@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[fertility-IQ]]></Name>
@@ -64,7 +64,7 @@
 			<Name><![CDATA[Main]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<StartupCode><![CDATA[f_defineHMatrix();
-
+f_defineMatingMatrix();
 for (Person p : people) {
 	dataViz.h_IQInitial.add(p.p_IQ);
 }]]></StartupCode>
@@ -235,8 +235,8 @@ for (Person p : people) {
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1632690393452</Id>
-					<Name><![CDATA[p_propRandomMating]]></Name>
-					<X>50</X><Y>390</Y>
+					<Name><![CDATA[p_randomMating]]></Name>
+					<X>50</X><Y>490</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -246,7 +246,7 @@ for (Person p : people) {
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[1.0]]></Code>
+							<Code><![CDATA[0.5]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1632690393450</Id>
@@ -356,7 +356,7 @@ for (Person p : people) {
 				<Variable Class="Parameter">
 					<Id>1632812972826</Id>
 					<Name><![CDATA[p_leakage]]></Name>
-					<X>50</X><Y>490</Y>
+					<X>50</X><Y>510</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -507,33 +507,25 @@ else return -99;]]></Body>
 						<Name><![CDATA[ego]]></Name>
 						<Type><![CDATA[Person]]></Type>
 					</Parameter>
-					<Parameter>
-						<Name><![CDATA[prop]]></Name>
-						<Type><![CDATA[double]]></Type>
-					</Parameter>
 					<Body><![CDATA[double diff = 999;
 
+List<Double> prop = selectValues("select prop from mating where ego = " 
+	+ ego.p_IQGroup);
+List<Double> IQ = selectValues("select alter from mating where ego = " 
+	+ ego.p_IQGroup);;
+
+double[] aprop = prop.stream().mapToDouble(d -> d).toArray();
+double[] aIQ = IQ.stream().mapToDouble(d -> d).toArray();
+double group = f_weightedSampling(aIQ, aprop);
+
 List<Person> alters = filter(c_aliveAgents, p -> !p.spouse.isConnected() && p != ego && 
-			p.p_generation == ego.p_generation);
+			p.p_generation == ego.p_generation & p.p_IQGroup == group);
 
 if (alters.size() > 0) {
 
 	Person partner = alters.get(0);
-
-	for (Person p : alters) {
-		if (randomTrue(prop)) {
-			partner = randomFrom(alters);
-		} else {
-			double a = ego.p_IQ;
-			double b = p.p_IQ;
-			double value = sqrt(pow(a - b + normal(p_diffNoise, 0), 2));
-			if (value < diff) {
-	 			partner = p;
-	 			diff = value;
-			}
-		}
-	}
-
+	partner = randomFrom(alters);
+	
 	ego.spouse.connectTo(partner);
 
 	if (ego.spouse.isConnected() & ego.p_fertility == -99) {
@@ -557,7 +549,7 @@ if (alters.size() > 0) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632725205130</Id>
 					<Name><![CDATA[f_definePropIQGroup]]></Name>
-					<X>220</X><Y>370</Y>
+					<X>220</X><Y>450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -659,7 +651,7 @@ Centrifugal: fertility increases with the distance from the minor diagonal.]]></
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632751749907</Id>
 					<Name><![CDATA[f_weightedSampling]]></Name>
-					<X>220</X><Y>430</Y>
+					<X>220</X><Y>520</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -704,7 +696,7 @@ return values[i-1];]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632812353264</Id>
 					<Name><![CDATA[f_defineHMatrix]]></Name>
-					<X>220</X><Y>450</Y>
+					<X>220</X><Y>470</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -712,9 +704,9 @@ return values[i-1];]]></Body>
 					<Body><![CDATA[if (p_heritabilityType == same ) { executeStatement("update matrixh set prop = 0.1428"); }
 else if (p_heritabilityType == preston) {
 	executeStatement("update matrixh set prop = 0.0");
-	executeStatement("update matrixh SET prop = 1 - " + p_leakage +
-	 	" where iq_father = iq_mother and  iq_kid = iq_mother");
-	executeStatement("update matrixh SET prop = " + p_leakage/2.0 +
+	executeStatement("update matrixh SET prop = " + (1-p_leakage) +
+	 	" where iq_father = iq_mother and iq_kid = iq_mother");
+	executeStatement("update matrixh SET prop = " + (p_leakage/2.0) +
 	 	" where iq_father = iq_mother and  (iq_kid = (iq_mother+1) or iq_kid = (iq_mother-1))");
 	executeStatement("update matrixh SET prop = " + p_leakage +
 	 	" where iq_father = 1 and iq_mother = 7 and iq_kid = 2");
@@ -722,6 +714,66 @@ else if (p_heritabilityType == preston) {
 	 	" where iq_father = 7 and iq_mother = 1 and iq_kid = 6");
 	 executeStatement("update matrixh SET prop = 0.5" +
 	 	" where iq_father != iq_mother and (iq_kid = iq_father or iq_kid = iq_mother)");
+}
+
+/*
+# R code
+test[iq_father == iq_mother & iq_kid == iq_mother, prop := 1-e]
+test[iq_father == iq_mother & 
+    (iq_kid == (iq_mother + 1) | iq_kid == (iq_mother - 1)), 
+    prop := e/2]
+
+
+test[iq_father == 1 & iq_mother == 1 & iq_kid == 2, prop := e]
+test[iq_father == 7 & iq_mother == 7 & iq_kid == 6, prop := e]
+
+table(test$prop)
+test[iq_father != iq_mother & (iq_father == iq_kid | iq_mother == iq_kid), prop := 1/2]
+
+*/]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1632817654880</Id>
+					<Name><![CDATA[f_IQFromIQGroup]]></Name>
+					<X>220</X><Y>370</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[group]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Body><![CDATA[if (group == 1) { return uniform(70, 74.499); }
+else if (group == 2) { return uniform(74.5, 84.499); }
+else if (group == 3) { return uniform(84.5, 94.499); }
+else if (group == 4) { return uniform(94.5, 105.499); }
+else if (group == 5) { return uniform(105.5, 115.499); }
+else if (group == 6) { return uniform(115.5, 125.449); }
+else if (group == 7) { return uniform(125.5, 130); }
+else return -99;]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1632819226602</Id>
+					<Name><![CDATA[f_defineMatingMatrix]]></Name>
+					<X>220</X><Y>490</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[
+double prop = 1.0/7.0;
+if (p_randomMating == 1) { executeStatement("update mating set prop = " + prop); }
+else {
+	executeStatement("update mating set prop = 0.0");
+	executeStatement("update mating SET prop = 1 - " + p_randomMating +
+	 	" where ego = alter");
+	executeStatement("update mating SET prop = " + p_randomMating/0.6 +
+	 	" where ego != alter");
 }
 
 /*
@@ -1438,7 +1490,7 @@ if (p_generation == 0) p_IQGroup = main.f_IQToGroup(p_IQ);]]></EntryAction>
 					</Points>
 					<IconOffset>15.0</IconOffset>
 					<Properties Source="1632485799947" Target="1632485803700" Trigger="timeout">
-						<Action><![CDATA[main.f_getPartner(this, main.p_propRandomMating);]]></Action>
+						<Action><![CDATA[main.f_getPartner(this);]]></Action>
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[20]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
@@ -1506,7 +1558,7 @@ if (p_generation == 0) p_IQGroup = main.f_IQToGroup(p_IQ);]]></EntryAction>
 						</Timeout>
 						<Condition><![CDATA[true]]></Condition>
 						<Rate Class="CodeUnitValue">
-							<Code><![CDATA[p_fertility / 20; ]]></Code>
+							<Code><![CDATA[p_fertility / 13.5; ]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_YEAR]]></Unit>
 						</Rate>
 						<Guard><![CDATA[this.spouse.isConnected() & p_parentType == mother;]]></Guard>
@@ -1628,6 +1680,7 @@ if (p_generation == 0) p_IQGroup = main.f_IQToGroup(p_IQ);]]></EntryAction>
 					<Body><![CDATA[kid.p_generation = mother.p_generation + 1;
 kid.p_IQGroup = main.f_defineKidIQ(mother.spouse.getConnectedAgent().p_IQGroup, 
 	mother.p_IQGroup);
+kid.p_IQ = main.f_IQFromIQGroup(kid.p_IQGroup);
 kid.p_motherIQGroup = mother.p_IQGroup;
 kid.p_fatherIQGroup = mother.spouse.getConnectedAgent().p_IQGroup;
 ]]></Body>
@@ -2071,7 +2124,7 @@ c_kids.clear();]]></Body>
     			<Histogram>
 					<Id>1632560771086</Id>
 					<Name><![CDATA[chart]]></Name>
-					<X>10</X><Y>20</Y>
+					<X>380</X><Y>330</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2146,7 +2199,7 @@ c_kids.clear();]]></Body>
     			<TimePlot>
 					<Id>1632688377352</Id>
 					<Name><![CDATA[plotPopulation]]></Name>
-					<X>400</X><Y>40</Y>
+					<X>30</X><Y>100</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2164,15 +2217,15 @@ c_kids.clear();]]></Body>
 						<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>360</Width>
-					<Height>230</Height>
+					<Width>350</Width>
+					<Height>210</Height>
 					<BackgroundColor/>
 					<BorderColor/>
 					<ChartArea>
 						<XOffset>50</XOffset>
 						<YOffset>10</YOffset>
-						<Width>280</Width>
-						<Height>160</Height>
+						<Width>270</Width>
+						<Height>150</Height>
 						<BackgroundColor>-1</BackgroundColor>
 						<BorderColor>-16777216</BorderColor>
 						<GridColor>-12566464</GridColor>
@@ -2180,7 +2233,7 @@ c_kids.clear();]]></Body>
 					<Legend>
 						<Place>NORTH</Place>
 						<TextColor>-16777216</TextColor>
-						<Size>30</Size>
+						<Size>20</Size>
 					</Legend>
 					<Labels>
 						<HorLabelsPosition>DEFAULT</HorLabelsPosition>
@@ -2213,7 +2266,7 @@ c_kids.clear();]]></Body>
     			<TimeStackChart>
 					<Id>1632728664778</Id>
 					<Name><![CDATA[plotIQGroup]]></Name>
-					<X>60</X><Y>300</Y>
+					<X>30</X><Y>320</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2232,12 +2285,12 @@ c_kids.clear();]]></Body>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Width>350</Width>
-					<Height>280</Height>
+					<Height>260</Height>
 					<BackgroundColor/>
 					<BorderColor/>
 					<ChartArea>
 						<XOffset>50</XOffset>
-						<YOffset>30</YOffset>
+						<YOffset>10</YOffset>
 						<Width>270</Width>
 						<Height>190</Height>
 						<BackgroundColor>-1</BackgroundColor>
@@ -2319,6 +2372,50 @@ c_kids.clear();]]></Body>
 					<VerScaleType>HUNDRED_PERCENTS</VerScaleType>
 					<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
     			</TimeStackChart>
+				<Rectangle>
+					<Id>1632817196914</Id>
+					<Name><![CDATA[rectangle]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>1</LineWidth>
+					<LineColor/>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>1000</Width>
+					<Height>80</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-14774017</FillColor>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
+				<Text>
+					<Id>1632817196918</Id>
+					<Name><![CDATA[text1]]></Name>
+					<X>30</X><Y>20</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<OnClickCode><![CDATA[randomFrom(main.people)._origin_VA.navigateTo();]]></OnClickCode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[Agents]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
 			</Presentation>
 
 				</Level>
@@ -2364,6 +2461,27 @@ c_kids.clear();]]></Body>
 				<Password><![CDATA[]]></Password>
 			</ExternalConnection>
 			<ExternalConnection>
+				<Id>1632819155656</Id>
+				<Name><![CDATA[database]]></Name>
+				<X>0</X><Y>0</Y>
+				<Label><X>10</X><Y>0</Y></Label>
+				<PublicFlag>false</PublicFlag>
+				<PresentationFlag>true</PresentationFlag>
+				<ShowLabel>true</ShowLabel>
+				<DatabaseType>EXCEL_ACCESS</DatabaseType>
+				<ConnectionURL><![CDATA[]]></ConnectionURL>
+				<ConnectOnStartup>true</ConnectOnStartup>
+				<DatabaseName><![CDATA[]]></DatabaseName>
+				<ResourceReference>
+					<PackageName><![CDATA[fertility_iq]]></PackageName>
+					<ClassName><![CDATA[/Users/sdaza/Documents/git/heritability-dem/data/mating.xlsx]]></ClassName>
+				</ResourceReference>
+				<Host><![CDATA[localhost]]></Host>
+				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
+				<Login><![CDATA[]]></Login>
+				<Password><![CDATA[]]></Password>
+			</ExternalConnection>
+			<ExternalConnection>
 				<Id>1632736819634</Id>
 				<Name><![CDATA[database]]></Name>
 				<X>0</X><Y>0</Y>
@@ -2396,9 +2514,18 @@ c_kids.clear();]]></Body>
 			<TableImportSettings>
 				<TableReference>
 					<PackageName><![CDATA[fertility_iq]]></PackageName>
-					<ClassName><![CDATA[heritability]]></ClassName>
+					<ClassName><![CDATA[mating]]></ClassName>
 				</TableReference>
 				<ConnectionIndex>1</ConnectionIndex>
+				<ExternalTableName><![CDATA["mating"]]></ExternalTableName>
+				<AutoImport>false</AutoImport>
+			</TableImportSettings>
+			<TableImportSettings>
+				<TableReference>
+					<PackageName><![CDATA[fertility_iq]]></PackageName>
+					<ClassName><![CDATA[heritability]]></ClassName>
+				</TableReference>
+				<ConnectionIndex>2</ConnectionIndex>
 				<ExternalTableName><![CDATA["heritability"]]></ExternalTableName>
 				<AutoImport>false</AutoImport>
 			</TableImportSettings>
@@ -2479,12 +2606,12 @@ c_kids.clear();]]></Body>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_diffNoise]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[1.0]]></Code>
-					</ParameterValue>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[p_propRandomMating]]></ParameterName>
+					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[0.7]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_IQStdev]]></ParameterName>
@@ -2495,7 +2622,7 @@ c_kids.clear();]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[p_fertilityType]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[centrifugal]]></Code>
+						<Code><![CDATA[uniform]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -2507,14 +2634,14 @@ c_kids.clear();]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[p_leakage]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[.60]]></Code>
+						<Code><![CDATA[0.4]]></Code>
 					</ParameterValue>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
-				<EnableZoomAndPanning>true</EnableZoomAndPanning>
+				<EnableZoomAndPanning>false</EnableZoomAndPanning>
 				<ExecutionMode><![CDATA[realTimeScaled]]></ExecutionMode>
-				<Title><![CDATA[fertility-IQ : Simulation]]></Title>	
+				<Title><![CDATA[Testing]]></Title>	
 				<EnableDeveloperPanel>true</EnableDeveloperPanel>
 				<ShowDeveloperPanelOnStart>true</ShowDeveloperPanelOnStart>
 				<RealTimeScale>1.0</RealTimeScale>
@@ -2536,6 +2663,10 @@ c_kids.clear();]]></Body>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[C:/Users/Y7514957C/Documents/git/fertility-IQ/data/matrixH.xlsx]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[/Users/sdaza/Documents/git/heritability-dem/data/mating.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
