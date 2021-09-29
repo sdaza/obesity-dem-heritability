@@ -63,10 +63,6 @@
 			<Id>1632485433838</Id>
 			<Name><![CDATA[Main]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
-			<Import><![CDATA[import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;]]></Import>
 			<StartupCode><![CDATA[f_defineHMatrix();
 f_defineMatingMatrix();
 for (Person p : people) {
@@ -165,34 +161,10 @@ for (Person p : people) {
 			<CurrentLevel>1632485433837</CurrentLevel>
 			<ConnectionsId>1632485433833</ConnectionsId>
 			<Variables>
-				<Variable Class="PlainVariable">
-					<Id>1632899137402</Id>
-					<Name><![CDATA[v_iteration]]></Name>
-					<X>50</X><Y>300</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[int]]></Type>        
-					</Properties>
-				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1632899137405</Id>
-					<Name><![CDATA[v_replicate]]></Name>
-					<X>50</X><Y>320</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[int]]></Type>        
-					</Properties>
-				</Variable>
 				<Variable Class="Parameter">
 					<Id>1632485646519</Id>
 					<Name><![CDATA[p_populationSize]]></Name>
-					<X>50</X><Y>360</Y>
+					<X>50</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -216,7 +188,7 @@ for (Person p : people) {
 				<Variable Class="Parameter">
 					<Id>1632689423941</Id>
 					<Name><![CDATA[p_generation]]></Name>
-					<X>50</X><Y>380</Y>
+					<X>50</X><Y>350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -240,7 +212,7 @@ for (Person p : people) {
 				<Variable Class="Parameter">
 					<Id>1632690393452</Id>
 					<Name><![CDATA[p_randomMating]]></Name>
-					<X>50</X><Y>450</Y>
+					<X>50</X><Y>460</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -264,7 +236,7 @@ for (Person p : people) {
 				<Variable Class="Parameter">
 					<Id>1632729818023</Id>
 					<Name><![CDATA[p_IQStdev]]></Name>
-					<X>50</X><Y>540</Y>
+					<X>50</X><Y>400</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -288,7 +260,7 @@ for (Person p : people) {
 				<Variable Class="Parameter">
 					<Id>1632729855222</Id>
 					<Name><![CDATA[p_useDataIQStdev]]></Name>
-					<X>50</X><Y>520</Y>
+					<X>50</X><Y>380</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -312,7 +284,7 @@ for (Person p : people) {
 				<Variable Class="Parameter">
 					<Id>1632731453253</Id>
 					<Name><![CDATA[p_fertilityType]]></Name>
-					<X>50</X><Y>410</Y>
+					<X>50</X><Y>420</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -336,7 +308,7 @@ for (Person p : people) {
 				<Variable Class="Parameter">
 					<Id>1632771778105</Id>
 					<Name><![CDATA[p_heritabilityType]]></Name>
-					<X>50</X><Y>430</Y>
+					<X>50</X><Y>440</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -360,7 +332,7 @@ for (Person p : people) {
 				<Variable Class="Parameter">
 					<Id>1632812972826</Id>
 					<Name><![CDATA[p_leakage]]></Name>
-					<X>50</X><Y>490</Y>
+					<X>50</X><Y>480</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -385,7 +357,7 @@ for (Person p : people) {
 				<Variable Class="Parameter">
 					<Id>1632826400810</Id>
 					<Name><![CDATA[p_fertilityAdjustment]]></Name>
-					<X>50</X><Y>470</Y>
+					<X>50</X><Y>500</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -399,79 +371,6 @@ for (Person p : people) {
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1632826400808</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1632898861982</Id>
-					<Name><![CDATA[p_exportData]]></Name>
-					<X>420</X><Y>320</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[boolean]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[false]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1632898861980</Id>
-							<EditorContolType>CHECK_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1632898917488</Id>
-					<Name><![CDATA[p_filePath]]></Name>
-					<X>420</X><Y>340</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[String]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA["output/"]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1632898917486</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>SEPARATE_SECTION</DelimeterType>
-							<StartSection><![CDATA[General]]></StartSection>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1632898917491</Id>
-					<Name><![CDATA[p_fileNames]]></Name>
-					<X>420</X><Y>380</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[String[]]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[{"groups"}]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1632898917489</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -527,42 +426,12 @@ for (Person p : people) {
 					</Properties>
 
 				</Variable>
-				<Variable Class="CollectionVariable">
-					<Id>1632898917471</Id>
-					<Name><![CDATA[col_textFiles]]></Name>
-					<X>420</X><Y>360</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
-						<CollectionClass><![CDATA[HashMap]]></CollectionClass>
-						<ElementClass><![CDATA[String]]></ElementClass>
-						<ValueElementClass><![CDATA[BufferedWriter]]></ValueElementClass>
-					</Properties>
-
-				</Variable>
-				<Variable Class="CollectionVariable">
-					<Id>1632898917473</Id>
-					<Name><![CDATA[col_fileColumns]]></Name>
-					<X>420</X><Y>400</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
-						<CollectionClass><![CDATA[HashMap]]></CollectionClass>
-						<ElementClass><![CDATA[String]]></ElementClass>
-						<ValueElementClass><![CDATA[String[]]]></ValueElementClass>
-					</Properties>
-
-				</Variable>
 			</Variables>
 			<Events>
 				<Event>
 					<Id>1632689572194</Id>
 					<Name><![CDATA[ev_updateStats]]></Name>
-					<X>50</X><Y>180</Y>
+					<X>50</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -597,17 +466,14 @@ for (Person p : c_aliveAgents) {
 	dataViz.h_IQ.add(p.p_IQ);
 }
 
-if (time() > 1000) {
-	f_writeGroupData();
-	f_writeParametersData();
-}
+f_definePropIQGroup();
 
 ]]></Action>
 				</Event>
 				<Event>
 					<Id>1632827105644</Id>
 					<Name><![CDATA[ev_fertilityAdjustment]]></Name>
-					<X>50</X><Y>200</Y>
+					<X>200</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -634,7 +500,6 @@ if (time() > 1000) {
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
 					<Action><![CDATA[// fertility adjustment
-// I need to improve this
 if (c_aliveAgents.size() > 5000 & p_fertilityAdjustment < 30) { 
 	p_fertilityAdjustment = p_fertilityAdjustment + 5;
 }
@@ -650,7 +515,7 @@ if (c_aliveAgents.size() < 2500 & p_fertilityAdjustment > 5) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632494699502</Id>
 					<Name><![CDATA[f_IQToGroup]]></Name>
-					<X>220</X><Y>370</Y>
+					<X>220</X><Y>350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -673,7 +538,7 @@ else return -99;]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632645873728</Id>
 					<Name><![CDATA[f_getPartner]]></Name>
-					<X>220</X><Y>350</Y>
+					<X>220</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -724,7 +589,7 @@ if (alters.size() > 0) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632725205130</Id>
 					<Name><![CDATA[f_definePropIQGroup]]></Name>
-					<X>220</X><Y>460</Y>
+					<X>220</X><Y>440</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -749,7 +614,7 @@ for (int i = 0; i <= 6; i++) {
 					<Name><![CDATA[f_defineFertility]]></Name>
 					<Description><![CDATA[Additive: fertility negatively correlated with IQ
 Centrifugal: fertility increases with the distance from the minor diagonal.]]></Description>
-					<X>220</X><Y>410</Y>
+					<X>220</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -781,7 +646,7 @@ Centrifugal: fertility increases with the distance from the minor diagonal.]]></
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632745681683</Id>
 					<Name><![CDATA[f_defineKidIQ]]></Name>
-					<X>220</X><Y>430</Y>
+					<X>220</X><Y>410</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -826,7 +691,7 @@ Centrifugal: fertility increases with the distance from the minor diagonal.]]></
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632751749907</Id>
 					<Name><![CDATA[f_weightedSampling]]></Name>
-					<X>220</X><Y>520</Y>
+					<X>220</X><Y>500</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -866,7 +731,7 @@ return values[i-1];]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632812353264</Id>
 					<Name><![CDATA[f_defineHMatrix]]></Name>
-					<X>220</X><Y>480</Y>
+					<X>220</X><Y>460</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -891,7 +756,7 @@ else if (p_heritabilityType == preston) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632817654880</Id>
 					<Name><![CDATA[f_IQFromIQGroup]]></Name>
-					<X>220</X><Y>390</Y>
+					<X>220</X><Y>370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -914,7 +779,7 @@ else return -99;]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632819226602</Id>
 					<Name><![CDATA[f_defineMatingMatrix]]></Name>
-					<X>220</X><Y>500</Y>
+					<X>220</X><Y>480</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -929,186 +794,6 @@ else {
 	 	" where ego != alter");
 }
 ]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1632898917475</Id>
-					<Name><![CDATA[f_initiateFiles]]></Name>
-					<X>540</X><Y>320</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[String[] col = new String[]{};
-
-//groups
-if (f_textFileInclude("groups", p_fileNames)) {
-
-	col = new String[]{"iteration", "replicate", "time", "g1", "g2", 
-		"g3", "g4", "g5", "g6", "g7"};
-	col_fileColumns.put("groups" col);
-
-}
-
-if (f_textFileInclude("parameters", p_fileNames)) {
-
-	col = new String[]{"iteration", "replicate", "population", "fertility_type", 
-	"heritability_type", "random_mating", "leakeage"};
-	col_fileColumns.put("parameters" col);
-
-}
-	    		    
-// loop to create files
-for (int i=0; i < p_fileNames.length; i++) {
-	try {
- 	String name = p_filePath + p_fileNames[i] + "_" + v_iteration + "_" + v_replicate + ".csv";
- 	File f = new File(name);
- 	f.getParentFile().mkdirs();
- 	BufferedWriter temp = new BufferedWriter(new FileWriter(f));
- 	col_textFiles.put(p_fileNames[i], temp);
-	col_textFiles.get(p_fileNames[i]).write(f_collapseStrings(";", col_fileColumns.get(p_fileNames[i])));
-	}
-	 catch (IOException e)	 {
-		getEngine().pause();
-		traceln("--> An Exception happened, continue? ...");
-		e.printStackTrace();
-	}
-	
-}
-]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1632898917477</Id>
-					<Name><![CDATA[f_closeFiles]]></Name>
-					<X>540</X><Y>340</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[for (int i=0; i < p_fileNames.length; i++) {
-
-	try {
-		col_textFiles.get(p_fileNames[i]).close();
-	}
-	catch (IOException e)	 {
-		getEngine().pause();
-		traceln("--> An Exception happened, continue? ...");
-		e.printStackTrace();
-	}
-}]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1632898917479</Id>
-					<Name><![CDATA[f_writeGroupData]]></Name>
-					<X>540</X><Y>400</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[String s = new String(";");	
-try {
-	col_textFiles.get("groups").write(
-    v_iteration + s +
-    v_replicate + s +
-   	time() + s +
-   	c_propIQGroup.get(0) + s +
-   	c_propIQGroup.get(1) + s + 
-   	c_propIQGroup.get(2) + s +
-   	c_propIQGroup.get(3) + s +
-   	c_propIQGroup.get(4) + s +
-   	c_propIQGroup.get(5) + s +
-   	c_propIQGroup.get(6) + "\n");
-	}
-catch (IOException e) {
-	e.printStackTrace();
-	}]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[String]]></ReturnType>
-					<Id>1632898917481</Id>
-					<Name><![CDATA[f_collapseStrings]]></Name>
-					<X>540</X><Y>380</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[separator]]></Name>
-						<Type><![CDATA[String]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[l]]></Name>
-						<Type><![CDATA[String[]]]></Type>
-					</Parameter>
-					<Body><![CDATA[String output = new String();
-
-for (int i=0; i < l.length; i++) {
-	if (i < l.length - 1) output = output + l[i] + separator;
-	else output = output + l[i] + " \n";
-}
-
-return output;]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[boolean]]></ReturnType>
-					<Id>1632898917483</Id>
-					<Name><![CDATA[f_textFileInclude]]></Name>
-					<X>540</X><Y>360</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[t]]></Name>
-						<Type><![CDATA[String]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[arr]]></Name>
-						<Type><![CDATA[String[]]]></Type>
-					</Parameter>
-					<Body><![CDATA[if (arr == null) return false;
-
-int len = arr.length;
-int i = 0;
-
-while (i < len) {
-	if (arr[i] == t) return true;
-	else i = i + 1;
-}
-
-return false;]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1632899425936</Id>
-					<Name><![CDATA[f_writeParametersData]]></Name>
-					<X>540</X><Y>420</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[String s = new String(";");	
-try {
-	col_textFiles.get("parameters").write(
-    v_iteration + s +
-    v_replicate + s +
-   	p_populationSize + s +
-   	p_fertilityType + s + 
-   	p_heritabilityType + s +
-   	p_randomMating + s +
-   	p_leakage + "\n");
-	}
-catch (IOException e) {
-	e.printStackTrace();
-	}]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -1367,27 +1052,6 @@ catch (IOException e) {
 						<Name>SansSerif</Name>
 						<Size>28</Size>
 						<Style>0</Style>
-					</Font>
-					<Alignment>LEFT</Alignment>
-				</Text>
-				<Text>
-					<Id>1632898917468</Id>
-					<Name><![CDATA[text3]]></Name>
-					<X>410</X><Y>280</Y>
-					<Label><X>0</X><Y>-10</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<Color>-16777216</Color>
-					<Text><![CDATA[Data output]]></Text>
-					<Font>
-						<Name>SansSerif</Name>
-						<Size>14</Size>
-						<Style>1</Style>
 					</Font>
 					<Alignment>LEFT</Alignment>
 				</Text>
@@ -2948,15 +2612,6 @@ c_kids.clear();]]></Body>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_fertilityAdjustment]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_exportData]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_filePath]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_fileNames]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>

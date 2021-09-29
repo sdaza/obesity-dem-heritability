@@ -44,7 +44,6 @@ write.xlsx(test, "heritability",  file = "data/heritability.xlsx", row.names = F
 
 # absolute values
 test = c(1, 2, 3, 4, 5, 7)
-
 abs(test - max(test)) 
 0.5 + 6 *0.25 + 6 * 0.25
 
@@ -68,4 +67,7 @@ table(test$prop)
 
 write.xlsx(test, "test",  file = "data/matrixH.xlsx", row.names = FALSE)
 
-test[iq_t]
+# mating matrix
+test = data.table(expand.grid(ego = 1:7, alter = 1:7))
+test[, prop := 0.0]
+write.xlsx(test, "mating", file = "data/mating.xlsx", row.names = FALSE)
