@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[fertility-IQ]]></Name>
@@ -693,6 +693,10 @@ v_notMarried = 0;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632494699502</Id>
 					<Name><![CDATA[f_IQToGroup]]></Name>
+					<Description><![CDATA[Transform any value of IQ (double) into a 7-group category
+@param  iq double value of IQ
+@author Sebastian Daza
+@since 1.0]]></Description>
 					<X>240</X><Y>220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -716,6 +720,12 @@ else return -99;]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632645873728</Id>
 					<Name><![CDATA[f_getPartner]]></Name>
+					<Description><![CDATA[Select a partner (if available) using probabilities from the matrix <code>mating</code> (database) using the value <code>p_randomMating</code>
+@param  ego Focal agent that would select a partner
+@author Sebastian Daza
+@since 1.0
+
+]]></Description>
 					<X>240</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -745,7 +755,7 @@ if (alters.size() > 0) {
 	ego.spouse.connectTo(partner);
 
 	if (ego.spouse.isConnected() & ego.v_fertility == -99) {
-			double fertility = f_defineFertility(p_fertilityType, ego.v_IQGroup, 
+			double fertility = f_defineFertility(ego.v_IQGroup, 
 				partner.v_IQGroup);
 			ego.v_fertility = fertility;
 			partner.v_fertility = fertility;
@@ -754,9 +764,7 @@ if (alters.size() > 0) {
 	}
 }
 
-if (!ego.spouse.isConnected()) v_notMarried++;
-
-]]></Body>
+if (!ego.spouse.isConnected()) v_notMarried++;]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -786,17 +794,16 @@ for (int i = 0; i <= 6; i++) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632731211003</Id>
 					<Name><![CDATA[f_defineFertility]]></Name>
-					<Description><![CDATA[Additive: fertility negatively correlated with IQ
-Centrifugal: fertility increases with the distance from the minor diagonal.]]></Description>
+					<Description><![CDATA[Define the agent fertility using three scenarios (<code>p_fertilityType</code>): <code>additive</code>: fertility negatively correlated with IQ; <code>centrifigual</code>: fertility increases with the distance from the minor diagonal; <code>uniform</code>: same fertility for all
+@param fatherIQ 7-group IQ category of the father
+@param motherIQ 7-group IQ category of the mother
+@author Sebastian Daza
+@since 1.0]]></Description>
 					<X>240</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[type]]></Name>
-						<Type><![CDATA[Fertility]]></Type>
-					</Parameter>
 					<Parameter>
 						<Name><![CDATA[fatherIQ]]></Name>
 						<Type><![CDATA[double]]></Type>
@@ -820,29 +827,34 @@ Centrifugal: fertility increases with the distance from the minor diagonal.]]></
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632745681683</Id>
 					<Name><![CDATA[f_defineKidIQ]]></Name>
+					<Description><![CDATA[Define offspring IQ group using different heritability values. If <code>p_heritabilityType</code> is <code>average</code>, the matrix <code>heritabiliy</code> (database) is used. If  <code>p_heritabilityType</code> is  <code>preston</code> or <code>uniform</code>, <code>matrixh</code> is used. 
+@param fatherIQ 7-group IQ category of the father
+@param motherIQ 7-group IQ category of the mother
+@author Sebastian Daza
+@since 1.0]]></Description>
 					<X>240</X><Y>280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Parameter>
-						<Name><![CDATA[father]]></Name>
+						<Name><![CDATA[fatherIQ]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
 					<Parameter>
-						<Name><![CDATA[mother]]></Name>
+						<Name><![CDATA[motherIQ]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
 					<Body><![CDATA[if (p_heritabilityType == average) {
 
 	double mean = selectFrom( heritability ).
-   		where( heritability.iq_father.eq(father)).
-   		where(heritability.iq_mother.eq(mother)).
+   		where( heritability.iq_father.eq(fatherIQ)).
+   		where(heritability.iq_mother.eq(motherIQ)).
     	uniqueResult( heritability.mean_iq );
 	if (p_useDataIQStdev) {
 		double sd = selectFrom( heritability ).
-   			where( heritability.iq_father.eq(father)).
-    		where(heritability.iq_mother.eq(mother)).
+   			where( heritability.iq_father.eq(fatherIQ)).
+    		where(heritability.iq_mother.eq(motherIQ)).
     		uniqueResult( heritability.sd_iq );
     	return f_IQToGroup(normal(sd, mean)); 
 	}	
@@ -852,8 +864,10 @@ Centrifugal: fertility increases with the distance from the minor diagonal.]]></
 	}
 } else { 
 
-	List<Double> prop = selectValues("select prop from matrixh where iq_father = " + father + " and iq_mother = " + mother);
-	List<Double> kidIQ = selectValues("select iq_kid from matrixh where iq_father = " + father + " and iq_mother = " + mother);
+	List<Double> prop = selectValues("select prop from matrixh where iq_father = " +
+		 fatherIQ +  " and iq_mother = " + motherIQ);
+	List<Double> kidIQ = selectValues("select iq_kid from matrixh where iq_father = " +
+		fatherIQ + " and iq_mother = " + motherIQ);
 
 	double[] aprop = prop.stream().mapToDouble(d -> d).toArray();
 	double[] akidIQ = kidIQ.stream().mapToDouble(d -> d).toArray();
@@ -930,6 +944,10 @@ else if (p_heritabilityType == preston) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632817654880</Id>
 					<Name><![CDATA[f_IQFromIQGroup]]></Name>
+					<Description><![CDATA[Impute IQ values using a 7-group IQ classifcation. Each value comes from a uniform distribution
+@param  group IQ categorie from 1 to 7
+@author Sebastian Daza
+@since 1.0]]></Description>
 					<X>240</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -2892,7 +2910,7 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
+						<Code><![CDATA[1]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
