@@ -4,10 +4,10 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
-	<Name><![CDATA[fertility-IQ]]></Name>
+	<Name><![CDATA[fertility-BMI]]></Name>
 	<EngineVersion>6</EngineVersion>
 	<JavaPackageName><![CDATA[fertility_iq]]></JavaPackageName>
 	<ModelTimeUnit><![CDATA[Year]]></ModelTimeUnit>
@@ -42,10 +42,10 @@
 		</OptionList>
 		<OptionList>
 			<Id>1632771879881</Id>
-			<Name><![CDATA[HeritabilityType]]></Name>
+			<Name><![CDATA[Heritability]]></Name>
 			<Option>
 				<Id>1632771879882</Id>
-				<Name><![CDATA[average]]></Name>
+				<Name><![CDATA[observed]]></Name>
 			</Option>
 			<Option>
 				<Id>1632771879883</Id>
@@ -53,7 +53,19 @@
 			</Option>
 			<Option>
 				<Id>1632771879884</Id>
-				<Name><![CDATA[same]]></Name>
+				<Name><![CDATA[uniform]]></Name>
+			</Option>
+		</OptionList>
+		<OptionList>
+			<Id>1634219217898</Id>
+			<Name><![CDATA[Mating]]></Name>
+			<Option>
+				<Id>1634219228597</Id>
+				<Name><![CDATA[defined]]></Name>
+			</Option>
+			<Option>
+				<Id>1634219232726</Id>
+				<Name><![CDATA[observed]]></Name>
 			</Option>
 		</OptionList>
 	</OptionLists>
@@ -73,19 +85,19 @@ import com.fasterxml.jackson.databind.util.IgnorePropertiesUtil;]]></Import>
 	f_writeParametersData();
 }
 
-f_defineHMatrix();
+f_defineHeritabilityMatrix();
 f_defineMatingMatrix();
 
 
 // initial IQ distribution
 for (Person p : people) {
-		p.v_IQGroup = f_weightedSampling(new double[] {1,2,3,4,5, 6, 7}, p_baselineIQDistribution);
-		p.v_IQ = f_IQFromIQGroup(p.v_IQGroup);
+		p.v_outcomeGroup = f_weightedSampling(new double[] {1,2,3,4}, p_baselineOutcomeDistribution);
+		p.v_outcome = f_outcomeToGroup(p.v_outcomeGroup);
 }
 	
 if (p_updatePlots) {
 	for (Person p : people) {
-		dataViz.h_IQInitial.add(p.v_IQ);
+		dataViz.h_outcomeInitial.add(p.v_outcome);
 	}
 }]]></StartupCode>
 			<DestroyCode><![CDATA[if (p_exportData)  {
@@ -248,7 +260,7 @@ if (p_updatePlots) {
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1632903435834</Id>
-					<Name><![CDATA[p_baselineIQDistribution]]></Name>
+					<Name><![CDATA[p_baselineOutcomeDistribution]]></Name>
 					<X>550</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -259,10 +271,11 @@ if (p_updatePlots) {
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[{0.5, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05}]]></Code>
+							<Code><![CDATA[{1/4, 1/4, 1/4, 1/4}]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1632903435832</Id>
+							<Label><![CDATA[p_baselineIQDistribution]]></Label>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -303,11 +316,11 @@ if (p_updatePlots) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[HeritabilityType]]></Type>
+						<Type><![CDATA[Heritability]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[average]]></Code>
+							<Code><![CDATA[preston]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1632771778103</Id>
@@ -321,7 +334,7 @@ if (p_updatePlots) {
 				<Variable Class="Parameter">
 					<Id>1632812972826</Id>
 					<Name><![CDATA[p_leakage]]></Name>
-					<X>400</X><Y>130</Y>
+					<X>400</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -337,54 +350,6 @@ if (p_updatePlots) {
 							<Id>1632812972824</Id>
 							<Label><![CDATA[p_leakage]]></Label>
 							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1632729818023</Id>
-					<Name><![CDATA[p_IQStdev]]></Name>
-					<X>400</X><Y>170</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[20]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1632729818021</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1632729855222</Id>
-					<Name><![CDATA[p_useDataIQStdev]]></Name>
-					<X>400</X><Y>150</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[boolean]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[true]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1632729855220</Id>
-							<EditorContolType>CHECK_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
 							<DelimeterType>NO_DELIMETER</DelimeterType>
@@ -561,6 +526,54 @@ if (p_updatePlots) {
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1634218330603</Id>
+					<Name><![CDATA[p_numberOutcomeCategories]]></Name>
+					<X>240</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[4]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1634218330601</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1634219193425</Id>
+					<Name><![CDATA[p_matingType]]></Name>
+					<X>400</X><Y>130</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[Mating]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[Mating.observed]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1634219193423</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1632583073542</Id>
 					<Name><![CDATA[col_deadAgents]]></Name>
@@ -593,7 +606,7 @@ if (p_updatePlots) {
 				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1632725269536</Id>
-					<Name><![CDATA[col_propIQGroup]]></Name>
+					<Name><![CDATA[col_propOutcomeGroup]]></Name>
 					<X>50</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -604,7 +617,7 @@ if (p_updatePlots) {
 						<ElementClass><![CDATA[Double]]></ElementClass>
 						<ValueElementClass><![CDATA[String]]></ValueElementClass>
 						<CollectionInitializer Class="CodeValue">
-							<Code><![CDATA[{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}]]></Code>
+							<Code><![CDATA[{0.0, 0.0, 0.0, 0.0}]]></Code>
 						</CollectionInitializer>
 					</Properties>
 
@@ -670,11 +683,11 @@ if (p_updatePlots) {
 						</RecurrenceCode>
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
-					<Action><![CDATA[f_definePropIQGroup();
+					<Action><![CDATA[f_definePropOutcomeGroup();
 
 if (p_updatePlots) {
 	for (Person p : col_aliveAgents) {
-		dataViz.h_IQ.add(p.v_IQ);
+		dataViz.h_outcome.add(p.v_outcome);
 	}
 }
 
@@ -692,27 +705,24 @@ v_notMarried = 0;
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632494699502</Id>
-					<Name><![CDATA[f_IQToGroup]]></Name>
+					<Name><![CDATA[f_outcomeToGroup]]></Name>
 					<Description><![CDATA[Transform any value of IQ (double) into a 7-group category
 @param  iq double value of IQ
 @author Sebastian Daza
 @since 1.0]]></Description>
-					<X>240</X><Y>220</Y>
+					<X>240</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Parameter>
-						<Name><![CDATA[iq]]></Name>
+						<Name><![CDATA[outcome]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
-					<Body><![CDATA[if (iq < 74.5) return 1;
-else if (iq >= 74.5 && iq < 84.5) return 2;
-else if (iq >= 84.5 && iq < 94.5) return 3;
-else if (iq >= 94.5 && iq < 106.5) return 4;
-else if (iq >= 106.5 && iq < 115.5) return 5;
-else if (iq >= 115.5 && iq < 125.5) return 6;
-else if (iq >= 125.5) return 7;
+					<Body><![CDATA[if (outcome < 18.5) return 1;
+else if (outcome >= 18.5 && outcome < 25) return 2;
+else if (outcome >= 25 && outcome < 30) return 3;
+else if (outcome >= 30) return 4;
 else return -99;]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -726,7 +736,7 @@ else return -99;]]></Body>
 @since 1.0
 
 ]]></Description>
-					<X>240</X><Y>200</Y>
+					<X>240</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -735,17 +745,21 @@ else return -99;]]></Body>
 						<Name><![CDATA[ego]]></Name>
 						<Type><![CDATA[Person]]></Type>
 					</Parameter>
-					<Body><![CDATA[List<Double> prop = selectValues("select prop from mating where ego = " 
-	+ ego.v_IQGroup);
-List<Double> IQ = selectValues("select alter from mating where ego = " 
-	+ ego.v_IQGroup);;
+					<Body><![CDATA[String wprop = p_matingType == Mating.observed ? 
+	(ego.v_parentType == father ? "fprop" : "mprop") : "tprop";
+String wparent = ego.v_parentType == father ? "father" : "mother";
+String wpartner = ego.v_parentType == father ? "mother" : "father";
+List<Double> prop = selectValues("select " + wprop + 
+	" from mating where " + wparent + " = "  + ego.v_outcomeGroup);
+List<Double> outcome = selectValues("select "  + wpartner + " from mating where " + wparent + 
+	" = " + ego.v_outcomeGroup);
 
 double[] aprop = prop.stream().mapToDouble(d -> d).toArray();
-double[] aIQ = IQ.stream().mapToDouble(d -> d).toArray();
-double group = f_weightedSampling(aIQ, aprop);
+double[] aoutcome = outcome.stream().mapToDouble(d -> d).toArray();
+double group = f_weightedSampling(aoutcome, aprop);
 
 List<Person> alters = filter(col_aliveAgents, p -> !p.spouse.isConnected() && p != ego && 
-			p.v_generation == ego.v_generation & p.v_IQGroup == group);
+			p.v_generation == ego.v_generation & p.v_outcomeGroup == group);
 
 if (alters.size() > 0) {
 
@@ -755,8 +769,8 @@ if (alters.size() > 0) {
 	ego.spouse.connectTo(partner);
 
 	if (ego.spouse.isConnected() & ego.v_fertility == -99) {
-			double fertility = f_defineFertility(ego.v_IQGroup, 
-				partner.v_IQGroup);
+			double fertility = f_defineFertility(ego.v_outcomeGroup, 
+				partner.v_outcomeGroup);
 			ego.v_fertility = fertility;
 			partner.v_fertility = fertility;
 	} else if (!ego.spouse.isConnected()) {
@@ -770,21 +784,21 @@ if (!ego.spouse.isConnected()) v_notMarried++;]]></Body>
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632725205130</Id>
-					<Name><![CDATA[f_definePropIQGroup]]></Name>
-					<X>240</X><Y>310</Y>
+					<Name><![CDATA[f_definePropOutcomeGroup]]></Name>
+					<X>240</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[double total = (double) col_aliveAgents.size();
 
-col_propIQGroup.clear();
+col_propOutcomeGroup.clear();
 
 for (int i = 0; i <= 6; i++) {
   	int h = i + 1;
   	double value = (double) 
-  	filter(col_aliveAgents, p -> p.v_IQGroup == h).size() / total;
-	col_propIQGroup.add(i, value);
+  	filter(col_aliveAgents, p -> p.v_outcomeGroup == h).size() / total;
+	col_propOutcomeGroup.add(i, value);
 }
  
 ]]></Body>
@@ -799,24 +813,24 @@ for (int i = 0; i <= 6; i++) {
 @param motherIQ 7-group IQ category of the mother
 @author Sebastian Daza
 @since 1.0]]></Description>
-					<X>240</X><Y>260</Y>
+					<X>240</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Parameter>
-						<Name><![CDATA[fatherIQ]]></Name>
+						<Name><![CDATA[fatherOutcome]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
 					<Parameter>
-						<Name><![CDATA[motherIQ]]></Name>
+						<Name><![CDATA[motherOutcome]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
 					<Body><![CDATA[if (p_fertilityType == additive) {
-	return p_baselineFertility - (fatherIQ-1) * 0.25 - (motherIQ-1) * 0.25;
+	return p_baselineFertility - (fatherOutcome-1) * 0.25 - (motherOutcome-1) * 0.25;
 } else if (p_fertilityType == centrifugal) {
-	return p_baselineFertility + 0.1 * abs(6 - (fatherIQ-1) - (motherIQ-1));
-} else if (p_fertilityType == uniform) {
+	return p_baselineFertility + 0.1 * abs((p_numberOutcomeCategories-1) - (fatherOutcome-1) - (motherOutcome-1));
+} else if (p_fertilityType == Fertility.uniform) {
  	return p_baselineFertility;
 } else {
 	return 0.0;
@@ -826,60 +840,42 @@ for (int i = 0; i <= 6; i++) {
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632745681683</Id>
-					<Name><![CDATA[f_defineKidIQ]]></Name>
+					<Name><![CDATA[f_defineKidOutcome]]></Name>
 					<Description><![CDATA[Define offspring IQ group using different heritability values. If <code>p_heritabilityType</code> is <code>average</code>, the matrix <code>heritabiliy</code> (database) is used. If  <code>p_heritabilityType</code> is  <code>preston</code> or <code>uniform</code>, <code>matrixh</code> is used. 
 @param fatherIQ 7-group IQ category of the father
 @param motherIQ 7-group IQ category of the mother
 @author Sebastian Daza
 @since 1.0]]></Description>
-					<X>240</X><Y>280</Y>
+					<X>240</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Parameter>
-						<Name><![CDATA[fatherIQ]]></Name>
+						<Name><![CDATA[fatherOutcome]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
 					<Parameter>
-						<Name><![CDATA[motherIQ]]></Name>
+						<Name><![CDATA[motherOutcome]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
-					<Body><![CDATA[if (p_heritabilityType == average) {
+					<Body><![CDATA[String wprop = p_heritabilityType == Heritability.observed ? "oprop" : "tprop";
+List<Double> prop = selectValues("select "  + wprop + " from heritability where father = " +
+		 fatherOutcome +  " and mother = " + motherOutcome);
+List<Double> kidOutcome = selectValues("select kid from heritability where father = " +
+		fatherOutcome + " and mother = " + motherOutcome);
 
-	double mean = selectFrom( heritability ).
-   		where( heritability.iq_father.eq(fatherIQ)).
-   		where(heritability.iq_mother.eq(motherIQ)).
-    	uniqueResult( heritability.mean_iq );
-	if (p_useDataIQStdev) {
-		double sd = selectFrom( heritability ).
-   			where( heritability.iq_father.eq(fatherIQ)).
-    		where(heritability.iq_mother.eq(motherIQ)).
-    		uniqueResult( heritability.sd_iq );
-    	return f_IQToGroup(normal(sd, mean)); 
-	}	
-	else { 
-		double sd = p_IQStdev; 
-		return  f_IQToGroup(normal(sd, mean)); 
-	}
-} else { 
+double[] aprop = prop.stream().mapToDouble(d -> d).toArray();
+double[] akidOutcome = kidOutcome.stream().mapToDouble(d -> d).toArray();
 
-	List<Double> prop = selectValues("select prop from matrixh where iq_father = " +
-		 fatherIQ +  " and iq_mother = " + motherIQ);
-	List<Double> kidIQ = selectValues("select iq_kid from matrixh where iq_father = " +
-		fatherIQ + " and iq_mother = " + motherIQ);
-
-	double[] aprop = prop.stream().mapToDouble(d -> d).toArray();
-	double[] akidIQ = kidIQ.stream().mapToDouble(d -> d).toArray();
-	return f_weightedSampling(akidIQ, aprop);
-}]]></Body>
+return f_weightedSampling(akidOutcome, aprop);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632751749907</Id>
 					<Name><![CDATA[f_weightedSampling]]></Name>
-					<X>240</X><Y>370</Y>
+					<X>240</X><Y>420</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -918,37 +914,37 @@ return values[i-1];]]></Body>
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632812353264</Id>
-					<Name><![CDATA[f_defineHMatrix]]></Name>
-					<X>240</X><Y>330</Y>
+					<Name><![CDATA[f_defineHeritabilityMatrix]]></Name>
+					<X>240</X><Y>380</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (p_heritabilityType == same ) { executeStatement("update matrixh set prop = " + 1.0/7.0); }
+					<Body><![CDATA[if (p_heritabilityType == Heritability.uniform ) { executeStatement("update heritability set tprop = " + 1.0 / p_numberOutcomeCategories); }
 else if (p_heritabilityType == preston) {
-	executeStatement("update matrixh set prop = 0.0");
-	executeStatement("update matrixh SET prop = " + (1-p_leakage) +
-	 	" where iq_father = iq_mother and iq_kid = iq_mother");
-	executeStatement("update matrixh SET prop = " + (p_leakage/2.0) +
-	 	" where iq_father = iq_mother and  (iq_kid = (iq_mother+1) or iq_kid = (iq_mother-1))");
-	executeStatement("update matrixh SET prop = " + p_leakage +
-	 	" where iq_father = 1 and iq_mother = 7 and iq_kid = 2");
-	 executeStatement("update matrixh SET prop = " + p_leakage +
-	 	" where iq_father = 7 and iq_mother = 1 and iq_kid = 6");
-	 executeStatement("update matrixh SET prop = 0.5" +
-	 	" where iq_father != iq_mother and (iq_kid = iq_father or iq_kid = iq_mother)");
+	executeStatement("update heritability set tprop = 0.0");
+	executeStatement("update heritability SET tprop = " + (1-p_leakage) +
+	 	" where father = mother and kid = mother");
+	executeStatement("update heritability SET tprop = " + (p_leakage/2.0) +
+	 	" where father = mother and  (kid = (mother+1) or kid = (mother-1))");
+	executeStatement("update heritability SET tprop = " + p_leakage +
+	 	" where father = 1 and mother = "  +  p_numberOutcomeCategories + " and kid = 2");
+	 executeStatement("update heritability SET tprop = " + p_leakage +
+	 	" where father = "  +  p_numberOutcomeCategories + " and mother = 1 and kid = "  +  (p_numberOutcomeCategories - 1));
+	 executeStatement("update heritability SET tprop = 0.5" +
+	 	" where father != mother and (kid = father or kid = mother)");
 }]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632817654880</Id>
-					<Name><![CDATA[f_IQFromIQGroup]]></Name>
+					<Name><![CDATA[f_groupToOutcome]]></Name>
 					<Description><![CDATA[Impute IQ values using a 7-group IQ classifcation. Each value comes from a uniform distribution
 @param  group IQ categorie from 1 to 7
 @author Sebastian Daza
 @since 1.0]]></Description>
-					<X>240</X><Y>240</Y>
+					<X>240</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -971,19 +967,23 @@ else return -99;]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632819226602</Id>
 					<Name><![CDATA[f_defineMatingMatrix]]></Name>
-					<X>240</X><Y>350</Y>
+					<X>240</X><Y>400</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[double prop = 1.0/7.0;
-if (p_randomMating == 1) { executeStatement("update mating set prop = " + prop); }
+					<Body><![CDATA[double prop = 1.0 / p_numberOutcomeCategories;
+if (p_randomMating == 1) { executeStatement("update mating set tprop = " + prop); }
 else {
-	executeStatement("update mating set prop = 0.0");
-	executeStatement("update mating SET prop = 1 - " + p_randomMating +
-	 	" where ego = alter");
-	executeStatement("update mating SET prop = " + (p_randomMating/6.0) +
-	 	" where ego != alter");
+	executeStatement("update mating set tprop = 0.0");
+	executeStatement("update mating set tprop = 1 - " + p_randomMating +
+	 	" where father = mother");
+	executeStatement("update mating set tprop = 1 - " + p_randomMating +
+	 	" where mother = father");
+	executeStatement("update mating SET tprop = " + (p_randomMating/ (p_numberOutcomeCategories  - 1.0)) +
+	 	" where father != mother");
+	executeStatement("update mating SET tprop = " + (p_randomMating/ (p_numberOutcomeCategories  - 1.0)) +
+	 	" where mother != father");
 }
 ]]></Body>
 				</Function>
@@ -1074,13 +1074,13 @@ try {
     v_replicate + s +
    	time() + s +
    	col_aliveAgents.size() + s + 
-   	col_propIQGroup.get(0) + s +
-   	col_propIQGroup.get(1) + s + 
-   	col_propIQGroup.get(2) + s +
-   	col_propIQGroup.get(3) + s +
-   	col_propIQGroup.get(4) + s +
-   	col_propIQGroup.get(5) + s +
-   	col_propIQGroup.get(6) + "\n");
+   	col_propOutcomeGroup.get(0) + s +
+   	col_propOutcomeGroup.get(1) + s + 
+   	col_propOutcomeGroup.get(2) + s +
+   	col_propOutcomeGroup.get(3) + s +
+   	col_propOutcomeGroup.get(4) + s +
+   	col_propOutcomeGroup.get(5) + s +
+   	col_propOutcomeGroup.get(6) + "\n");
 	}
 catch (IOException e) {
 	e.printStackTrace();
@@ -1521,7 +1521,7 @@ catch (IOException e) {
 			<Variables>
 				<Variable Class="PlainVariable">
 					<Id>1632904971172</Id>
-					<Name><![CDATA[v_IQ]]></Name>
+					<Name><![CDATA[v_outcome]]></Name>
 					<X>40</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -1536,7 +1536,7 @@ catch (IOException e) {
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1632904981533</Id>
-					<Name><![CDATA[v_IQGroup]]></Name>
+					<Name><![CDATA[v_outcomeGroup]]></Name>
 					<X>40</X><Y>280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -1614,7 +1614,7 @@ catch (IOException e) {
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1632905058838</Id>
-					<Name><![CDATA[v_fatherIQGroup]]></Name>
+					<Name><![CDATA[v_fatherOutcomeGroup]]></Name>
 					<X>40</X><Y>420</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -1626,7 +1626,7 @@ catch (IOException e) {
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1632905069875</Id>
-					<Name><![CDATA[v_motherIQGroup]]></Name>
+					<Name><![CDATA[v_motherOutcomeGroup]]></Name>
 					<X>40</X><Y>440</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -1925,11 +1925,11 @@ main.col_deadAgents.remove(this);]]></EntryAction>
 						<Type><![CDATA[Person]]></Type>
 					</Parameter>
 					<Body><![CDATA[kid.v_generation = mother.v_generation + 1;
-kid.v_IQGroup = main.f_defineKidIQ(mother.spouse.getConnectedAgent().v_IQGroup, 
-	mother.v_IQGroup);
-kid.v_IQ = main.f_IQFromIQGroup(kid.v_IQGroup);
-kid.v_motherIQGroup = mother.v_IQGroup;
-kid.v_fatherIQGroup = mother.spouse.getConnectedAgent().v_IQGroup;
+kid.v_outcomeGroup = main.f_defineKidOutcome(mother.spouse.getConnectedAgent().v_outcomeGroup, 
+	mother.v_outcomeGroup);
+kid.v_outcome = main.f_outcomeToGroup(kid.v_outcomeGroup);
+kid.v_motherOutcomeGroup = mother.v_outcomeGroup;
+kid.v_fatherOutcomeGroup = mother.spouse.getConnectedAgent().v_outcomeGroup;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1947,11 +1947,11 @@ main.col_aliveAgents.remove(this);
 
 spouse.disconnect();
 v_parentType = null;
-v_IQ = -99;
-v_IQGroup = -99;
+v_outcome = -99;
+v_outcomeGroup = -99;
 v_fertility = -99;
-v_fatherIQGroup = -99;
-v_motherIQGroup = -99;
+v_fatherOutcomeGroup = -99;
+v_motherOutcomeGroup = -99;
 v_alive = false;
 col_kids.clear();]]></Body>
 				</Function>
@@ -2281,7 +2281,7 @@ col_kids.clear();]]></Body>
 			<AnalysisData>
     			<HistogramData>
 					<Id>1632560790881</Id>
-					<Name><![CDATA[h_IQInitial]]></Name>
+					<Name><![CDATA[h_outcomeInitial]]></Name>
 					<X>180</X><Y>-60</Y>
 					<Label><X>15</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -2312,7 +2312,7 @@ col_kids.clear();]]></Body>
 				</HistogramData>
     			<HistogramData>
 					<Id>1632689512871</Id>
-					<Name><![CDATA[h_IQ]]></Name>
+					<Name><![CDATA[h_outcome]]></Name>
 					<X>180</X><Y>-40</Y>
 					<Label><X>15</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -2448,25 +2448,25 @@ col_kids.clear();]]></Body>
 					</Bars>
 					<HistogramDataExpression>
 					<Id>0</Id>
-					<Expression><![CDATA[h_IQInitial]]></Expression>
+					<Expression><![CDATA[h_outcomeInitial]]></Expression>
 						<ColorPDF>-16744320</ColorPDF>
 						<ColorCDF>-12799119</ColorCDF>
 						<ColorLowPercent>-29696</ColorLowPercent>
 						<ColorHighPercent>-16728065</ColorHighPercent>
 						<ColorMean>-2354116</ColorMean>
 						<LineWidth>1</LineWidth>						
-						<Title><![CDATA[IQ initial distribtuion]]></Title>							
+						<Title><![CDATA[BMI initial distribtuion]]></Title>							
 					</HistogramDataExpression>
 					<HistogramDataExpression>
 					<Id>0</Id>
-					<Expression><![CDATA[h_IQ]]></Expression>
+					<Expression><![CDATA[h_outcome]]></Expression>
 						<ColorPDF>-14774017</ColorPDF>
 						<ColorCDF>-9807155</ColorCDF>
 						<ColorLowPercent>-12799119</ColorLowPercent>
 						<ColorHighPercent>-4565549</ColorHighPercent>
 						<ColorMean>-10496</ColorMean>
 						<LineWidth>1</LineWidth>						
-						<Title><![CDATA[IQ distribution]]></Title>							
+						<Title><![CDATA[BMI distribution]]></Title>							
 					</HistogramDataExpression>
     			</Histogram>
     			<TimePlot>
@@ -2588,7 +2588,7 @@ col_kids.clear();]]></Body>
 					<Id>0</Id>
 					<Expression><![CDATA[my_dataset]]></Expression>
 					<Color>-9807155</Color>
-					<Expression2><![CDATA[main.col_propIQGroup.get(0)]]></Expression2>
+					<Expression2><![CDATA[main.col_propOutcomeGroup.get(0)]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>  
 							<Title><![CDATA[1]]></Title>
 					</DatasetExpression>
@@ -2596,7 +2596,7 @@ col_kids.clear();]]></Body>
 					<Id>0</Id>
 					<Expression><![CDATA[my_dataset]]></Expression>
 					<Color>-2987746</Color>
-					<Expression2><![CDATA[main.col_propIQGroup.get(1)]]></Expression2>
+					<Expression2><![CDATA[main.col_propOutcomeGroup.get(1)]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>  
 							<Title><![CDATA[2]]></Title>
 					</DatasetExpression>
@@ -2604,7 +2604,7 @@ col_kids.clear();]]></Body>
 					<Id>0</Id>
 					<Expression><![CDATA[my_dataset]]></Expression>
 					<Color>-2448096</Color>
-					<Expression2><![CDATA[main.col_propIQGroup.get(2)]]></Expression2>
+					<Expression2><![CDATA[main.col_propOutcomeGroup.get(2)]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>  
 							<Title><![CDATA[3]]></Title>
 					</DatasetExpression>
@@ -2612,33 +2612,9 @@ col_kids.clear();]]></Body>
 					<Id>0</Id>
 					<Expression><![CDATA[my_dataset]]></Expression>
 					<Color>-9728477</Color>
-					<Expression2><![CDATA[main.col_propIQGroup.get(2)]]></Expression2>
+					<Expression2><![CDATA[main.col_propOutcomeGroup.get(2)]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>  
 							<Title><![CDATA[4]]></Title>
-					</DatasetExpression>
-					<DatasetExpression>
-					<Id>0</Id>
-					<Expression><![CDATA[my_dataset]]></Expression>
-					<Color>-60269</Color>
-					<Expression2><![CDATA[main.col_propIQGroup.get(4)]]></Expression2>
-					<Expression2Flag>true</Expression2Flag>  
-							<Title><![CDATA[5]]></Title>
-					</DatasetExpression>
-					<DatasetExpression>
-					<Id>0</Id>
-					<Expression><![CDATA[my_dataset]]></Expression>
-					<Color>-29696</Color>
-					<Expression2><![CDATA[main.col_propIQGroup.get(5)]]></Expression2>
-					<Expression2Flag>true</Expression2Flag>  
-							<Title><![CDATA[6]]></Title>
-					</DatasetExpression>
-					<DatasetExpression>
-					<Id>0</Id>
-					<Expression><![CDATA[my_dataset]]></Expression>
-					<Color>-12799119</Color>
-					<Expression2><![CDATA[main.col_propIQGroup.get(6)]]></Expression2>
-					<Expression2Flag>true</Expression2Flag>  
-							<Title><![CDATA[7]]></Title>
 					</DatasetExpression>
 					<SamplesToKeep>100</SamplesToKeep>
 					<VerScaleToExpression><![CDATA[1]]></VerScaleToExpression>
@@ -2735,7 +2711,7 @@ col_kids.clear();]]></Body>
 		<ShutdownCompact>false</ShutdownCompact>
 		<ImportSettings>
 			<ExternalConnection>
-				<Id>1632744158757</Id>
+				<Id>1634216825844</Id>
 				<Name><![CDATA[database]]></Name>
 				<X>0</X><Y>0</Y>
 				<Label><X>10</X><Y>0</Y></Label>
@@ -2748,7 +2724,7 @@ col_kids.clear();]]></Body>
 				<DatabaseName><![CDATA[]]></DatabaseName>
 				<ResourceReference>
 					<PackageName><![CDATA[fertility_iq]]></PackageName>
-					<ClassName><![CDATA[C:/Users/Y7514957C/Documents/git/fertility-IQ/data/matrixH.xlsx]]></ClassName>
+					<ClassName><![CDATA[data/mating.xlsx]]></ClassName>
 				</ResourceReference>
 				<Host><![CDATA[localhost]]></Host>
 				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
@@ -2756,7 +2732,7 @@ col_kids.clear();]]></Body>
 				<Password><![CDATA[]]></Password>
 			</ExternalConnection>
 			<ExternalConnection>
-				<Id>1632819155656</Id>
+				<Id>1634216231230</Id>
 				<Name><![CDATA[database]]></Name>
 				<X>0</X><Y>0</Y>
 				<Label><X>10</X><Y>0</Y></Label>
@@ -2769,49 +2745,19 @@ col_kids.clear();]]></Body>
 				<DatabaseName><![CDATA[]]></DatabaseName>
 				<ResourceReference>
 					<PackageName><![CDATA[fertility_iq]]></PackageName>
-					<ClassName><![CDATA[/Users/sdaza/Documents/git/heritability-dem/data/mating.xlsx]]></ClassName>
+					<ClassName><![CDATA[data/heritability.xlsx]]></ClassName>
 				</ResourceReference>
 				<Host><![CDATA[localhost]]></Host>
 				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
 				<Login><![CDATA[]]></Login>
 				<Password><![CDATA[]]></Password>
 			</ExternalConnection>
-			<ExternalConnection>
-				<Id>1632736819634</Id>
-				<Name><![CDATA[database]]></Name>
-				<X>0</X><Y>0</Y>
-				<Label><X>10</X><Y>0</Y></Label>
-				<PublicFlag>false</PublicFlag>
-				<PresentationFlag>true</PresentationFlag>
-				<ShowLabel>true</ShowLabel>
-				<DatabaseType>EXCEL_ACCESS</DatabaseType>
-				<ConnectionURL><![CDATA[]]></ConnectionURL>
-				<ConnectOnStartup>true</ConnectOnStartup>
-				<DatabaseName><![CDATA[]]></DatabaseName>
-				<ResourceReference>
-					<PackageName><![CDATA[fertility_iq]]></PackageName>
-					<ClassName><![CDATA[C:/Users/Y7514957C/Documents/git/fertility-IQ/data/heritability.xlsx]]></ClassName>
-				</ResourceReference>
-				<Host><![CDATA[localhost]]></Host>
-				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
-				<Login><![CDATA[]]></Login>
-				<Password><![CDATA[]]></Password>
-			</ExternalConnection>
-			<TableImportSettings>
-				<TableReference>
-					<PackageName><![CDATA[fertility_iq]]></PackageName>
-					<ClassName><![CDATA[matrixh]]></ClassName>
-				</TableReference>
-				<ConnectionIndex>0</ConnectionIndex>
-				<ExternalTableName><![CDATA["test"]]></ExternalTableName>
-				<AutoImport>false</AutoImport>
-			</TableImportSettings>
 			<TableImportSettings>
 				<TableReference>
 					<PackageName><![CDATA[fertility_iq]]></PackageName>
 					<ClassName><![CDATA[mating]]></ClassName>
 				</TableReference>
-				<ConnectionIndex>1</ConnectionIndex>
+				<ConnectionIndex>0</ConnectionIndex>
 				<ExternalTableName><![CDATA["mating"]]></ExternalTableName>
 				<AutoImport>false</AutoImport>
 			</TableImportSettings>
@@ -2820,7 +2766,7 @@ col_kids.clear();]]></Body>
 					<PackageName><![CDATA[fertility_iq]]></PackageName>
 					<ClassName><![CDATA[heritability]]></ClassName>
 				</TableReference>
-				<ConnectionIndex>2</ConnectionIndex>
+				<ConnectionIndex>1</ConnectionIndex>
 				<ExternalTableName><![CDATA["heritability"]]></ExternalTableName>
 				<AutoImport>false</AutoImport>
 			</TableImportSettings>
@@ -2905,13 +2851,10 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[p_baselineIQDistribution]]></ParameterName>
+					<ParameterName><![CDATA[p_baselineOutcomeDistribution]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[1]]></Code>
-					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_heritabilityType]]></ParameterName>
@@ -2922,14 +2865,8 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 				<Parameter>
 					<ParameterName><![CDATA[p_leakage]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.1]]></Code>
+						<Code><![CDATA[0.0]]></Code>
 					</ParameterValue>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_IQStdev]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_useDataIQStdev]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_baselineFertility]]></ParameterName>
@@ -2954,6 +2891,12 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_updatePlots]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_numberOutcomeCategories]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_matingType]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
@@ -3049,21 +2992,15 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 				<Id>1632690393452</Id>
 			</FreeformParamValue>
 			<FreeformParamValue>	
-				<Id>1632729818023</Id>
-			</FreeformParamValue>
-			<FreeformParamValue>	
-				<Id>1632729855222</Id>
-			</FreeformParamValue>
-			<FreeformParamValue>	
 				<Id>1632731453253</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[uniform]]></Code>
+					<Code><![CDATA[Fertility.uniform]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632771778105</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[same]]></Code>
+					<Code><![CDATA[Heritability.uniform]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -3093,20 +3030,18 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 			<FreeformParamValue>	
 				<Id>1632906140220</Id>
 			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1634218330603</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1634219193425</Id>
+			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632690393452</Id>
-				<Type>FIXED</Type>
-			</RangeVariationParamValue>
-			<RangeVariationParamValue>	
-				<Id>1632729818023</Id>
-				<Type>FIXED</Type>
-			</RangeVariationParamValue>
-			<RangeVariationParamValue>	
-				<Id>1632729855222</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
@@ -3147,6 +3082,14 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632906140220</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1634218330603</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1634219193425</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<ModelTimeProperties>
@@ -3189,6 +3132,14 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[commons-io-2.11.0.jar]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[data/heritability.xlsx]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[data/mating.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
