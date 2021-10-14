@@ -55,6 +55,10 @@
 				<Id>1632771879884</Id>
 				<Name><![CDATA[uniform]]></Name>
 			</Option>
+			<Option>
+				<Id>1634225067337</Id>
+				<Name><![CDATA[complete]]></Name>
+			</Option>
 		</OptionList>
 		<OptionList>
 			<Id>1634219217898</Id>
@@ -284,6 +288,30 @@ if (p_updatePlots) {
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
+					<Id>1634219193425</Id>
+					<Name><![CDATA[p_matingType]]></Name>
+					<X>400</X><Y>130</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[Mating]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[Mating.observed]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1634219193423</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
 					<Id>1632690393452</Id>
 					<Name><![CDATA[p_randomMating]]></Name>
 					<X>240</X><Y>130</Y>
@@ -478,6 +506,30 @@ if (p_updatePlots) {
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
+					<Id>1634218330603</Id>
+					<Name><![CDATA[p_numberOutcomeCategories]]></Name>
+					<X>240</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[4]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1634218330601</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
 					<Id>1632898861982</Id>
 					<Name><![CDATA[p_exportData]]></Name>
 					<X>60</X><Y>460</Y>
@@ -520,54 +572,6 @@ if (p_updatePlots) {
 							<Id>1632900849931</Id>
 							<Label><![CDATA[p_updatePlots]]></Label>
 							<EditorContolType>CHECK_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1634218330603</Id>
-					<Name><![CDATA[p_numberOutcomeCategories]]></Name>
-					<X>240</X><Y>190</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[4]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1634218330601</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1634219193425</Id>
-					<Name><![CDATA[p_matingType]]></Name>
-					<X>400</X><Y>130</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[Mating]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[Mating.observed]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1634219193423</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
 							<DelimeterType>NO_DELIMETER</DelimeterType>
@@ -794,7 +798,7 @@ if (!ego.spouse.isConnected()) v_notMarried++;]]></Body>
 
 col_propOutcomeGroup.clear();
 
-for (int i = 0; i <= 6; i++) {
+for (int i = 0; i < p_numberOutcomeCategories; i++) {
   	int h = i + 1;
   	double value = (double) 
   	filter(col_aliveAgents, p -> p.v_outcomeGroup == h).size() / total;
@@ -827,7 +831,7 @@ for (int i = 0; i <= 6; i++) {
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
 					<Body><![CDATA[if (p_fertilityType == additive) {
-	return p_baselineFertility - (fatherOutcome-1) * 0.25 - (motherOutcome-1) * 0.25;
+	return p_baselineFertility + (fatherOutcome-1) * 0.25 + (motherOutcome-1) * 0.25;
 } else if (p_fertilityType == centrifugal) {
 	return p_baselineFertility + 0.1 * abs((p_numberOutcomeCategories-1) - (fatherOutcome-1) - (motherOutcome-1));
 } else if (p_fertilityType == Fertility.uniform) {
@@ -926,13 +930,23 @@ else if (p_heritabilityType == preston) {
 	executeStatement("update heritability SET tprop = " + (1-p_leakage) +
 	 	" where father = mother and kid = mother");
 	executeStatement("update heritability SET tprop = " + (p_leakage/2.0) +
-	 	" where father = mother and  (kid = (mother+1) or kid = (mother-1))");
-	executeStatement("update heritability SET tprop = " + p_leakage +
-	 	" where father = 1 and mother = "  +  p_numberOutcomeCategories + " and kid = 2");
+	 	" where father = mother and (kid = (mother+1) or kid = (mother-1))");
 	 executeStatement("update heritability SET tprop = " + p_leakage +
-	 	" where father = "  +  p_numberOutcomeCategories + " and mother = 1 and kid = "  +  (p_numberOutcomeCategories - 1));
+	 	" where father = 1 and mother = 1 " + " and kid = 2");
+	 executeStatement("update heritability SET tprop = " + p_leakage +
+	 	" where father = "  +  p_numberOutcomeCategories + " and mother = " + p_numberOutcomeCategories + 
+	 	" and kid = "  +  (p_numberOutcomeCategories - 1));
 	 executeStatement("update heritability SET tprop = 0.5" +
-	 	" where father != mother and (kid = father or kid = mother)");
+ 	" where father != mother and (kid = father or kid = mother)");
+}
+else if (p_heritabilityType == complete) {
+	executeStatement("update heritability set tprop = 0.0");
+	executeStatement("update heritability SET tprop = " + (1-p_leakage) +
+	 	" where father = mother and kid = mother");
+	executeStatement("update heritability SET tprop = " + (p_leakage/(p_numberOutcomeCategories-1)) +
+	 	" where father = mother and kid != mother");
+	executeStatement("update heritability SET tprop = " + (1/p_numberOutcomeCategories) +
+	 	" where father != mother");
 }]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1077,10 +1091,7 @@ try {
    	col_propOutcomeGroup.get(0) + s +
    	col_propOutcomeGroup.get(1) + s + 
    	col_propOutcomeGroup.get(2) + s +
-   	col_propOutcomeGroup.get(3) + s +
-   	col_propOutcomeGroup.get(4) + s +
-   	col_propOutcomeGroup.get(5) + s +
-   	col_propOutcomeGroup.get(6) + "\n");
+   	col_propOutcomeGroup.get(3) + "\n");
 	}
 catch (IOException e) {
 	e.printStackTrace();
@@ -2397,6 +2408,7 @@ col_kids.clear();]]></Body>
     			<Histogram>
 					<Id>1632560771086</Id>
 					<Name><![CDATA[chart]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
 					<X>380</X><Y>330</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
@@ -2833,7 +2845,7 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-12490271</Color>
-					<Text><![CDATA[fertility-IQ]]></Text>
+					<Text><![CDATA[fertility-BMI]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>24</Size>
@@ -2852,26 +2864,38 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_baselineOutcomeDistribution]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[{0.1, 0.6, 0.15, 0.15}]]></Code>
+					</ParameterValue>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_matingType]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[Mating.defined]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_heritabilityType]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[preston]]></Code>
+						<Code><![CDATA[Heritability.complete]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_leakage]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.0]]></Code>
+						<Code><![CDATA[0.3]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_baselineFertility]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[2.8]]></Code>
+						<Code><![CDATA[1.5]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -2887,16 +2911,13 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 					<ParameterName><![CDATA[p_fileNames]]></ParameterName>
 				</Parameter>
 				<Parameter>
+					<ParameterName><![CDATA[p_numberOutcomeCategories]]></ParameterName>
+				</Parameter>
+				<Parameter>
 					<ParameterName><![CDATA[p_exportData]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_updatePlots]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_numberOutcomeCategories]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_matingType]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
@@ -2990,6 +3011,9 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632690393452</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.0]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632731453253</Id>
@@ -3026,6 +3050,9 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632903435834</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[{0.1, 0.6, 0.15, 0.05}]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632906140220</Id>
@@ -3035,6 +3062,9 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1634219193425</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[Mating.defined]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
@@ -3118,18 +3148,6 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 		</ParamVariationExperiment>	
 	</Experiments>
 	<ModelResources>
-		<Resource>
-			<Path><![CDATA[C:/Users/Y7514957C/Documents/git/fertility-IQ/data/heritability.xlsx]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[C:/Users/Y7514957C/Documents/git/fertility-IQ/data/matrixH.xlsx]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[/Users/sdaza/Documents/git/heritability-dem/data/mating.xlsx]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
 		<Resource>
 			<Path><![CDATA[commons-io-2.11.0.jar]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
