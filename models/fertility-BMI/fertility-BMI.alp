@@ -9,7 +9,7 @@
 	<Id>1632485433832</Id>
 	<Name><![CDATA[fertility-BMI]]></Name>
 	<EngineVersion>6</EngineVersion>
-	<JavaPackageName><![CDATA[fertility_iq]]></JavaPackageName>
+	<JavaPackageName><![CDATA[fertility_bmi]]></JavaPackageName>
 	<ModelTimeUnit><![CDATA[Year]]></ModelTimeUnit>
 	<OptionLists>
 		<OptionList>
@@ -83,7 +83,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import com.fasterxml.jackson.databind.util.IgnorePropertiesUtil;]]></Import>
+import com.fasterxml.jackson.databind.util.IgnorePropertiesUtil;
+import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import>
 			<StartupCode><![CDATA[if (p_exportData) {
 	f_initiateFiles();
 	f_writeParametersData();
@@ -92,17 +93,18 @@ import com.fasterxml.jackson.databind.util.IgnorePropertiesUtil;]]></Import>
 f_defineHeritabilityMatrix();
 f_defineMatingMatrix();
 
-
-// initial IQ distribution
+// initial BMI distribution
 for (Person p : people) {
 		p.v_outcomeGroup = f_weightedSampling(new double[] {1,2,3,4}, p_baselineOutcomeDistribution);
-		p.v_outcome = f_outcomeToGroup(p.v_outcomeGroup);
+		p.v_id = v_id++;
+		p.v_fatherID = uniform();
+		p.v_motherID = uniform();
+		p.v_parentType = randomFrom(ParentType.class);
+		col_aliveAgents.add(p);
 }
 	
 if (p_updatePlots) {
-	for (Person p : people) {
-		dataViz.h_outcomeInitial.add(p.v_outcome);
-	}
+
 }]]></StartupCode>
 			<DestroyCode><![CDATA[if (p_exportData)  {
 	f_writeGroupData();
@@ -227,9 +229,33 @@ if (p_updatePlots) {
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
-					<Id>1632905639364</Id>
-					<Name><![CDATA[v_notMarried]]></Name>
+					<Id>1634553224336</Id>
+					<Name><![CDATA[v_id]]></Name>
 					<X>50</X><Y>340</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1634561267223</Id>
+					<Name><![CDATA[v_assortativeMating]]></Name>
+					<X>240</X><Y>220</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1634562703084</Id>
+					<Name><![CDATA[v_fertility]]></Name>
+					<X>580</X><Y>370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -265,7 +291,7 @@ if (p_updatePlots) {
 				<Variable Class="Parameter">
 					<Id>1632903435834</Id>
 					<Name><![CDATA[p_baselineOutcomeDistribution]]></Name>
-					<X>550</X><Y>130</Y>
+					<X>800</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -290,7 +316,7 @@ if (p_updatePlots) {
 				<Variable Class="Parameter">
 					<Id>1634219193425</Id>
 					<Name><![CDATA[p_matingType]]></Name>
-					<X>400</X><Y>130</Y>
+					<X>400</X><Y>110</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -314,7 +340,7 @@ if (p_updatePlots) {
 				<Variable Class="Parameter">
 					<Id>1632690393452</Id>
 					<Name><![CDATA[p_randomMating]]></Name>
-					<X>240</X><Y>130</Y>
+					<X>400</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -338,7 +364,7 @@ if (p_updatePlots) {
 				<Variable Class="Parameter">
 					<Id>1632771778105</Id>
 					<Name><![CDATA[p_heritabilityType]]></Name>
-					<X>400</X><Y>110</Y>
+					<X>570</X><Y>110</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -362,7 +388,7 @@ if (p_updatePlots) {
 				<Variable Class="Parameter">
 					<Id>1632812972826</Id>
 					<Name><![CDATA[p_leakage]]></Name>
-					<X>400</X><Y>150</Y>
+					<X>570</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -387,7 +413,7 @@ if (p_updatePlots) {
 				<Variable Class="Parameter">
 					<Id>1632903366204</Id>
 					<Name><![CDATA[p_baselineFertility]]></Name>
-					<X>550</X><Y>110</Y>
+					<X>800</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -397,7 +423,7 @@ if (p_updatePlots) {
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[1.8]]></Code>
+							<Code><![CDATA[0.5]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1632903366202</Id>
@@ -411,7 +437,7 @@ if (p_updatePlots) {
 				<Variable Class="Parameter">
 					<Id>1632731453253</Id>
 					<Name><![CDATA[p_fertilityType]]></Name>
-					<X>240</X><Y>150</Y>
+					<X>800</X><Y>110</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -435,7 +461,7 @@ if (p_updatePlots) {
 				<Variable Class="Parameter">
 					<Id>1632906140220</Id>
 					<Name><![CDATA[p_fertilityAdjustment]]></Name>
-					<X>240</X><Y>170</Y>
+					<X>240</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -508,7 +534,7 @@ if (p_updatePlots) {
 				<Variable Class="Parameter">
 					<Id>1634218330603</Id>
 					<Name><![CDATA[p_numberOutcomeCategories]]></Name>
-					<X>240</X><Y>190</Y>
+					<X>240</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -572,6 +598,30 @@ if (p_updatePlots) {
 							<Id>1632900849931</Id>
 							<Label><![CDATA[p_updatePlots]]></Label>
 							<EditorContolType>CHECK_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1634306204283</Id>
+					<Name><![CDATA[p_numberKids]]></Name>
+					<X>240</X><Y>170</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double[]]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[{1, 2, 3, 4}]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1634306204281</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
 							<DelimeterType>NO_DELIMETER</DelimeterType>
@@ -656,12 +706,42 @@ if (p_updatePlots) {
 					</Properties>
 
 				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1634560638371</Id>
+					<Name><![CDATA[col_partnerX]]></Name>
+					<X>580</X><Y>320</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[Double]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1634560674183</Id>
+					<Name><![CDATA[col_partnerY]]></Name>
+					<X>580</X><Y>340</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[Double]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
 			</Variables>
 			<Events>
 				<Event>
 					<Id>1632689572194</Id>
 					<Name><![CDATA[ev_updateStats]]></Name>
-					<X>50</X><Y>180</Y>
+					<X>580</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -682,26 +762,90 @@ if (p_updatePlots) {
 							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 						</OccurrenceTime>
 						<RecurrenceCode Class="CodeUnitValue">
-							<Code><![CDATA[20]]></Code>
+							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 						</RecurrenceCode>
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
 					<Action><![CDATA[f_definePropOutcomeGroup();
 
-if (p_updatePlots) {
-	for (Person p : col_aliveAgents) {
-		dataViz.h_outcome.add(p.v_outcome);
-	}
-}
-
 if(col_aliveAgents.size() < 50) {
 	traceln("Population size is too small!!!");
 	finishSimulation();
 }
 
-v_notMarried = 0;
+if(time() > 200) {
+	traceln("Simulation stopped!");
+	finishSimulation();
+}
 ]]></Action>
+				</Event>
+				<Event>
+					<Id>1634395468317</Id>
+					<Name><![CDATA[ev_adjustFertility]]></Name>
+					<X>580</X><Y>230</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties TriggerType="timeout" Mode="cyclic">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
+						</Timeout>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_YEAR]]></Unit>
+						</Rate>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1634457600000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
+						</RecurrenceCode>
+						<Condition><![CDATA[false]]></Condition>
+					</Properties>
+					<Action><![CDATA[if ((col_aliveAgents.size() > 3000)) { 
+	for (int i = 0; i < col_aliveAgents.size() * 0.30; i++) {
+		Person p = randomFrom(col_aliveAgents);
+		p.send("die", p);;
+	}
+}]]></Action>
+				</Event>
+				<Event>
+					<Id>1634560556087</Id>
+					<Name><![CDATA[assortativeMating]]></Name>
+					<X>580</X><Y>280</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties TriggerType="timeout" Mode="cyclic">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
+						</Timeout>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_YEAR]]></Unit>
+						</Rate>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1634630400000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code><![CDATA[3]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code><![CDATA[3]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
+						</RecurrenceCode>
+						<Condition><![CDATA[false]]></Condition>
+					</Properties>
+					<Action><![CDATA[if (col_partnerX.size() > 30) f_assortiveMating();]]></Action>
 				</Event>
 			</Events>
 			<Functions>
@@ -760,29 +904,44 @@ List<Double> outcome = selectValues("select "  + wpartner + " from mating where 
 
 double[] aprop = prop.stream().mapToDouble(d -> d).toArray();
 double[] aoutcome = outcome.stream().mapToDouble(d -> d).toArray();
+
 double group = f_weightedSampling(aoutcome, aprop);
 
-List<Person> alters = filter(col_aliveAgents, p -> !p.spouse.isConnected() && p != ego && 
-			p.v_generation == ego.v_generation & p.v_outcomeGroup == group);
+List<Person> alters = filter(col_aliveAgents, p -> p.v_married == false & 
+	p != ego &
+	p.v_parentType != ego.v_parentType &
+	//p.v_generation == ego.v_generation &&
+	(p.v_motherID != ego.v_motherID &  p.v_fatherID != ego.v_fatherID) &
+	p.v_outcomeGroup == group);
 
+/*
 if (alters.size() > 0) {
-
-	Person partner = alters.get(0);
-	partner = randomFrom(alters);
-	
+	alters = filter(col_aliveAgents, p -> p.v_married == false &
+		p != ego & p.v_parentType != ego.v_parentType &
+		(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID));
+}
+*/
+if (alters.size() > 0) {
+	Person partner = randomFrom(alters);
 	ego.spouse.connectTo(partner);
-
-	if (ego.spouse.isConnected() & ego.v_fertility == -99) {
-			double fertility = f_defineFertility(ego.v_outcomeGroup, 
-				partner.v_outcomeGroup);
+	if (ego.spouse.isConnected()) {
+		ego.v_married = true;
+		s_married.add(1.0);
+		partner.v_married = true;
+		if (ego.v_fertility == -99) {
+			double fertility = f_defineFertility(ego.v_outcomeGroup, partner.v_outcomeGroup);
 			ego.v_fertility = fertility;
 			partner.v_fertility = fertility;
-	} else if (!ego.spouse.isConnected()) {
+		}
+		col_partnerX.add(ego.v_outcomeGroup);
+		col_partnerY.add(ego.spouse.getConnectedAgent().v_outcomeGroup);
+	}
+	else if (!ego.spouse.isConnected()) {
 		ego.v_fertility = 0;
+		s_married.add(0.0);
 	}
 }
-
-if (!ego.spouse.isConnected()) v_notMarried++;]]></Body>
+]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -1179,7 +1338,68 @@ catch (IOException e) {
 	e.printStackTrace();
 	}]]></Body>
 				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1634558685830</Id>
+					<Name><![CDATA[f_assortiveMating]]></Name>
+					<X>580</X><Y>300</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[double[] tx = col_partnerX.stream().mapToDouble(d -> d).toArray();
+double[] ty = col_partnerY.stream().mapToDouble(d -> d).toArray();
+
+KendallsCorrelation k = new KendallsCorrelation();
+v_assortativeMating = k.correlation(tx, ty);
+]]></Body>
+				</Function>
 			</Functions>
+			<AnalysisData>
+    			<Statistics>
+					<Id>1634391262068</Id>
+					<Name><![CDATA[s_numberKids]]></Name>
+					<X>50</X><Y>370</Y>
+					<Label><X>15</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<AutoUpdate>false</AutoUpdate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1634457600000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
+					</RecurrenceCode>
+					<Discrete>true</Discrete>
+				</Statistics>
+    			<Statistics>
+					<Id>1634549421788</Id>
+					<Name><![CDATA[s_married]]></Name>
+					<X>50</X><Y>390</Y>
+					<Label><X>15</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<AutoUpdate>false</AutoUpdate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1634457600000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
+					</RecurrenceCode>
+					<Discrete>true</Discrete>
+				</Statistics>
+			</AnalysisData>
 			<AgentLinks>
 				<AgentLink>
 					<Id>1632485433833</Id>
@@ -1212,12 +1432,12 @@ catch (IOException e) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<ActiveObjectClass>
-						<PackageName><![CDATA[fertility_iq]]></PackageName>
+						<PackageName><![CDATA[fertility_bmi]]></PackageName>
 						<ClassName><![CDATA[Person]]></ClassName>
 					</ActiveObjectClass>
 					<GenericParameterSubstitute>
 						<GenericParameterSubstituteReference>
-							<PackageName><![CDATA[fertility_iq]]></PackageName>
+							<PackageName><![CDATA[fertility_bmi]]></PackageName>
 							<ClassName><![CDATA[Person]]></ClassName>
 							<ItemName><![CDATA[1632485445832]]></ItemName>
 						</GenericParameterSubstituteReference>
@@ -1272,12 +1492,12 @@ catch (IOException e) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<ActiveObjectClass>
-						<PackageName><![CDATA[fertility_iq]]></PackageName>
+						<PackageName><![CDATA[fertility_bmi]]></PackageName>
 						<ClassName><![CDATA[DataViz]]></ClassName>
 					</ActiveObjectClass>
 					<GenericParameterSubstitute>
 						<GenericParameterSubstituteReference>
-							<PackageName><![CDATA[fertility_iq]]></PackageName>
+							<PackageName><![CDATA[fertility_bmi]]></PackageName>
 							<ClassName><![CDATA[DataViz]]></ClassName>
 							<ItemName><![CDATA[1632485532591]]></ItemName>
 						</GenericParameterSubstituteReference>
@@ -1531,21 +1751,6 @@ catch (IOException e) {
 			<ConnectionsId>1632485445829</ConnectionsId>
 			<Variables>
 				<Variable Class="PlainVariable">
-					<Id>1632904971172</Id>
-					<Name><![CDATA[v_outcome]]></Name>
-					<X>40</X><Y>260</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[double]]></Type>        
-						<InitialValue Class="CodeValue">
-							<Code><![CDATA[-99]]></Code>
-						</InitialValue>
-					</Properties>
-				</Variable>
-				<Variable Class="PlainVariable">
 					<Id>1632904981533</Id>
 					<Name><![CDATA[v_outcomeGroup]]></Name>
 					<X>40</X><Y>280</Y>
@@ -1647,6 +1852,73 @@ catch (IOException e) {
 						<Type><![CDATA[double]]></Type>        
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1634295538881</Id>
+					<Name><![CDATA[v_fatherID]]></Name>
+					<X>40</X><Y>480</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1634295552123</Id>
+					<Name><![CDATA[v_motherID]]></Name>
+					<X>40</X><Y>500</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1634552935057</Id>
+					<Name><![CDATA[v_married]]></Name>
+					<X>40</X><Y>520</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[boolean]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[false]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1634553204051</Id>
+					<Name><![CDATA[v_id]]></Name>
+					<X>40</X><Y>560</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1634553456253</Id>
+					<Name><![CDATA[v_lookingForPartner]]></Name>
+					<X>40</X><Y>540</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[boolean]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[false
+]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1632646282331</Id>
 					<Name><![CDATA[col_kids]]></Name>
@@ -1673,10 +1945,6 @@ catch (IOException e) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="110" Height="40">
-						<EntryAction><![CDATA[v_alive = true;
-v_parentType = randomFrom(ParentType.class);
-main.col_aliveAgents.add(this);
-main.col_deadAgents.remove(this);]]></EntryAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
@@ -1689,15 +1957,14 @@ main.col_deadAgents.remove(this);]]></EntryAction>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="110" Height="50">
-						<EntryAction><![CDATA[// traceln(!this.spouse.isConnected());
-// traceln(this.v_parentType);]]></EntryAction>
+						<EntryAction><![CDATA[if (v_married == false) main.f_getPartner(this);]]></EntryAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1632485807244</Id>
 					<Name><![CDATA[Death]]></Name>
-					<X>430</X><Y>430</Y>
+					<X>430</X><Y>350</Y>
 					<Label><X>10</X><Y>15</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1705,18 +1972,6 @@ main.col_deadAgents.remove(this);]]></EntryAction>
 					<Properties Width="110" Height="40">
 						<EntryAction><![CDATA[f_dying();]]></EntryAction>
 						<FillColor>-65536</FillColor>
-					</Properties>
-				</StatechartElement>
-				<StatechartElement Class="State" ParentState="ROOT_NODE">
-					<Id>1632670896426</Id>
-					<Name><![CDATA[Adulthood]]></Name>
-					<X>430</X><Y>350</Y>
-					<Label><X>5</X><Y>15</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties Width="110" Height="45">
-						<FillColor/>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
@@ -1748,9 +2003,8 @@ main.col_deadAgents.remove(this);]]></EntryAction>
 					</Points>
 					<IconOffset>15.0</IconOffset>
 					<Properties Source="1632485799947" Target="1632485803700" Trigger="timeout">
-						<Action><![CDATA[main.f_getPartner(this);]]></Action>
 						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[20]]></Code>
+							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 						</Timeout>
 						<Condition><![CDATA[true]]></Condition>
@@ -1778,9 +2032,9 @@ main.col_deadAgents.remove(this);]]></EntryAction>
 						<Point><X>0</X><Y>40</Y></Point>
 					</Points>
 					<IconOffset>10.0</IconOffset>
-					<Properties Source="1632485803700" Target="1632670896426" Trigger="timeout">
+					<Properties Source="1632485803700" Target="1632485807244" Trigger="timeout">
 						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[20]]></Code>
+							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 						</Timeout>
 						<Condition><![CDATA[true]]></Condition>
@@ -1795,42 +2049,10 @@ main.col_deadAgents.remove(this);]]></EntryAction>
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
-				<StatechartElement Class="Transition" ParentState="Marriage" ParentStateId="1632485803700">
-					<Id>1632582906826</Id>
-					<Name><![CDATA[fertility]]></Name>
-					<X>505</X><Y>310</Y>
-					<Label><X>30</X><Y>-30</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Points>
-						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>25</X><Y>-50</Y></Point>
-					</Points>
-					<IconOffset>30.0</IconOffset>
-					<Properties Source="1632485803700" Target="1632485803700" Trigger="rate">
-						<Action><![CDATA[f_haveKid();]]></Action>
-						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[1]]></Code>
-							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
-						</Timeout>
-						<Condition><![CDATA[true]]></Condition>
-						<Rate Class="CodeUnitValue">
-							<Code><![CDATA[v_fertility / main.p_fertilityAdjustment]]></Code>
-							<Unit Class="RateUnits"><![CDATA[PER_YEAR]]></Unit>
-						</Rate>
-						<Guard><![CDATA[this.spouse.isConnected() & v_parentType == mother;]]></Guard>
-						<MessageType><![CDATA[Object]]></MessageType>
-						<DefaultTransition>true</DefaultTransition>
-						<FilterType><![CDATA[unconditionally]]></FilterType>
-						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
-						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
-					</Properties>	
-				</StatechartElement>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1632583215981</Id>
 					<Name><![CDATA[transition3]]></Name>
-					<X>540</X><Y>450</Y>
+					<X>540</X><Y>370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1838,8 +2060,8 @@ main.col_deadAgents.remove(this);]]></EntryAction>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
 						<Point><X>60</X><Y>0</Y></Point>
-						<Point><X>60</X><Y>-250</Y></Point>
-						<Point><X>0</X><Y>-250</Y></Point>
+						<Point><X>60</X><Y>-170</Y></Point>
+						<Point><X>0</X><Y>-170</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1632485807244" Target="1632485799947" Trigger="message">
@@ -1859,22 +2081,56 @@ main.col_deadAgents.remove(this);]]></EntryAction>
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
-				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
-					<Id>1632670938174</Id>
+				<StatechartElement Class="Transition" ParentState="Marriage" ParentStateId="1632485803700">
+					<Id>1634310145719</Id>
 					<Name><![CDATA[transition1]]></Name>
-					<X>490</X><Y>395</Y>
+					<X>530</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>35</Y></Point>
+						<Point><X>0</X><Y>50</Y></Point>
 					</Points>
-					<IconOffset>10.0</IconOffset>
-					<Properties Source="1632670896426" Target="1632485807244" Trigger="timeout">
+					<IconOffset>30.0</IconOffset>
+					<Properties Source="1632485803700" Target="1632485803700" Trigger="rate">
+						<Action><![CDATA[f_haveKids();]]></Action>
 						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[40]]></Code>
+							<Code><![CDATA[2/12]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[MONTH]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[v_fertility]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_YEAR]]></Unit>
+						</Rate>
+						<Guard><![CDATA[spouse.isConnected() && v_parentType == mother;]]></Guard>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1634564782008</Id>
+					<Name><![CDATA[transition2]]></Name>
+					<X>430</X><Y>200</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>-50</X><Y>0</Y></Point>
+						<Point><X>-50</X><Y>163</Y></Point>
+						<Point><X>0</X><Y>163</Y></Point>
+					</Points>
+					<IconOffset>60.0</IconOffset>
+					<Properties Source="1632485799947" Target="1632485807244" Trigger="message">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 						</Timeout>
 						<Condition><![CDATA[true]]></Condition>
@@ -1884,8 +2140,8 @@ main.col_deadAgents.remove(this);]]></EntryAction>
 						</Rate>
 						<MessageType><![CDATA[Object]]></MessageType>
 						<DefaultTransition>true</DefaultTransition>
-						<FilterType><![CDATA[unconditionally]]></FilterType>
-						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<FilterType><![CDATA[equalsTo]]></FilterType>
+						<EqualsExpression><![CDATA["die"]]></EqualsExpression>
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
@@ -1894,35 +2150,9 @@ main.col_deadAgents.remove(this);]]></EntryAction>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1632584346745</Id>
-					<Name><![CDATA[f_haveKid]]></Name>
-					<X>210</X><Y>250</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (main.col_deadAgents.size() > 0) {
- 	Person s = randomFrom(main.col_deadAgents);
-	f_defineKidParams(s, this);
-	col_kids.add(s);
-	s.v_recycled = true;
-	send("come to live!", s);
-} else {
-	Person s = main.add_people();
-	f_defineKidParams(s, this);
-	col_kids.add(s);
-	spouse.getConnectedAgent().col_kids.add(s);
-}
-
-
-]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632584558335</Id>
 					<Name><![CDATA[f_defineKidParams]]></Name>
-					<X>210</X><Y>270</Y>
+					<X>210</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1935,12 +2165,18 @@ main.col_deadAgents.remove(this);]]></EntryAction>
 						<Name><![CDATA[mother]]></Name>
 						<Type><![CDATA[Person]]></Type>
 					</Parameter>
-					<Body><![CDATA[kid.v_generation = mother.v_generation + 1;
+					<Body><![CDATA[kid.v_id = main.v_id++;
+kid.v_generation = mother.v_generation + 1;
 kid.v_outcomeGroup = main.f_defineKidOutcome(mother.spouse.getConnectedAgent().v_outcomeGroup, 
 	mother.v_outcomeGroup);
-kid.v_outcome = main.f_outcomeToGroup(kid.v_outcomeGroup);
 kid.v_motherOutcomeGroup = mother.v_outcomeGroup;
 kid.v_fatherOutcomeGroup = mother.spouse.getConnectedAgent().v_outcomeGroup;
+kid.v_motherID = mother.v_id;
+kid.v_fatherID = mother.spouse.getConnectedAgent().v_id;
+kid.v_parentType = randomFrom(ParentType.class);
+kid.v_alive = true;
+kid.v_married = false;
+kid.v_lookingForPartner = false;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1948,23 +2184,55 @@ kid.v_fatherOutcomeGroup = mother.spouse.getConnectedAgent().v_outcomeGroup;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632738675937</Id>
 					<Name><![CDATA[f_dying]]></Name>
-					<X>210</X><Y>290</Y>
+					<X>210</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[main.col_deadAgents.add(this);
+					<Body><![CDATA[if (v_parentType == mother) main.s_numberKids.add(col_kids.size());
+main.col_deadAgents.add(this);
 main.col_aliveAgents.remove(this);
 
 spouse.disconnect();
+v_married = false;
+col_kids.clear();
 v_parentType = null;
-v_outcome = -99;
 v_outcomeGroup = -99;
 v_fertility = -99;
 v_fatherOutcomeGroup = -99;
 v_motherOutcomeGroup = -99;
+v_fatherID = -99;
+v_motherID = -99;
 v_alive = false;
-col_kids.clear();]]></Body>
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1634306140019</Id>
+					<Name><![CDATA[f_haveKids]]></Name>
+					<X>210</X><Y>220</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[if (main.col_deadAgents.size() > 0) {
+ 	Person s = randomFrom(main.col_deadAgents);
+ 	main.col_deadAgents.remove(s);
+	main.col_aliveAgents.add(s);
+	f_defineKidParams(s, this);
+	col_kids.add(s);
+	spouse.getConnectedAgent().col_kids.add(s);
+	s.v_recycled = true;
+	send("come to live!", s);
+
+} else {
+	Person s = main.add_people();
+	main.col_aliveAgents.add(s);
+	f_defineKidParams(s, this);
+	col_kids.add(s);
+	spouse.getConnectedAgent().col_kids.add(s);
+}]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -1981,7 +2249,7 @@ col_kids.clear();]]></Body>
 					<AgentLinkBidirectional>true</AgentLinkBidirectional>
 					<MessageType><![CDATA[Object]]></MessageType>
 					<StatechartReference>
-						<PackageName><![CDATA[fertility_iq]]></PackageName>
+						<PackageName><![CDATA[fertility_bmi]]></PackageName>
 						<ClassName><![CDATA[Person]]></ClassName>
 						<ItemName><![CDATA[statechart]]></ItemName>
 					</StatechartReference>
@@ -1995,8 +2263,8 @@ col_kids.clear();]]></Body>
 				<AgentLink>
 					<Id>1632485458055</Id>
 					<Name><![CDATA[spouse]]></Name>
-					<X>50</X><Y>180</Y>
-					<Label><X>20</X><Y>0</Y></Label>
+					<X>40</X><Y>180</Y>
+					<Label><X>15</X><Y>-5</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -2007,7 +2275,7 @@ col_kids.clear();]]></Body>
 					<BidirectionalPeerId>1632485458055</BidirectionalPeerId>
 					<MessageType><![CDATA[Object]]></MessageType>
 					<StatechartReference>
-						<PackageName><![CDATA[fertility_iq]]></PackageName>
+						<PackageName><![CDATA[fertility_bmi]]></PackageName>
 						<ClassName><![CDATA[Person]]></ClassName>
 						<ItemName><![CDATA[statechart]]></ItemName>
 					</StatechartReference>
@@ -2030,7 +2298,7 @@ col_kids.clear();]]></Body>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<ActiveObjectClass>
-						<PackageName><![CDATA[fertility_iq]]></PackageName>
+						<PackageName><![CDATA[fertility_bmi]]></PackageName>
 						<ClassName><![CDATA[Main]]></ClassName>
 					</ActiveObjectClass>
 				</ContainerLink>
@@ -2385,7 +2653,7 @@ col_kids.clear();]]></Body>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<ActiveObjectClass>
-						<PackageName><![CDATA[fertility_iq]]></PackageName>
+						<PackageName><![CDATA[fertility_bmi]]></PackageName>
 						<ClassName><![CDATA[Main]]></ClassName>
 					</ActiveObjectClass>
 				</ContainerLink>
@@ -2409,7 +2677,7 @@ col_kids.clear();]]></Body>
 					<Id>1632560771086</Id>
 					<Name><![CDATA[chart]]></Name>
 					<ExcludeFromBuild>true</ExcludeFromBuild>
-					<X>380</X><Y>330</Y>
+					<X>420</X><Y>330</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2502,14 +2770,14 @@ col_kids.clear();]]></Body>
 						<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>350</Width>
+					<Width>400</Width>
 					<Height>210</Height>
 					<BackgroundColor/>
 					<BorderColor/>
 					<ChartArea>
 						<XOffset>50</XOffset>
 						<YOffset>10</YOffset>
-						<Width>270</Width>
+						<Width>330</Width>
 						<Height>150</Height>
 						<BackgroundColor>-1</BackgroundColor>
 						<BorderColor>-16777216</BorderColor>
@@ -2569,14 +2837,14 @@ col_kids.clear();]]></Body>
 						<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>350</Width>
+					<Width>400</Width>
 					<Height>260</Height>
 					<BackgroundColor/>
 					<BorderColor/>
 					<ChartArea>
 						<XOffset>50</XOffset>
 						<YOffset>10</YOffset>
-						<Width>270</Width>
+						<Width>340</Width>
 						<Height>190</Height>
 						<BackgroundColor>-1</BackgroundColor>
 						<BorderColor>-16777216</BorderColor>
@@ -2599,34 +2867,34 @@ col_kids.clear();]]></Body>
 					<DatasetExpression>
 					<Id>0</Id>
 					<Expression><![CDATA[my_dataset]]></Expression>
-					<Color>-9807155</Color>
+					<Color>-14774017</Color>
 					<Expression2><![CDATA[main.col_propOutcomeGroup.get(0)]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>  
-							<Title><![CDATA[1]]></Title>
+							<Title><![CDATA[Underweigth]]></Title>
 					</DatasetExpression>
 					<DatasetExpression>
 					<Id>0</Id>
 					<Expression><![CDATA[my_dataset]]></Expression>
-					<Color>-2987746</Color>
+					<Color>-16744448</Color>
 					<Expression2><![CDATA[main.col_propOutcomeGroup.get(1)]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>  
-							<Title><![CDATA[2]]></Title>
+							<Title><![CDATA[Normal]]></Title>
 					</DatasetExpression>
 					<DatasetExpression>
 					<Id>0</Id>
 					<Expression><![CDATA[my_dataset]]></Expression>
-					<Color>-2448096</Color>
+					<Color>-23296</Color>
 					<Expression2><![CDATA[main.col_propOutcomeGroup.get(2)]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>  
-							<Title><![CDATA[3]]></Title>
+							<Title><![CDATA[Overweight]]></Title>
 					</DatasetExpression>
 					<DatasetExpression>
 					<Id>0</Id>
 					<Expression><![CDATA[my_dataset]]></Expression>
-					<Color>-9728477</Color>
-					<Expression2><![CDATA[main.col_propOutcomeGroup.get(2)]]></Expression2>
+					<Color>-65536</Color>
+					<Expression2><![CDATA[main.col_propOutcomeGroup.get(3)]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>  
-							<Title><![CDATA[4]]></Title>
+							<Title><![CDATA[Obese]]></Title>
 					</DatasetExpression>
 					<SamplesToKeep>100</SamplesToKeep>
 					<VerScaleToExpression><![CDATA[1]]></VerScaleToExpression>
@@ -2699,6 +2967,50 @@ col_kids.clear();]]></Body>
 					</Font>
 					<Alignment>LEFT</Alignment>
 				</Text>
+				<Text>
+					<Id>1634391639942</Id>
+					<Name><![CDATA[text3]]></Name>
+					<X>270</X><Y>20</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[Avg kids = s_numberKids.mean()]]></Text>
+					<TextCode><![CDATA["Avg kids = " + ((int) (main.s_numberKids.mean() * 100)) / 100.0]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1634563438498</Id>
+					<Name><![CDATA[text5]]></Name>
+					<X>720</X><Y>20</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[Avg kids = s_numberKids.mean()]]></Text>
+					<TextCode><![CDATA["Mating = " + ((int) (main.v_assortativeMating * 100)) / 100.0]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
 			</Presentation>
 
 				</Level>
@@ -2735,7 +3047,7 @@ col_kids.clear();]]></Body>
 				<ConnectOnStartup>true</ConnectOnStartup>
 				<DatabaseName><![CDATA[]]></DatabaseName>
 				<ResourceReference>
-					<PackageName><![CDATA[fertility_iq]]></PackageName>
+					<PackageName><![CDATA[fertility_bmi]]></PackageName>
 					<ClassName><![CDATA[data/mating.xlsx]]></ClassName>
 				</ResourceReference>
 				<Host><![CDATA[localhost]]></Host>
@@ -2756,7 +3068,7 @@ col_kids.clear();]]></Body>
 				<ConnectOnStartup>true</ConnectOnStartup>
 				<DatabaseName><![CDATA[]]></DatabaseName>
 				<ResourceReference>
-					<PackageName><![CDATA[fertility_iq]]></PackageName>
+					<PackageName><![CDATA[fertility_bmi]]></PackageName>
 					<ClassName><![CDATA[data/heritability.xlsx]]></ClassName>
 				</ResourceReference>
 				<Host><![CDATA[localhost]]></Host>
@@ -2766,7 +3078,7 @@ col_kids.clear();]]></Body>
 			</ExternalConnection>
 			<TableImportSettings>
 				<TableReference>
-					<PackageName><![CDATA[fertility_iq]]></PackageName>
+					<PackageName><![CDATA[fertility_bmi]]></PackageName>
 					<ClassName><![CDATA[mating]]></ClassName>
 				</TableReference>
 				<ConnectionIndex>0</ConnectionIndex>
@@ -2775,7 +3087,7 @@ col_kids.clear();]]></Body>
 			</TableImportSettings>
 			<TableImportSettings>
 				<TableReference>
-					<PackageName><![CDATA[fertility_iq]]></PackageName>
+					<PackageName><![CDATA[fertility_bmi]]></PackageName>
 					<ClassName><![CDATA[heritability]]></ClassName>
 				</TableReference>
 				<ConnectionIndex>1</ConnectionIndex>
@@ -2845,7 +3157,7 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-12490271</Color>
-					<Text><![CDATA[fertility-BMI]]></Text>
+					<Text><![CDATA[Fertility-BMI]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>24</Size>
@@ -2858,14 +3170,11 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 			<Parameters>			
 				<Parameter>
 					<ParameterName><![CDATA[p_populationSize]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[500]]></Code>
-					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_baselineOutcomeDistribution]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[{0.1, 0.6, 0.15, 0.15}]]></Code>
+						<Code><![CDATA[{0.25, 0.25, 0.25, 0.25}]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -2877,32 +3186,38 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
+						<Code><![CDATA[.1]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_heritabilityType]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[Heritability.complete]]></Code>
+						<Code><![CDATA[Heritability.preston]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_leakage]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.3]]></Code>
+						<Code><![CDATA[0.10]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_baselineFertility]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[1.5]]></Code>
+						<Code><![CDATA[2.5]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_fertilityType]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[Fertility.additive]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_fertilityAdjustment]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[1]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_filePath]]></ParameterName>
@@ -2918,6 +3233,9 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_updatePlots]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_numberKids]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
@@ -3066,6 +3384,9 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 					<Code><![CDATA[Mating.defined]]></Code>
 				</Expression>
 			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1634306204283</Id>
+			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
 				<Type>FIXED</Type>
@@ -3122,6 +3443,10 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 				<Id>1634219193425</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1634306204283</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
 			<ModelTimeProperties>
 				<StopOption><![CDATA[Stop at specified time]]></StopOption>
 				<InitialDate><![CDATA[1632441600000]]></InitialDate>	
@@ -3160,6 +3485,14 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 			<Path><![CDATA[data/mating.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
+		<Resource>
+			<Path><![CDATA[commons-math3-3.6.1-bin.zip]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[commons-math3-3.6.1.jar]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
 	</ModelResources>
     <RequiredLibraryReference>
 		<LibraryName><![CDATA[com.anylogic.libraries.modules.markup_descriptors]]></LibraryName>
@@ -3169,8 +3502,16 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
     </RequiredLibraryReference>
 	<ClassPathEntry>
 		<ResourceReference>
-			<PackageName><![CDATA[fertility_iq]]></PackageName>
+			<PackageName><![CDATA[fertility_bmi]]></PackageName>
 			<ClassName><![CDATA[commons-io-2.11.0.jar]]></ClassName>
+		</ResourceReference>
+		<Imported>true</Imported>
+		<Folder>false</Folder>
+	</ClassPathEntry>
+	<ClassPathEntry>
+		<ResourceReference>
+			<PackageName><![CDATA[fertility_bmi]]></PackageName>
+			<ClassName><![CDATA[commons-math3-3.6.1.jar]]></ClassName>
 		</ResourceReference>
 		<Imported>true</Imported>
 		<Folder>false</Folder>
