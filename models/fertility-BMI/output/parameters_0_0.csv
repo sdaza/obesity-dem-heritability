@@ -1,2 +1,2 @@
-iteration;replicate;population;fertility_type;heritability_type;random_mating;leakeage 
-0;0;1000;additive;preston;0.1;0.1
+iteration;replicate;population;fertility_type;heritability_type;mating_type;random_mating;leakeage 
+0;0;1000;additive;preston;defined;0.0;0.1

@@ -55,10 +55,6 @@
 				<Id>1632771879884</Id>
 				<Name><![CDATA[uniform]]></Name>
 			</Option>
-			<Option>
-				<Id>1634225067337</Id>
-				<Name><![CDATA[complete]]></Name>
-			</Option>
 		</OptionList>
 		<OptionList>
 			<Id>1634219217898</Id>
@@ -85,27 +81,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import com.fasterxml.jackson.databind.util.IgnorePropertiesUtil;
 import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import>
-			<StartupCode><![CDATA[if (p_exportData) {
-	f_initiateFiles();
-	f_writeParametersData();
-}
-
-f_defineHeritabilityMatrix();
-f_defineMatingMatrix();
-
-// initial BMI distribution
-for (Person p : people) {
-		p.v_outcomeGroup = f_weightedSampling(new double[] {1,2,3,4}, p_baselineOutcomeDistribution);
-		p.v_id = v_id++;
-		p.v_fatherID = uniform();
-		p.v_motherID = uniform();
-		p.v_parentType = randomFrom(ParentType.class);
-		col_aliveAgents.add(p);
-}
-	
-if (p_updatePlots) {
-
-}]]></StartupCode>
+			<StartupCode><![CDATA[f_initialDefinition();]]></StartupCode>
 			<DestroyCode><![CDATA[if (p_exportData)  {
 	f_writeGroupData();
 	f_closeFiles();
@@ -243,19 +219,7 @@ if (p_updatePlots) {
 				<Variable Class="PlainVariable">
 					<Id>1634561267223</Id>
 					<Name><![CDATA[v_assortativeMating]]></Name>
-					<X>240</X><Y>220</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[double]]></Type>        
-					</Properties>
-				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1634562703084</Id>
-					<Name><![CDATA[v_fertility]]></Name>
-					<X>580</X><Y>370</Y>
+					<X>440</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -316,7 +280,7 @@ if (p_updatePlots) {
 				<Variable Class="Parameter">
 					<Id>1634219193425</Id>
 					<Name><![CDATA[p_matingType]]></Name>
-					<X>400</X><Y>110</Y>
+					<X>440</X><Y>110</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -326,7 +290,7 @@ if (p_updatePlots) {
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[Mating.observed]]></Code>
+							<Code><![CDATA[Mating.defined]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1634219193423</Id>
@@ -340,7 +304,7 @@ if (p_updatePlots) {
 				<Variable Class="Parameter">
 					<Id>1632690393452</Id>
 					<Name><![CDATA[p_randomMating]]></Name>
-					<X>400</X><Y>130</Y>
+					<X>440</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -459,30 +423,6 @@ if (p_updatePlots) {
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
-					<Id>1632906140220</Id>
-					<Name><![CDATA[p_fertilityAdjustment]]></Name>
-					<X>240</X><Y>130</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[12.5]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1632906140218</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
 					<Id>1632898917488</Id>
 					<Name><![CDATA[p_filePath]]></Name>
 					<X>60</X><Y>480</Y>
@@ -534,7 +474,7 @@ if (p_updatePlots) {
 				<Variable Class="Parameter">
 					<Id>1634218330603</Id>
 					<Name><![CDATA[p_numberOutcomeCategories]]></Name>
-					<X>240</X><Y>150</Y>
+					<X>240</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -605,22 +545,22 @@ if (p_updatePlots) {
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
-					<Id>1634306204283</Id>
-					<Name><![CDATA[p_numberKids]]></Name>
-					<X>240</X><Y>170</Y>
+					<Id>1634650586511</Id>
+					<Name><![CDATA[p_fertilityAdjustment]]></Name>
+					<X>240</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double[]]]></Type>
+						<Type><![CDATA[double]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[{1, 2, 3, 4}]]></Code>
+							<Code><![CDATA[0.3]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
-							<Id>1634306204281</Id>
+							<Id>1634650586509</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -709,7 +649,7 @@ if (p_updatePlots) {
 				<Variable Class="CollectionVariable">
 					<Id>1634560638371</Id>
 					<Name><![CDATA[col_partnerX]]></Name>
-					<X>580</X><Y>320</Y>
+					<X>440</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -724,7 +664,7 @@ if (p_updatePlots) {
 				<Variable Class="CollectionVariable">
 					<Id>1634560674183</Id>
 					<Name><![CDATA[col_partnerY]]></Name>
-					<X>580</X><Y>340</Y>
+					<X>440</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -736,12 +676,42 @@ if (p_updatePlots) {
 					</Properties>
 
 				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1634640909761</Id>
+					<Name><![CDATA[col_matingData]]></Name>
+					<X>590</X><Y>240</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[MatingData]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1634646508775</Id>
+					<Name><![CDATA[col_heritabilityData]]></Name>
+					<X>590</X><Y>260</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[HeritabilityData]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
 			</Variables>
 			<Events>
 				<Event>
 					<Id>1632689572194</Id>
 					<Name><![CDATA[ev_updateStats]]></Name>
-					<X>580</X><Y>210</Y>
+					<X>50</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -774,16 +744,18 @@ if(col_aliveAgents.size() < 50) {
 	finishSimulation();
 }
 
-if(time() > 200) {
+if(time() > 500) {
 	traceln("Simulation stopped!");
 	finishSimulation();
 }
-]]></Action>
+
+if (col_aliveAgents.size() > 7000) p_fertilityAdjustment = 0.50;
+if (col_aliveAgents.size() > 2000) p_fertilityAdjustment = 0.20;]]></Action>
 				</Event>
 				<Event>
 					<Id>1634395468317</Id>
 					<Name><![CDATA[ev_adjustFertility]]></Name>
-					<X>580</X><Y>230</Y>
+					<X>240</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -810,7 +782,7 @@ if(time() > 200) {
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
 					<Action><![CDATA[if ((col_aliveAgents.size() > 3000)) { 
-	for (int i = 0; i < col_aliveAgents.size() * 0.30; i++) {
+	for (int i = 0; i < col_aliveAgents.size() * p_fertilityAdjustment; i++) {
 		Person p = randomFrom(col_aliveAgents);
 		p.send("die", p);;
 	}
@@ -819,7 +791,7 @@ if(time() > 200) {
 				<Event>
 					<Id>1634560556087</Id>
 					<Name><![CDATA[assortativeMating]]></Name>
-					<X>580</X><Y>280</Y>
+					<X>440</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -858,7 +830,7 @@ if(time() > 200) {
 @param  iq double value of IQ
 @author Sebastian Daza
 @since 1.0]]></Description>
-					<X>240</X><Y>270</Y>
+					<X>240</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -884,7 +856,7 @@ else return -99;]]></Body>
 @since 1.0
 
 ]]></Description>
-					<X>240</X><Y>250</Y>
+					<X>240</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -893,17 +865,11 @@ else return -99;]]></Body>
 						<Name><![CDATA[ego]]></Name>
 						<Type><![CDATA[Person]]></Type>
 					</Parameter>
-					<Body><![CDATA[String wprop = p_matingType == Mating.observed ? 
-	(ego.v_parentType == father ? "fprop" : "mprop") : "tprop";
-String wparent = ego.v_parentType == father ? "father" : "mother";
-String wpartner = ego.v_parentType == father ? "mother" : "father";
-List<Double> prop = selectValues("select " + wprop + 
-	" from mating where " + wparent + " = "  + ego.v_outcomeGroup);
-List<Double> outcome = selectValues("select "  + wpartner + " from mating where " + wparent + 
-	" = " + ego.v_outcomeGroup);
+					<Body><![CDATA[double[] aprop = col_matingData.stream().filter(w -> w.father == ego.v_outcomeGroup)
+	.mapToDouble(d -> d.prob).toArray();
+double[] aoutcome = col_matingData.stream().filter(w -> w.father == ego.v_outcomeGroup)
+	.mapToDouble(d -> d.mother).toArray();
 
-double[] aprop = prop.stream().mapToDouble(d -> d).toArray();
-double[] aoutcome = outcome.stream().mapToDouble(d -> d).toArray();
 
 double group = f_weightedSampling(aoutcome, aprop);
 
@@ -948,7 +914,7 @@ if (alters.size() > 0) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632725205130</Id>
 					<Name><![CDATA[f_definePropOutcomeGroup]]></Name>
-					<X>240</X><Y>360</Y>
+					<X>240</X><Y>320</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -976,7 +942,7 @@ for (int i = 0; i < p_numberOutcomeCategories; i++) {
 @param motherIQ 7-group IQ category of the mother
 @author Sebastian Daza
 @since 1.0]]></Description>
-					<X>240</X><Y>310</Y>
+					<X>240</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1009,7 +975,7 @@ for (int i = 0; i < p_numberOutcomeCategories; i++) {
 @param motherIQ 7-group IQ category of the mother
 @author Sebastian Daza
 @since 1.0]]></Description>
-					<X>240</X><Y>330</Y>
+					<X>240</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1022,14 +988,10 @@ for (int i = 0; i < p_numberOutcomeCategories; i++) {
 						<Name><![CDATA[motherOutcome]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
-					<Body><![CDATA[String wprop = p_heritabilityType == Heritability.observed ? "oprop" : "tprop";
-List<Double> prop = selectValues("select "  + wprop + " from heritability where father = " +
-		 fatherOutcome +  " and mother = " + motherOutcome);
-List<Double> kidOutcome = selectValues("select kid from heritability where father = " +
-		fatherOutcome + " and mother = " + motherOutcome);
-
-double[] aprop = prop.stream().mapToDouble(d -> d).toArray();
-double[] akidOutcome = kidOutcome.stream().mapToDouble(d -> d).toArray();
+					<Body><![CDATA[double[] aprop = col_heritabilityData.stream().filter(w -> w.father == fatherOutcome & w.mother == motherOutcome)
+	.mapToDouble(w -> w.prob).toArray();
+double[] akidOutcome = col_heritabilityData.stream().filter(w -> w.father == fatherOutcome & w.mother == motherOutcome)
+	.mapToDouble(w -> w.kid).toArray();
 
 return f_weightedSampling(akidOutcome, aprop);]]></Body>
 				</Function>
@@ -1038,7 +1000,7 @@ return f_weightedSampling(akidOutcome, aprop);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632751749907</Id>
 					<Name><![CDATA[f_weightedSampling]]></Name>
-					<X>240</X><Y>420</Y>
+					<X>240</X><Y>340</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1078,12 +1040,14 @@ return values[i-1];]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632812353264</Id>
 					<Name><![CDATA[f_defineHeritabilityMatrix]]></Name>
-					<X>240</X><Y>380</Y>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
+					<X>-150</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (p_heritabilityType == Heritability.uniform ) { executeStatement("update heritability set tprop = " + 1.0 / p_numberOutcomeCategories); }
+					<Body><![CDATA[if (p_heritabilityType == Heritability.uniform ) { 
+	executeStatement("update heritability set tprop = " + 1.0 / p_numberOutcomeCategories); }
 else if (p_heritabilityType == preston) {
 	executeStatement("update heritability set tprop = 0.0");
 	executeStatement("update heritability SET tprop = " + (1-p_leakage) +
@@ -1117,7 +1081,7 @@ else if (p_heritabilityType == complete) {
 @param  group IQ categorie from 1 to 7
 @author Sebastian Daza
 @since 1.0]]></Description>
-					<X>240</X><Y>290</Y>
+					<X>240</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1140,7 +1104,8 @@ else return -99;]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632819226602</Id>
 					<Name><![CDATA[f_defineMatingMatrix]]></Name>
-					<X>240</X><Y>400</Y>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
+					<X>-150</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1176,7 +1141,7 @@ else {
 if (f_textFileInclude("groups", p_fileNames)) {
 
 	col = new String[]{"iteration", "replicate", "time", "population", "g1", "g2", 
-		"g3", "g4", "g5", "g6", "g7"};
+		"g3", "g4", "g5", "g6", "g7", "mating"};
 	col_fileColumns.put("groups", col);
 
 }
@@ -1184,7 +1149,7 @@ if (f_textFileInclude("groups", p_fileNames)) {
 if (f_textFileInclude("parameters", p_fileNames)) {
 
 	col = new String[]{"iteration", "replicate", "population", "fertility_type", 
-	"heritability_type", "random_mating", "leakeage"};
+	"heritability_type", "mating_type", "random_mating", "leakeage"};
 	col_fileColumns.put("parameters", col);
 
 }
@@ -1250,7 +1215,8 @@ try {
    	col_propOutcomeGroup.get(0) + s +
    	col_propOutcomeGroup.get(1) + s + 
    	col_propOutcomeGroup.get(2) + s +
-   	col_propOutcomeGroup.get(3) + "\n");
+   	col_propOutcomeGroup.get(3) + s + 
+   	v_assortativeMating + "\n");
 	}
 catch (IOException e) {
 	e.printStackTrace();
@@ -1331,6 +1297,7 @@ try {
    	p_populationSize + s +
    	p_fertilityType + s + 
    	p_heritabilityType + s +
+   	p_matingType + s +
    	p_randomMating + s +
    	p_leakage + "\n");
 	}
@@ -1343,7 +1310,7 @@ catch (IOException e) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1634558685830</Id>
 					<Name><![CDATA[f_assortiveMating]]></Name>
-					<X>580</X><Y>300</Y>
+					<X>440</X><Y>220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1354,6 +1321,110 @@ double[] ty = col_partnerY.stream().mapToDouble(d -> d).toArray();
 KendallsCorrelation k = new KendallsCorrelation();
 v_assortativeMating = k.correlation(tx, ty);
 ]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1634628760051</Id>
+					<Name><![CDATA[f_readMatingData]]></Name>
+					<X>590</X><Y>200</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[boolean firstLine = true;
+while (mating.canReadMore() == true) {
+		String line = mating.readLine();
+		if (firstLine == true) {
+			firstLine = false;
+			continue;
+		}
+		String[] list = line.split("[,]", 0);
+		double father = Double.parseDouble(list[0]);
+		double mother = Double.parseDouble(list[1]);
+		double fprob = Double.parseDouble(list[2]);
+		double prob =  0.0;
+		
+		if (p_matingType == defined) {
+			if (p_randomMating == 1) prob = 1 / p_numberOutcomeCategories;
+			else {
+				if (father == mother) prob = (1-p_randomMating);
+				else prob = p_randomMating / p_numberOutcomeCategories;
+			}
+		} else prob = fprob;
+		MatingData m = new MatingData(father, mother, prob);
+		col_matingData.add(m);
+}
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1634646713310</Id>
+					<Name><![CDATA[f_readHeritabilityData]]></Name>
+					<X>590</X><Y>220</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[boolean firstLine = true;
+while (heritability.canReadMore() == true) {
+		String line = heritability.readLine();
+		if (firstLine == true) {
+			firstLine = false;
+			continue;
+		}
+		String[] list = line.split("[,]", 0);
+		double father = Double.parseDouble(list[0]);
+		double mother = Double.parseDouble(list[1]);
+		double kid = Double.parseDouble(list[2]);
+		double oprob = Double.parseDouble(list[3]);
+		double prob = 0.0;
+		
+		if (p_heritabilityType == Heritability.observed) {
+			prob = oprob;
+		} else if (p_heritabilityType == Heritability.uniform) {
+			prob = 1 /p_numberOutcomeCategories;
+		} else if (p_heritabilityType == Heritability.preston) {
+			if (mother == father & kid == mother) prob = 1-p_leakage;
+			else if (mother == father & (kid == (mother+1) | kid == (mother-1))) prob = p_leakage / 2.0;
+			else if (mother == 1  & father == 1 & kid == 2) prob = p_leakage;
+			else if (mother == p_numberOutcomeCategories  & father == p_numberOutcomeCategories &
+				 kid == (p_numberOutcomeCategories - 1)) prob = p_leakage;
+			else if (mother != father & (kid == father | kid == mother)) prob = 0.5;
+		}
+		HeritabilityData h = new HeritabilityData(father, mother, kid, prob);
+		col_heritabilityData.add(h);
+}
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1634647898972</Id>
+					<Name><![CDATA[f_initialDefinition]]></Name>
+					<X>590</X><Y>180</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[if (p_exportData) {
+	f_initiateFiles();
+	f_writeParametersData();
+}
+
+f_readMatingData();
+f_readHeritabilityData();
+
+
+for (Person p : people) {
+		p.v_outcomeGroup = f_weightedSampling(new double[] {1,2,3,4}, p_baselineOutcomeDistribution);
+		p.v_id = v_id++;
+		p.v_fatherID = uniform();
+		p.v_motherID = uniform();
+		p.v_parentType = randomFrom(ParentType.class);
+		col_aliveAgents.add(p);
+}]]></Body>
 				</Function>
 			</Functions>
 			<AnalysisData>
@@ -1400,6 +1471,44 @@ v_assortativeMating = k.correlation(tx, ty);
 					<Discrete>true</Discrete>
 				</Statistics>
 			</AnalysisData>
+			<Connectivity>
+				<TextFile>
+					<Id>1634631376893</Id>
+					<Name><![CDATA[mating]]></Name>
+					<X>590</X><Y>280</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<FileType>FILE</FileType>
+					<Url><![CDATA[]]></Url>
+					<ResourceReference>
+						<PackageName><![CDATA[fertility_bmi]]></PackageName>
+						<ClassName><![CDATA[data/mating.csv]]></ClassName>
+					</ResourceReference>
+					<FileMode>READ</FileMode>
+					<CharsetName>null</CharsetName>
+					<Separators>,</Separators>
+				</TextFile>
+				<TextFile>
+					<Id>1634646435958</Id>
+					<Name><![CDATA[heritability]]></Name>
+					<X>590</X><Y>300</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<FileType>FILE</FileType>
+					<Url><![CDATA[]]></Url>
+					<ResourceReference>
+						<PackageName><![CDATA[fertility_bmi]]></PackageName>
+						<ClassName><![CDATA[data/heritability.csv]]></ClassName>
+					</ResourceReference>
+					<FileMode>READ</FileMode>
+					<CharsetName>null</CharsetName>
+					<Separators>,</Separators>
+				</TextFile>
+			</Connectivity>
 			<AgentLinks>
 				<AgentLink>
 					<Id>1632485433833</Id>
@@ -2123,12 +2232,44 @@ v_assortativeMating = k.correlation(tx, ty);
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-50</X><Y>0</Y></Point>
-						<Point><X>-50</X><Y>163</Y></Point>
-						<Point><X>0</X><Y>163</Y></Point>
+						<Point><X>-60</X><Y>0</Y></Point>
+						<Point><X>-60</X><Y>170</Y></Point>
+						<Point><X>0</X><Y>170</Y></Point>
 					</Points>
-					<IconOffset>60.0</IconOffset>
+					<IconOffset>250.0</IconOffset>
 					<Properties Source="1632485799947" Target="1632485807244" Trigger="message">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_YEAR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[equalsTo]]></FilterType>
+						<EqualsExpression><![CDATA["die"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1634651056725</Id>
+					<Name><![CDATA[transition4]]></Name>
+					<X>430</X><Y>290</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>-40</X><Y>0</Y></Point>
+						<Point><X>-40</X><Y>70</Y></Point>
+						<Point><X>0</X><Y>70</Y></Point>
+					</Points>
+					<IconOffset>80.0</IconOffset>
+					<Properties Source="1632485803700" Target="1632485807244" Trigger="message">
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
@@ -3034,66 +3175,6 @@ v_alive = false;
 		<AutoExport>false</AutoExport>
 		<ShutdownCompact>false</ShutdownCompact>
 		<ImportSettings>
-			<ExternalConnection>
-				<Id>1634216825844</Id>
-				<Name><![CDATA[database]]></Name>
-				<X>0</X><Y>0</Y>
-				<Label><X>10</X><Y>0</Y></Label>
-				<PublicFlag>false</PublicFlag>
-				<PresentationFlag>true</PresentationFlag>
-				<ShowLabel>true</ShowLabel>
-				<DatabaseType>EXCEL_ACCESS</DatabaseType>
-				<ConnectionURL><![CDATA[]]></ConnectionURL>
-				<ConnectOnStartup>true</ConnectOnStartup>
-				<DatabaseName><![CDATA[]]></DatabaseName>
-				<ResourceReference>
-					<PackageName><![CDATA[fertility_bmi]]></PackageName>
-					<ClassName><![CDATA[data/mating.xlsx]]></ClassName>
-				</ResourceReference>
-				<Host><![CDATA[localhost]]></Host>
-				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
-				<Login><![CDATA[]]></Login>
-				<Password><![CDATA[]]></Password>
-			</ExternalConnection>
-			<ExternalConnection>
-				<Id>1634216231230</Id>
-				<Name><![CDATA[database]]></Name>
-				<X>0</X><Y>0</Y>
-				<Label><X>10</X><Y>0</Y></Label>
-				<PublicFlag>false</PublicFlag>
-				<PresentationFlag>true</PresentationFlag>
-				<ShowLabel>true</ShowLabel>
-				<DatabaseType>EXCEL_ACCESS</DatabaseType>
-				<ConnectionURL><![CDATA[]]></ConnectionURL>
-				<ConnectOnStartup>true</ConnectOnStartup>
-				<DatabaseName><![CDATA[]]></DatabaseName>
-				<ResourceReference>
-					<PackageName><![CDATA[fertility_bmi]]></PackageName>
-					<ClassName><![CDATA[data/heritability.xlsx]]></ClassName>
-				</ResourceReference>
-				<Host><![CDATA[localhost]]></Host>
-				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
-				<Login><![CDATA[]]></Login>
-				<Password><![CDATA[]]></Password>
-			</ExternalConnection>
-			<TableImportSettings>
-				<TableReference>
-					<PackageName><![CDATA[fertility_bmi]]></PackageName>
-					<ClassName><![CDATA[mating]]></ClassName>
-				</TableReference>
-				<ConnectionIndex>0</ConnectionIndex>
-				<ExternalTableName><![CDATA["mating"]]></ExternalTableName>
-				<AutoImport>false</AutoImport>
-			</TableImportSettings>
-			<TableImportSettings>
-				<TableReference>
-					<PackageName><![CDATA[fertility_bmi]]></PackageName>
-					<ClassName><![CDATA[heritability]]></ClassName>
-				</TableReference>
-				<ConnectionIndex>1</ConnectionIndex>
-				<ExternalTableName><![CDATA["heritability"]]></ExternalTableName>
-				<AutoImport>false</AutoImport>
-			</TableImportSettings>
 		</ImportSettings>
 		<ExportSettings>
 		</ExportSettings>
@@ -3174,19 +3255,16 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 				<Parameter>
 					<ParameterName><![CDATA[p_baselineOutcomeDistribution]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[{0.25, 0.25, 0.25, 0.25}]]></Code>
+						<Code><![CDATA[{0.1, 0.6, 0.15, 0.05}]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_matingType]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[Mating.defined]]></Code>
-					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[.1]]></Code>
+						<Code><![CDATA[0.0]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -3204,19 +3282,13 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 				<Parameter>
 					<ParameterName><![CDATA[p_baselineFertility]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[2.5]]></Code>
+						<Code><![CDATA[2.7]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_fertilityType]]></ParameterName>
 					<ParameterValue Class="CodeValue">
 						<Code><![CDATA[Fertility.additive]]></Code>
-					</ParameterValue>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_fertilityAdjustment]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[1]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -3235,7 +3307,7 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 					<ParameterName><![CDATA[p_updatePlots]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[p_numberKids]]></ParameterName>
+					<ParameterName><![CDATA[p_fertilityAdjustment]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
@@ -3270,7 +3342,10 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
 			<BeforeSimulationRunCode><![CDATA[root.v_iteration = getCurrentIteration();
-root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
+root.v_replicate = getCurrentReplication();
+
+double[] random_mating = {0.0, 0.5, 1.0};
+root.p_randomMating = random_mating[root.v_iteration-1];]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[v_replicates++;]]></AfterSimulationRunCode>
 			<SeedValue>1</SeedValue>
 			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
@@ -3320,12 +3395,9 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>1</NumberOfRuns>
+			<NumberOfRuns>3</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[500]]></Code>
-				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632690393452</Id>
@@ -3336,17 +3408,20 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 			<FreeformParamValue>	
 				<Id>1632731453253</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[Fertility.uniform]]></Code>
+					<Code><![CDATA[Fertility.additive]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632771778105</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[Heritability.uniform]]></Code>
+					<Code><![CDATA[Heritability.preston]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632812972826</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[.10]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632898861982</Id>
@@ -3365,15 +3440,15 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[2.5]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632903435834</Id>
 				<Expression Class="CodeValue">
 					<Code><![CDATA[{0.1, 0.6, 0.15, 0.05}]]></Code>
 				</Expression>
-			</FreeformParamValue>
-			<FreeformParamValue>	
-				<Id>1632906140220</Id>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1634218330603</Id>
@@ -3385,7 +3460,7 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
-				<Id>1634306204283</Id>
+				<Id>1634650586511</Id>
 			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
@@ -3432,10 +3507,6 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
-				<Id>1632906140220</Id>
-				<Type>FIXED</Type>
-			</RangeVariationParamValue>
-			<RangeVariationParamValue>	
 				<Id>1634218330603</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
@@ -3444,15 +3515,15 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
-				<Id>1634306204283</Id>
+				<Id>1634650586511</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<ModelTimeProperties>
 				<StopOption><![CDATA[Stop at specified time]]></StopOption>
 				<InitialDate><![CDATA[1632441600000]]></InitialDate>	
 				<InitialTime><![CDATA[0.0]]></InitialTime>	
-				<FinalDate><![CDATA[17400441600000]]></FinalDate>	
-				<FinalTime><![CDATA[500.0]]></FinalTime>	
+				<FinalDate><![CDATA[4786041600000]]></FinalDate>	
+				<FinalTime><![CDATA[100.0]]></FinalTime>	
 			</ModelTimeProperties>
 			<PresentationProperties>
 				<EnableZoomAndPanning>false</EnableZoomAndPanning>
@@ -3463,7 +3534,7 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 			<ReplicationsProperties>
 				<UseReplication>true</UseReplication>
 				<FixedReplicationsNumber>true</FixedReplicationsNumber>
-				<ReplicationPerIteration>2</ReplicationPerIteration>
+				<ReplicationPerIteration>10</ReplicationPerIteration>
 				<MinimumReplication>2</MinimumReplication>
 				<MaximumReplication>10</MaximumReplication>
 				<ConfidenceLevel>LEVEL_80</ConfidenceLevel>
@@ -3472,25 +3543,55 @@ root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 			</ReplicationsProperties>
 		</ParamVariationExperiment>	
 	</Experiments>
+	<JavaClasses>
+		<!--   =========   Java Class   ========  -->
+		<JavaClass>
+			<Id>1634640741605</Id>
+			<Name><![CDATA[MatingData]]></Name>
+			<Text><![CDATA[class MatingData {
+	double father;
+	double mother;
+	double prob;
+	public MatingData(double father, double mother, double prob) {
+		this.father = father;
+		this.mother = mother;
+		this.prob = prob;
+	}
+}]]></Text>
+		</JavaClass>
+		<!--   =========   Java Class   ========  -->
+		<JavaClass>
+			<Id>1634646559594</Id>
+			<Name><![CDATA[HeritabilityData]]></Name>
+			<Text><![CDATA[class HeritabilityData {
+	double father;
+	double mother;
+	double kid;
+	double prob;
+	public HeritabilityData(double father, double mother, double kid, double prob) {
+		this.father = father;
+		this.mother = mother;
+		this.kid = kid;
+		this.prob = prob;
+	}
+}]]></Text>
+		</JavaClass>
+	</JavaClasses>
 	<ModelResources>
 		<Resource>
 			<Path><![CDATA[commons-io-2.11.0.jar]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
-			<Path><![CDATA[data/heritability.xlsx]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[data/mating.xlsx]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[commons-math3-3.6.1-bin.zip]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
 			<Path><![CDATA[commons-math3-3.6.1.jar]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[data/mating.csv]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[data/heritability.csv]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
