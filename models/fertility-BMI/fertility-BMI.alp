@@ -740,7 +740,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 					<Action><![CDATA[f_definePropOutcomeGroup();
 
 if (col_aliveAgents.size() > 7000) {p_fertilityAdjustment = 0.50;}
-if (col_aliveAgents.size() < 2000) {p_fertilityAdjustment = 0.20;}
+if (col_aliveAgents.size() < 2500) p_baselineFertility = p_baselineFertility + 0.05;
 
 if(col_aliveAgents.size() < 50) {
 	traceln("Population size is too small!!!");
@@ -2005,7 +2005,7 @@ for (Person p : people) {
 				<Variable Class="PlainVariable">
 					<Id>1634553204051</Id>
 					<Name><![CDATA[v_id]]></Name>
-					<X>40</X><Y>560</Y>
+					<X>40</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2014,26 +2014,10 @@ for (Person p : people) {
 						<Type><![CDATA[double]]></Type>        
 					</Properties>
 				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1634553456253</Id>
-					<Name><![CDATA[v_lookingForPartner]]></Name>
-					<X>40</X><Y>540</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[boolean]]></Type>        
-						<InitialValue Class="CodeValue">
-							<Code><![CDATA[false
-]]></Code>
-						</InitialValue>
-					</Properties>
-				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1632646282331</Id>
 					<Name><![CDATA[col_kids]]></Name>
-					<X>40</X><Y>220</Y>
+					<X>210</X><Y>280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2318,9 +2302,7 @@ kid.v_motherID = mother.v_id;
 kid.v_fatherID = mother.spouse.getConnectedAgent().v_id;
 kid.v_parentType = randomFrom(ParentType.class);
 kid.v_alive = true;
-kid.v_married = false;
-kid.v_lookingForPartner = false;
-]]></Body>
+kid.v_married = false;]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -3013,7 +2995,7 @@ v_alive = false;
 					<Color>-14774017</Color>
 					<Expression2><![CDATA[main.col_propOutcomeGroup.get(0)]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>  
-							<Title><![CDATA[Underweigth]]></Title>
+							<Title><![CDATA[Underweight]]></Title>
 					</DatasetExpression>
 					<DatasetExpression>
 					<Id>0</Id>
@@ -3266,13 +3248,13 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.0]]></Code>
+						<Code><![CDATA[0.1]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_heritabilityType]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[Heritability.preston]]></Code>
+						<Code><![CDATA[Heritability.uniform]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -3346,7 +3328,7 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 			<BeforeSimulationRunCode><![CDATA[root.v_iteration = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
-double[] random_mating = {0.0, 0.5, 1.0};
+double[] random_mating = {0.1, 0.5, 1.0};
 root.p_randomMating = random_mating[root.v_iteration-1];]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[v_replicates++;]]></AfterSimulationRunCode>
 			<SeedValue>1</SeedValue>
@@ -3404,7 +3386,7 @@ root.p_randomMating = random_mating[root.v_iteration-1];]]></BeforeSimulationRun
 			<FreeformParamValue>	
 				<Id>1632690393452</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[0.0]]></Code>
+					<Code><![CDATA[0.1]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -3416,7 +3398,7 @@ root.p_randomMating = random_mating[root.v_iteration-1];]]></BeforeSimulationRun
 			<FreeformParamValue>	
 				<Id>1632771778105</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[Heritability.preston]]></Code>
+					<Code><![CDATA[Heritability.observed]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -3443,13 +3425,13 @@ root.p_randomMating = random_mating[root.v_iteration-1];]]></BeforeSimulationRun
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.5]]></Code>
+					<Code><![CDATA[2.7]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632903435834</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[{0.1, 0.6, 0.15, 0.05}]]></Code>
+					<Code><![CDATA[{0.1, 0.6, 0.15, 0.15}]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -3524,8 +3506,8 @@ root.p_randomMating = random_mating[root.v_iteration-1];]]></BeforeSimulationRun
 				<StopOption><![CDATA[Stop at specified time]]></StopOption>
 				<InitialDate><![CDATA[1632441600000]]></InitialDate>	
 				<InitialTime><![CDATA[0.0]]></InitialTime>	
-				<FinalDate><![CDATA[4786041600000]]></FinalDate>	
-				<FinalTime><![CDATA[100.0]]></FinalTime>	
+				<FinalDate><![CDATA[7939641600000]]></FinalDate>	
+				<FinalTime><![CDATA[200.0]]></FinalTime>	
 			</ModelTimeProperties>
 			<PresentationProperties>
 				<EnableZoomAndPanning>false</EnableZoomAndPanning>
@@ -3536,7 +3518,7 @@ root.p_randomMating = random_mating[root.v_iteration-1];]]></BeforeSimulationRun
 			<ReplicationsProperties>
 				<UseReplication>true</UseReplication>
 				<FixedReplicationsNumber>true</FixedReplicationsNumber>
-				<ReplicationPerIteration>10</ReplicationPerIteration>
+				<ReplicationPerIteration>100</ReplicationPerIteration>
 				<MinimumReplication>2</MinimumReplication>
 				<MaximumReplication>10</MaximumReplication>
 				<ConfidenceLevel>LEVEL_80</ConfidenceLevel>
