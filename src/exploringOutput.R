@@ -15,9 +15,7 @@ readFiles = function(path, files) {
 dat = readFiles(path, files)
 params = list.files(path = path, pattern = "paramet")
 params = readFiles(path = path, params)
-params = params[replicate == 1]
-
-
+params = params[replicate == 1][, replicate := NULL]
 
 rounding = function(x) {
     return(sprintf(x, fmt = '%#.2f'))
@@ -30,9 +28,11 @@ intervals = function(x) {
     return(paste0(m, " [", l, "-", h, "]"))
 }
 
-m[population > 1000]
-a = dat[population > 1000, lapply(.SD, function(x) rounding(median(x))), .SDcols = "mating", by = .(iteration)]
+names(dat)
+a = dat[population > 1000, lapply(.SD, function(x) rounding(median(x))), 
+    .SDcols = c("mating",  "kid-father-cor", "kid-mother-cor"), by = .(iteration)]
+a
 m = dat[population > 1000, lapply(.SD, intervals), .SDcols = paste0("g", 1:4), by = .(iteration)]
 m = merge(a, m, by = "iteration")
 setnames(m, paste0("g", 1:4), c("underweight", "normal", "overweight", "obese"))
-m
+m = merge(params, m, by = "iteration")

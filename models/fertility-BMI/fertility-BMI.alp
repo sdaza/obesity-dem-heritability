@@ -219,7 +219,31 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1634561267223</Id>
 					<Name><![CDATA[v_assortativeMating]]></Name>
-					<X>440</X><Y>180</Y>
+					<X>440</X><Y>200</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1634820182582</Id>
+					<Name><![CDATA[v_fatherKidCorrelation]]></Name>
+					<X>440</X><Y>350</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1634820196037</Id>
+					<Name><![CDATA[v_motherKidCorrelation]]></Name>
+					<X>440</X><Y>370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -706,6 +730,21 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 					</Properties>
 
 				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1634819872802</Id>
+					<Name><![CDATA[col_groupBMI]]></Name>
+					<X>440</X><Y>390</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[double[]]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
 			</Variables>
 			<Events>
 				<Event>
@@ -793,7 +832,7 @@ if(time() > 500) {
 				<Event>
 					<Id>1634560556087</Id>
 					<Name><![CDATA[assortativeMating]]></Name>
-					<X>440</X><Y>200</Y>
+					<X>440</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -819,7 +858,8 @@ if(time() > 500) {
 						</RecurrenceCode>
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
-					<Action><![CDATA[if (col_partnerX.size() > 30) f_assortiveMating();]]></Action>
+					<Action><![CDATA[if (col_partnerX.size() > 30) f_assortiveMating();
+if (col_groupBMI.size() > 30) f_parentKidCorrelation();]]></Action>
 				</Event>
 			</Events>
 			<Functions>
@@ -867,10 +907,10 @@ else return -99;]]></Body>
 						<Name><![CDATA[ego]]></Name>
 						<Type><![CDATA[Person]]></Type>
 					</Parameter>
-					<Body><![CDATA[double[] aprop = col_matingData.stream().filter(w -> w.father == ego.v_outcomeGroup)
+					<Body><![CDATA[double[] aprop = col_matingData.stream().filter(w -> w.ego == ego.v_outcomeGroup)
 	.mapToDouble(d -> d.prob).toArray();
-double[] aoutcome = col_matingData.stream().filter(w -> w.father == ego.v_outcomeGroup)
-	.mapToDouble(d -> d.mother).toArray();
+double[] aoutcome = col_matingData.stream().filter(w -> w.ego == ego.v_outcomeGroup)
+	.mapToDouble(d -> d.alter).toArray();
 
 
 double group = f_weightedSampling(aoutcome, aprop);
@@ -1143,7 +1183,7 @@ else {
 if (f_textFileInclude("groups", p_fileNames)) {
 
 	col = new String[]{"iteration", "replicate", "time", "population", "g1", "g2", 
-		"g3", "g4", "mating"};
+		"g3", "g4", "mating", "kid-father-cor", "kid-mother-cor"};
 	col_fileColumns.put("groups", col);
 
 }
@@ -1218,7 +1258,9 @@ try {
    	col_propOutcomeGroup.get(1) + s + 
    	col_propOutcomeGroup.get(2) + s +
    	col_propOutcomeGroup.get(3) + s + 
-   	v_assortativeMating + "\n");
+   	v_assortativeMating + s + 
+   	v_fatherKidCorrelation + s + 
+   	v_motherKidCorrelation + "\n");
 	}
 catch (IOException e) {
 	e.printStackTrace();
@@ -1342,19 +1384,19 @@ while (mating.canReadMore() == true) {
 			continue;
 		}
 		String[] list = line.split("[,]", 0);
-		double father = Double.parseDouble(list[0]);
-		double mother = Double.parseDouble(list[1]);
-		double fprob = Double.parseDouble(list[2]);
+		double ego = Double.parseDouble(list[0]);
+		double alter = Double.parseDouble(list[1]);
+		double oprob = Double.parseDouble(list[2]);
 		double prob =  0.0;
 		
 		if (p_matingType == defined) {
 			if (p_randomMating == 1) prob = 1 / p_numberOutcomeCategories;
 			else {
-				if (father == mother) prob = (1-p_randomMating);
+				if (ego == alter) prob = (1-p_randomMating);
 				else prob = p_randomMating / p_numberOutcomeCategories;
 			}
-		} else prob = fprob;
-		MatingData m = new MatingData(father, mother, prob);
+		} else prob = oprob;
+		MatingData m = new MatingData(ego, alter, prob);
 		col_matingData.add(m);
 }
 ]]></Body>
@@ -1427,6 +1469,26 @@ for (Person p : people) {
 		p.v_parentType = randomFrom(ParentType.class);
 		col_aliveAgents.add(p);
 }]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1634820221835</Id>
+					<Name><![CDATA[f_parentKidCorrelation]]></Name>
+					<X>440</X><Y>330</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[double[] tx = col_groupBMI.stream().mapToDouble(d -> d[0]).toArray();
+double[] ty = col_groupBMI.stream().mapToDouble(d -> d[2]).toArray();
+
+KendallsCorrelation k = new KendallsCorrelation();
+v_fatherKidCorrelation = k.correlation(tx, ty);
+
+tx = col_groupBMI.stream().mapToDouble(d -> d[1]).toArray();
+v_motherKidCorrelation = k.correlation(tx, ty);
+]]></Body>
 				</Function>
 			</Functions>
 			<AnalysisData>
@@ -2302,7 +2364,11 @@ kid.v_motherID = mother.v_id;
 kid.v_fatherID = mother.spouse.getConnectedAgent().v_id;
 kid.v_parentType = randomFrom(ParentType.class);
 kid.v_alive = true;
-kid.v_married = false;]]></Body>
+kid.v_married = false;
+
+main.col_groupBMI.add(new double[] {kid.v_fatherOutcomeGroup, kid.v_motherOutcomeGroup, 
+	kid.v_outcomeGroup});
+]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -3136,6 +3202,50 @@ v_alive = false;
 					</Font>
 					<Alignment>LEFT</Alignment>
 				</Text>
+				<Text>
+					<Id>1634820742318</Id>
+					<Name><![CDATA[text]]></Name>
+					<X>450</X><Y>130</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA["Father-kid correlation: " + ]]></Text>
+					<TextCode><![CDATA["Father-Kid correlation: " +  ((int) (main.v_fatherKidCorrelation * 100)) / 100.0]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>14</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1634820827803</Id>
+					<Name><![CDATA[text4]]></Name>
+					<X>450</X><Y>160</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA["Father-kid correlation: " + ]]></Text>
+					<TextCode><![CDATA["Mother-Kid correlation: " +  ((int) (main.v_motherKidCorrelation * 100)) / 100.0]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>14</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
 			</Presentation>
 
 				</Level>
@@ -3239,7 +3349,7 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 				<Parameter>
 					<ParameterName><![CDATA[p_baselineOutcomeDistribution]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[{0.1, 0.6, 0.15, 0.05}]]></Code>
+						<Code><![CDATA[{0.25, 0.25, 0.25, 0.25}]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -3248,19 +3358,19 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.1]]></Code>
+						<Code><![CDATA[0.05]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_heritabilityType]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[Heritability.uniform]]></Code>
+						<Code><![CDATA[Heritability.observed]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_leakage]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.10]]></Code>
+						<Code><![CDATA[0.7]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -3321,15 +3431,21 @@ import org.apache.commons.io.FileUtils;
 import java.io.IOException;]]></Import>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[try { FileUtils.cleanDirectory(new File("output/")); }
-catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
+catch(IOException ie) { ie.printStackTrace(); }
+
+f_readExperimentData();]]></InitialSetupCode>
 			<MaximumMemory>512</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
 			<BeforeSimulationRunCode><![CDATA[root.v_iteration = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
-double[] random_mating = {0.1, 0.5, 1.0};
-root.p_randomMating = random_mating[root.v_iteration-1];]]></BeforeSimulationRunCode>
+String[] line = col_experimentLines.get(root.v_iteration-1);
+
+root.p_matingType = Mating.valueOf(line[0]);
+root.p_randomMating = Double.parseDouble(line[1]);
+root.p_heritabilityType = Heritability.valueOf(line[2]);
+root.p_leakage = Double.parseDouble(line[3]);]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[v_replicates++;]]></AfterSimulationRunCode>
 			<SeedValue>1</SeedValue>
 			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
@@ -3351,7 +3467,66 @@ root.p_randomMating = random_mating[root.v_iteration-1];]]></BeforeSimulationRun
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1634901108702</Id>
+					<Name><![CDATA[col_experimentLines]]></Name>
+					<X>90</X><Y>200</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[String[]]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
 			</Variables>
+			<Functions>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1634901144682</Id>
+					<Name><![CDATA[f_readExperimentData]]></Name>
+					<X>90</X><Y>180</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[boolean firstLine = true;
+while (experimentFile.canReadMore() == true) {
+		String line = experimentFile.readLine();
+		if (firstLine == true) {
+			firstLine = false;
+			continue;
+		}
+		String[] list = line.split("[,]", 0);
+		col_experimentLines.add(list);
+}
+]]></Body>
+				</Function>
+			</Functions>
+			<Connectivity>
+				<TextFile>
+					<Id>1634901183862</Id>
+					<Name><![CDATA[experimentFile]]></Name>
+					<X>90</X><Y>220</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<FileType>FILE</FileType>
+					<Url><![CDATA[]]></Url>
+					<ResourceReference>
+						<PackageName><![CDATA[fertility_bmi]]></PackageName>
+						<ClassName><![CDATA[data/exp-design-01.csv]]></ClassName>
+					</ResourceReference>
+					<FileMode>READ</FileMode>
+					<CharsetName>null</CharsetName>
+					<Separators>,</Separators>
+				</TextFile>
+			</Connectivity>
 
 			<Presentation>
 				<Text>
@@ -3379,7 +3554,7 @@ root.p_randomMating = random_mating[root.v_iteration-1];]]></BeforeSimulationRun
 
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>3</NumberOfRuns>
+			<NumberOfRuns>20</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 			</FreeformParamValue>
@@ -3452,7 +3627,7 @@ root.p_randomMating = random_mating[root.v_iteration-1];]]></BeforeSimulationRun
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632690393452</Id>
-				<Type>FIXED</Type>
+				<Type>RANGE</Type>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632731453253</Id>
@@ -3533,12 +3708,12 @@ root.p_randomMating = random_mating[root.v_iteration-1];]]></BeforeSimulationRun
 			<Id>1634640741605</Id>
 			<Name><![CDATA[MatingData]]></Name>
 			<Text><![CDATA[class MatingData {
-	double father;
-	double mother;
+	double ego;
+	double alter;
 	double prob;
-	public MatingData(double father, double mother, double prob) {
-		this.father = father;
-		this.mother = mother;
+	public MatingData(double ego, double alter, double prob) {
+		this.ego = ego;
+		this.alter = alter;
 		this.prob = prob;
 	}
 }]]></Text>
@@ -3576,6 +3751,10 @@ root.p_randomMating = random_mating[root.v_iteration-1];]]></BeforeSimulationRun
 		</Resource>
 		<Resource>
 			<Path><![CDATA[data/heritability.csv]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[data/exp-design-01.csv]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
