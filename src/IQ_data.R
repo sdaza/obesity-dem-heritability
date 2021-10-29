@@ -49,7 +49,7 @@ abs(test - max(test))
 
 # create preston matrix
 e = 0.4
-test = expand.grid(iq_father = 1:7, iq_mother = 1:7, iq_kid = 1:7)
+test = expand.grid(iq_father = 1:4, iq_mother = 1:4, iq_kid = 1:4)
 test = data.table(test)
 test[iq_father == iq_mother & iq_kid == iq_mother, prop := 1-e]
 test[iq_father == iq_mother & 
@@ -58,12 +58,14 @@ test[iq_father == iq_mother &
 
 
 test[iq_father == 1 & iq_mother == 1 & iq_kid == 2, prop := e]
-test[iq_father == 7 & iq_mother == 7 & iq_kid == 6, prop := e]
+test[iq_father == 4 & iq_mother == 4 & iq_kid == 3, prop := e]
 
+test
 table(test$prop)
 test[iq_father != iq_mother & (iq_father == iq_kid | iq_mother == iq_kid), prop := 1/2]
 test[is.na(prop), prop := 0]
 table(test$prop)
+test[, sum(prop), .(iq_mother, iq_father)]
 
 write.xlsx(test, "test",  file = "data/matrixH.xlsx", row.names = FALSE)
 
@@ -71,3 +73,5 @@ write.xlsx(test, "test",  file = "data/matrixH.xlsx", row.names = FALSE)
 test = data.table(expand.grid(ego = 1:7, alter = 1:7))
 test[, prop := 0.0]
 write.xlsx(test, "mating", file = "data/mating.xlsx", row.names = FALSE)
+
+test[iq_father == 3 & iq_mother == 2]
