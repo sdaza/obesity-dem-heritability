@@ -1,6 +1,7 @@
 # exploring simulation output
 
 library(data.table)
+library(xtable)
 path = "models/fertility-BMI/output/"
 files = list.files(path = path, pattern = "group")
 
@@ -15,7 +16,9 @@ readFiles = function(path, files) {
 dat = readFiles(path, files)
 params = list.files(path = path, pattern = "paramet")
 params = readFiles(path = path, params)
+params[, replicates := .N, iteration]
 params = params[replicate == 1][, replicate := NULL]
+params
 
 rounding = function(x) {
     return(sprintf(x, fmt = '%#.2f'))
@@ -36,3 +39,17 @@ m = dat[population > 1000, lapply(.SD, intervals), .SDcols = paste0("g", 1:4), b
 m = merge(a, m, by = "iteration")
 setnames(m, paste0("g", 1:4), c("underweight", "normal", "overweight", "obese"))
 m = merge(params, m, by = "iteration")
+
+vars = c("replicates", "fertility_type", "heritability_type", "mating_type", "random_mating",
+    "mating", "kid-father-cor", "kid-mother-cor", "normal", "overweight", "obese")
+tab  = m[heritability_type == "observed", ..vars]
+
+setorder(tab, mating_type)
+tab = transpose(tab, keep.names = "rn")
+
+lt = print(xtable::xtable(tab, caption = "Preliminary model output"), 
+        table.placement = "htp", 
+        booktabs=TRUE,
+        caption.placement = "top", 
+        include.rownames = FALSE, 
+        scalebox = 0.8, file = "output/tables/example.tex")
