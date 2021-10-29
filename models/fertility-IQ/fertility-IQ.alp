@@ -1666,7 +1666,7 @@ catch (IOException e) {
 v_parentType = randomFrom(ParentType.class);
 main.col_aliveAgents.add(this);
 main.col_deadAgents.remove(this);]]></EntryAction>
-						<FillColor/>
+						<FillColor>-6632142</FillColor>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
@@ -1705,7 +1705,7 @@ main.col_deadAgents.remove(this);]]></EntryAction>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="110" Height="45">
-						<FillColor/>
+						<FillColor>-14774017</FillColor>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
@@ -2175,6 +2175,29 @@ col_kids.clear();]]></Body>
 					</Font>
 					<Alignment>LEFT</Alignment>
 				</Text>
+				<RoundedRectangle>
+					<Id>1635491521476</Id>
+					<Name><![CDATA[roundRectangle]]></Name>
+					<X>350</X><Y>110</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>1</LineWidth>
+					<LineColor>-16777216</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>300</Width>
+					<Height>400</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-1</FillColor>
+					<FillMaterial>null</FillMaterial>
+					<ArcRadius>10</ArcRadius>
+				</RoundedRectangle>
 			</Presentation>
 
 				</Level>
