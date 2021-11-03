@@ -18,11 +18,14 @@ params = list.files(path = path, pattern = "paramet")
 params = readFiles(path = path, params)
 params[, replicates := .N, iteration]
 params = params[replicate == 1][, replicate := NULL]
+setorder(params, iteration)
+
 params
 
 rounding = function(x) {
     return(sprintf(x, fmt = '%#.2f'))
 }
+str(params)
 
 intervals = function(x) {
     m = rounding(median(x))
@@ -34,8 +37,11 @@ intervals = function(x) {
 names(dat)
 a = dat[population > 1000, lapply(.SD, function(x) rounding(median(x))), 
     .SDcols = c("mating",  "kid-father-cor", "kid-mother-cor"), by = .(iteration)]
-a
+table(a$iteration)
+
 m = dat[population > 1000, lapply(.SD, intervals), .SDcols = paste0("g", 1:4), by = .(iteration)]
+table(m$iteration)
+
 m = merge(a, m, by = "iteration")
 setnames(m, paste0("g", 1:4), c("underweight", "normal", "overweight", "obese"))
 m = merge(params, m, by = "iteration")
