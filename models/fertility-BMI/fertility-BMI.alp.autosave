@@ -279,7 +279,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1632903435834</Id>
 					<Name><![CDATA[p_baselineOutcomeDistribution]]></Name>
-					<X>800</X><Y>150</Y>
+					<X>800</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -401,7 +401,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1632903366204</Id>
 					<Name><![CDATA[p_baselineFertility]]></Name>
-					<X>800</X><Y>130</Y>
+					<X>800</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -585,6 +585,30 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1634656309396</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1636145720853</Id>
+					<Name><![CDATA[p_fertilityFactor]]></Name>
+					<X>800</X><Y>130</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0.25]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1636145720851</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -998,7 +1022,7 @@ for (int i = 0; i < p_numberOutcomeCategories; i++) {
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
 					<Body><![CDATA[if (p_fertilityType == additive) {
-	return p_baselineFertility + (fatherOutcome-1) * 0.25 + (motherOutcome-1) * 0.25;
+	return p_baselineFertility + (fatherOutcome-1) * p_fertilityFactor + (motherOutcome-1) * p_fertilityFactor;
 } else if (p_fertilityType == centrifugal) {
 	return p_baselineFertility + 0.1 * abs((p_numberOutcomeCategories-1) - (fatherOutcome-1) - (motherOutcome-1));
 } else if (p_fertilityType == Fertility.uniform) {
@@ -1191,7 +1215,7 @@ if (f_textFileInclude("groups", p_fileNames)) {
 if (f_textFileInclude("parameters", p_fileNames)) {
 
 	col = new String[]{"iteration", "replicate", "population", "fertility_type", 
-	"heritability_type", "mating_type", "random_mating", "leakeage"};
+	"heritability_type", "mating_type", "random_mating", "leakage", "fertility_factor"};
 	col_fileColumns.put("parameters", col);
 
 }
@@ -1343,7 +1367,8 @@ try {
    	p_heritabilityType + s +
    	p_matingType + s +
    	p_randomMating + s +
-   	p_leakage + "\n");
+   	p_leakage + s + 
+   	p_fertilityFactor + "\n");
 	}
 catch (IOException e) {
 	e.printStackTrace();
@@ -3426,6 +3451,9 @@ catch(IOException ie) { ie.printStackTrace(); }]]></InitialSetupCode>
 				<Parameter>
 					<ParameterName><![CDATA[p_fertilityAdjustment]]></ParameterName>
 				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_fertilityFactor]]></ParameterName>
+				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
 				<EnableZoomAndPanning>false</EnableZoomAndPanning>
@@ -3480,11 +3508,9 @@ root.v_replicate = getCurrentReplication();
 
 String[] line = col_experimentLines.get(root.v_iteration-1);
 
-root.p_matingType = Mating.valueOf(line[0]);
-root.p_randomMating = Double.parseDouble(line[1]);
-root.p_heritabilityType = Heritability.valueOf(line[2]);
-root.p_leakage = Double.parseDouble(line[3]);
-root.p_fertilityType = Fertility.valueOf(line[4]);]]></BeforeSimulationRunCode>
+root.p_randomMating = Double.parseDouble(line[0]);
+root.p_leakage = Double.parseDouble(line[1]);
+root.p_fertilityFactor = Double.parseDouble(line[2]);]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[v_replicates++;]]></AfterSimulationRunCode>
 			<SeedValue>1</SeedValue>
 			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
@@ -3618,7 +3644,7 @@ return token;]]></Body>
 					<Url><![CDATA[]]></Url>
 					<ResourceReference>
 						<PackageName><![CDATA[fertility_bmi]]></PackageName>
-						<ClassName><![CDATA[data/exp-design-01.csv]]></ClassName>
+						<ClassName><![CDATA[data/hypercube.csv]]></ClassName>
 					</ResourceReference>
 					<FileMode>READ</FileMode>
 					<CharsetName>null</CharsetName>
@@ -3654,7 +3680,7 @@ return token;]]></Body>
 traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>240</NumberOfRuns>
+			<NumberOfRuns>100</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 			</FreeformParamValue>
@@ -3673,7 +3699,7 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632771778105</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[Heritability.observed]]></Code>
+					<Code><![CDATA[Heritability.preston]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -3720,6 +3746,9 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1634656309398</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1636145720853</Id>
 			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
@@ -3777,6 +3806,10 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 				<Id>1634656309398</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1636145720853</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
 			<ModelTimeProperties>
 				<StopOption><![CDATA[Stop at specified time]]></StopOption>
 				<InitialDate><![CDATA[1632441600000]]></InitialDate>	
@@ -3793,7 +3826,7 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<ReplicationsProperties>
 				<UseReplication>true</UseReplication>
 				<FixedReplicationsNumber>true</FixedReplicationsNumber>
-				<ReplicationPerIteration>2</ReplicationPerIteration>
+				<ReplicationPerIteration>1</ReplicationPerIteration>
 				<MinimumReplication>2</MinimumReplication>
 				<MaximumReplication>10</MaximumReplication>
 				<ConfidenceLevel>LEVEL_80</ConfidenceLevel>
@@ -3838,23 +3871,11 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 	</JavaClasses>
 	<ModelResources>
 		<Resource>
-			<Path><![CDATA[commons-io-2.11.0.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[commons-math3-3.6.1.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
 			<Path><![CDATA[data/mating.csv]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[data/heritability.csv]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[data/exp-design-01.csv]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
@@ -3890,30 +3911,6 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
-			<Path><![CDATA[okhttp-4.9.0.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[okio-2.8.0.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[slack-api-client-1.2.1.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[slack-api-model-1.2.1.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[slack-app-backend-1.2.1.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[slf4j-api-1.7.30.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
 			<Path><![CDATA[jarfiles/annotations-13.0.jar]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
@@ -3939,6 +3936,10 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[jarfiles/kotlin-stdlib-common-1.4.0.jar]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[data/hypercube.csv]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>

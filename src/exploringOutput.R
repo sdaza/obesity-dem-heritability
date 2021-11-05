@@ -2,9 +2,12 @@
 
 library(data.table)
 library(xtable)
+library(texreg)
 path = "models/fertility-BMI/output/"
 files = list.files(path = path, pattern = "group")
 
+
+# functions
 readFiles = function(path, files) {
     data = list()
     for (i in seq_along(files)) {
@@ -13,20 +16,6 @@ readFiles = function(path, files) {
     return(rbindlist(data))   
 }
 
-dat = readFiles(path, files)
-params = list.files(path = path, pattern = "paramet")
-params = readFiles(path = path, params)
-params[, replicates := .N, iteration]
-params = params[replicate == 1][, replicate := NULL]
-setorder(params, iteration)
-
-params
-
-rounding = function(x) {
-    return(sprintf(x, fmt = '%#.2f'))
-}
-str(params)
-
 intervals = function(x) {
     m = rounding(median(x))
     l = rounding(quantile(x, 0.025))
@@ -34,11 +23,65 @@ intervals = function(x) {
     return(paste0(m, " [", l, "-", h, "]"))
 }
 
-names(dat)
+rounding = function(x) {
+    return(sprintf(x, fmt = '%#.2f'))
+}
+
+
+# read data
+dat = readFiles(path, files)
+params = list.files(path = path, pattern = "paramet")
+params = readFiles(path = path, params)
+params[, replicates := .N, iteration]
+params = params[replicate == 1][, replicate := NULL]
+setorder(params, iteration)
+setnames(params, names(params), paste0("par_", names(params)))
+params
+
+dat = merge(dat, params, by.x = "iteration", by.y = "par_iteration", x.all = TRUE)
+dat = dat[population > 1000]
+dat[, replicates := .N, iteration]
+summary(dat$replicates)
+
+# sensitivity analysis using random forest
+library(party)
+cf = cforest(g4 ~  par_random_mating + par_leakage + par_fertility_factor,
+    data = dat,   
+    controls = cforest_unbiased(mtry = 2, ntree = 100))
+vi = varimp(cf, conditional = TRUE)
+barplot(vi)
+
+
+# 3D countour
+library(plotly)
+
+fig = plot_ly(dat, x = ~ par_random_mating,
+    y = ~ par_fertility_factor, 
+    z = ~ par_leakage,
+    marker = list(color = ~ g4, size = 4, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+fig = fig %>% add_markers()
+fig = fig %>% layout(scene = list(xaxis = list(title = 'random mating'),
+                                   yaxis = list(title = 'fertility'),
+                                   zaxis = list(title = 'leakage')),
+                      annotations = list(
+                        x = 1.13,
+                        y = 1.05,
+                        text = 'Obesity',
+                        xref = 'paper',
+                        yref = 'paper',
+                        showarrow = FALSE
+                        ))
+fig
+
+
+
+
+
 a = dat[population > 1000, lapply(.SD, function(x) rounding(median(x))), 
     .SDcols = c("mating",  "kid-father-cor", "kid-mother-cor"), by = .(iteration)]
 table(a$iteration)
 
+a
 m = dat[population > 1000, lapply(.SD, intervals), .SDcols = paste0("g", 1:4), by = .(iteration)]
 table(m$iteration)
 
@@ -46,6 +89,7 @@ m = merge(a, m, by = "iteration")
 setnames(m, paste0("g", 1:4), c("underweight", "normal", "overweight", "obese"))
 m = merge(params, m, by = "iteration")
 
+m
 vars = c("replicates", "fertility_type", "heritability_type", "mating_type", "random_mating",
     "mating", "kid-father-cor", "kid-mother-cor", "normal", "overweight", "obese")
 tab  = m[heritability_type == "observed", ..vars]

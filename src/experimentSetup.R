@@ -10,7 +10,6 @@ fertility = c("uniform", "additive")
 experiments = data.table(expand.grid(mating_type = mating_type, mating = mating, heredity = heredity, 
     leakage = leakeage, fertility_type = fertility))
 nrow(experiments)
-
 experiments
 
 # remove reduntant rows
@@ -28,3 +27,22 @@ fwrite(experiments, "models/fertility-BMI/data/exp-design-01.csv", row.names = F
 
 # check values
 experiments[mating_type == "observed" & heredity == "preston"]
+
+# hypercube sampling
+library(lhs)
+
+# set the seed for reproducibility
+set.seed(1111)
+# a design with 5 samples from 4 parameters
+A = improvedLHS(100, 3) 
+B = matrix(nrow = nrow(A), ncol = ncol(A))
+
+B[,1] <- qunif(A[, 1], min = 0, max = 1)
+B[,2] <- qunif(A[, 2], min = 0, max = 0.6)
+B[,3] <- qunif(A[, 3], min = 0, max = 0.3)
+
+B = data.table(B)
+setnames(B, names(B), c("random_mating", "leakage", "fertility"))
+fwrite(B, "models/fertility-BMI/data/hypercube.csv", row.names = FALSE)
+
+
