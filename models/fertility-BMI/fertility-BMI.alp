@@ -1215,7 +1215,7 @@ if (f_textFileInclude("groups", p_fileNames)) {
 if (f_textFileInclude("parameters", p_fileNames)) {
 
 	col = new String[]{"iteration", "replicate", "population", "fertility_type", 
-	"heritability_type", "mating_type", "random_mating", "leakeage"};
+	"heritability_type", "mating_type", "random_mating", "leakage", "fertility_factor"};
 	col_fileColumns.put("parameters", col);
 
 }
@@ -1367,7 +1367,8 @@ try {
    	p_heritabilityType + s +
    	p_matingType + s +
    	p_randomMating + s +
-   	p_leakage + "\n");
+   	p_leakage + s + 
+   	p_fertilityFactor + "\n");
 	}
 catch (IOException e) {
 	e.printStackTrace();
@@ -3507,11 +3508,9 @@ root.v_replicate = getCurrentReplication();
 
 String[] line = col_experimentLines.get(root.v_iteration-1);
 
-root.p_matingType = Mating.valueOf(line[0]);
-root.p_randomMating = Double.parseDouble(line[1]);
-root.p_heritabilityType = Heritability.valueOf(line[2]);
-root.p_leakage = Double.parseDouble(line[3]);
-root.p_fertilityType = Fertility.valueOf(line[4]);]]></BeforeSimulationRunCode>
+root.p_randomMating = Double.parseDouble(line[0]);
+root.p_leakage = Double.parseDouble(line[1]);
+root.p_fertilityFactor = Double.parseDouble(line[2]);]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[v_replicates++;]]></AfterSimulationRunCode>
 			<SeedValue>1</SeedValue>
 			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
@@ -3645,7 +3644,7 @@ return token;]]></Body>
 					<Url><![CDATA[]]></Url>
 					<ResourceReference>
 						<PackageName><![CDATA[fertility_bmi]]></PackageName>
-						<ClassName><![CDATA[data/exp-design-01.csv]]></ClassName>
+						<ClassName><![CDATA[data/hypercube.csv]]></ClassName>
 					</ResourceReference>
 					<FileMode>READ</FileMode>
 					<CharsetName>null</CharsetName>
@@ -3681,7 +3680,7 @@ return token;]]></Body>
 traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>240</NumberOfRuns>
+			<NumberOfRuns>100</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 			</FreeformParamValue>
@@ -3700,7 +3699,7 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632771778105</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[Heritability.observed]]></Code>
+					<Code><![CDATA[Heritability.preston]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -3872,23 +3871,11 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 	</JavaClasses>
 	<ModelResources>
 		<Resource>
-			<Path><![CDATA[commons-io-2.11.0.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[commons-math3-3.6.1.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
 			<Path><![CDATA[data/mating.csv]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[data/heritability.csv]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[data/exp-design-01.csv]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
@@ -3924,30 +3911,6 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
-			<Path><![CDATA[okhttp-4.9.0.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[okio-2.8.0.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[slack-api-client-1.2.1.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[slack-api-model-1.2.1.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[slack-app-backend-1.2.1.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[slf4j-api-1.7.30.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
 			<Path><![CDATA[jarfiles/annotations-13.0.jar]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
@@ -3973,6 +3936,10 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[jarfiles/kotlin-stdlib-common-1.4.0.jar]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[data/hypercube.csv]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>

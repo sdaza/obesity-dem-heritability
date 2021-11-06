@@ -73,10 +73,36 @@ fig = fig %>% layout(scene = list(xaxis = list(title = 'random mating'),
                         ))
 fig
 
+# linear model
+library(lme4)
 
+dat[, rm := scale(par_random_mating)]
+dat[, l := scale(par_leakage)]
+dat[, f := scale(par_fertility_factor)]
 
+m1 = lm(g4 ~  par_random_mating * par_leakage * par_fertility_factor, data = dat)
+summary(m1)
 
+m1 = lm(g4 ~  rm * l * f, data = dat)
+screenreg(m1)
 
+# sensobol
+library(sensobol)
+
+N <- 2 ^ 13
+params <- c("$r$", "$K$", "$N_0$")
+matrices <- c("A", "B", "AB", "BA")
+first <- total <- "azzini"
+order <- "second"
+R <- 10 ^ 3
+type <- "percent"
+conf <- 0.95
+
+mat <- sobol_matrices(matrices = matrices, N = N, params = params,
+    order = order, type = "LHS")
+
+dim(mat)
+2^# explore estimates
 a = dat[population > 1000, lapply(.SD, function(x) rounding(median(x))), 
     .SDcols = c("mating",  "kid-father-cor", "kid-mother-cor"), by = .(iteration)]
 table(a$iteration)
