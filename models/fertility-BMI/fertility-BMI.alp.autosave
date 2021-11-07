@@ -3374,7 +3374,7 @@ import com.slack.api.model.Message;]]></Import>
 			<InitialSetupCode><![CDATA[try { FileUtils.cleanDirectory(new File("output/")); }
 catch(IOException ie) { ie.printStackTrace(); }
 
-f_readExperimentData();]]></InitialSetupCode>
+f_readExperimentData("data/param-sobol.csv");]]></InitialSetupCode>
 			<MaximumMemory>512</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
@@ -3422,7 +3422,12 @@ traceln(":::::: end simulation ::::::");]]></AfterSimulationRunCode>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[boolean firstLine = true;
+					<Parameter>
+						<Name><![CDATA[path]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+					<Body><![CDATA[experimentFile.setFile(path, TextFile.Mode.READ);
+boolean firstLine = true;
 while (experimentFile.canReadMore() == true) {
 		String line = experimentFile.readLine();
 		if (firstLine == true) {
@@ -3496,7 +3501,7 @@ return token;]]></Body>
 			</Functions>
 			<Connectivity>
 				<TextFile>
-					<Id>1636225247598</Id>
+					<Id>1636299081006</Id>
 					<Name><![CDATA[experimentFile]]></Name>
 					<X>90</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
@@ -3505,10 +3510,6 @@ return token;]]></Body>
 					<ShowLabel>true</ShowLabel>
 					<FileType>FILE</FileType>
 					<Url><![CDATA[]]></Url>
-					<ResourceReference>
-						<PackageName><![CDATA[fertility_bmi]]></PackageName>
-						<ClassName><![CDATA[data/param_values.csv]]></ClassName>
-					</ResourceReference>
 					<FileMode>READ</FileMode>
 					<CharsetName>null</CharsetName>
 					<Separators>,</Separators>
@@ -3647,7 +3648,8 @@ import com.slack.api.model.Message;]]></Import>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[try { FileUtils.cleanDirectory(new File("output/")); }
 catch(IOException ie) { ie.printStackTrace(); }
-f_readExperimentData("data/sobol.csv");]]></InitialSetupCode>
+f_readExperimentData(v_path);
+setFixedReplicationsNumber(v_nreplicates);]]></InitialSetupCode>
 			<MaximumMemory>512</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
@@ -3680,10 +3682,40 @@ root.p_fertilityFactor = Double.parseDouble(line[2]);]]></BeforeSimulationRunCod
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1636320353439</Id>
+					<Name><![CDATA[v_path]]></Name>
+					<X>250</X><Y>150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA["data/param-efast.csv"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1636320419255</Id>
+					<Name><![CDATA[v_nreplicates]]></Name>
+					<X>250</X><Y>170</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[1]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1634901108702</Id>
 					<Name><![CDATA[col_experimentLines]]></Name>
-					<X>90</X><Y>200</Y>
+					<X>90</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3702,7 +3734,7 @@ root.p_fertilityFactor = Double.parseDouble(line[2]);]]></BeforeSimulationRunCod
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1634901144682</Id>
 					<Name><![CDATA[f_readExperimentData]]></Name>
-					<X>90</X><Y>180</Y>
+					<X>90</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3786,19 +3818,15 @@ return token;]]></Body>
 			</Functions>
 			<Connectivity>
 				<TextFile>
-					<Id>1634901183862</Id>
+					<Id>1636298825488</Id>
 					<Name><![CDATA[experimentFile]]></Name>
-					<X>90</X><Y>220</Y>
+					<X>90</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<FileType>FILE</FileType>
 					<Url><![CDATA[]]></Url>
-					<ResourceReference>
-						<PackageName><![CDATA[fertility_bmi]]></PackageName>
-						<ClassName><![CDATA[data/param_values.csv]]></ClassName>
-					</ResourceReference>
 					<FileMode>READ</FileMode>
 					<CharsetName>null</CharsetName>
 					<Separators>,</Separators>
@@ -3829,11 +3857,14 @@ return token;]]></Body>
 				</Text>
 			</Presentation>
 
+			<AfterIterationCode><![CDATA[if (getNumberOfCompletedIterations() == col_experimentLines.size()) {
+	getEngine().finish();
+}]]></AfterIterationCode>
 			<AfterExperimentCode><![CDATA[f_sendSlackMessage();
 traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>4096</NumberOfRuns>
+			<NumberOfRuns>100000</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 			</FreeformParamValue>
@@ -3879,7 +3910,7 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.7]]></Code>
+					<Code><![CDATA[3.3]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -3979,7 +4010,7 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<ReplicationsProperties>
 				<UseReplication>true</UseReplication>
 				<FixedReplicationsNumber>true</FixedReplicationsNumber>
-				<ReplicationPerIteration>2</ReplicationPerIteration>
+				<ReplicationPerIteration>1</ReplicationPerIteration>
 				<MinimumReplication>2</MinimumReplication>
 				<MaximumReplication>10</MaximumReplication>
 				<ConfidenceLevel>LEVEL_80</ConfidenceLevel>
@@ -4089,10 +4120,6 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[jarfiles/kotlin-stdlib-common-1.4.0.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[data/param_values.csv]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
