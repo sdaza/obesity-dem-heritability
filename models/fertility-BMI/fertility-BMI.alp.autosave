@@ -3829,7 +3829,7 @@ return token;]]></Body>
 traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>128</NumberOfRuns>
+			<NumberOfRuns>4096</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 			</FreeformParamValue>
@@ -3963,8 +3963,8 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 				<StopOption><![CDATA[Stop at specified time]]></StopOption>
 				<InitialDate><![CDATA[1632441600000]]></InitialDate>	
 				<InitialTime><![CDATA[0.0]]></InitialTime>	
-				<FinalDate><![CDATA[6362841600000]]></FinalDate>	
-				<FinalTime><![CDATA[150.0]]></FinalTime>	
+				<FinalDate><![CDATA[4786041600000]]></FinalDate>	
+				<FinalTime><![CDATA[100.0]]></FinalTime>	
 			</ModelTimeProperties>
 			<PresentationProperties>
 				<EnableZoomAndPanning>false</EnableZoomAndPanning>
@@ -3975,7 +3975,7 @@ traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<ReplicationsProperties>
 				<UseReplication>true</UseReplication>
 				<FixedReplicationsNumber>true</FixedReplicationsNumber>
-				<ReplicationPerIteration>1</ReplicationPerIteration>
+				<ReplicationPerIteration>2</ReplicationPerIteration>
 				<MinimumReplication>2</MinimumReplication>
 				<MaximumReplication>10</MaximumReplication>
 				<ConfidenceLevel>LEVEL_80</ConfidenceLevel>
