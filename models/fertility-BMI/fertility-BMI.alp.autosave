@@ -3647,8 +3647,7 @@ import com.slack.api.model.Message;]]></Import>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[try { FileUtils.cleanDirectory(new File("output/")); }
 catch(IOException ie) { ie.printStackTrace(); }
-
-f_readExperimentData();]]></InitialSetupCode>
+f_readExperimentData("data/sobol.csv");]]></InitialSetupCode>
 			<MaximumMemory>512</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
@@ -3708,7 +3707,12 @@ root.p_fertilityFactor = Double.parseDouble(line[2]);]]></BeforeSimulationRunCod
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[boolean firstLine = true;
+					<Parameter>
+						<Name><![CDATA[path]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+					<Body><![CDATA[experimentFile.setFile(path, TextFile.Mode.READ);
+boolean firstLine = true;
 while (experimentFile.canReadMore() == true) {
 		String line = experimentFile.readLine();
 		if (firstLine == true) {
