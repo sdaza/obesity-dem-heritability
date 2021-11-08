@@ -30,6 +30,7 @@ rounding = function(x) {
 
 # read data
 dat = readFiles(path, files)
+nrow(dat)
 params = list.files(path = path, pattern = "paramet")
 params = readFiles(path = path, params)
 params[, replicates := .N, iteration]
@@ -39,9 +40,16 @@ setnames(params, names(params), paste0("par_", names(params)))
 params
 
 dat = merge(dat, params, by.x = "iteration", by.y = "par_iteration", x.all = TRUE)
-dat = dat[population > 1000]
+dat = dat[, select := ifelse(population > 1000, 1, 0)]
+dat[, select_t := max(select), iteration]
+table(dat$select_t)
+dat[, seq := 1:.N, iteration]
+dat = dat[seq == 1]
 dat[, replicates := .N, iteration]
 summary(dat$replicates)
+
+nrow(dat)
+fwrite(dat, "output/data/results-sobol.csv", row.names = FALSE)
 
 # sensitivity analysis using random forest
 library(party)
