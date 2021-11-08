@@ -1214,7 +1214,7 @@ if (f_textFileInclude("groups", p_fileNames)) {
 
 if (f_textFileInclude("parameters", p_fileNames)) {
 
-	col = new String[]{"iteration", "replicate", "population", "fertility_type", 
+	col = new String[]{"iteration", "replicate", "init_pop", "fertility_type", 
 	"heritability_type", "mating_type", "random_mating", "leakage", "fertility_factor"};
 	col_fileColumns.put("parameters", col);
 
@@ -1312,7 +1312,7 @@ catch (IOException e) {
 
 for (int i=0; i < l.length; i++) {
 	if (i < l.length - 1) output = output + l[i] + separator;
-	else output = output + l[i] + " \n";
+	else output = output + l[i] + "\n";
 }
 
 return output;]]></Body>
@@ -3843,12 +3843,10 @@ return token;]]></Body>
 				</Text>
 			</Presentation>
 
-			<AfterIterationCode><![CDATA[if ( (getNumberOfCompletedIterations()+1) == col_experimentLines.size()) {
+			<AfterIterationCode><![CDATA[if ( (getNumberOfCompletedIterations()+1) >= col_experimentLines.size()) {
 	f_sendSlackMessage();
 	stop();
 }]]></AfterIterationCode>
-			<AfterExperimentCode><![CDATA[//f_sendSlackMessage();
-//traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
 			<NumberOfRuns>100000</NumberOfRuns>

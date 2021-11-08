@@ -3648,19 +3648,21 @@ import com.slack.api.model.Message;]]></Import>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[try { FileUtils.cleanDirectory(new File("output/")); }
 catch(IOException ie) { ie.printStackTrace(); }
-f_readExperimentData("data/param-sobol.csv");]]></InitialSetupCode>
+f_readExperimentData(v_path);
+setFixedReplicationsNumber(v_nreplicates);]]></InitialSetupCode>
 			<MaximumMemory>512</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
-			<BeforeEachExperimentRunCode><![CDATA[setFixedReplicationsNumber(2);]]></BeforeEachExperimentRunCode>
 			<BeforeSimulationRunCode><![CDATA[root.v_iteration = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
+if (root.v_iteration <= col_experimentLines.size()) {
 String[] line = col_experimentLines.get(root.v_iteration-1);
 
 root.p_randomMating = Double.parseDouble(line[0]);
 root.p_leakage = Double.parseDouble(line[1]);
-root.p_fertilityFactor = Double.parseDouble(line[2]);]]></BeforeSimulationRunCode>
+root.p_fertilityFactor = Double.parseDouble(line[2]);
+} else getEngine().finish();]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[v_replicates++;]]></AfterSimulationRunCode>
 			<SeedValue>1</SeedValue>
 			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
@@ -3682,10 +3684,40 @@ root.p_fertilityFactor = Double.parseDouble(line[2]);]]></BeforeSimulationRunCod
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1636320353439</Id>
+					<Name><![CDATA[v_path]]></Name>
+					<X>250</X><Y>150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA["data/param-testt.csv"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1636320419255</Id>
+					<Name><![CDATA[v_nreplicates]]></Name>
+					<X>250</X><Y>170</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[1]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1634901108702</Id>
 					<Name><![CDATA[col_experimentLines]]></Name>
-					<X>90</X><Y>170</Y>
+					<X>90</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3790,7 +3822,7 @@ return token;]]></Body>
 				<TextFile>
 					<Id>1636298825488</Id>
 					<Name><![CDATA[experimentFile]]></Name>
-					<X>90</X><Y>200</Y>
+					<X>90</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
