@@ -1214,7 +1214,7 @@ if (f_textFileInclude("groups", p_fileNames)) {
 
 if (f_textFileInclude("parameters", p_fileNames)) {
 
-	col = new String[]{"iteration", "replicate", "population", "fertility_type", 
+	col = new String[]{"iteration", "replicate", "init_pop", "fertility_type", 
 	"heritability_type", "mating_type", "random_mating", "leakage", "fertility_factor"};
 	col_fileColumns.put("parameters", col);
 
@@ -1312,7 +1312,7 @@ catch (IOException e) {
 
 for (int i=0; i < l.length; i++) {
 	if (i < l.length - 1) output = output + l[i] + separator;
-	else output = output + l[i] + " \n";
+	else output = output + l[i] + "\n";
 }
 
 return output;]]></Body>
@@ -3648,8 +3648,7 @@ import com.slack.api.model.Message;]]></Import>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[try { FileUtils.cleanDirectory(new File("output/")); }
 catch(IOException ie) { ie.printStackTrace(); }
-f_readExperimentData(v_path);
-setFixedReplicationsNumber(v_nreplicates);]]></InitialSetupCode>
+f_readExperimentData(v_path);]]></InitialSetupCode>
 			<MaximumMemory>512</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
@@ -3662,7 +3661,7 @@ String[] line = col_experimentLines.get(root.v_iteration-1);
 root.p_randomMating = Double.parseDouble(line[0]);
 root.p_leakage = Double.parseDouble(line[1]);
 root.p_fertilityFactor = Double.parseDouble(line[2]);
-} else getEngine().finish();]]></BeforeSimulationRunCode>
+} else root.finishSimulation();]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[v_replicates++;]]></AfterSimulationRunCode>
 			<SeedValue>1</SeedValue>
 			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
@@ -3687,7 +3686,7 @@ root.p_fertilityFactor = Double.parseDouble(line[2]);
 				<Variable Class="PlainVariable">
 					<Id>1636320353439</Id>
 					<Name><![CDATA[v_path]]></Name>
-					<X>250</X><Y>150</Y>
+					<X>90</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3695,22 +3694,7 @@ root.p_fertilityFactor = Double.parseDouble(line[2]);
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["data/param-testt.csv"]]></Code>
-						</InitialValue>
-					</Properties>
-				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1636320419255</Id>
-					<Name><![CDATA[v_nreplicates]]></Name>
-					<X>250</X><Y>170</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[int]]></Type>        
-						<InitialValue Class="CodeValue">
-							<Code><![CDATA[1]]></Code>
+							<Code><![CDATA["data/param-sobol.csv"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -3859,11 +3843,10 @@ return token;]]></Body>
 				</Text>
 			</Presentation>
 
-			<AfterIterationCode><![CDATA[if (getNumberOfCompletedIterations() == col_experimentLines.size()) {
-	getEngine().finish();
+			<AfterIterationCode><![CDATA[if ( (getNumberOfCompletedIterations()+1) == col_experimentLines.size()) {
+	f_sendSlackMessage();
+	stop();
 }]]></AfterIterationCode>
-			<AfterExperimentCode><![CDATA[f_sendSlackMessage();
-traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
 			<NumberOfRuns>100000</NumberOfRuns>

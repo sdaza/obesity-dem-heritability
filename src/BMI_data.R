@@ -53,7 +53,7 @@ abs(test - max(test))
 
 # create preston matrix
 e = 0.4
-test = expand.grid(iq_father = 1:7, iq_mother = 1:7, iq_kid = 1:7)
+test = expand.grid(iq_father = 1:4, iq_mother = 1:4, iq_kid = 1:4)
 test = data.table(test)
 test[iq_father == iq_mother & iq_kid == iq_mother, prop := 1-e]
 test[iq_father == iq_mother & 
