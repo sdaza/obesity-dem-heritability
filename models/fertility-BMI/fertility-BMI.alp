@@ -1214,7 +1214,7 @@ if (f_textFileInclude("groups", p_fileNames)) {
 
 if (f_textFileInclude("parameters", p_fileNames)) {
 
-	col = new String[]{"iteration", "replicate", "population", "fertility_type", 
+	col = new String[]{"iteration", "replicate", "init_pop", "fertility_type", 
 	"heritability_type", "mating_type", "random_mating", "leakage", "fertility_factor"};
 	col_fileColumns.put("parameters", col);
 
@@ -1312,10 +1312,10 @@ catch (IOException e) {
 
 for (int i=0; i < l.length; i++) {
 	if (i < l.length - 1) output = output + l[i] + separator;
-	else output = output + l[i] + " \n";
+	else output = output + l[i] + "\n";
 }
 
-return output.trim();]]></Body>
+return output;]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -3686,7 +3686,7 @@ root.p_fertilityFactor = Double.parseDouble(line[2]);
 				<Variable Class="PlainVariable">
 					<Id>1636320353439</Id>
 					<Name><![CDATA[v_path]]></Name>
-					<X>90</X><Y>220</Y>
+					<X>90</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3847,8 +3847,6 @@ return token;]]></Body>
 	f_sendSlackMessage();
 	stop();
 }]]></AfterIterationCode>
-			<AfterExperimentCode><![CDATA[//f_sendSlackMessage();
-//traceln(":::::: end simulation ::::::");]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
 			<NumberOfRuns>100000</NumberOfRuns>
