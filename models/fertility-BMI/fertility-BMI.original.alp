@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[fertility-BMI]]></Name>
@@ -385,9 +385,6 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 						<Type><![CDATA[double]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[.40]]></Code>
-						</DefaultValue>
 						<ParameterEditor>
 							<Id>1632812972824</Id>
 							<Label><![CDATA[p_leakage]]></Label>
@@ -1059,6 +1056,20 @@ for (int i = 0; i < p_numberOutcomeCategories; i++) {
 double[] akidOutcome = col_heritabilityData.stream().filter(w -> w.father == fatherOutcome & w.mother == motherOutcome)
 	.mapToDouble(w -> w.kid).toArray();
 
+double total = 0.0;
+
+for (int i=0; i < aprop.length; i++) {
+	total = total + aprop[i];
+}
+if (total < 1) finishSimulation();
+traceln("::::::: new agent");
+traceln(p_leakage);
+traceln("Total : " + total);
+traceln(fatherOutcome);
+traceln(motherOutcome);
+traceln(aprop);
+traceln(akidOutcome);
+
 return f_weightedSampling(akidOutcome, aprop);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1456,10 +1467,10 @@ while (heritability.canReadMore() == true) {
 			prob = 1 /p_numberOutcomeCategories;
 		} else if (p_heritabilityType == Heritability.preston) {
 			if (mother == father & kid == mother) prob = 1-p_leakage;
-			else if (mother == father & (kid == (mother+1) | kid == (mother-1))) prob = p_leakage / 2.0;
+			else if (mother == father & mother > 1 & mother < 4 & (kid == (mother+1) | kid == (mother-1))) prob = p_leakage/2;
 			else if (mother == 1  & father == 1 & kid == 2) prob = p_leakage;
 			else if (mother == p_numberOutcomeCategories  & father == p_numberOutcomeCategories &
-				 kid == (p_numberOutcomeCategories - 1)) prob = p_leakage;
+				kid == (p_numberOutcomeCategories - 1)) prob = p_leakage;
 			else if (mother != father & (kid == father | kid == mother)) prob = 0.5;
 		}
 		HeritabilityData h = new HeritabilityData(father, mother, kid, prob);
@@ -3378,16 +3389,16 @@ f_readExperimentData("data/param-sobol.csv");]]></InitialSetupCode>
 			<MaximumMemory>512</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
-			<BeforeSimulationRunCode><![CDATA[String[] line = col_experimentLines.get(1);
+			<BeforeSimulationRunCode><![CDATA[//String[] line = col_experimentLines.get(1);
 
-root.p_randomMating = Double.parseDouble(line[0]);
-root.p_leakage = Double.parseDouble(line[1]);
-root.p_fertilityFactor = Double.parseDouble(line[2]);
+//root.p_randomMating = Double.parseDouble(line[0]);
+//root.p_leakage = Double.parseDouble(line[1]);
+//root.p_fertilityFactor = Double.parseDouble(line[2]);
 
-traceln("iteration....");
-traceln(root.p_randomMating);
-traceln(root.p_leakage);
-traceln(root.p_fertilityFactor);]]></BeforeSimulationRunCode>
+//traceln("iteration....");
+//traceln(root.p_randomMating);
+//traceln(root.p_leakage);
+//traceln(root.p_fertilityFactor);]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[f_sendSlackMessage();
 traceln(":::::: end simulation ::::::");]]></AfterSimulationRunCode>
 			<SeedValue>1</SeedValue>
@@ -3556,19 +3567,19 @@ return token;]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.05]]></Code>
+						<Code><![CDATA[0.2]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_heritabilityType]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[Heritability.observed]]></Code>
+						<Code><![CDATA[Heritability.preston]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_leakage]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.7]]></Code>
+						<Code><![CDATA[0.2]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>

@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[fertility-BMI]]></Name>
@@ -933,6 +933,20 @@ else return -99;]]></Body>
 double[] aoutcome = col_matingData.stream().filter(w -> w.ego == ego.v_outcomeGroup)
 	.mapToDouble(d -> d.alter).toArray();
 
+// testing 
+/*
+double total = 0.0;
+for (int i=0; i < aprop.length; i++) {
+	total = total + aprop[i];
+}
+if (total < 1) finishSimulation();
+traceln("::::::: new agent");
+traceln(p_randomMating);
+traceln(ego.v_outcomeGroup);
+traceln("Total : " + total);
+traceln(aprop);
+traceln(aoutcome);
+*/
 
 double group = f_weightedSampling(aoutcome, aprop);
 
@@ -1056,8 +1070,10 @@ for (int i = 0; i < p_numberOutcomeCategories; i++) {
 double[] akidOutcome = col_heritabilityData.stream().filter(w -> w.father == fatherOutcome & w.mother == motherOutcome)
 	.mapToDouble(w -> w.kid).toArray();
 
-double total = 0.0;
 
+// testing 
+/*
+double total = 0.0;
 for (int i=0; i < aprop.length; i++) {
 	total = total + aprop[i];
 }
@@ -1069,6 +1085,8 @@ traceln(fatherOutcome);
 traceln(motherOutcome);
 traceln(aprop);
 traceln(akidOutcome);
+*/
+
 
 return f_weightedSampling(akidOutcome, aprop);]]></Body>
 				</Function>
@@ -1429,7 +1447,7 @@ while (mating.canReadMore() == true) {
 			if (p_randomMating == 1) prob = 1 / p_numberOutcomeCategories;
 			else {
 				if (ego == alter) prob = (1-p_randomMating);
-				else prob = p_randomMating / p_numberOutcomeCategories;
+				else prob = p_randomMating / (p_numberOutcomeCategories-1);
 			}
 		} else prob = oprob;
 		MatingData m = new MatingData(ego, alter, prob);
@@ -3567,7 +3585,7 @@ return token;]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.2]]></Code>
+						<Code><![CDATA[0.75]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -3705,7 +3723,7 @@ root.p_fertilityFactor = Double.parseDouble(line[2]);
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["data/param-sobol.csv"]]></Code>
+							<Code><![CDATA["data/param-efast.csv"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
