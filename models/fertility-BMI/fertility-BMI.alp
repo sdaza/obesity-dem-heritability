@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[fertility-BMI]]></Name>
@@ -3659,7 +3659,10 @@ return token;]]></Body>
 			<Import><![CDATA[import java.io.File;
 import org.apache.commons.io.FileUtils;
 import java.io.IOException;
-
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.charset.Charset;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -3667,6 +3670,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.*;
+import org.apache.tools.ant.DirectoryScanner;
+
 
 import com.slack.api.Slack;
 import com.slack.api.methods.MethodsClient;
@@ -3700,7 +3705,7 @@ root.p_fertilityFactor = Double.parseDouble(line[2]);
 				<Variable Class="PlainVariable">
 					<Id>1632900715658</Id>
 					<Name><![CDATA[v_replicates]]></Name>
-					<X>90</X><Y>120</Y>
+					<X>90</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3715,7 +3720,7 @@ root.p_fertilityFactor = Double.parseDouble(line[2]);
 				<Variable Class="PlainVariable">
 					<Id>1636320353439</Id>
 					<Name><![CDATA[v_path]]></Name>
-					<X>90</X><Y>210</Y>
+					<X>90</X><Y>220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3723,7 +3728,7 @@ root.p_fertilityFactor = Double.parseDouble(line[2]);
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["data/param-sobol.csv"]]></Code>
+							<Code><![CDATA["data/param-efast.csv"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -3830,6 +3835,61 @@ try (BufferedReader reader = new BufferedReader(new FileReader(new File(filePath
 }
 return token;]]></Body>
 				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[List<String>]]></ReturnType>
+					<Id>1636964188402</Id>
+					<Name><![CDATA[mergeOutputFiles]]></Name>
+					<X>90</X><Y>340</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[pattern]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[path]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[resultFile]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[outputPath]]></Name>
+						<Type><![CDATA[String]]></Type>
+					</Parameter>
+					<Body><![CDATA[DirectoryScanner scanner = new DirectoryScanner();
+scanner.setIncludes(new String[]{pattern});
+scanner.setBasedir(path);
+scanner.setCaseSensitive(false);
+scanner.scan();
+String[] files = scanner.getIncludedFiles();
+
+List<String> mergedLines = new ArrayList<> ();
+
+for (int i=0; i < files.length; i++) {
+	// check files
+	//traceln(files[i].toString());;
+	// get paths
+	Path p = Paths.get(path + files[i]);
+	List<String> lines = new ArrayList<> ();
+	try { lines = Files.readAllLines(p, Charset.forName("UTF-8")); 
+		Files.delete(p);} 
+	catch(IOException e) {};	
+    if (!lines.isEmpty()) {
+    	if (mergedLines.isEmpty()) {
+           	mergedLines.add(lines.get(0)); //add header only once
+        }
+    	mergedLines.addAll(lines.subList(1, lines.size()));
+    } 
+}
+
+Path target = Paths.get(outputPath+resultFile);
+try { Files.write(target, mergedLines, Charset.forName("UTF-8")); } catch(IOException e) {};]]></Body>
+				</Function>
 			</Functions>
 			<Connectivity>
 				<TextFile>
@@ -3872,13 +3932,15 @@ return token;]]></Body>
 				</Text>
 			</Presentation>
 
-			<AfterIterationCode><![CDATA[if ( (getNumberOfCompletedIterations()+1) == col_experimentLines.size()) {
+			<AfterIterationCode><![CDATA[if ( getNumberOfCompletedIterations() == col_experimentLines.size()) { 
 	f_sendSlackMessage();
 	stop();
 }]]></AfterIterationCode>
+			<AfterExperimentCode><![CDATA[mergeOutputFiles("group*.csv", "output/", "total_result.csv", "../../output/data/");
+mergeOutputFiles("par*.csv", "output/", "total_params.csv", "../../output/data/");]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>100000</NumberOfRuns>
+			<NumberOfRuns>2</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 			</FreeformParamValue>
@@ -4136,6 +4198,10 @@ return token;]]></Body>
 			<Path><![CDATA[jarfiles/kotlin-stdlib-common-1.4.0.jar]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
+		<Resource>
+			<Path><![CDATA[jarfiles/ant-1.10.11.jar]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
 	</ModelResources>
     <RequiredLibraryReference>
 		<LibraryName><![CDATA[com.anylogic.libraries.modules.markup_descriptors]]></LibraryName>
@@ -4323,6 +4389,14 @@ return token;]]></Body>
 		<ResourceReference>
 			<PackageName><![CDATA[fertility_bmi]]></PackageName>
 			<ClassName><![CDATA[jarfiles/slf4j-api-1.7.30.jar]]></ClassName>
+		</ResourceReference>
+		<Imported>false</Imported>
+		<Folder>false</Folder>
+	</ClassPathEntry>
+	<ClassPathEntry>
+		<ResourceReference>
+			<PackageName><![CDATA[fertility_bmi]]></PackageName>
+			<ClassName><![CDATA[jarfiles/ant-1.10.11.jar]]></ClassName>
 		</ResourceReference>
 		<Imported>false</Imported>
 		<Folder>false</Folder>
