@@ -1,2 +1,4 @@
 .DS_Store
 models/fertility-BMI/output/
+.push.settings.jsonc
+.vscode
