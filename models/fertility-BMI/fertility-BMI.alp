@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[fertility-BMI]]></Name>
@@ -3687,22 +3687,30 @@ catch(IOException ie) { ie.printStackTrace(); }
 f_readExperimentData(v_inputPath + "param-" + v_paramName+ ".csv");
 
 // create range of iterations
-List<Integer> list = IntStream.rangeClosed(1, col_experimentLines.size()).boxed().collect(Collectors.toList());  
-col_iterations = new ArrayList<Integer>(list);
-            ]]></InitialSetupCode>
+List<Integer> list = IntStream.rangeClosed(1, 
+	col_experimentLines.size()).boxed().collect(Collectors.toList());  
+col_iterations = new ArrayList<Integer>(list);]]></InitialSetupCode>
 			<MaximumMemory>8192</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
-			<BeforeSimulationRunCode><![CDATA[root.v_iteration = getCurrentIteration();
-root.v_replicate = getCurrentReplication();
-String[] line = col_experimentLines.get(root.v_iteration-1);
-root.p_randomMating = Double.parseDouble(line[0]);
-root.p_leakage = Double.parseDouble(line[1]);
-root.p_fertilityFactor = Double.parseDouble(line[2]);
-]]></BeforeSimulationRunCode>
-			<AfterSimulationRunCode><![CDATA[v_replicates++;
+			<BeforeSimulationRunCode><![CDATA[setUseReplications(true);
+setFixedReplicationsNumber(v_numberReplicates);
 
-]]></AfterSimulationRunCode>
+root.v_iteration = getCurrentIteration();
+root.v_replicate = getCurrentReplication();
+
+if (getCurrentIteration() <= col_iterations.size()) {
+	String[] line = col_experimentLines.get(root.v_iteration-1);
+	// define parameters
+	root.p_randomMating = Double.parseDouble(line[0]);
+	root.p_leakage = Double.parseDouble(line[1]);
+	root.p_fertilityFactor = Double.parseDouble(line[2]);
+	
+} else { root.finishSimulation(); }
+]]></BeforeSimulationRunCode>
+			<AfterSimulationRunCode><![CDATA[if (getCurrentIteration() <= col_iterations.size()) { 
+	v_replicates++;
+}]]></AfterSimulationRunCode>
 			<SeedValue>1</SeedValue>
 			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
 			<VmArgs><![CDATA[]]></VmArgs>
@@ -3764,7 +3772,7 @@ root.p_fertilityFactor = Double.parseDouble(line[2]);
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["efast"]]></Code>
+							<Code><![CDATA["rep-efast"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -3780,6 +3788,21 @@ root.p_fertilityFactor = Double.parseDouble(line[2]);
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA["output/"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1637586729235</Id>
+					<Name><![CDATA[v_numberReplicates]]></Name>
+					<X>270</X><Y>220</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[2]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -4002,9 +4025,11 @@ try { Files.write(target, mergedLines, Charset.forName("UTF-8")); } catch(IOExce
 				</Text>
 			</Presentation>
 
-			<AfterIterationCode><![CDATA[col_iterations.remove(Integer.valueOf(getCurrentIteration()));
+			<AfterIterationCode><![CDATA[if (getCurrentReplication() == v_numberReplicates) {
+	col_iterations.remove(Integer.valueOf(getCurrentIteration()));
+}
 
-if (col_iterations.size() == 0 & v_iterationCheck == false) {
+if (col_iterations.size() == 0 & v_iterationCheck == false) {	
 	v_iterationCheck = true; 
 	stop();
 	mergeOutputFiles("group*.csv", v_outputPath, "results-" + v_paramName + ".csv", "../../output/data/");
@@ -4016,6 +4041,8 @@ if (col_iterations.size() == 0 & v_iterationCheck == false) {
 	catch(IOException ie) { ie.printStackTrace(); }
 }
 ]]></AfterIterationCode>
+			<AfterExperimentCode><![CDATA[try { FileUtils.cleanDirectory(new File(v_outputPath)); }
+catch(IOException ie) { ie.printStackTrace(); }]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
 			<NumberOfRuns>100000</NumberOfRuns>
@@ -4162,9 +4189,9 @@ if (col_iterations.size() == 0 & v_iterationCheck == false) {
 				<ShowDeveloperPanelOnStart>true</ShowDeveloperPanelOnStart>
 			</PresentationProperties>
 			<ReplicationsProperties>
-				<UseReplication>true</UseReplication>
+				<UseReplication>false</UseReplication>
 				<FixedReplicationsNumber>true</FixedReplicationsNumber>
-				<ReplicationPerIteration>1</ReplicationPerIteration>
+				<ReplicationPerIteration>10000</ReplicationPerIteration>
 				<MinimumReplication>2</MinimumReplication>
 				<MaximumReplication>10</MaximumReplication>
 				<ConfidenceLevel>LEVEL_80</ConfidenceLevel>
