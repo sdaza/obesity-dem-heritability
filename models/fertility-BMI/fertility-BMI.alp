@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[fertility-BMI]]></Name>
@@ -3699,15 +3699,12 @@ setFixedReplicationsNumber(v_numberReplicates);
 root.v_iteration = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
-if (getCurrentIteration() <= col_iterations.size()) {
+if (col_iterations.size() > 0) {
 	String[] line = col_experimentLines.get(root.v_iteration-1);
-	// define parameters
 	root.p_randomMating = Double.parseDouble(line[0]);
 	root.p_leakage = Double.parseDouble(line[1]);
 	root.p_fertilityFactor = Double.parseDouble(line[2]);
-	
-} else { root.finishSimulation(); }
-]]></BeforeSimulationRunCode>
+}]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[if (getCurrentIteration() <= col_iterations.size()) { 
 	v_replicates++;
 }]]></AfterSimulationRunCode>
@@ -3802,7 +3799,7 @@ if (getCurrentIteration() <= col_iterations.size()) {
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[int]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[2]]></Code>
+							<Code><![CDATA[30]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
