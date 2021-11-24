@@ -3699,13 +3699,13 @@ setFixedReplicationsNumber(v_numberReplicates);
 root.v_iteration = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
-if (col_iterations.size() > 0) {
+if (getCurrentIteration() <= col_experimentLines.size()) {
 	String[] line = col_experimentLines.get(root.v_iteration-1);
 	root.p_randomMating = Double.parseDouble(line[0]);
 	root.p_leakage = Double.parseDouble(line[1]);
 	root.p_fertilityFactor = Double.parseDouble(line[2]);
 }]]></BeforeSimulationRunCode>
-			<AfterSimulationRunCode><![CDATA[if (getCurrentIteration() <= col_iterations.size()) { 
+			<AfterSimulationRunCode><![CDATA[if (getCurrentIteration() <= col_experimentLines.size()) { 
 	v_replicates++;
 }]]></AfterSimulationRunCode>
 			<SeedValue>1</SeedValue>
@@ -4022,9 +4022,7 @@ try { Files.write(target, mergedLines, Charset.forName("UTF-8")); } catch(IOExce
 				</Text>
 			</Presentation>
 
-			<AfterIterationCode><![CDATA[if (getCurrentReplication() == v_numberReplicates) {
-	col_iterations.remove(Integer.valueOf(getCurrentIteration()));
-}
+			<AfterIterationCode><![CDATA[col_iterations.remove(Integer.valueOf(getCurrentIteration()));
 
 if (col_iterations.size() == 0 & v_iterationCheck == false) {	
 	v_iterationCheck = true; 
@@ -4036,10 +4034,7 @@ if (col_iterations.size() == 0 & v_iterationCheck == false) {
 	close();
 	try { FileUtils.cleanDirectory(new File(v_outputPath)); }
 	catch(IOException ie) { ie.printStackTrace(); }
-}
-]]></AfterIterationCode>
-			<AfterExperimentCode><![CDATA[try { FileUtils.cleanDirectory(new File(v_outputPath)); }
-catch(IOException ie) { ie.printStackTrace(); }]]></AfterExperimentCode>
+}]]></AfterIterationCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
 			<NumberOfRuns>100000</NumberOfRuns>
