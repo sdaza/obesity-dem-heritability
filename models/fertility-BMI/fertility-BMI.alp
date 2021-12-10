@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[fertility-BMI]]></Name>
@@ -219,7 +219,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1634561267223</Id>
 					<Name><![CDATA[v_assortativeMating]]></Name>
-					<X>440</X><Y>200</Y>
+					<X>450</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -231,7 +231,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1634820182582</Id>
 					<Name><![CDATA[v_fatherKidCorrelation]]></Name>
-					<X>440</X><Y>350</Y>
+					<X>450</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -243,7 +243,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1634820196037</Id>
 					<Name><![CDATA[v_motherKidCorrelation]]></Name>
-					<X>440</X><Y>370</Y>
+					<X>450</X><Y>350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -279,7 +279,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1632903435834</Id>
 					<Name><![CDATA[p_baselineOutcomeDistribution]]></Name>
-					<X>800</X><Y>170</Y>
+					<X>720</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -398,7 +398,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1632903366204</Id>
 					<Name><![CDATA[p_baselineFertility]]></Name>
-					<X>800</X><Y>150</Y>
+					<X>720</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -422,7 +422,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1632731453253</Id>
 					<Name><![CDATA[p_fertilityType]]></Name>
-					<X>800</X><Y>110</Y>
+					<X>720</X><Y>110</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -592,7 +592,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1636145720853</Id>
 					<Name><![CDATA[p_fertilityFactor]]></Name>
-					<X>800</X><Y>130</Y>
+					<X>720</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -694,7 +694,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1634560638371</Id>
 					<Name><![CDATA[col_partnerX]]></Name>
-					<X>440</X><Y>240</Y>
+					<X>450</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -709,7 +709,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1634560674183</Id>
 					<Name><![CDATA[col_partnerY]]></Name>
-					<X>440</X><Y>260</Y>
+					<X>450</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -724,7 +724,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1634640909761</Id>
 					<Name><![CDATA[col_matingData]]></Name>
-					<X>590</X><Y>240</Y>
+					<X>370</X><Y>520</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -739,7 +739,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1634646508775</Id>
 					<Name><![CDATA[col_heritabilityData]]></Name>
-					<X>590</X><Y>260</Y>
+					<X>370</X><Y>540</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -754,7 +754,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1634819872802</Id>
 					<Name><![CDATA[col_groupBMI]]></Name>
-					<X>440</X><Y>390</Y>
+					<X>450</X><Y>370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -799,15 +799,17 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 					</Properties>
 					<Action><![CDATA[f_definePropOutcomeGroup();
 
+// control number of agents
 if (col_aliveAgents.size() > 7000) {p_fertilityAdjustment = 0.50;}
 if (col_aliveAgents.size() < 2500) p_baselineFertility = p_baselineFertility + 0.05;
 
 if(col_aliveAgents.size() < 50) {
+
 	traceln("Population size is too small!!!");
 	finishSimulation();
 }
 
-if(time() > 500) {
+if(time() > 1500) {
 	traceln("Simulation stopped!");
 	finishSimulation();
 }
@@ -848,12 +850,27 @@ if(time() > 500) {
 		Person p = randomFrom(col_aliveAgents);
 		p.send("die", p);;
 	}
+}
+
+if ((col_aliveAgents.size() < 300)) { 
+	for (int i = 0; i < 1000; i++) {
+		Person p = randomFrom(col_deadAgents);
+ 		col_deadAgents.remove(p);
+		col_aliveAgents.add(p);
+	    p.v_recycled = true;
+	    p.v_outcomeGroup = f_weightedSampling(new double[] {1,2,3,4}, p_baselineOutcomeDistribution);
+		p.v_id = v_id++;
+		p.v_fatherID = uniform();
+		p.v_motherID = uniform();
+		p.v_parentType = randomFrom(ParentType.class);
+	    send("come to live!", p);
+	}
 }]]></Action>
 				</Event>
 				<Event>
 					<Id>1634560556087</Id>
 					<Name><![CDATA[assortativeMating]]></Name>
-					<X>440</X><Y>180</Y>
+					<X>450</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -879,8 +896,8 @@ if(time() > 500) {
 						</RecurrenceCode>
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
-					<Action><![CDATA[if (col_partnerX.size() > 30) f_assortiveMating();
-if (col_groupBMI.size() > 30) f_parentKidCorrelation();]]></Action>
+					<Action><![CDATA[if (col_partnerX.size() > 30) f_assortiveMatingCorr();
+if (col_groupBMI.size() > 30) f_parentKidCorr();]]></Action>
 				</Event>
 			</Events>
 			<Functions>
@@ -954,22 +971,36 @@ List<Person> alters = filter(col_aliveAgents, p -> p.v_married == false &
 	p != ego &
 	p.v_parentType != ego.v_parentType &
 	//p.v_generation == ego.v_generation &&
-	(p.v_motherID != ego.v_motherID &  p.v_fatherID != ego.v_fatherID) &
+	(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID) &
 	p.v_outcomeGroup == group);
 
-/*
-if (alters.size() > 0) {
-	alters = filter(col_aliveAgents, p -> p.v_married == false &
-		p != ego & p.v_parentType != ego.v_parentType &
-		(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID));
-}
-*/
+//traceln(alters.size());
+
 if (alters.size() > 0) {
 	Person partner = randomFrom(alters);
 	ego.spouse.connectTo(partner);
-	if (ego.spouse.isConnected()) {
+	ego.v_married = true;
+	s_married.add(1.0);
+	partner.v_married = true;
+	if (ego.v_fertility == -99) {
+		double fertility = f_defineFertility(ego.v_outcomeGroup, partner.v_outcomeGroup);
+		ego.v_fertility = fertility;
+		partner.v_fertility = fertility;
+	}
+	col_partnerX.add(ego.v_outcomeGroup);
+	col_partnerY.add(ego.spouse.getConnectedAgent().v_outcomeGroup);
+} else {
+	traceln("Not finding a partner from the group " + group + " at time " + time());
+	List<Person> new_alters = filter(col_aliveAgents, p -> p.v_married == false & 
+	p != ego &
+	p.v_parentType != ego.v_parentType &
+	//p.v_generation == ego.v_generation &&
+	(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID));
+	if (new_alters.size() > 0) {
+		Person partner = randomFrom(new_alters);
+		ego.spouse.connectTo(partner);
 		ego.v_married = true;
-		s_married.add(1.0);
+		s_married.add(0.0);
 		partner.v_married = true;
 		if (ego.v_fertility == -99) {
 			double fertility = f_defineFertility(ego.v_outcomeGroup, partner.v_outcomeGroup);
@@ -977,13 +1008,10 @@ if (alters.size() > 0) {
 			partner.v_fertility = fertility;
 		}
 		col_partnerX.add(ego.v_outcomeGroup);
-		col_partnerY.add(ego.spouse.getConnectedAgent().v_outcomeGroup);
-	}
-	else if (!ego.spouse.isConnected()) {
-		ego.v_fertility = 0;
-		s_married.add(0.0);
+		col_partnerY.add(ego.spouse.getConnectedAgent().v_outcomeGroup);	
 	}
 }
+
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1407,8 +1435,8 @@ catch (IOException e) {
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1634558685830</Id>
-					<Name><![CDATA[f_assortiveMating]]></Name>
-					<X>440</X><Y>220</Y>
+					<Name><![CDATA[f_assortiveMatingCorr]]></Name>
+					<X>450</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1425,7 +1453,7 @@ v_assortativeMating = k.correlation(tx, ty);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1634628760051</Id>
 					<Name><![CDATA[f_readMatingData]]></Name>
-					<X>590</X><Y>200</Y>
+					<X>370</X><Y>480</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1460,7 +1488,7 @@ while (mating.canReadMore() == true) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1634646713310</Id>
 					<Name><![CDATA[f_readHeritabilityData]]></Name>
-					<X>590</X><Y>220</Y>
+					<X>370</X><Y>500</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1501,7 +1529,7 @@ while (heritability.canReadMore() == true) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1634647898972</Id>
 					<Name><![CDATA[f_initialDefinition]]></Name>
-					<X>590</X><Y>180</Y>
+					<X>370</X><Y>460</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1528,8 +1556,8 @@ for (Person p : people) {
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1634820221835</Id>
-					<Name><![CDATA[f_parentKidCorrelation]]></Name>
-					<X>440</X><Y>330</Y>
+					<Name><![CDATA[f_parentKidCorr]]></Name>
+					<X>450</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1593,7 +1621,7 @@ v_motherKidCorrelation = k.correlation(tx, ty);
 				<TextFile>
 					<Id>1634631376893</Id>
 					<Name><![CDATA[mating]]></Name>
-					<X>590</X><Y>280</Y>
+					<X>540</X><Y>460</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1611,7 +1639,7 @@ v_motherKidCorrelation = k.correlation(tx, ty);
 				<TextFile>
 					<Id>1634646435958</Id>
 					<Name><![CDATA[heritability]]></Name>
-					<X>590</X><Y>300</Y>
+					<X>540</X><Y>480</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1854,7 +1882,7 @@ v_motherKidCorrelation = k.correlation(tx, ty);
 				</Text>
 				<Text>
 					<Id>1632898917468</Id>
-					<Name><![CDATA[text3]]></Name>
+					<Name><![CDATA[dataOutput]]></Name>
 					<X>50</X><Y>420</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
@@ -1866,6 +1894,27 @@ v_motherKidCorrelation = k.correlation(tx, ty);
 					<Rotation>0.0</Rotation>
 					<Color>-16777216</Color>
 					<Text><![CDATA[Data output]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>14</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1639036534102</Id>
+					<Name><![CDATA[dataInput]]></Name>
+					<X>360</X><Y>420</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Data input]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>14</Size>
@@ -3585,7 +3634,7 @@ return token;]]></Body>
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.75]]></Code>
+						<Code><![CDATA[0.2]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -3643,7 +3692,7 @@ return token;]]></Body>
 				<RealTimeScale>250.0</RealTimeScale>
 			</PresentationProperties>
 			<ModelTimeProperties>
-				<StopOption><![CDATA[Stop at specified time]]></StopOption>
+				<StopOption><![CDATA[Never]]></StopOption>
 				<InitialDate><![CDATA[1632441600000]]></InitialDate>	
 				<InitialTime><![CDATA[0.0]]></InitialTime>	
 				<FinalDate><![CDATA[7939641600000]]></FinalDate>	
