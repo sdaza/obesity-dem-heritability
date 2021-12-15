@@ -75,10 +75,9 @@
 			<Id>1632485433838</Id>
 			<Name><![CDATA[Main]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
-			<Import><![CDATA[import java.io.BufferedWriter;
-import java.io.File;
+			<Import><![CDATA[import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
+import java.io.BufferedWriter;
 import com.fasterxml.jackson.databind.util.IgnorePropertiesUtil;
 import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import>
 			<StartupCode><![CDATA[f_initialSetup();]]></StartupCode>
@@ -888,6 +887,7 @@ if (col_groupBMI.size() > 30) f_parentKidCorr();]]></Action>
 @param  iq double value of IQ
 @author Sebastian Daza
 @since 1.0]]></Description>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
 					<X>240</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -1006,13 +1006,11 @@ if (alters.size() > 0) {
 col_propOutcomeGroup.clear();
 
 for (int i = 0; i < p_numberOutcomeCategories; i++) {
-  	int h = i + 1;
-  	double value = (double) 
-  	filter(col_aliveAgents, p -> p.v_outcomeGroup == h).size() / total;
+	int h = i + 1;
+	double value = (double) filter(col_aliveAgents,
+			p -> p.v_outcomeGroup == h).size() / total;
 	col_propOutcomeGroup.add(i, value);
-}
- 
-]]></Body>
+}]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -1074,27 +1072,25 @@ for (int i = 0; i < p_numberOutcomeCategories; i++) {
 						<Name><![CDATA[motherOutcome]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
-					<Body><![CDATA[double[] aprop = col_heritabilityData.stream().filter(w -> w.father == fatherOutcome & w.mother == motherOutcome)
-	.mapToDouble(w -> w.prob).toArray();
-double[] akidOutcome = col_heritabilityData.stream().filter(w -> w.father == fatherOutcome & w.mother == motherOutcome)
-	.mapToDouble(w -> w.kid).toArray();
+					<Body><![CDATA[double[] aprop = col_heritabilityData.stream()
+		.filter(w -> w.father == fatherOutcome
+				& w.mother == motherOutcome)
+		.mapToDouble(w -> w.prob).toArray();
+double[] akidOutcome = col_heritabilityData.stream()
+		.filter(w -> w.father == fatherOutcome
+				& w.mother == motherOutcome)
+		.mapToDouble(w -> w.kid).toArray();
 
-// testing 
+//traceln("prop " + aprop); traceln(akidOutcome);
+// testing
 /*
-double total = 0.0;
-for (int i=0; i < aprop.length; i++) {
-	total = total + aprop[i];
-}
-if (total < 1) finishSimulation();
-traceln("::::::: new agent");
-traceln(p_leakage);
-traceln("Total : " + total);
-traceln(fatherOutcome);
-traceln(motherOutcome);
-traceln(aprop);
-traceln(akidOutcome);
-*/
-
+ * double total = 0.0; for (int i=0; i < aprop.length; i++)
+ * { total = total + aprop[i]; } if (total < 1)
+ * finishSimulation(); traceln("::::::: new agent");
+ * traceln(p_leakage); traceln("Total : " + total);
+ * traceln(fatherOutcome); traceln(motherOutcome);
+ * traceln(aprop); traceln(akidOutcome);
+ */
 
 return f_weightedSampling(akidOutcome, aprop);]]></Body>
 				</Function>
@@ -1117,17 +1113,17 @@ return f_weightedSampling(akidOutcome, aprop);]]></Body>
 						<Type><![CDATA[double[]]]></Type>
 					</Parameter>
 					<Body><![CDATA[double totalPro = 0;
-for (int i=0; i < values.length; i++) {
+for (int i = 0; i < values.length; i++) {
 	totalPro += probs[i];
 }
 
 if (totalPro != 1) {
-	for (int i=0; i < values.length; i++) {
+	for (int i = 0; i < values.length; i++) {
 		probs[i] = probs[i] / totalPro;
 	}
 	totalPro = 1;
 }
-		
+
 double index = uniform();
 double sum = 0;
 int i = 0;
@@ -1136,7 +1132,7 @@ while (sum < index) {
 
 }
 
-return values[i-1];]]></Body>
+return values[i - 1];]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -1185,7 +1181,7 @@ for (int i = 0; i < input.size(); i++) {
 
 	if (p_matingType == defined) {
 		if (p_randomMating == 1)
-			prob = 1 / p_numberOutcomeCategories;
+			prob = 1.0 / p_numberOutcomeCategories;
 		else {
 			if (ego == alter)
 				prob = (1 - p_randomMating);
@@ -1195,6 +1191,7 @@ for (int i = 0; i < input.size(); i++) {
 		}
 	} else
 		prob = oprob;
+	//traceln(ego + ";" + alter + ";" + prob);
 	MatingData m = new MatingData(ego, alter, prob);
 	col_matingData.add(m);
 }]]></Body>
@@ -1251,6 +1248,7 @@ for (int i = 0; i < input.size(); i++) {
 	}
 	HeritabilityData h = new HeritabilityData(father,
 			mother, kid, prob);
+	//traceln(father + ";" + mother + ";" + kid + ";" + prob);
 	col_heritabilityData.add(h);
 }
 ]]></Body>
@@ -3193,16 +3191,18 @@ f.removeOutputFiles();]]></InitialSetupCode>
 			<MaximumMemory>512</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
-			<BeforeSimulationRunCode><![CDATA[//String[] line = col_experimentLines.get(1);
+			<BeforeSimulationRunCode><![CDATA[/*
+String[] line = col_experimentLines.get(1);
 
-//root.p_randomMating = Double.parseDouble(line[0]);
-//root.p_leakage = Double.parseDouble(line[1]);
-//root.p_fertilityFactor = Double.parseDouble(line[2]);
+root.p_randomMating = Double.parseDouble(line[0]);
+root.p_leakage = Double.parseDouble(line[1]);
+root.p_fertilityFactor = Double.parseDouble(line[2]);
 
-//traceln("iteration....");
-//traceln(root.p_randomMating);
-//traceln(root.p_leakage);
-//traceln(root.p_fertilityFactor);]]></BeforeSimulationRunCode>
+traceln("iteration....");
+traceln(root.p_randomMating);
+traceln(root.p_leakage);
+traceln(root.p_fertilityFactor);
+*/]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[if (v_slack) {
 	SlackMessage s = new SlackMessage();
 	s.sendMessage();
@@ -3284,7 +3284,7 @@ f.removeOutputFiles();]]></InitialSetupCode>
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.0]]></Code>
+						<Code><![CDATA[0.2]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -3296,7 +3296,7 @@ f.removeOutputFiles();]]></InitialSetupCode>
 				<Parameter>
 					<ParameterName><![CDATA[p_leakage]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.0]]></Code>
+						<Code><![CDATA[0.2]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -3308,7 +3308,7 @@ f.removeOutputFiles();]]></InitialSetupCode>
 				<Parameter>
 					<ParameterName><![CDATA[p_fertilityType]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[Fertility.additive]]></Code>
+						<Code><![CDATA[Fertility.uniform]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -3354,7 +3354,7 @@ f.removeOutputFiles();]]></InitialSetupCode>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[// read parameter file
-TextFileUtilities f = new TextFileUtilities(v_inputPath, "param-" + v_paramName+ ".csv", "output");
+TextFileUtilities f = new TextFileUtilities("data", "param-" + v_paramName+ ".csv", "output");
 col_experimentLines = f.fromFileToCollection(true);
 f.removeOutputFiles();
 // collection to track iterations
@@ -3398,36 +3398,6 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 						<Type><![CDATA[int]]></Type>        
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA[0]]></Code>
-						</InitialValue>
-					</Properties>
-				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1636320353439</Id>
-					<Name><![CDATA[v_inputPath]]></Name>
-					<X>90</X><Y>120</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[String]]></Type>        
-						<InitialValue Class="CodeValue">
-							<Code><![CDATA["data/"]]></Code>
-						</InitialValue>
-					</Properties>
-				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1636992882823</Id>
-					<Name><![CDATA[v_iterationCheck]]></Name>
-					<X>90</X><Y>180</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[boolean]]></Type>        
-						<InitialValue Class="CodeValue">
-							<Code><![CDATA[false]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -3476,10 +3446,25 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1639580444833</Id>
+					<Name><![CDATA[v_iterationCheck]]></Name>
+					<X>90</X><Y>180</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[boolean]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[false]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1634901108702</Id>
 					<Name><![CDATA[col_experimentLines]]></Name>
-					<X>270</X><Y>170</Y>
+					<X>240</X><Y>140</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3494,7 +3479,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 				<Variable Class="CollectionVariable">
 					<Id>1636990179371</Id>
 					<Name><![CDATA[col_iterations]]></Name>
-					<X>270</X><Y>190</Y>
+					<X>240</X><Y>160</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3539,7 +3524,7 @@ if (col_iterations.size() == 0 & v_iterationCheck == false) {
 	v_iterationCheck = true; 
 	stop();
 	// append output files
-	TextFileUtilities f = new TextFileUtilities(v_inputPath, "param-" + v_paramName+ ".csv", "output");
+	TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
 	f.appendOutputFiles(v_outputPath, "group*.csv", "results-" + v_paramName + ".csv", "../../output/data/");
 	f.appendOutputFiles(v_outputPath, "par*.csv", "param-" + v_paramName + ".csv", "../../output/data/");
 	traceln("Output files created ::::::");
@@ -3710,7 +3695,8 @@ if (col_iterations.size() == 0 & v_iterationCheck == false) {
 	double ego;
 	double alter;
 	double prob;
-	public MatingData(double ego, double alter, double prob) {
+	public MatingData(double ego, double alter,
+			double prob) {
 		this.ego = ego;
 		this.alter = alter;
 		this.prob = prob;
@@ -3726,7 +3712,8 @@ if (col_iterations.size() == 0 & v_iterationCheck == false) {
 	double mother;
 	double kid;
 	double prob;
-	public HeritabilityData(double father, double mother, double kid, double prob) {
+	public HeritabilityData(double father, double mother,
+			double kid, double prob) {
 		this.father = father;
 		this.mother = mother;
 		this.kid = kid;
@@ -3760,51 +3747,57 @@ public class SlackMessage {
 	String path;
 	String header;
 	String channel;
-	
+
 	public SlackMessage() {
 		this.path = "slack.txt";
-		this.header = "Anylogic simulation experiment finished at ";	
+		this.header = "Anylogic simulation experiment finished at ";
 		this.channel = "#slack-from-simulations";
 	}
-	
-	public SlackMessage(String path, String header, String channel) {
+
+	public SlackMessage(String path, String header,
+			String channel) {
 		this.path = path;
 		this.header = header;
 		this.channel = channel;
 	}
-    
-    public void sendMessage() {
-    	
-    	// get date
-    	SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-    	Date date = new Date(System.currentTimeMillis());
-    	String cdate = new String(formatter.format(date));
 
-    	// read token
-    	String token = "";
-    	try (BufferedReader reader = new BufferedReader(new FileReader(new File(this.path)))) {
-    		token = reader.readLine();
-    	} catch (IOException e) {
-    		e.printStackTrace();
-    	}
-    	
-    	Slack slack = Slack.getInstance();
-    	MethodsClient methods = slack.methods(token);
-    	try {
-    		ChatPostMessageResponse response = slack.methods(token).chatPostMessage(req -> req
-    				.channel(this.channel)
-    				.text(this.header + cdate + " :wink:"));
-    		if (response.isOk()) {
-    			Message postedMessage = response.getMessage();
-    		} else {
-    			String errorCode = response.getError();
-    		}
-    	} catch (SlackApiException requestFailure) {
-    	} catch (IOException connectivityIssue) {
-    	}
-    }
+	public void sendMessage() {
+
+		// get date
+		SimpleDateFormat formatter = new SimpleDateFormat(
+				"yyyy-MM-dd 'at' HH:mm:ss z");
+		Date date = new Date(System.currentTimeMillis());
+		String cdate = new String(formatter.format(date));
+
+		// read token
+		String token = "";
+		try (BufferedReader reader = new BufferedReader(
+				new FileReader(new File(this.path)))) {
+			token = reader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		Slack slack = Slack.getInstance();
+		MethodsClient methods = slack.methods(token);
+		try {
+			ChatPostMessageResponse response = slack
+					.methods(token).chatPostMessage(
+							req -> req.channel(this.channel)
+									.text(this.header
+											+ cdate
+											+ " :wink:"));
+			if (response.isOk()) {
+				Message postedMessage = response
+						.getMessage();
+			} else {
+				String errorCode = response.getError();
+			}
+		} catch (SlackApiException requestFailure) {
+		} catch (IOException connectivityIssue) {
+		}
+	}
 }
-
 ]]></Text>
 		</JavaClass>
 		<!--   =========   Java Class   ========  -->
@@ -3815,7 +3808,6 @@ public class SlackMessage {
 import org.apache.commons.io.FileUtils;
 import java.io.IOException;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 
 import java.nio.file.Files;
@@ -3832,47 +3824,37 @@ public class TextFileUtilities {
 	String filename;
 	String output;
 
-	
 	public TextFileUtilities() {
-			this.path = "data/";
-			this.filename = "experiment.csv ";
-			this.output = "output";
-		}
-	
-	
+		this.path = "data/";
+		this.filename = "experiment.csv ";
+		this.output = "output";
+	}
+
 	public TextFileUtilities(String path, String filename,
-				String output) {
-			this.path = path;
-			this.filename = filename;
-			this.output = output;
-		}
-	
-	
+			String output) {
+		this.path = path;
+		this.filename = filename;
+		this.output = output;
+	}
+
 	public ArrayList<String[]> fromFileToCollection(
 			boolean firstLine) {
 
-	ArrayList<String[]> col = new ArrayList<String[]>();
+		ArrayList<String[]> col = new ArrayList<String[]>();
 
-		try (BufferedReader reader = new BufferedReader(
-				new FileReader(new File(
-						this.path + this.filename)))) {
-
-			while (reader.readLine() != null) {
-				String line = reader.readLine();
-				if (firstLine == true) {
-					firstLine = false;
-					continue;
-				}
-				if (line != null) {
-					String[] list = line.split("[,]", 0);
+		try {
+			List<String> allLines = Files.readAllLines(
+					Paths.get(this.path + this.filename));
+			for (int i = 0; i < allLines.size(); i++) {
+				if (i > 0) {
+					String[] list = allLines.get(i)
+							.split("[,]", 0);
 					col.add(list);
 				}
 			}
-			reader.close();
-		} catch (IOException ie) {
-			ie.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-
 		return col;
 	}
 
@@ -3887,7 +3869,7 @@ public class TextFileUtilities {
 	public void appendOutputFiles(String path,
 			String pattern, String newFileName,
 			String outputPath) {
-		// get all files directories
+		// get all file directories
 		DirectoryScanner scanner = new DirectoryScanner();
 		scanner.setIncludes(new String[]{pattern});
 		scanner.setBasedir(path);
@@ -3908,17 +3890,15 @@ public class TextFileUtilities {
 			} ;
 			if (!lines.isEmpty()) {
 				if (mergedLines.isEmpty()) {
-					mergedLines.add(lines.get(0)); // add
-													// header
-													// only
-													// once
+					// add header only once
+					mergedLines.add(lines.get(0));
 				}
 				mergedLines.addAll(
 						lines.subList(1, lines.size()));
 			}
 		}
 
-		// create final file
+		// create final text file
 		Path target = Paths.get(outputPath + newFileName);
 		try {
 			Files.write(target, mergedLines,
@@ -3947,91 +3927,109 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
-public class ExportOutput  {
+public class ExportOutput {
 	String outputPath;
 	String fileName;
 	int iteration;
 	int replicate;
 	String[] columnNames;
 	String[] variableNames;
-	
-	
-    public ExportOutput() {
-    	this.outputPath = "output/";
-    	this.fileName = "myfile";
-    	this.iteration = 0;
-    	this.replicate = 0;
-    	this.columnNames = new String[] {"iteration", "replicate", "myvariable"};
-    	this.variableNames = new String[] {"iteration", "replicate", "myVariable"};
-    }
-   
-    
-    public ExportOutput(String outputPath, String fileName, int iteration, int replicate, 
-    		String[] columnNames, String[] variableNames) {
-    	this.outputPath = outputPath;
-    	this.fileName = fileName;
-        this.iteration = iteration; 
-        this.replicate = replicate;
-        this.columnNames = columnNames;
-        this.variableNames = variableNames;
-    }
 
-    
-    public void initiateFile(LinkedHashMap<String, BufferedWriter> col) { 
-     	String name = this.outputPath + this.fileName + "-" + this.iteration + "-" + this.replicate + ".csv";
-     	File f = new File(name);
-     	f.getParentFile().mkdirs();
-     	try { BufferedWriter t = new BufferedWriter(new FileWriter(f));
-     	t.write(collapseStrings(this.columnNames, ";"));
-     	col.put(this.fileName, t);
-         } 
-    	catch (IOException e) {
-    		e.printStackTrace();
-    	}	
-     }
- 
-    
-    public String getValues(Agent agent) {
-    	String text = new String();
-    	for (int i=0; i < this.variableNames.length; i++) {
-    		if (i==0 ) { text =  "String.valueOf(" +this.variableNames[i] + ") +" +  "';'"; }
-    		else if (i < (this.variableNames.length-1)) { text = text + "+ String.valueOf(" + this.variableNames[i] + ") +" +  "';'"; }
-    		else {text =  text +  "+ String.valueOf("  + this.variableNames[i] + ") + '\\n'";}
-    	}	
-    	CodeValue c = new CodeValue(agent, text);
-    	return c.execute();
-    }
-    
-    
-    public void writeFile(BufferedWriter t, String text)  {		
-    	try { 
-    		t.write(text);
-    	}
-    	catch (IOException e) {
-    		e.printStackTrace();
-    	}	
-    }
-    
-    
-    public void closeFiles(LinkedHashMap<String, BufferedWriter> col) {
-    	ArrayList<String> keys = new ArrayList<>(col.keySet());
-    	for (int i=0; i < keys.size(); i++) {
-    		try { col.get(keys.get(i)).close();}
-        	catch (IOException e) { e.printStackTrace();}	
-    	}
-    }
-    	
-    public String collapseStrings(String[] listStrings, String sep) {	
-    	String output = new String();
-    	for (int i=0; i < listStrings.length; i++) {
-        	if (i < listStrings.length - 1) output = output + listStrings[i] + sep;
-        	else output = output + listStrings[i] + "\n";
-        }
-        return output;
-    }
+	public ExportOutput() {
+		this.outputPath = "output/";
+		this.fileName = "myfile";
+		this.iteration = 0;
+		this.replicate = 0;
+		this.columnNames = new String[]{"iteration",
+				"replicate", "myvariable"};
+		this.variableNames = new String[]{"iteration",
+				"replicate", "myVariable"};
+	}
+
+	public ExportOutput(String outputPath, String fileName,
+			int iteration, int replicate,
+			String[] columnNames, String[] variableNames) {
+		this.outputPath = outputPath;
+		this.fileName = fileName;
+		this.iteration = iteration;
+		this.replicate = replicate;
+		this.columnNames = columnNames;
+		this.variableNames = variableNames;
+	}
+
+	public void initiateFile(
+			LinkedHashMap<String, BufferedWriter> col) {
+		String name = this.outputPath + this.fileName + "-"
+				+ this.iteration + "-" + this.replicate
+				+ ".csv";
+		File f = new File(name);
+		f.getParentFile().mkdirs();
+		try {
+			BufferedWriter t = new BufferedWriter(
+					new FileWriter(f));
+			t.write(collapseStrings(this.columnNames, ";"));
+			col.put(this.fileName, t);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String getValues(Agent agent) {
+		String text = new String();
+		for (int i = 0; i < this.variableNames.length; i++) {
+			if (i == 0) {
+				text = "String.valueOf("
+						+ this.variableNames[i] + ") +"
+						+ "';'";
+			} else if (i < (this.variableNames.length
+					- 1)) {
+				text = text + "+ String.valueOf("
+						+ this.variableNames[i] + ") +"
+						+ "';'";
+			} else {
+				text = text + "+ String.valueOf("
+						+ this.variableNames[i]
+						+ ") + '\\n'";
+			}
+		}
+		CodeValue c = new CodeValue(agent, text);
+		return c.execute();
+	}
+
+	public void writeFile(BufferedWriter t, String text) {
+		try {
+			t.write(text);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void closeFiles(
+			LinkedHashMap<String, BufferedWriter> col) {
+		ArrayList<String> keys = new ArrayList<>(
+				col.keySet());
+		for (int i = 0; i < keys.size(); i++) {
+			try {
+				col.get(keys.get(i)).close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public String collapseStrings(String[] listStrings,
+			String sep) {
+		String output = new String();
+		for (int i = 0; i < listStrings.length; i++) {
+			if (i < listStrings.length - 1)
+				output = output + listStrings[i] + sep;
+			else
+				output = output + listStrings[i] + "\n";
+		}
+		return output;
+	}
 }
-  ]]></Text>
+]]></Text>
 		</JavaClass>
 	</JavaClasses>
 	<ModelResources>
