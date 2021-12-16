@@ -671,7 +671,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1634640909761</Id>
 					<Name><![CDATA[col_matingData]]></Name>
-					<X>220</X><Y>500</Y>
+					<X>220</X><Y>480</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -686,7 +686,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1634646508775</Id>
 					<Name><![CDATA[col_heritabilityData]]></Name>
-					<X>220</X><Y>520</Y>
+					<X>220</X><Y>500</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -835,7 +835,7 @@ if ((col_aliveAgents.size() < 300)) {
  		col_deadAgents.remove(p);
 		col_aliveAgents.add(p);
 	    p.v_recycled = true;
-	    p.v_outcomeGroup = f_weightedSampling(new double[] {1,2,3,4}, p_initialOutcomeDistribution);
+	    p.v_outcomeGroup = new StatUtils().weightedSampling(new double[] {1,2,3,4}, p_initialOutcomeDistribution);
 		p.v_id = v_id++;
 		p.v_fatherID = uniform();
 		p.v_motherID = uniform();
@@ -879,31 +879,6 @@ if (col_groupBMI.size() > 30) f_parentKidCorr();]]></Action>
 			</Events>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1632494699502</Id>
-					<Name><![CDATA[f_outcomeToGroup]]></Name>
-					<Description><![CDATA[Transform any value of IQ (double) into a 7-group category
-@param  iq double value of IQ
-@author Sebastian Daza
-@since 1.0]]></Description>
-					<ExcludeFromBuild>true</ExcludeFromBuild>
-					<X>240</X><Y>240</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[outcome]]></Name>
-						<Type><![CDATA[double]]></Type>
-					</Parameter>
-					<Body><![CDATA[if (outcome < 18.5) return 1;
-else if (outcome >= 18.5 && outcome < 25) return 2;
-else if (outcome >= 25 && outcome < 30) return 3;
-else if (outcome >= 30) return 4;
-else return -99;]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632645873728</Id>
@@ -943,7 +918,7 @@ traceln(aprop);
 traceln(aoutcome);
 */
 
-double group = f_weightedSampling(aoutcome, aprop);
+double group = new StatUtils().weightedSampling(aoutcome, aprop);
 
 List<Person> alters = filter(col_aliveAgents, p -> p.v_married == false & 
 	p != ego &
@@ -996,7 +971,7 @@ if (alters.size() > 0) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632725205130</Id>
 					<Name><![CDATA[f_definePropOutcomeGroup]]></Name>
-					<X>240</X><Y>320</Y>
+					<X>240</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1022,7 +997,7 @@ for (int i = 0; i < p_numberOutcomeCategories; i++) {
 @param motherIQ 7-group IQ category of the mother
 @author Sebastian Daza
 @since 1.0]]></Description>
-					<X>240</X><Y>280</Y>
+					<X>240</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1054,12 +1029,12 @@ for (int i = 0; i < p_numberOutcomeCategories; i++) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632745681683</Id>
 					<Name><![CDATA[f_defineKidOutcome]]></Name>
-					<Description><![CDATA[Define offspring IQ group using different heritability values. If <code>p_heritabilityType</code> is <code>average</code>, the matrix <code>heritabiliy</code> (database) is used. If  <code>p_heritabilityType</code> is  <code>preston</code> or <code>uniform</code>, <code>matrixh</code> is used. 
+					<Description><![CDATA[Define offspring BMI group using different heritability values. If <code>p_heritabilityType</code> is <code>average</code>, the matrix <code>heritabiliy</code> (database) is used. If  <code>p_heritabilityType</code> is  <code>preston</code> or <code>uniform</code>, <code>matrixh</code> is used. 
 @param fatherIQ 7-group IQ category of the father
 @param motherIQ 7-group IQ category of the mother
 @author Sebastian Daza
 @since 1.0]]></Description>
-					<X>240</X><Y>300</Y>
+					<X>240</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1092,47 +1067,7 @@ double[] akidOutcome = col_heritabilityData.stream()
  * traceln(aprop); traceln(akidOutcome);
  */
 
-return f_weightedSampling(akidOutcome, aprop);]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1632751749907</Id>
-					<Name><![CDATA[f_weightedSampling]]></Name>
-					<X>240</X><Y>340</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[values]]></Name>
-						<Type><![CDATA[double[]]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[probs]]></Name>
-						<Type><![CDATA[double[]]]></Type>
-					</Parameter>
-					<Body><![CDATA[double totalPro = 0;
-for (int i = 0; i < values.length; i++) {
-	totalPro += probs[i];
-}
-
-if (totalPro != 1) {
-	for (int i = 0; i < values.length; i++) {
-		probs[i] = probs[i] / totalPro;
-	}
-	totalPro = 1;
-}
-
-double index = uniform();
-double sum = 0;
-int i = 0;
-while (sum < index) {
-	sum += probs[i++];
-
-}
-
-return values[i - 1];]]></Body>
+return new StatUtils().weightedSampling(akidOutcome, aprop);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -1155,7 +1090,7 @@ v_assortativeMating = k.correlation(tx, ty);
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1634628760051</Id>
-					<Name><![CDATA[f_readMatingData]]></Name>
+					<Name><![CDATA[f_readInputFiles]]></Name>
 					<X>220</X><Y>460</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -1165,20 +1100,18 @@ v_assortativeMating = k.correlation(tx, ty);
 						<Name><![CDATA[path]]></Name>
 						<Type><![CDATA[String]]></Type>
 					</Parameter>
-					<Parameter>
-						<Name><![CDATA[file]]></Name>
-						<Type><![CDATA[String]]></Type>
-					</Parameter>
-					<Body><![CDATA[TextFileUtilities t = new TextFileUtilities(path, file, "");
-ArrayList<String[]> input = t.fromFileToCollection(true);
+					<Body><![CDATA[// mating
+TextFileUtilities m = new TextFileUtilities(path, "mating.csv", "");
+ArrayList<String[]> im = m.fromFileToCollection(true);
 
-for (int i = 0; i < input.size(); i++) {
-	String[] list = input.get(i);
+for (int i = 0; i < im.size(); i++) {
+	String[] list = im.get(i);
 	double ego = Double.parseDouble(list[0]);
 	double alter = Double.parseDouble(list[1]);
 	double oprob = Double.parseDouble(list[2]);
 	double prob = 0.0;
 
+	// mating rules!
 	if (p_matingType == defined) {
 		if (p_randomMating == 1)
 			prob = 1.0 / p_numberOutcomeCategories;
@@ -1192,39 +1125,24 @@ for (int i = 0; i < input.size(); i++) {
 	} else
 		prob = oprob;
 	//traceln(ego + ";" + alter + ";" + prob);
-	MatingData m = new MatingData(ego, alter, prob);
-	col_matingData.add(m);
-}]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1634646713310</Id>
-					<Name><![CDATA[f_readHeritabilityData]]></Name>
-					<X>220</X><Y>480</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[path]]></Name>
-						<Type><![CDATA[String]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[file]]></Name>
-						<Type><![CDATA[String]]></Type>
-					</Parameter>
-					<Body><![CDATA[TextFileUtilities t = new TextFileUtilities(path, file, "");
-ArrayList<String[]> input = t.fromFileToCollection(true);
+	MatingData mm = new MatingData(ego, alter, prob);
+	col_matingData.add(mm);
+}
 
-for (int i = 0; i < input.size(); i++) {
-	String[] list = input.get(i);
+
+// heritability 
+TextFileUtilities h = new TextFileUtilities(path, "heritability.csv", "");
+ArrayList<String[]> ih = h.fromFileToCollection(true);
+
+for (int i = 0; i < ih.size(); i++) {
+	String[] list = ih.get(i);
 	double father = Double.parseDouble(list[0]);
 	double mother = Double.parseDouble(list[1]);
 	double kid = Double.parseDouble(list[2]);
 	double oprob = Double.parseDouble(list[3]);
 	double prob = 0.0;
 
+	// heritability rules!
 	if (p_heritabilityType == Heritability.observed) {
 		prob = oprob;
 	} else if (p_heritabilityType == Heritability.uniform) {
@@ -1246,10 +1164,10 @@ for (int i = 0; i < input.size(); i++) {
 				& (kid == father | kid == mother))
 			prob = 0.5;
 	}
-	HeritabilityData h = new HeritabilityData(father,
+	HeritabilityData hh = new HeritabilityData(father,
 			mother, kid, prob);
 	//traceln(father + ";" + mother + ";" + kid + ";" + prob);
-	col_heritabilityData.add(h);
+	col_heritabilityData.add(hh);
 }
 ]]></Body>
 				</Function>
@@ -1264,8 +1182,7 @@ for (int i = 0; i < input.size(); i++) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[// read input files
-f_readMatingData("data/", "mating.csv");
-f_readHeritabilityData("data/", "heritability.csv");
+f_readInputFiles("data/");
 
 // set output files
 if (p_exportData) {
@@ -1276,7 +1193,7 @@ if (p_exportData) {
 
 // set initial agents
 for (Person p : people) {
-		p.v_outcomeGroup = f_weightedSampling(new double[] {1,2,3,4}, p_initialOutcomeDistribution);
+		p.v_outcomeGroup = new StatUtils().weightedSampling(new double[] {1,2,3,4}, p_initialOutcomeDistribution);
 		p.v_id = v_id++;
 		p.v_fatherID = uniform();
 		p.v_motherID = uniform();
@@ -3284,7 +3201,7 @@ traceln(root.p_fertilityFactor);
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.2]]></Code>
+						<Code><![CDATA[0.0]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -4030,6 +3947,45 @@ public class ExportOutput {
 	}
 }
 ]]></Text>
+		</JavaClass>
+		<!--   =========   Java Class   ========  -->
+		<JavaClass>
+			<Id>1639642177870</Id>
+			<Name><![CDATA[StatUtils]]></Name>
+			<Text><![CDATA[/**
+ * StatUtils
+ */
+public class StatUtils {
+
+	public StatUtils() {
+	}
+
+	// methods
+	public double weightedSampling(double[] values,
+			double[] probs) {
+
+		double totalPro = 0;
+		for (int i = 0; i < values.length; i++) {
+			totalPro += probs[i];
+		}
+
+		if (totalPro != 1) {
+			for (int i = 0; i < values.length; i++) {
+				probs[i] = probs[i] / totalPro;
+			}
+			totalPro = 1;
+		}
+
+		double index = Math.random();
+		double sum = 0;
+		int i = 0;
+		while (sum < index) {
+			sum += probs[i++];
+		}
+		return values[i - 1];
+	}
+
+}]]></Text>
 		</JavaClass>
 	</JavaClasses>
 	<ModelResources>
