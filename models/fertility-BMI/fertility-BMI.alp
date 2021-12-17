@@ -822,25 +822,47 @@ if(time() > 1500) {
 						</RecurrenceCode>
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
-					<Action><![CDATA[if ((col_aliveAgents.size() > 3000)) { 
-	for (int i = 0; i < col_aliveAgents.size() * p_fertilityAdjustment; i++) {
+					<Action><![CDATA[// remove random agents with population is too big
+if ((col_aliveAgents.size() > 3000)) {
+	for (int i = 0; i < col_aliveAgents.size()
+			* p_fertilityAdjustment; i++) {
 		Person p = randomFrom(col_aliveAgents);
 		p.send("die", p);;
 	}
 }
 
-if ((col_aliveAgents.size() < 300)) { 
-	for (int i = 0; i < 1000; i++) {
-		Person p = randomFrom(col_deadAgents);
- 		col_deadAgents.remove(p);
-		col_aliveAgents.add(p);
-	    p.v_recycled = true;
-	    p.v_outcomeGroup = new StatUtils().weightedSampling(new double[] {1,2,3,4}, p_initialOutcomeDistribution);
-		p.v_id = v_id++;
-		p.v_fatherID = uniform();
-		p.v_motherID = uniform();
-		p.v_parentType = randomFrom(ParentType.class);
-	    send("come to live!", p);
+// add random new agents when population is too low
+if ((col_aliveAgents.size() < 300)) {
+	if (col_deadAgents.size() >= 1000) {
+		for (int i = 0; i < 1000; i++) {
+			Person p = randomFrom(col_deadAgents);
+			col_deadAgents.remove(p);
+			col_aliveAgents.add(p);
+			p.v_recycled = true;
+			p.v_outcomeGroup = new StatUtils()
+					.weightedSampling(
+							new double[]{1, 2, 3, 4},
+							p_initialOutcomeDistribution);
+			p.v_id = v_id++;
+			p.v_fatherID = uniform();
+			p.v_motherID = uniform();
+			p.v_parentType = randomFrom(ParentType.class);
+			send("come to live!", p);
+		}
+	} else {
+		for (int i = 0; i < 1000; i++) {
+			Person p = add_people();
+			col_aliveAgents.add(p);
+			p.v_recycled = false;
+			p.v_outcomeGroup = new StatUtils()
+					.weightedSampling(
+							new double[]{1, 2, 3, 4},
+							p_initialOutcomeDistribution);
+			p.v_id = v_id++;
+			p.v_fatherID = uniform();
+			p.v_motherID = uniform();
+			p.v_parentType = randomFrom(ParentType.class);
+		}
 	}
 }]]></Action>
 				</Event>
@@ -889,7 +911,7 @@ if (col_groupBMI.size() > 30) f_parentKidCorr();]]></Action>
 @since 1.0
 
 ]]></Description>
-					<X>240</X><Y>220</Y>
+					<X>240</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3271,7 +3293,7 @@ traceln(root.p_fertilityFactor);
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[// read parameter file
-TextFileUtilities f = new TextFileUtilities("data", "param-" + v_paramName+ ".csv", "output");
+TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
 col_experimentLines = f.fromFileToCollection(true);
 f.removeOutputFiles();
 // collection to track iterations
@@ -3329,7 +3351,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["rep-efast"]]></Code>
+							<Code><![CDATA["efast"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -3359,7 +3381,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[int]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[30]]></Code>
+							<Code><![CDATA[1]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -3428,7 +3450,29 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>28</Size>
-						<Style>0</Style>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1639687672513</Id>
+					<Name><![CDATA[progress]]></Name>
+					<X>290</X><Y>50</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-8388608</Color>
+					<Text><![CDATA[v_replicates  / (col_experimentLines * v_numberReplicates)]]></Text>
+					<TextCode><![CDATA[(int) (((double) v_replicates) / ((double) col_experimentLines.size() * (double) v_numberReplicates) * 10000) / 100.0 + "%"]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>1</Style>
 					</Font>
 					<Alignment>LEFT</Alignment>
 				</Text>
