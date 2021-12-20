@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[fertility-BMI]]></Name>
@@ -81,12 +81,13 @@ import java.io.BufferedWriter;
 import com.fasterxml.jackson.databind.util.IgnorePropertiesUtil;
 import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import>
 			<StartupCode><![CDATA[f_initialSetup();]]></StartupCode>
-			<DestroyCode><![CDATA[if (p_exportData)  {
-	ExportOutput t = col_dataExport.get("groups");
-	t.writeFile(col_textFiles.get("groups"), t.getValues(this));
-	t.closeFiles(col_textFiles);
-}
-]]></DestroyCode>
+			<DestroyCode><![CDATA[// write files
+ExportOutput p = col_dataExport.get("params");
+p.writeFile(col_textFiles.get("params"), p.getValues(this));
+
+ExportOutput t = col_dataExport.get("groups");
+t.writeFile(col_textFiles.get("groups"), t.getValues(this));
+t.closeFiles(col_textFiles);]]></DestroyCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1632485433836</Id>
@@ -781,7 +782,6 @@ if (col_aliveAgents.size() > 7000) {p_fertilityAdjustment = 0.50;}
 if (col_aliveAgents.size() < 2500) p_baselineFertility = p_baselineFertility + 0.05;
 
 if(col_aliveAgents.size() < 50) {
-
 	traceln("Population size is too small!!!");
 	finishSimulation();
 }
@@ -1209,8 +1209,6 @@ f_readInputFiles("data/");
 // set output files
 if (p_exportData) {
 	f_defineOutputFiles();
-	ExportOutput t = col_dataExport.get("params");
-	t.writeFile(col_textFiles.get("params"), t.getValues(this));
 }
 
 // set initial agents
@@ -1255,19 +1253,7 @@ v_motherKidCorrelation = k.correlation(tx, ty);
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[// groups
-ExportOutput g = new ExportOutput(p_outputPath, "groups", v_iteration, v_replicate, 
-	new String[] {"iteration", "replicate", "time", "population", "bmi_group_prop", 
-		"mating", "kid-father-cor", "kid-mother-cor"}, 
-	new String[] {"v_iteration", "v_replicate", "time()", "col_aliveAgents.size()",
-		 "col_propOutcomeGroup.toString()", "v_assortativeMating", "v_fatherKidCorrelation", 
-		 "v_motherKidCorrelation"});
-col_propOutcomeGroup.toArray();
-g.initiateFile(col_textFiles);
-col_dataExport.put("groups", g);
-
-
-// params
+					<Body><![CDATA[// params
 ExportOutput p = new ExportOutput(p_outputPath, "params", v_iteration, v_replicate, 
 	new String[] {"iteration", "replicate", "init_pop", "fertility_type", 
 		"heritability_type", "mating_type", "random_mating", "leakage", 
@@ -1276,7 +1262,17 @@ ExportOutput p = new ExportOutput(p_outputPath, "params", v_iteration, v_replica
 		"p_heritabilityType", "p_matingType", "p_randomMating", "p_leakage", 
 		 "p_fertilityFactor"});
 p.initiateFile(col_textFiles);
-col_dataExport.put("params", p);]]></Body>
+col_dataExport.put("params", p);
+
+// groups
+ExportOutput g = new ExportOutput(p_outputPath, "groups", v_iteration, v_replicate, 
+	new String[] {"iteration", "replicate", "time", "population", "bmi_group_prop", 
+		"mating", "kid-father-cor", "kid-mother-cor"}, 
+	new String[] {"v_iteration", "v_replicate", "time()", "col_aliveAgents.size()",
+		 "col_propOutcomeGroup.toString()", "v_assortativeMating", "v_fatherKidCorrelation", 
+		 "v_motherKidCorrelation"});
+g.initiateFile(col_textFiles);
+col_dataExport.put("groups", g);]]></Body>
 				</Function>
 			</Functions>
 			<AnalysisData>
@@ -3295,9 +3291,9 @@ traceln(root.p_fertilityFactor);
 			<InitialSetupCode><![CDATA[// read parameter file
 TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
 col_experimentLines = f.fromFileToCollection(true);
+/// remove temporary output files
 f.removeOutputFiles();
-// collection to track iterations
-col_iterations = f.iterationList(col_experimentLines.size());]]></InitialSetupCode>
+]]></InitialSetupCode>
 			<MaximumMemory>8192</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
@@ -3317,9 +3313,9 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 	root.p_fertilityFactor = Double.parseDouble(line[2]);
 }]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[// track number of replicates
-if (getCurrentIteration() <= col_experimentLines.size()) { 
+//if (getCurrentIteration() <= col_experimentLines.size()) { 
 	v_replicates++;
-}]]></AfterSimulationRunCode>
+//}]]></AfterSimulationRunCode>
 			<SeedValue>1</SeedValue>
 			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
 			<VmArgs><![CDATA[]]></VmArgs>
@@ -3328,7 +3324,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 				<Variable Class="PlainVariable">
 					<Id>1632900715658</Id>
 					<Name><![CDATA[v_replicates]]></Name>
-					<X>90</X><Y>230</Y>
+					<X>90</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3373,7 +3369,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 				<Variable Class="PlainVariable">
 					<Id>1637586729235</Id>
 					<Name><![CDATA[v_numberReplicates]]></Name>
-					<X>90</X><Y>250</Y>
+					<X>90</X><Y>220</Y>
 					<Label><X>15</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3385,25 +3381,10 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 						</InitialValue>
 					</Properties>
 				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1639580444833</Id>
-					<Name><![CDATA[v_iterationCheck]]></Name>
-					<X>90</X><Y>180</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[boolean]]></Type>        
-						<InitialValue Class="CodeValue">
-							<Code><![CDATA[false]]></Code>
-						</InitialValue>
-					</Properties>
-				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1634901108702</Id>
 					<Name><![CDATA[col_experimentLines]]></Name>
-					<X>240</X><Y>140</Y>
+					<X>90</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3411,21 +3392,6 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
 						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
 						<ElementClass><![CDATA[String[]]]></ElementClass>
-						<ValueElementClass><![CDATA[String]]></ValueElementClass>
-					</Properties>
-
-				</Variable>
-				<Variable Class="CollectionVariable">
-					<Id>1636990179371</Id>
-					<Name><![CDATA[col_iterations]]></Name>
-					<X>240</X><Y>160</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
-						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
-						<ElementClass><![CDATA[Integer]]></ElementClass>
 						<ValueElementClass><![CDATA[String]]></ValueElementClass>
 					</Properties>
 
@@ -3468,7 +3434,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 					<Rotation>0.0</Rotation>
 					<Color>-8388608</Color>
 					<Text><![CDATA[v_replicates  / (col_experimentLines * v_numberReplicates)]]></Text>
-					<TextCode><![CDATA[(int) (((double) v_replicates) / ((double) col_experimentLines.size() * (double) v_numberReplicates) * 10000) / 100.0 + "%"]]></TextCode>
+					<TextCode><![CDATA[(int) (((double) v_replicates) / ((double) getMaximumIterations() * (double) v_numberReplicates) * 10000) / 100.0 + "%"]]></TextCode>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>28</Size>
@@ -3478,28 +3444,18 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 				</Text>
 			</Presentation>
 
-			<AfterIterationCode><![CDATA[col_iterations.remove(Integer.valueOf(getCurrentIteration()));
+			<AfterExperimentCode><![CDATA[// append files and remove temporary ones
+TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
+f.appendOutputFiles(v_outputPath, "group*.csv", "results-" + v_paramName + ".csv", "../../output/data/");
+f.appendOutputFiles(v_outputPath, "par*.csv", "param-" + v_paramName + ".csv", "../../output/data/");
+f.removeOutputFiles();
 
-// check and stop simulation
-if (col_iterations.size() == 0 & v_iterationCheck == false) {	
-	v_iterationCheck = true; 
-	stop();
-	// append output files
-	TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
-	f.appendOutputFiles(v_outputPath, "group*.csv", "results-" + v_paramName + ".csv", "../../output/data/");
-	f.appendOutputFiles(v_outputPath, "par*.csv", "param-" + v_paramName + ".csv", "../../output/data/");
-	traceln("Output files created ::::::");
-	
-	// send slack message
-	SlackMessage s = new SlackMessage();
-	s.sendMessage();
-
-	close();
-	f.removeOutputFiles();
-}]]></AfterIterationCode>
+// send slack message
+SlackMessage s = new SlackMessage();
+s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>100000</NumberOfRuns>
+			<NumberOfRuns>6000</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 			</FreeformParamValue>
@@ -3638,7 +3594,7 @@ if (col_iterations.size() == 0 & v_iterationCheck == false) {
 			<ReplicationsProperties>
 				<UseReplication>false</UseReplication>
 				<FixedReplicationsNumber>true</FixedReplicationsNumber>
-				<ReplicationPerIteration>10000</ReplicationPerIteration>
+				<ReplicationPerIteration>2</ReplicationPerIteration>
 				<MinimumReplication>2</MinimumReplication>
 				<MaximumReplication>10</MaximumReplication>
 				<ConfidenceLevel>LEVEL_80</ConfidenceLevel>
