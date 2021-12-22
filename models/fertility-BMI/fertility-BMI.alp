@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[fertility-BMI]]></Name>
@@ -796,7 +796,7 @@ if(time() > 1500) {
 				<Event>
 					<Id>1634395468317</Id>
 					<Name><![CDATA[ev_adjustFertility]]></Name>
-					<X>240</X><Y>170</Y>
+					<X>240</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -832,7 +832,7 @@ if ((col_aliveAgents.size() > 3000)) {
 }
 
 // add random new agents when population is too low
-if ((col_aliveAgents.size() < 300)) {
+if ((col_aliveAgents.size() < 1000)) {
 	if (col_deadAgents.size() >= 1000) {
 		for (int i = 0; i < 1000; i++) {
 			Person p = randomFrom(col_deadAgents);
@@ -3458,6 +3458,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			<NumberOfRuns>6000</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[3000]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632690393452</Id>
