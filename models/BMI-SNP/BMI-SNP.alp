@@ -40,38 +40,6 @@
 				<Name><![CDATA[centrifugal]]></Name>
 			</Option>
 		</OptionList>
-		<OptionList>
-			<Id>1632771879881</Id>
-			<Name><![CDATA[Heritability]]></Name>
-			<Option>
-				<Id>1632771879883</Id>
-				<Name><![CDATA[preston]]></Name>
-			</Option>
-			<Option>
-				<Id>1632771879884</Id>
-				<Name><![CDATA[uniform]]></Name>
-			</Option>
-			<Option>
-				<Id>1642502555476</Id>
-				<Name><![CDATA[observedIFLS]]></Name>
-			</Option>
-			<Option>
-				<Id>1632771879882</Id>
-				<Name><![CDATA[observedFF]]></Name>
-			</Option>
-		</OptionList>
-		<OptionList>
-			<Id>1634219217898</Id>
-			<Name><![CDATA[Mating]]></Name>
-			<Option>
-				<Id>1634219228597</Id>
-				<Name><![CDATA[defined]]></Name>
-			</Option>
-			<Option>
-				<Id>1634219232726</Id>
-				<Name><![CDATA[observed]]></Name>
-			</Option>
-		</OptionList>
 	</OptionLists>
 	<ActiveObjectClasses>
 		<!--   =========   Active Object Class   ========  -->
@@ -188,7 +156,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1632899137402</Id>
 					<Name><![CDATA[v_iteration]]></Name>
-					<X>50</X><Y>300</Y>
+					<X>470</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -200,7 +168,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1632899137405</Id>
 					<Name><![CDATA[v_replicate]]></Name>
-					<X>50</X><Y>320</Y>
+					<X>470</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -212,7 +180,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1634553224336</Id>
 					<Name><![CDATA[v_id]]></Name>
-					<X>50</X><Y>340</Y>
+					<X>470</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -224,7 +192,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1634561267223</Id>
 					<Name><![CDATA[v_assortativeMatingBMI]]></Name>
-					<X>680</X><Y>210</Y>
+					<X>470</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -236,7 +204,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1634820182582</Id>
 					<Name><![CDATA[v_fatherKidBMI]]></Name>
-					<X>680</X><Y>240</Y>
+					<X>470</X><Y>420</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -248,7 +216,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1634820196037</Id>
 					<Name><![CDATA[v_motherKidBMI]]></Name>
-					<X>680</X><Y>260</Y>
+					<X>470</X><Y>440</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -260,7 +228,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1647510437209</Id>
 					<Name><![CDATA[v_scalingNoise]]></Name>
-					<X>460</X><Y>560</Y>
+					<X>470</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -275,7 +243,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1647510440182</Id>
 					<Name><![CDATA[v_scalingPGS]]></Name>
-					<X>460</X><Y>540</Y>
+					<X>470</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -290,7 +258,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1647516688709</Id>
 					<Name><![CDATA[v_assortativeMatingPGS]]></Name>
-					<X>680</X><Y>190</Y>
+					<X>470</X><Y>370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -302,7 +270,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1647518391075</Id>
 					<Name><![CDATA[v_fatherKidPGS]]></Name>
-					<X>680</X><Y>290</Y>
+					<X>470</X><Y>470</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -314,7 +282,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1647518391078</Id>
 					<Name><![CDATA[v_motherKidPGS]]></Name>
-					<X>680</X><Y>310</Y>
+					<X>470</X><Y>490</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -326,7 +294,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1647521952180</Id>
 					<Name><![CDATA[v_geneticVariance]]></Name>
-					<X>680</X><Y>340</Y>
+					<X>470</X><Y>520</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -338,7 +306,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1647527785246</Id>
 					<Name><![CDATA[v_initialPGSMean]]></Name>
-					<X>460</X><Y>580</Y>
+					<X>470</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -350,7 +318,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1647527797587</Id>
 					<Name><![CDATA[v_initialPGSSD]]></Name>
-					<X>210</X><Y>570</Y>
+					<X>470</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -362,7 +330,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1647530415201</Id>
 					<Name><![CDATA[v_zpgsSD]]></Name>
-					<X>680</X><Y>540</Y>
+					<X>470</X><Y>320</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -374,7 +342,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="PlainVariable">
 					<Id>1647530437728</Id>
 					<Name><![CDATA[v_bmiSD]]></Name>
-					<X>680</X><Y>560</Y>
+					<X>470</X><Y>340</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -383,10 +351,25 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 						<Type><![CDATA[double]]></Type>        
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1647592746173</Id>
+					<Name><![CDATA[v_generation]]></Name>
+					<X>470</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1632485646519</Id>
 					<Name><![CDATA[p_populationSize]]></Name>
-					<X>240</X><Y>130</Y>
+					<X>50</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -409,58 +392,9 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
-					<Id>1632903435834</Id>
-					<Name><![CDATA[p_initialOutcomeDistribution]]></Name>
-					<X>240</X><Y>180</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double[]]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[{1/4, 1/4, 1/4, 1/4}]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1632903435832</Id>
-							<Label><![CDATA[p_baselineIQDistribution]]></Label>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1634219193425</Id>
-					<Name><![CDATA[p_matingType]]></Name>
-					<X>240</X><Y>250</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[Mating]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[Mating.defined]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1634219193423</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
 					<Id>1632690393452</Id>
 					<Name><![CDATA[p_randomMating]]></Name>
-					<X>240</X><Y>270</Y>
+					<X>50</X><Y>220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -482,55 +416,9 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
-					<Id>1632771778105</Id>
-					<Name><![CDATA[p_heritabilityType]]></Name>
-					<X>240</X><Y>300</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[Heritability]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[Heritability.preston]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1632771778103</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1632812972826</Id>
-					<Name><![CDATA[p_leakage]]></Name>
-					<X>240</X><Y>230</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<ParameterEditor>
-							<Id>1632812972824</Id>
-							<Label><![CDATA[p_leakage]]></Label>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
 					<Id>1632903366204</Id>
 					<Name><![CDATA[p_baselineFertility]]></Name>
-					<X>240</X><Y>370</Y>
+					<X>50</X><Y>280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -554,7 +442,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1632731453253</Id>
 					<Name><![CDATA[p_fertilityType]]></Name>
-					<X>240</X><Y>320</Y>
+					<X>50</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -578,7 +466,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1632898917488</Id>
 					<Name><![CDATA[p_outputPath]]></Name>
-					<X>50</X><Y>500</Y>
+					<X>50</X><Y>510</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -601,33 +489,9 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
-					<Id>1634218330603</Id>
-					<Name><![CDATA[p_numberOutcomeCategories]]></Name>
-					<X>240</X><Y>150</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[4]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1634218330601</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
 					<Id>1632898861982</Id>
 					<Name><![CDATA[p_exportData]]></Name>
-					<X>50</X><Y>480</Y>
+					<X>50</X><Y>490</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -651,7 +515,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1632900849933</Id>
 					<Name><![CDATA[p_updatePlots]]></Name>
-					<X>240</X><Y>200</Y>
+					<X>50</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -676,7 +540,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1634656309398</Id>
 					<Name><![CDATA[p_fertilityAdjustment]]></Name>
-					<X>240</X><Y>390</Y>
+					<X>50</X><Y>300</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -700,7 +564,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1636145720853</Id>
 					<Name><![CDATA[p_fertilityFactor]]></Name>
-					<X>240</X><Y>350</Y>
+					<X>50</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -724,7 +588,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1647443482862</Id>
 					<Name><![CDATA[p_numberSNP]]></Name>
-					<X>460</X><Y>320</Y>
+					<X>50</X><Y>340</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -748,7 +612,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1647444988213</Id>
 					<Name><![CDATA[p_alleleFrequencies]]></Name>
-					<X>460</X><Y>340</Y>
+					<X>50</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -772,7 +636,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="Parameter">
 					<Id>1647510223271</Id>
 					<Name><![CDATA[p_geneticVariance]]></Name>
-					<X>460</X><Y>270</Y>
+					<X>50</X><Y>320</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -793,10 +657,79 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1647593863140</Id>
+					<Name><![CDATA[p_bmiMean]]></Name>
+					<X>50</X><Y>400</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[24.4]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1647593863138</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1647593887088</Id>
+					<Name><![CDATA[p_bmiSD]]></Name>
+					<X>50</X><Y>420</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[4.0]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1647593887086</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1647595664772</Id>
+					<Name><![CDATA[p_afreq]]></Name>
+					<X>50</X><Y>380</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double[]]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1647595664770</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1632583073542</Id>
 					<Name><![CDATA[col_deadAgents]]></Name>
-					<X>50</X><Y>220</Y>
+					<X>840</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -811,7 +744,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1632583142837</Id>
 					<Name><![CDATA[col_aliveAgents]]></Name>
-					<X>50</X><Y>240</Y>
+					<X>840</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -825,8 +758,8 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1632725269536</Id>
-					<Name><![CDATA[col_propOutcomeGroup]]></Name>
-					<X>50</X><Y>260</Y>
+					<Name><![CDATA[col_propBMIGroup]]></Name>
+					<X>840</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -843,8 +776,8 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1634640909761</Id>
-					<Name><![CDATA[col_matingData]]></Name>
-					<X>210</X><Y>500</Y>
+					<Name><![CDATA[col_geneticEffectsData]]></Name>
+					<X>210</X><Y>510</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -857,24 +790,9 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 
 				</Variable>
 				<Variable Class="CollectionVariable">
-					<Id>1634646508775</Id>
-					<Name><![CDATA[col_heritabilityData]]></Name>
-					<X>210</X><Y>520</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
-						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
-						<ElementClass><![CDATA[HeritabilityData]]></ElementClass>
-						<ValueElementClass><![CDATA[String]]></ValueElementClass>
-					</Properties>
-
-				</Variable>
-				<Variable Class="CollectionVariable">
 					<Id>1639566660204</Id>
 					<Name><![CDATA[col_textFiles]]></Name>
-					<X>50</X><Y>520</Y>
+					<X>50</X><Y>530</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -889,7 +807,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1639567236332</Id>
 					<Name><![CDATA[col_dataExport]]></Name>
-					<X>50</X><Y>540</Y>
+					<X>50</X><Y>550</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -904,7 +822,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1647444048415</Id>
 					<Name><![CDATA[col_geneticEffects]]></Name>
-					<X>460</X><Y>290</Y>
+					<X>840</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -919,7 +837,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1647516015821</Id>
 					<Name><![CDATA[col_fatherKidBMI]]></Name>
-					<X>680</X><Y>430</Y>
+					<X>680</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -934,7 +852,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1647516037796</Id>
 					<Name><![CDATA[col_coupleBMI]]></Name>
-					<X>680</X><Y>380</Y>
+					<X>680</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -949,7 +867,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1647516050729</Id>
 					<Name><![CDATA[col_couplePGS]]></Name>
-					<X>680</X><Y>400</Y>
+					<X>680</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -964,7 +882,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1647516076923</Id>
 					<Name><![CDATA[col_fatherKidPGS]]></Name>
-					<X>680</X><Y>450</Y>
+					<X>680</X><Y>280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -979,7 +897,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1647516094743</Id>
 					<Name><![CDATA[col_motherKidBMI]]></Name>
-					<X>680</X><Y>480</Y>
+					<X>680</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -994,7 +912,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 				<Variable Class="CollectionVariable">
 					<Id>1647516094746</Id>
 					<Name><![CDATA[col_motherKidPGS]]></Name>
-					<X>680</X><Y>500</Y>
+					<X>680</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1037,8 +955,7 @@ import org.apache.commons.math3.stat.correlation.KendallsCorrelation;]]></Import
 						</RecurrenceCode>
 						<Condition><![CDATA[false]]></Condition>
 					</Properties>
-					<Action><![CDATA[f_definePropOutcomeGroup();
-
+					<Action><![CDATA[f_definePropBMIGroup();
 
 dataViz.h_bmi.reset();
 dataViz.h_pgs.reset();
@@ -1053,25 +970,23 @@ for(Person p : col_aliveAgents) {
 if (col_aliveAgents.size() > 7000) {p_fertilityAdjustment = 0.50;}
 if (col_aliveAgents.size() < 2500) p_baselineFertility = p_baselineFertility + 0.05;
 
-if(col_aliveAgents.size() < 50) {
+if(col_aliveAgents.size() < 100) {
 	traceln("Population size is too small!!!");
 	finishSimulation();
 }
 
-if(time() > 3000) {
+if(v_generation > 1002) {
 	traceln("Simulation stopped!");
 	finishSimulation();
-}
-
-]]></Action>
+}]]></Action>
 				</Event>
 				<Event>
 					<Id>1634395468317</Id>
 					<Name><![CDATA[ev_adjustFertility]]></Name>
-					<X>680</X><Y>110</Y>
+					<X>680</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
+					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties TriggerType="timeout" Mode="cyclic">
 						<Timeout Class="CodeUnitValue">
@@ -1110,30 +1025,13 @@ if ((col_aliveAgents.size() < 1000)) {
 			Person p = randomFrom(col_deadAgents);
 			col_deadAgents.remove(p);
 			col_aliveAgents.add(p);
-			p.v_recycled = true;
-			p.v_BMIGroup = new StatUtils()
-					.weightedSampling(
-							new double[]{1, 2, 3, 4},
-							p_initialOutcomeDistribution);
-			p.v_id = v_id++;
-			p.v_fatherID = uniform();
-			p.v_motherID = uniform();
-			p.v_parentType = randomFrom(ParentType.class);
-			send("come to live!", p);
+			f_createRandomAgent(p);
 		}
 	} else {
 		for (int i = 0; i < 1000; i++) {
 			Person p = add_people();
 			col_aliveAgents.add(p);
-			p.v_recycled = false;
-			p.v_BMIGroup = new StatUtils()
-					.weightedSampling(
-							new double[]{1, 2, 3, 4},
-							p_initialOutcomeDistribution);
-			p.v_id = v_id++;
-			p.v_fatherID = uniform();
-			p.v_motherID = uniform();
-			p.v_parentType = randomFrom(ParentType.class);
+			f_createRandomAgent(p);
 		}
 	}
 }]]></Action>
@@ -1141,7 +1039,7 @@ if ((col_aliveAgents.size() < 1000)) {
 				<Event>
 					<Id>1634560556087</Id>
 					<Name><![CDATA[correlations]]></Name>
-					<X>680</X><Y>160</Y>
+					<X>680</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1244,7 +1142,7 @@ v_zpgsSD = dataViz.h_pgs.deviation();
 @since 1.0
 
 ]]></Description>
-					<X>460</X><Y>110</Y>
+					<X>250</X><Y>140</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1253,12 +1151,30 @@ v_zpgsSD = dataViz.h_pgs.deviation();
 						<Name><![CDATA[ego]]></Name>
 						<Type><![CDATA[Person]]></Type>
 					</Parameter>
-					<Body><![CDATA[List<Person> alters = filter(col_aliveAgents, p -> p.v_married == false & 
-	p != ego & p.v_parentType != ego.v_parentType &
-	//p.v_generation == ego.v_generation &&
-	(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID));
+					<Body><![CDATA[boolean r = randomTrue(p_randomMating);
 
-//traceln(alters.size());
+List<Person> alters = new ArrayList<Person>();
+
+if (r) {
+
+	alters = filter(col_aliveAgents, p -> p.v_married == false & 
+		p != ego & p.v_parentType != ego.v_parentType &
+		(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID));
+	
+} else {
+	
+	alters = filter(col_aliveAgents, p -> p.v_married == false & 
+		p != ego & p.v_parentType != ego.v_parentType &
+		p.v_BMIGroup == ego.v_BMIGroup &
+		(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID));
+		
+	if (alters.size() == 0) {
+		alters = filter(col_aliveAgents, p -> p.v_married == false & 
+		p != ego & p.v_parentType != ego.v_parentType &
+		(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID));
+	
+	}		
+}
 
 if (alters.size() > 0) {
 	Person partner = randomFrom(alters);
@@ -1274,21 +1190,21 @@ if (alters.size() > 0) {
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632725205130</Id>
-					<Name><![CDATA[f_definePropOutcomeGroup]]></Name>
-					<X>460</X><Y>170</Y>
+					<Name><![CDATA[f_definePropBMIGroup]]></Name>
+					<X>250</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[double total = (double) col_aliveAgents.size();
 
-col_propOutcomeGroup.clear();
+col_propBMIGroup.clear();
 
-for (int i = 0; i < p_numberOutcomeCategories; i++) {
+for (int i = 0; i < 4; i++) {
 	int h = i;
 	double value = (double) filter(col_aliveAgents,
 			p -> p.v_BMIGroup == h).size() / total;
-	col_propOutcomeGroup.add(i, value);
+	col_propBMIGroup.add(i, value);
 }]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1301,7 +1217,7 @@ for (int i = 0; i < p_numberOutcomeCategories; i++) {
 @param motherIQ 7-group IQ category of the mother
 @author Sebastian Daza
 @since 1.0]]></Description>
-					<X>460</X><Y>130</Y>
+					<X>250</X><Y>160</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1318,7 +1234,7 @@ for (int i = 0; i < p_numberOutcomeCategories; i++) {
 	case uniform:
 		return p_baselineFertility;
 	case centrifugal:
-		return p_baselineFertility + 0.1 * abs((p_numberOutcomeCategories-1) -
+		return p_baselineFertility + 0.1 * abs((4-1) -
 			 (fatherOutcome-1) - (motherOutcome-1));
 	case additive:
 		return p_baselineFertility + (fatherOutcome-1) * p_fertilityFactor +
@@ -1331,54 +1247,9 @@ for (int i = 0; i < p_numberOutcomeCategories; i++) {
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1632745681683</Id>
-					<Name><![CDATA[f_defineKidOutcome]]></Name>
-					<Description><![CDATA[Define offspring BMI group using different heritability values. If <code>p_heritabilityType</code> is <code>average</code>, the matrix <code>heritabiliy</code> (database) is used. If  <code>p_heritabilityType</code> is  <code>preston</code> or <code>uniform</code>, <code>matrixh</code> is used. 
-@param fatherIQ 7-group IQ category of the father
-@param motherIQ 7-group IQ category of the mother
-@author Sebastian Daza
-@since 1.0]]></Description>
-					<X>460</X><Y>150</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[fatherOutcome]]></Name>
-						<Type><![CDATA[double]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[motherOutcome]]></Name>
-						<Type><![CDATA[double]]></Type>
-					</Parameter>
-					<Body><![CDATA[double[] aprop = col_heritabilityData.stream()
-		.filter(w -> w.father == fatherOutcome
-				& w.mother == motherOutcome)
-		.mapToDouble(w -> w.prob).toArray();
-double[] akidOutcome = col_heritabilityData.stream()
-		.filter(w -> w.father == fatherOutcome
-				& w.mother == motherOutcome)
-		.mapToDouble(w -> w.kid).toArray();
-
-//traceln("prop " + aprop); traceln(akidOutcome);
-// testing
-/*
- * double total = 0.0; for (int i=0; i < aprop.length; i++)
- * { total = total + aprop[i]; } if (total < 1)
- * finishSimulation(); traceln("::::::: new agent");
- * traceln(p_leakage); traceln("Total : " + total);
- * traceln(fatherOutcome); traceln(motherOutcome);
- * traceln(aprop); traceln(akidOutcome);
- */
-
-return new StatUtils().weightedSampling(akidOutcome, aprop);]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1634558685830</Id>
 					<Name><![CDATA[f_pairsCorrelation]]></Name>
-					<X>460</X><Y>200</Y>
+					<X>250</X><Y>400</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1399,7 +1270,7 @@ return s.correlation(ego, alter);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1634628760051</Id>
 					<Name><![CDATA[f_readInputFiles]]></Name>
-					<X>210</X><Y>480</Y>
+					<X>210</X><Y>490</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1408,92 +1279,13 @@ return s.correlation(ego, alter);]]></Body>
 						<Name><![CDATA[path]]></Name>
 						<Type><![CDATA[String]]></Type>
 					</Parameter>
-					<Body><![CDATA[// mating
-TextFileUtilities m = new TextFileUtilities(path, "mating.csv", "");
-ArrayList<String[]> im = m.fromFileToCollection(true);
-
-for (int i = 0; i < im.size(); i++) {
-	String[] list = im.get(i);
-	double ego = Double.parseDouble(list[0]);
-	double alter = Double.parseDouble(list[1]);
-	double oprob = Double.parseDouble(list[2]);
-	double prob = 0.0;
-
-	// mating rules!
-	if (p_matingType == defined) {
-		if (p_randomMating == 1)
-			prob = 1.0 / p_numberOutcomeCategories;
-		else {
-			if (ego == alter)
-				prob = (1 - p_randomMating);
-			else
-				prob = p_randomMating
-						/ (p_numberOutcomeCategories - 1);
-		}
-	} else
-		prob = oprob;
-	//traceln(ego + ";" + alter + ";" + prob);
-	MatingData mm = new MatingData(ego, alter, prob);
-	col_matingData.add(mm);
-}
-
-
-// heritability
-String filename = "";
-switch (p_heritabilityType) {
-	case observedFF:
-		filename = "heritability-ff.csv";
-	case observedIFLS:
-		filename = "heritability-ifls.csv";
-	default:
-		filename = "heritability-ff.csv";
-}
-
-
-TextFileUtilities h = new TextFileUtilities(path, filename, "");
-ArrayList<String[]> ih = h.fromFileToCollection(true);
-for (int i = 0; i < ih.size(); i++) {
-	String[] list = ih.get(i);
-	double father = Double.parseDouble(list[0]);
-	double mother = Double.parseDouble(list[1]);
-	double kid = Double.parseDouble(list[2]);
-	double oprob = Double.parseDouble(list[3]);
-	double prob = 0.0;
-
-	// heritability rules!
-	if (p_heritabilityType == Heritability.uniform) {
-		prob = 1 / p_numberOutcomeCategories;
-	} else if (p_heritabilityType == Heritability.preston) {
-		if (mother == father & kid == mother)
-			prob = 1 - p_leakage;
-		else if (mother == father & mother > 1 & mother < 4
-				& (kid == (mother + 1)
-						| kid == (mother - 1)))
-			prob = p_leakage / 2;
-		else if (mother == 1 & father == 1 & kid == 2)
-			prob = p_leakage;
-		else if (mother == p_numberOutcomeCategories
-				& father == p_numberOutcomeCategories
-				& kid == (p_numberOutcomeCategories - 1))
-			prob = p_leakage;
-		else if (mother != father
-				& (kid == father | kid == mother))
-			prob = 0.5;
-	} else {
-		prob = oprob;
-	}
-	HeritabilityData hh = new HeritabilityData(father,
-			mother, kid, prob);
-	//traceln(father + ";" + mother + ";" + kid + ";" + prob);
-	col_heritabilityData.add(hh);
-}]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1634647898972</Id>
 					<Name><![CDATA[f_initialSetup]]></Name>
-					<X>240</X><Y>110</Y>
+					<X>250</X><Y>120</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1523,17 +1315,17 @@ for (Person p : people) {
 	p.v_motherID = uniform();
 	col_aliveAgents.add(p);
 	// define SNPs
-	double[] afreq = new double[(int) p_numberSNP];
+	p_afreq = new double[(int) p_numberSNP];
 	for (int i = 0; i < p_numberSNP; i++) {
-		afreq[i] = new StatUtils().sample(p_alleleFrequencies);
+		p_afreq[i] = new StatUtils().sample(p_alleleFrequencies);
 	}
 	for (int i = 0; i < p_numberSNP; i++) {
 		double vv = Double.valueOf(
-			binomial(afreq[1], 2));
-		traceln(vv);
+			binomial(p_afreq[i], 2));
+		//traceln(vv);
 		p.col_SNP.put(i, vv);
 	}
-	f_defineComponents(p);
+	f_defineBMIComponents(p);
 	v[j] = p.v_pgs;
 	j++;
 }
@@ -1547,7 +1339,7 @@ for (int i = 0; i < people.size(); i++) {
 	p.v_zpgs = (p.v_pgs - v_initialPGSMean)/v_initialPGSSD;	
 }
 
-f_defineScaling();
+f_scaleComponents();
 
 for (int i = 0; i < people.size(); i++) {
 	Person p = people.get(i);
@@ -1559,32 +1351,9 @@ for (int i = 0; i < people.size(); i++) {
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1634820221835</Id>
-					<Name><![CDATA[f_parentKidCorr]]></Name>
-					<ExcludeFromBuild>true</ExcludeFromBuild>
-					<X>860</X><Y>110</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[double[] tx = col_groupBMI.stream().mapToDouble(d -> d[0])
-		.toArray();
-double[] ty = col_groupBMI.stream().mapToDouble(d -> d[2])
-		.toArray();
-
-KendallsCorrelation k = new KendallsCorrelation();
-v_fatherKidBMI = k.correlation(tx, ty);
-
-tx = col_groupBMI.stream().mapToDouble(d -> d[1]).toArray();
-v_motherKidBMI = k.correlation(tx, ty);
-]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1639566720255</Id>
 					<Name><![CDATA[f_defineOutputFiles]]></Name>
-					<X>50</X><Y>560</Y>
+					<X>50</X><Y>570</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1615,7 +1384,7 @@ col_dataExport.put("groups", g);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1647446228321</Id>
 					<Name><![CDATA[f_assignSNP]]></Name>
-					<X>460</X><Y>370</Y>
+					<X>250</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1645,8 +1414,8 @@ switch((int) value) {
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1647447578832</Id>
-					<Name><![CDATA[f_defineComponents]]></Name>
-					<X>460</X><Y>390</Y>
+					<Name><![CDATA[f_defineBMIComponents]]></Name>
+					<X>250</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1669,8 +1438,8 @@ p.v_noise = noiseComp;]]></Body>
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1647510380985</Id>
-					<Name><![CDATA[f_defineScaling]]></Name>
-					<X>460</X><Y>410</Y>
+					<Name><![CDATA[f_scaleComponents]]></Name>
+					<X>250</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1693,7 +1462,7 @@ v_scalingNoise = s.scalingFactor(c2.stream().mapToDouble(d -> d).toArray(), 1-p_
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1647511540838</Id>
 					<Name><![CDATA[f_defineBMI]]></Name>
-					<X>460</X><Y>460</Y>
+					<X>250</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1709,7 +1478,7 @@ v_scalingNoise = s.scalingFactor(c2.stream().mapToDouble(d -> d).toArray(), 1-p_
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1647521605807</Id>
 					<Name><![CDATA[f_geneticVariance]]></Name>
-					<X>460</X><Y>430</Y>
+					<X>250</X><Y>340</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1734,7 +1503,7 @@ return s.variance(pgs) / s.variance(trait);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1647529307481</Id>
 					<Name><![CDATA[f_zscore]]></Name>
-					<X>460</X><Y>220</Y>
+					<X>250</X><Y>380</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1758,7 +1527,7 @@ return s.variance(pgs) / s.variance(trait);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1647532972266</Id>
 					<Name><![CDATA[f_transformBMI]]></Name>
-					<X>460</X><Y>480</Y>
+					<X>250</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1767,14 +1536,14 @@ return s.variance(pgs) / s.variance(trait);]]></Body>
 						<Name><![CDATA[p]]></Name>
 						<Type><![CDATA[Person]]></Type>
 					</Parameter>
-					<Body><![CDATA[p.v_tbmi = p.v_bmi * 4 + 24.4;]]></Body>
+					<Body><![CDATA[p.v_tbmi = p.v_bmi * p_bmiSD + p_bmiMean;]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1647552259142</Id>
 					<Name><![CDATA[f_categorizeBMI]]></Name>
-					<X>460</X><Y>500</Y>
+					<X>250</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1789,12 +1558,43 @@ if (p.v_tbmi >= 25.0 & p.v_tbmi < 30) p.v_BMIGroup = 2;
 if (p.v_tbmi >= 30) p.v_BMIGroup = 3;
 ]]></Body>
 				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1647596123497</Id>
+					<Name><![CDATA[f_createRandomAgent]]></Name>
+					<X>250</X><Y>420</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[p]]></Name>
+						<Type><![CDATA[Person]]></Type>
+					</Parameter>
+					<Body><![CDATA[p.v_recycled = true;
+p.v_id = v_id++;
+p.v_fatherID = uniform();
+p.v_motherID = uniform();
+p.v_parentType = randomFrom(ParentType.class);
+
+for (int i = 0; i < p_numberSNP; i++) {
+	double vv = Double.valueOf(binomial(p_afreq[i], 2));
+		p.col_SNP.put(i, vv);
+}
+f_defineBMIComponents(p);	
+p.v_zpgs = (p.v_pgs - v_initialPGSMean)/v_initialPGSSD;	
+f_defineBMI(p);
+f_transformBMI(p);
+f_categorizeBMI(p);
+send("come to live!", p);]]></Body>
+				</Function>
 			</Functions>
 			<AnalysisData>
     			<Statistics>
 					<Id>1634391262068</Id>
 					<Name><![CDATA[s_numberKids]]></Name>
-					<X>50</X><Y>370</Y>
+					<X>680</X><Y>370</Y>
 					<Label><X>15</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1815,7 +1615,7 @@ if (p.v_tbmi >= 30) p.v_BMIGroup = 3;
     			<Statistics>
 					<Id>1634549421788</Id>
 					<Name><![CDATA[s_marriedMating]]></Name>
-					<X>50</X><Y>390</Y>
+					<X>680</X><Y>390</Y>
 					<Label><X>15</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2040,7 +1840,7 @@ if (p.v_tbmi >= 30) p.v_BMIGroup = 3;
 				<Text>
 					<Id>1632584084401</Id>
 					<Name><![CDATA[text1]]></Name>
-					<X>160</X><Y>20</Y>
+					<X>120</X><Y>20</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2062,7 +1862,7 @@ if (p.v_tbmi >= 30) p.v_BMIGroup = 3;
 				<Text>
 					<Id>1632898917468</Id>
 					<Name><![CDATA[dataOutput]]></Name>
-					<X>40</X><Y>440</Y>
+					<X>40</X><Y>460</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2083,7 +1883,7 @@ if (p.v_tbmi >= 30) p.v_BMIGroup = 3;
 				<Text>
 					<Id>1639036534102</Id>
 					<Name><![CDATA[dataInput]]></Name>
-					<X>200</X><Y>440</Y>
+					<X>200</X><Y>460</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2361,7 +2161,7 @@ if (p.v_tbmi >= 30) p.v_BMIGroup = 3;
 				<Variable Class="PlainVariable">
 					<Id>1647444389265</Id>
 					<Name><![CDATA[v_bmi]]></Name>
-					<X>210</X><Y>470</Y>
+					<X>210</X><Y>450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2373,7 +2173,7 @@ if (p.v_tbmi >= 30) p.v_BMIGroup = 3;
 				<Variable Class="PlainVariable">
 					<Id>1647508662810</Id>
 					<Name><![CDATA[v_pgs]]></Name>
-					<X>210</X><Y>390</Y>
+					<X>210</X><Y>400</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2385,7 +2185,7 @@ if (p.v_tbmi >= 30) p.v_BMIGroup = 3;
 				<Variable Class="PlainVariable">
 					<Id>1647510341678</Id>
 					<Name><![CDATA[v_noise]]></Name>
-					<X>210</X><Y>410</Y>
+					<X>210</X><Y>530</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2397,7 +2197,7 @@ if (p.v_tbmi >= 30) p.v_BMIGroup = 3;
 				<Variable Class="PlainVariable">
 					<Id>1647527997661</Id>
 					<Name><![CDATA[v_zpgs]]></Name>
-					<X>210</X><Y>430</Y>
+					<X>210</X><Y>420</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2409,13 +2209,28 @@ if (p.v_tbmi >= 30) p.v_BMIGroup = 3;
 				<Variable Class="PlainVariable">
 					<Id>1647532944435</Id>
 					<Name><![CDATA[v_tbmi]]></Name>
-					<X>210</X><Y>450</Y>
+					<X>210</X><Y>470</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[double]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1647596668517</Id>
+					<Name><![CDATA[v_ghost]]></Name>
+					<X>40</X><Y>540</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[boolean]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[false]]></Code>
+						</InitialValue>
 					</Properties>
 				</Variable>
 				<Variable Class="CollectionVariable">
@@ -2436,7 +2251,7 @@ if (p.v_tbmi >= 30) p.v_BMIGroup = 3;
 				<Variable Class="CollectionVariable">
 					<Id>1647443170555</Id>
 					<Name><![CDATA[col_SNP]]></Name>
-					<X>210</X><Y>320</Y>
+					<X>210</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2721,6 +2536,10 @@ kid.v_parentType = randomFrom(ParentType.class);
 kid.v_alive = true;
 kid.v_married = false;
 
+if (kid.v_generation > main.v_generation) {
+	main.v_generation = kid.v_generation;
+}
+
 f_updateSNP(mother.spouse.getConnectedAgent(), mother, kid);
 
 main.col_fatherKidBMI.add(new Pairs(father.v_bmi, kid.v_bmi));
@@ -2743,9 +2562,16 @@ main.col_deadAgents.add(this);
 main.col_aliveAgents.remove(this);
 
 spouse.disconnect();
+
 v_married = false;
 col_kids.clear();
+col_SNP.clear();
 v_parentType = null;
+v_bmi = -99;
+v_tbmi = -99;
+v_pgs = -99;
+v_zpgs = -99;
+v_noise = -99;
 v_BMIGroup = -99;
 v_fertility = -99;
 v_fatherBMIGroup = -99;
@@ -2753,6 +2579,8 @@ v_motherBMIGroup = -99;
 v_fatherID = -99;
 v_motherID = -99;
 v_alive = false;
+v_ghost = false;
+
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -2842,7 +2670,7 @@ v_alive = false;
 	kid.col_SNP.put(i, f);
 }
 
-main.f_defineComponents(kid);
+main.f_defineBMIComponents(kid);
 kid.v_zpgs = main.f_zscore(main.v_initialPGSMean, main.v_initialPGSSD, kid.v_pgs);
 main.f_defineBMI(kid);
 main.f_transformBMI(kid);
@@ -3344,7 +3172,7 @@ main.f_categorizeBMI(kid);]]></Body>
     			<Histogram>
 					<Id>1632560771086</Id>
 					<Name><![CDATA[chart]]></Name>
-					<X>700</X><Y>630</Y>
+					<X>10</X><Y>950</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3362,15 +3190,15 @@ main.f_categorizeBMI(kid);]]></Body>
 						<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>310</Width>
-					<Height>220</Height>
+					<Width>300</Width>
+					<Height>230</Height>
 					<BackgroundColor/>
 					<BorderColor/>
 					<ChartArea>
 						<XOffset>50</XOffset>
 						<YOffset>10</YOffset>
-						<Width>230</Width>
-						<Height>150</Height>
+						<Width>220</Width>
+						<Height>160</Height>
 						<BackgroundColor>-1</BackgroundColor>
 						<BorderColor>-16777216</BorderColor>
 						<GridColor>-12566464</GridColor>
@@ -3408,7 +3236,7 @@ main.f_categorizeBMI(kid);]]></Body>
     			<TimePlot>
 					<Id>1632688377352</Id>
 					<Name><![CDATA[plotPopulation]]></Name>
-					<X>700</X><Y>860</Y>
+					<X>660</X><Y>940</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3475,7 +3303,7 @@ main.f_categorizeBMI(kid);]]></Body>
     			<TimeStackChart>
 					<Id>1632728664778</Id>
 					<Name><![CDATA[plotIQGroup]]></Name>
-					<X>360</X><Y>850</Y>
+					<X>340</X><Y>700</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3493,15 +3321,15 @@ main.f_categorizeBMI(kid);]]></Body>
 						<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>340</Width>
-					<Height>240</Height>
+					<Width>320</Width>
+					<Height>220</Height>
 					<BackgroundColor/>
 					<BorderColor/>
 					<ChartArea>
 						<XOffset>50</XOffset>
 						<YOffset>10</YOffset>
-						<Width>280</Width>
-						<Height>170</Height>
+						<Width>260</Width>
+						<Height>150</Height>
 						<BackgroundColor>-1</BackgroundColor>
 						<BorderColor>-16777216</BorderColor>
 						<GridColor>-12566464</GridColor>
@@ -3524,7 +3352,7 @@ main.f_categorizeBMI(kid);]]></Body>
 					<Id>0</Id>
 					<Expression><![CDATA[my_dataset]]></Expression>
 					<Color>-14774017</Color>
-					<Expression2><![CDATA[main.col_propOutcomeGroup.get(0)]]></Expression2>
+					<Expression2><![CDATA[main.col_propBMIGroup.get(0)]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>  
 							<Title><![CDATA[Underweight]]></Title>
 					</DatasetExpression>
@@ -3532,7 +3360,7 @@ main.f_categorizeBMI(kid);]]></Body>
 					<Id>0</Id>
 					<Expression><![CDATA[my_dataset]]></Expression>
 					<Color>-16744448</Color>
-					<Expression2><![CDATA[main.col_propOutcomeGroup.get(1)]]></Expression2>
+					<Expression2><![CDATA[main.col_propBMIGroup.get(1)]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>  
 							<Title><![CDATA[Normal]]></Title>
 					</DatasetExpression>
@@ -3540,7 +3368,7 @@ main.f_categorizeBMI(kid);]]></Body>
 					<Id>0</Id>
 					<Expression><![CDATA[my_dataset]]></Expression>
 					<Color>-23296</Color>
-					<Expression2><![CDATA[main.col_propOutcomeGroup.get(2)]]></Expression2>
+					<Expression2><![CDATA[main.col_propBMIGroup.get(2)]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>  
 							<Title><![CDATA[Overweight]]></Title>
 					</DatasetExpression>
@@ -3548,7 +3376,7 @@ main.f_categorizeBMI(kid);]]></Body>
 					<Id>0</Id>
 					<Expression><![CDATA[my_dataset]]></Expression>
 					<Color>-65536</Color>
-					<Expression2><![CDATA[main.col_propOutcomeGroup.get(3)]]></Expression2>
+					<Expression2><![CDATA[main.col_propBMIGroup.get(3)]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>  
 							<Title><![CDATA[Obese]]></Title>
 					</DatasetExpression>
@@ -3582,7 +3410,7 @@ main.f_categorizeBMI(kid);]]></Body>
 				<Text>
 					<Id>1632817196918</Id>
 					<Name><![CDATA[text1]]></Name>
-					<X>150</X><Y>20</Y>
+					<X>190</X><Y>20</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3626,7 +3454,7 @@ main.f_categorizeBMI(kid);]]></Body>
 				<Text>
 					<Id>1634391639942</Id>
 					<Name><![CDATA[text3]]></Name>
-					<X>270</X><Y>20</Y>
+					<X>310</X><Y>20</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3648,7 +3476,7 @@ main.f_categorizeBMI(kid);]]></Body>
 				<Text>
 					<Id>1634563438498</Id>
 					<Name><![CDATA[text5]]></Name>
-					<X>720</X><Y>20</Y>
+					<X>740</X><Y>20</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3716,7 +3544,7 @@ main.f_categorizeBMI(kid);]]></Body>
     			<TimePlot>
 					<Id>1647508054663</Id>
 					<Name><![CDATA[plotPopulation1]]></Name>
-					<X>50</X><Y>130</Y>
+					<X>20</X><Y>130</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3734,14 +3562,14 @@ main.f_categorizeBMI(kid);]]></Body>
 						<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>320</Width>
+					<Width>300</Width>
 					<Height>210</Height>
 					<BackgroundColor/>
 					<BorderColor/>
 					<ChartArea>
 						<XOffset>50</XOffset>
 						<YOffset>20</YOffset>
-						<Width>250</Width>
+						<Width>230</Width>
 						<Height>140</Height>
 						<BackgroundColor>-1</BackgroundColor>
 						<BorderColor>-16777216</BorderColor>
@@ -3793,7 +3621,7 @@ main.f_categorizeBMI(kid);]]></Body>
     			<Histogram>
 					<Id>1647508739093</Id>
 					<Name><![CDATA[chart1]]></Name>
-					<X>50</X><Y>860</Y>
+					<X>340</X><Y>940</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3811,15 +3639,15 @@ main.f_categorizeBMI(kid);]]></Body>
 						<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>310</Width>
-					<Height>240</Height>
+					<Width>320</Width>
+					<Height>230</Height>
 					<BackgroundColor/>
 					<BorderColor/>
 					<ChartArea>
 						<XOffset>50</XOffset>
 						<YOffset>10</YOffset>
-						<Width>230</Width>
-						<Height>170</Height>
+						<Width>240</Width>
+						<Height>160</Height>
 						<BackgroundColor>-1</BackgroundColor>
 						<BorderColor>-16777216</BorderColor>
 						<GridColor>-12566464</GridColor>
@@ -3857,7 +3685,7 @@ main.f_categorizeBMI(kid);]]></Body>
     			<TimePlot>
 					<Id>1647508760963</Id>
 					<Name><![CDATA[plotPopulation2]]></Name>
-					<X>380</X><Y>120</Y>
+					<X>340</X><Y>120</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3934,7 +3762,7 @@ main.f_categorizeBMI(kid);]]></Body>
     			<TimePlot>
 					<Id>1647523329987</Id>
 					<Name><![CDATA[plotPopulation3]]></Name>
-					<X>50</X><Y>360</Y>
+					<X>10</X><Y>360</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4011,7 +3839,7 @@ main.f_categorizeBMI(kid);]]></Body>
     			<TimePlot>
 					<Id>1647523616405</Id>
 					<Name><![CDATA[plotPopulation4]]></Name>
-					<X>370</X><Y>360</Y>
+					<X>340</X><Y>360</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4088,7 +3916,7 @@ main.f_categorizeBMI(kid);]]></Body>
     			<TimePlot>
 					<Id>1647529780451</Id>
 					<Name><![CDATA[plotPopulation5]]></Name>
-					<X>700</X><Y>140</Y>
+					<X>660</X><Y>140</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4155,7 +3983,7 @@ main.f_categorizeBMI(kid);]]></Body>
     			<TimePlot>
 					<Id>1647530718793</Id>
 					<Name><![CDATA[plotPopulation6]]></Name>
-					<X>700</X><Y>350</Y>
+					<X>660</X><Y>340</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4232,7 +4060,7 @@ main.f_categorizeBMI(kid);]]></Body>
     			<Histogram>
 					<Id>1647533505091</Id>
 					<Name><![CDATA[chart2]]></Name>
-					<X>370</X><Y>630</Y>
+					<X>670</X><Y>700</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4250,15 +4078,15 @@ main.f_categorizeBMI(kid);]]></Body>
 						<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>340</Width>
-					<Height>220</Height>
+					<Width>310</Width>
+					<Height>210</Height>
 					<BackgroundColor/>
 					<BorderColor/>
 					<ChartArea>
 						<XOffset>50</XOffset>
 						<YOffset>10</YOffset>
-						<Width>260</Width>
-						<Height>150</Height>
+						<Width>230</Width>
+						<Height>140</Height>
 						<BackgroundColor>-1</BackgroundColor>
 						<BorderColor>-16777216</BorderColor>
 						<GridColor>-12566464</GridColor>
@@ -4296,7 +4124,7 @@ main.f_categorizeBMI(kid);]]></Body>
     			<TimePlot>
 					<Id>1647533769488</Id>
 					<Name><![CDATA[plotPopulation7]]></Name>
-					<X>50</X><Y>630</Y>
+					<X>0</X><Y>700</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4314,14 +4142,14 @@ main.f_categorizeBMI(kid);]]></Body>
 						<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>320</Width>
+					<Width>310</Width>
 					<Height>210</Height>
 					<BackgroundColor/>
 					<BorderColor/>
 					<ChartArea>
 						<XOffset>50</XOffset>
 						<YOffset>20</YOffset>
-						<Width>250</Width>
+						<Width>240</Width>
 						<Height>140</Height>
 						<BackgroundColor>-1</BackgroundColor>
 						<BorderColor>-16777216</BorderColor>
@@ -4360,10 +4188,222 @@ main.f_categorizeBMI(kid);]]></Body>
 					<FillAreaUnderLine>false</FillAreaUnderLine>
 					<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
     			</TimePlot>
+				<Text>
+					<Id>1647592864079</Id>
+					<Name><![CDATA[text6]]></Name>
+					<X>530</X><Y>20</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[Avg kids = s_numberKids.mean()]]></Text>
+					<TextCode><![CDATA["Gen = " + (int) main.v_generation]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1647593122409</Id>
+					<Name><![CDATA[text7]]></Name>
+					<X>130</X><Y>20</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<OnClickCode><![CDATA[panelB.navigateTo();]]></OnClickCode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[B]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Rectangle>
+					<Id>1647593157910</Id>
+					<Name><![CDATA[rectangle1]]></Name>
+					<X>0</X><Y>600</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>1</LineWidth>
+					<LineColor/>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>1000</Width>
+					<Height>80</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-14774017</FillColor>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
+				<Text>
+					<Id>1647593157913</Id>
+					<Name><![CDATA[text8]]></Name>
+					<X>130</X><Y>620</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<OnClickCode><![CDATA[_origin_VA.navigateTo();]]></OnClickCode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[A]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1647593157915</Id>
+					<Name><![CDATA[text9]]></Name>
+					<X>310</X><Y>620</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[Avg kids = s_numberKids.mean()]]></Text>
+					<TextCode><![CDATA["Avg kids = " + ((int) (main.s_numberKids.mean() * 100)) / 100.0]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1647593157917</Id>
+					<Name><![CDATA[text10]]></Name>
+					<X>530</X><Y>620</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[Avg kids = s_numberKids.mean()]]></Text>
+					<TextCode><![CDATA["Gen = " + (int) main.v_generation]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1647593157919</Id>
+					<Name><![CDATA[text11]]></Name>
+					<X>30</X><Y>620</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<OnClickCode><![CDATA[main._origin_VA.navigateTo();]]></OnClickCode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[Home]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1647593157921</Id>
+					<Name><![CDATA[text12]]></Name>
+					<X>190</X><Y>620</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<OnClickCode><![CDATA[randomFrom(main.people)._origin_VA.navigateTo();]]></OnClickCode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[Agents]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1647593270368</Id>
+					<Name><![CDATA[text13]]></Name>
+					<X>760</X><Y>620</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-1</Color>
+					<Text><![CDATA[Avg kids = s_numberKids.mean()]]></Text>
+					<TextCode><![CDATA["AM = " + ((int) (main.v_assortativeMatingBMI * 100)) / 100.0]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
 			</Presentation>
 
 				</Level>
 			</Presentation>
+			<Areas>
+				<Area>
+					<Id>1647593179580</Id>
+					<Name><![CDATA[panelB]]></Name>
+					<X>0</X><Y>600</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Title><![CDATA[]]></Title>
+					<Width>1000</Width>
+					<Height>600</Height>
+				</Area>
+			</Areas>
 
 		</ActiveObjectClass>
 	</ActiveObjectClasses>	
@@ -4507,30 +4547,9 @@ traceln(root.p_fertilityFactor);
 					<ParameterName><![CDATA[p_populationSize]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[p_initialOutcomeDistribution]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[{0.25, 0.25, 0.25, 0.25}]]></Code>
-					</ParameterValue>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_matingType]]></ParameterName>
-				</Parameter>
-				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
 						<Code><![CDATA[1.0]]></Code>
-					</ParameterValue>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_heritabilityType]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[Heritability.preston]]></Code>
-					</ParameterValue>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_leakage]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.2]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -4547,9 +4566,6 @@ traceln(root.p_fertilityFactor);
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_outputPath]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_numberOutcomeCategories]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_exportData]]></ParameterName>
@@ -4572,7 +4588,7 @@ traceln(root.p_fertilityFactor);
 				<Parameter>
 					<ParameterName><![CDATA[p_numberSNP]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[200]]></Code>
+						<Code><![CDATA[100]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -4584,8 +4600,17 @@ traceln(root.p_fertilityFactor);
 				<Parameter>
 					<ParameterName><![CDATA[p_geneticVariance]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.6]]></Code>
+						<Code><![CDATA[0.3]]></Code>
 					</ParameterValue>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_bmiMean]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_bmiSD]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_afreq]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
@@ -4609,6 +4634,7 @@ traceln(root.p_fertilityFactor);
 		<ParamVariationExperiment ActiveObjectClassId="1632485433838">
 			<Id>1632900535843</Id>
 			<Name><![CDATA[Scenarios]]></Name>
+			<ExcludeFromBuild>true</ExcludeFromBuild>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[// read parameter file
@@ -4798,18 +4824,6 @@ s.sendMessage();]]></AfterExperimentCode>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
-				<Id>1632771778105</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[Heritability.preston]]></Code>
-				</Expression>
-			</FreeformParamValue>
-			<FreeformParamValue>	
-				<Id>1632812972826</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[.10]]></Code>
-				</Expression>
-			</FreeformParamValue>
-			<FreeformParamValue>	
 				<Id>1632898861982</Id>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -4828,21 +4842,6 @@ s.sendMessage();]]></AfterExperimentCode>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
-				<Id>1632903435834</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[{0.1, 0.6, 0.15, 0.15}]]></Code>
-				</Expression>
-			</FreeformParamValue>
-			<FreeformParamValue>	
-				<Id>1634218330603</Id>
-			</FreeformParamValue>
-			<FreeformParamValue>	
-				<Id>1634219193425</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[Mating.defined]]></Code>
-				</Expression>
-			</FreeformParamValue>
-			<FreeformParamValue>	
 				<Id>1634656309398</Id>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -4857,6 +4856,15 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1647510223271</Id>
 			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647593863140</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647593887088</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647595664772</Id>
+			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
 				<Type>FIXED</Type>
@@ -4867,14 +4875,6 @@ s.sendMessage();]]></AfterExperimentCode>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632731453253</Id>
-				<Type>FIXED</Type>
-			</RangeVariationParamValue>
-			<RangeVariationParamValue>	
-				<Id>1632771778105</Id>
-				<Type>FIXED</Type>
-			</RangeVariationParamValue>
-			<RangeVariationParamValue>	
-				<Id>1632812972826</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
@@ -4894,18 +4894,6 @@ s.sendMessage();]]></AfterExperimentCode>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
-				<Id>1632903435834</Id>
-				<Type>FIXED</Type>
-			</RangeVariationParamValue>
-			<RangeVariationParamValue>	
-				<Id>1634218330603</Id>
-				<Type>FIXED</Type>
-			</RangeVariationParamValue>
-			<RangeVariationParamValue>	
-				<Id>1634219193425</Id>
-				<Type>FIXED</Type>
-			</RangeVariationParamValue>
-			<RangeVariationParamValue>	
 				<Id>1634656309398</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
@@ -4923,6 +4911,18 @@ s.sendMessage();]]></AfterExperimentCode>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1647510223271</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647593863140</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647593887088</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647595664772</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<ModelTimeProperties>
@@ -4953,6 +4953,7 @@ s.sendMessage();]]></AfterExperimentCode>
 		<ParamVariationExperiment ActiveObjectClassId="1632485433838">
 			<Id>1642502235200</Id>
 			<Name><![CDATA[ScenariosIFLS]]></Name>
+			<ExcludeFromBuild>true</ExcludeFromBuild>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[// read parameter file
@@ -5142,18 +5143,6 @@ s.sendMessage();]]></AfterExperimentCode>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
-				<Id>1632771778105</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[Heritability.observedIFLS]]></Code>
-				</Expression>
-			</FreeformParamValue>
-			<FreeformParamValue>	
-				<Id>1632812972826</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[.10]]></Code>
-				</Expression>
-			</FreeformParamValue>
-			<FreeformParamValue>	
 				<Id>1632898861982</Id>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -5172,21 +5161,6 @@ s.sendMessage();]]></AfterExperimentCode>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
-				<Id>1632903435834</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[{0.1, 0.6, 0.15, 0.15}]]></Code>
-				</Expression>
-			</FreeformParamValue>
-			<FreeformParamValue>	
-				<Id>1634218330603</Id>
-			</FreeformParamValue>
-			<FreeformParamValue>	
-				<Id>1634219193425</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[Mating.defined]]></Code>
-				</Expression>
-			</FreeformParamValue>
-			<FreeformParamValue>	
 				<Id>1634656309398</Id>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -5201,6 +5175,15 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1647510223271</Id>
 			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647593863140</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647593887088</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647595664772</Id>
+			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
 				<Type>FIXED</Type>
@@ -5211,14 +5194,6 @@ s.sendMessage();]]></AfterExperimentCode>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632731453253</Id>
-				<Type>FIXED</Type>
-			</RangeVariationParamValue>
-			<RangeVariationParamValue>	
-				<Id>1632771778105</Id>
-				<Type>FIXED</Type>
-			</RangeVariationParamValue>
-			<RangeVariationParamValue>	
-				<Id>1632812972826</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
@@ -5238,18 +5213,6 @@ s.sendMessage();]]></AfterExperimentCode>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
-				<Id>1632903435834</Id>
-				<Type>FIXED</Type>
-			</RangeVariationParamValue>
-			<RangeVariationParamValue>	
-				<Id>1634218330603</Id>
-				<Type>FIXED</Type>
-			</RangeVariationParamValue>
-			<RangeVariationParamValue>	
-				<Id>1634219193425</Id>
-				<Type>FIXED</Type>
-			</RangeVariationParamValue>
-			<RangeVariationParamValue>	
 				<Id>1634656309398</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
@@ -5267,6 +5230,18 @@ s.sendMessage();]]></AfterExperimentCode>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1647510223271</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647593863140</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647593887088</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647595664772</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<ModelTimeProperties>
