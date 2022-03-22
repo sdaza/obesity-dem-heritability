@@ -1,5 +1,6 @@
 .DS_Store
-models/fertility-BMI/output/
+/models/fertility-BMI/output
+/models/SNP-BMI/output
 .push.settings.jsonc
 .vscode
 slack.txt

@@ -1,7 +1,7 @@
 # testing SNP model output (anylogic)
 
 library(data.table)
-gen = 500
+gen = 50:60
 dat = fread("models/BMI-SNP/output/agents-0-0.csv")
 
 dat = dat[generation %in% c(0, gen)]
@@ -21,6 +21,14 @@ diff  = c(diff, b -  a)
 
 hist(diff)
 table(diff>0)
+
+# pgs mating by group
+dat[, snps := NULL]
+t = dat[generation != 0, .(cor = cor(father_pgs, mother_pgs), cmk = cor(father_pgs, pgs)), .(father_bmi_group, mother_bmi_group)]
+setorder(t, cor)
+
+tt = function(t) (max(t) - t) + min(t)
+tt(c(0, 1,2, 3))
 
 # snp example
 vv = sample(1:100, 1)
@@ -42,7 +50,7 @@ m
 # create heritability matrix
 dat = fread("models/BMI-SNP/output/agents-0-0.csv")
 dat[, snps := NULL]
-tt = dat[generation > 100 & generation < 200]
+tt = dat[generation > 20 & generation < 50]
 tt = tt[, .N, .(father_bmi_group, mother_bmi_group, bmi_group)]
 tt[, total := sum(N), .(father_bmi_group, mother_bmi_group)]
 tt[, prop := N / total]

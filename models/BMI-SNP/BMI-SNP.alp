@@ -1126,6 +1126,21 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					</Properties>
 
 				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1647980254187</Id>
+					<Name><![CDATA[col_potentialMates]]></Name>
+					<X>840</X><Y>290</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[Person]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
 			</Variables>
 			<Events>
 				<Event>
@@ -1196,6 +1211,10 @@ if (p_updatePlots) {
 	dataViz.plotGeneticVariance.updateData();
 	dataViz.plotParentKidBMI.updateData();
 	
+}
+
+if (s_numberKids.count() > 10000) {
+  s_numberKids.reset();
 }
 // stop simulation
 if (col_aliveAgents.size() < 500) {
@@ -2576,6 +2595,7 @@ v_propMarriedAgents = married / total;]]></Body>
 					</Points>
 					<IconOffset>15.0</IconOffset>
 					<Properties Source="1632485799947" Target="1632485803700" Trigger="timeout">
+						<Action><![CDATA[main.col_potentialMates.add(this)]]></Action>
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[main.p_childhoodTime]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
@@ -2606,6 +2626,7 @@ v_propMarriedAgents = married / total;]]></Body>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1632485803700" Target="1647878799173" Trigger="timeout">
+						<Action><![CDATA[main.col_potentialMates.remove(this)]]></Action>
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[main.p_reproductiveTime]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
@@ -2804,7 +2825,7 @@ v_propMarriedAgents = married / total;]]></Body>
 							<Code><![CDATA[5]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_YEAR]]></Unit>
 						</Rate>
-						<Guard><![CDATA[v_married == false]]></Guard>
+						<Guard><![CDATA[!spouse.isConnected()]]></Guard>
 						<MessageType><![CDATA[Object]]></MessageType>
 						<DefaultTransition>true</DefaultTransition>
 						<FilterType><![CDATA[unconditionally]]></FilterType>
@@ -2880,6 +2901,7 @@ main.col_motherKidPGS.add(new Pairs(mother.v_pgs, kid.v_pgs));]]></Body>
 if (v_parentType == mother) main.s_numberKids.add(col_kids.size());
 main.col_deadAgents.add(this);
 main.col_aliveAgents.remove(this);
+main.col_potentialMates.remove(this);
 
 if (spouse.isConnected()) {
 	spouse.disconnect();
@@ -3017,17 +3039,16 @@ List<Person> alters = new ArrayList<Person>();
 
 if (r) {
 
-	alters = filter(main.col_aliveAgents, p -> p.v_married == false & 
-		p != ego & p.v_parentType != ego.v_parentType & 
-		p.inState(p.Mating) & 
+	alters = filter(main.col_potentialMates, p ->
+		p != ego & p.v_parentType != ego.v_parentType &  
 		(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID));
 	//traceln(time() + ": " + alters.size());
 	
 } else {
 	
-	alters = filter(main.col_aliveAgents, p -> p.v_married == false & 
+	alters = filter(main.col_potentialMates, p -> 
 		p != ego & p.v_parentType != ego.v_parentType &
-		p.v_BMIGroup == ego.v_BMIGroup & p.inState(p.Mating) &
+		p.v_BMIGroup == ego.v_BMIGroup &
 		(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID));	
 	//traceln(alters.size());
 	//if (alters.size() == 0) {
@@ -3038,9 +3059,10 @@ if (r) {
 	
 	//}	
 }
-
 if (alters.size() > 0) {
 	Person partner = randomFrom(alters);
+	main.col_potentialMates.remove(this);
+	main.col_potentialMates.remove(partner);
 	ego.spouse.connectTo(partner);
 	ego.v_married = true;
 	ego.v_matingTime = time() - ego.v_birthTime;
@@ -3079,8 +3101,8 @@ switch (main.p_fertilityType) {
 	case uniform:
 		return main.p_baselineFertility;
 	case additive:
-		return main.p_baselineFertility + s.rev(fatherOutcome, 0, 3) * main.p_fertilityBMIDifferential +
-			s.rev(motherOutcome, 0, 3) * main.p_fertilityBMIDifferential;
+		return main.p_baselineFertility + fatherOutcome * main.p_fertilityBMIDifferential +
+			motherOutcome * main.p_fertilityBMIDifferential;
 	default:
 		return 2.0;
 }
@@ -4970,7 +4992,7 @@ traceln(root.p_fertilityFactor);
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[1]]></Code>
+						<Code><![CDATA[0.2]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -5071,8 +5093,9 @@ root.v_replicate = getCurrentReplication();
 // update parameters
 if (getCurrentIteration() <= col_experimentLines.size()) {
 	String[] line = col_experimentLines.get(root.v_iteration-1);
-	root.p_randomMating = Double.parseDouble(line[1]);
-	root.p_geneticVariance = Double.parseDouble(line[0]);
+	root.p_randomMating = Double.parseDouble(line[0]);
+	root.p_geneticVariance = Double.parseDouble(line[1]);
+	root.p_fertilityBMIDifferential = Double.parseDouble(line[2]);
 }]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[// track number of replicates
 //if (getCurrentIteration() <= col_experimentLines.size()) { 
@@ -5109,7 +5132,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["snp-testing"]]></Code>
+							<Code><![CDATA["snp-efast"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -5139,7 +5162,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[int]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[30]]></Code>
+							<Code><![CDATA[1]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -5217,12 +5240,9 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>4</NumberOfRuns>
+			<NumberOfRuns>6000</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[2000]]></Code>
-				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632690393452</Id>
@@ -5232,6 +5252,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632731453253</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[Fertility.additive]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632898861982</Id>
@@ -5247,23 +5270,26 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[3.7]]></Code>
-				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1634656309398</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.05]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1636145720853</Id>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647443482862</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[100]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647444988213</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[{0.2, 0.3, 0.4, 0.5, 0.6}]]></Code>
+					<Code><![CDATA[{0.1, 0.2, 0.3, 0.4}]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -5394,7 +5420,7 @@ s.sendMessage();]]></AfterExperimentCode>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<ModelTimeProperties>
-				<StopOption><![CDATA[Stop at specified time]]></StopOption>
+				<StopOption><![CDATA[Never]]></StopOption>
 				<InitialDate><![CDATA[1632441600000]]></InitialDate>	
 				<InitialTime><![CDATA[0.0]]></InitialTime>	
 				<FinalDate><![CDATA[17400441600000]]></FinalDate>	
@@ -5409,7 +5435,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<ReplicationsProperties>
 				<UseReplication>true</UseReplication>
 				<FixedReplicationsNumber>true</FixedReplicationsNumber>
-				<ReplicationPerIteration>2</ReplicationPerIteration>
+				<ReplicationPerIteration>1</ReplicationPerIteration>
 				<MinimumReplication>2</MinimumReplication>
 				<MaximumReplication>10</MaximumReplication>
 				<ConfidenceLevel>LEVEL_80</ConfidenceLevel>
