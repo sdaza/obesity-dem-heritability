@@ -2,6 +2,19 @@
 
 library(data.table)
 
+# define genetic effects
+set.seed(105422)
+dat = data.table(effects = rnorm(2000))
+fwrite(dat, "models/BMI-SNP/data/genetic-effects.csv", row.names = FALSE)
+
+# SNPs grid of parameters 
+genetic_variance = c(0.3, 0.6)
+random_mating = c(0.5, 1.0)
+experiments = data.table(expand.grid(gv =genetic_variance, 
+    rm = random_mating))
+fwrite(experiments, "models/BMI-SNP/data/param-snp-testing.csv", row.names = FALSE)
+
+# mating
 mating_type = c("defined", "observed")
 mating = seq(0.1, 0.9, 0.1)
 heredity = c("uniform", "preston", "observed")
