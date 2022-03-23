@@ -15,7 +15,7 @@ vv = sample(1:100, 1)
 diff = NULL
 for (i in 1:100) {      
 a = sd(dat[generation == 0, get(paste0("snp", i))])
-b = sd(dat[generation == gen, get(paste0("snp", i))])
+b = sd(dat[generation == 60, get(paste0("snp", i))])
 diff  = c(diff, b -  a)
 }
 
@@ -24,7 +24,8 @@ table(diff>0)
 
 # pgs mating by group
 dat[, snps := NULL]
-t = dat[generation != 0, .(cor = cor(father_pgs, mother_pgs), cmk = cor(father_pgs, pgs)), .(father_bmi_group, mother_bmi_group)]
+t = dat[generation != 0, .(cor = cor(father_pgs, mother_pgs), 
+    cmk = cor(father_pgs, pgs)), .(father_bmi_group, mother_bmi_group)]
 setorder(t, cor)
 
 tt = function(t) (max(t) - t) + min(t)
@@ -36,7 +37,7 @@ print(vv)
 prop.table(table(dat[generation == 0, get(paste0("snp", vv))]))
 sd(dat[generation == 0, get(paste0("snp", vv))])
 
-prop.table(table(dat[generation == gen,  get(paste0("snp", vv))]))
+prop.table(table(dat[generation == 60,  get(paste0("snp", vv))]))
 sd(dat[generation == gen, get(paste0("snp", vv))])
 
 # mendelian matrix
