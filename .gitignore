@@ -1,5 +1,5 @@
 .DS_Store
-/models/fertility-BMI/output
+/models/BMI-fertility/output
 /models/BMI-SNP/output
 .push.settings.jsonc
 .vscode
