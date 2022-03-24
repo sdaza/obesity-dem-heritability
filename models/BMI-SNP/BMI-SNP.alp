@@ -474,7 +474,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[10]]></Code>
+							<Code><![CDATA[15]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1647938699058</Id>
@@ -572,7 +572,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[40]]></Code>
+							<Code><![CDATA[35]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1647938541576</Id>
@@ -944,6 +944,78 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1648134544569</Id>
+					<Name><![CDATA[p_maxSizeCollections]]></Name>
+					<X>250</X><Y>500</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[5000]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1648134544567</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1648134544572</Id>
+					<Name><![CDATA[p_maxPopulation]]></Name>
+					<X>250</X><Y>480</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[6000]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1648134544570</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1648134544575</Id>
+					<Name><![CDATA[p_minSizeCorrelations]]></Name>
+					<X>250</X><Y>520</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[3000]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1648134544573</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1632583073542</Id>
 					<Name><![CDATA[col_deadAgents]]></Name>
@@ -1221,9 +1293,8 @@ if (p_updatePlots) {
 	
 }
 
-if (s_numberKids.count() > 10000) {
-  s_numberKids.reset();
-}
+if (s_numberKids.count() > p_maxSizeCollections) s_numberKids.reset();
+
 
 // stop simulation
 if (col_aliveAgents.size() < 500) {
@@ -1245,7 +1316,7 @@ if (col_aliveAgents.stream().filter(
 
 
 // population adjustment
-if ((col_aliveAgents.size() > 6000)) {
+if ((col_aliveAgents.size() > p_maxPopulation)) {
 	for (int i = 0; i < col_aliveAgents.size() * p_populationAdjustment; i++) {
 		Person p = randomFrom(col_aliveAgents);
 		p.send("die", p);;
@@ -1283,29 +1354,29 @@ if ((col_aliveAgents.size() > 6000)) {
 					</Properties>
 					<Action><![CDATA[StatUtils s = new StatUtils();
 
-if (col_coupleBMI.size() > 10000) {
+if (col_coupleBMI.size() > p_maxSizeCollections) {
 	col_coupleBMI.clear();
 	col_couplePGS.clear();
 }
 
-if (col_fatherKidBMI.size() > 10000) {
+if (col_fatherKidBMI.size() > p_maxSizeCollections) {
 	col_fatherKidBMI.clear();
 	col_fatherKidPGS.clear();
 }
 
-if (col_motherKidBMI.size() > 10000) {
+if (col_motherKidBMI.size() > p_maxSizeCollections) {
 	col_motherKidBMI.clear();
 	col_motherKidPGS.clear();
 }
 
-if (col_coupleBMI.size() > 1000) {
+if (col_coupleBMI.size() > p_minSizeCorrelations) {
 	v_assortativeMatingBMI = f_pairsCorrelation(
 			col_coupleBMI.stream().mapToDouble(d -> d.ego)
 					.toArray(),
 			col_coupleBMI.stream().mapToDouble(d -> d.alter)
 					.toArray());
 }
-if (col_couplePGS.size() > 1000) {
+if (col_couplePGS.size() > p_minSizeCorrelations) {
 	v_assortativeMatingPGS = f_pairsCorrelation(
 			col_couplePGS.stream().mapToDouble(d -> d.ego)
 					.toArray(),
@@ -1313,7 +1384,7 @@ if (col_couplePGS.size() > 1000) {
 					.toArray());
 }
 
-if (col_fatherKidBMI.size() > 1000) {
+if (col_fatherKidBMI.size() > p_minSizeCorrelations) {
 	v_fatherKidBMI = f_pairsCorrelation(
 			col_fatherKidBMI.stream()
 					.mapToDouble(d -> d.ego).toArray(),
@@ -1321,7 +1392,7 @@ if (col_fatherKidBMI.size() > 1000) {
 					.mapToDouble(d -> d.alter).toArray());
 }
 
-if (col_fatherKidPGS.size() > 1000) {
+if (col_fatherKidPGS.size() > p_minSizeCorrelations) {
 	v_fatherKidPGS = f_pairsCorrelation(
 			col_fatherKidPGS.stream()
 					.mapToDouble(d -> d.ego).toArray(),
@@ -1329,7 +1400,7 @@ if (col_fatherKidPGS.size() > 1000) {
 					.mapToDouble(d -> d.alter).toArray());
 }
 
-if (col_motherKidBMI.size() > 1000) {
+if (col_motherKidBMI.size() > p_minSizeCorrelations) {
 	v_motherKidBMI = f_pairsCorrelation(
 			col_motherKidBMI.stream()
 					.mapToDouble(d -> d.ego).toArray(),
@@ -1459,7 +1530,11 @@ for (Person p : people) {
 	p.v_parentType = randomFrom(ParentType.class);
 	p.v_fatherID = uniform();
 	p.v_motherID = uniform();
+	p.v_grandFatherID = uniform();
+	p.v_grandMotherID = uniform();
 	col_aliveAgents.add(p);
+
+	
 	// define SNPs
 	p.col_SNP.clear();
 	for (int i = 0; i < p_numberSNP; i++) {
@@ -1486,6 +1561,7 @@ for (int i = 0; i < people.size(); i++) {
 	f_defineBMI(p);
 	f_transformBMI(p);
 	f_categorizeBMI(p);
+
 }]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1523,9 +1599,9 @@ col_dataExport.put("agents", a);
 
 // groups
 ExportOutput g = new ExportOutput(p_outputPath, "prevalence", v_iteration, v_replicate, 
-	new String[] {"iteration", "replicate", "time", "population", "bmi_category_prevalence", 
+	new String[] {"iteration", "replicate", "time", "last_generation",  "population", "bmi_category_prevalence", 
 		"am_bmi", "am_pgs", "genetic_variance"}, 
-	new String[] {"v_iteration", "v_replicate", "time()", "col_aliveAgents.size()",
+	new String[] {"v_iteration", "v_replicate", "time()", "v_lastCompleteGeneration", "col_aliveAgents.size()",
 		 "col_propBMIGroup.toString()", "v_assortativeMatingBMI", "v_assortativeMatingPGS", "v_geneticVariance"});
 g.initiateFile(col_textFiles);
 col_dataExport.put("prevalence", g);]]></Body>
@@ -2331,7 +2407,7 @@ v_propMarriedAgents = married / total;]]></Body>
 				<Variable Class="PlainVariable">
 					<Id>1634295538881</Id>
 					<Name><![CDATA[v_fatherID]]></Name>
-					<X>40</X><Y>470</Y>
+					<X>200</X><Y>500</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2343,7 +2419,7 @@ v_propMarriedAgents = married / total;]]></Body>
 				<Variable Class="PlainVariable">
 					<Id>1634295552123</Id>
 					<Name><![CDATA[v_motherID]]></Name>
-					<X>40</X><Y>490</Y>
+					<X>200</X><Y>520</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2502,6 +2578,30 @@ v_propMarriedAgents = married / total;]]></Body>
 						<Type><![CDATA[double]]></Type>        
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1648131596359</Id>
+					<Name><![CDATA[v_grandFatherID]]></Name>
+					<X>200</X><Y>540</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1648131614931</Id>
+					<Name><![CDATA[v_grandMotherID]]></Name>
+					<X>200</X><Y>560</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+					</Properties>
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1632646282331</Id>
 					<Name><![CDATA[col_kids]]></Name>
@@ -2613,7 +2713,10 @@ v_propMarriedAgents = married / total;]]></Body>
 					</Points>
 					<IconOffset>15.0</IconOffset>
 					<Properties Source="1632485799947" Target="1632485803700" Trigger="timeout">
-						<Action><![CDATA[main.col_potentialMates.add(this)]]></Action>
+						<Action><![CDATA[main.col_potentialMates.add(this);
+if (v_parentType == ParentType.mother) {
+	v_fertility = f_defineFertility(v_fatherBMIGroup, v_motherBMIGroup);
+} else v_fertility = 0;]]></Action>
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[main.p_childhoodTime]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[YEAR]]></Unit>
@@ -2908,6 +3011,9 @@ kid.v_id = main.v_id++;
 kid.v_generation = mother.v_generation + 1;
 kid.v_motherID = mother.v_id;
 kid.v_fatherID = father.v_id;
+kid.v_grandMotherID = mother.v_motherID;
+kid.v_grandFatherID = father.v_fatherID;
+
 kid.v_fatherBMIGroup = mother.v_BMIGroup;
 kid.v_motherBMIGroup = father.v_BMIGroup;
 kid.v_parentType = randomFrom(ParentType.class);
@@ -2916,10 +3022,6 @@ kid.v_married = false;
 kid.v_fatherPGS = father.v_zpgs;
 kid.v_motherPGS = mother.v_zpgs;
 
-
-if (kid.v_parentType == ParentType.mother) {
-	kid.v_fertility = f_defineFertility(kid.v_fatherBMIGroup, kid.v_motherBMIGroup);
-} else kid.v_fertility = 0;
 
 if (kid.v_generation > main.v_newGeneration) {
 	main.v_newGeneration = kid.v_generation;
@@ -2971,6 +3073,8 @@ v_fatherBMIGroup = -99;
 v_motherBMIGroup = -99;
 v_fatherID = -99;
 v_motherID = -99;
+v_grandFatherID = -99;
+v_grandMotherID = -99;
 v_generation = -99;
 v_alive = false;
 v_ghost = false;
@@ -3090,7 +3194,8 @@ if (r) {
 
 	alters = filter(main.col_potentialMates, p ->
 		p != ego & p.v_parentType != ego.v_parentType &  
-		(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID));
+		(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID) & 
+		(p.v_grandMotherID != ego.v_grandMotherID & p.v_grandFatherID != ego.v_grandFatherID));
 	//traceln(time() + ": " + alters.size());
 	
 } else {
@@ -3098,7 +3203,8 @@ if (r) {
 	alters = filter(main.col_potentialMates, p -> 
 		p != ego & p.v_parentType != ego.v_parentType &
 		p.v_BMIGroup == ego.v_BMIGroup &
-		(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID));	
+		(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID) & 
+		(p.v_grandMotherID != ego.v_grandMotherID & p.v_grandFatherID != ego.v_grandFatherID));	
 	//traceln(alters.size());
 	//if (alters.size() == 0) {
 		//alters = filter(col_aliveAgents, p -> p.v_married == false & 
@@ -5098,6 +5204,15 @@ traceln(root.p_fertilityFactor);
 				<Parameter>
 					<ParameterName><![CDATA[p_generationToRecord]]></ParameterName>
 				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_maxSizeCollections]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_maxPopulation]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_minSizeCorrelations]]></ParameterName>
+				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
 				<EnableZoomAndPanning>false</EnableZoomAndPanning>
@@ -5380,6 +5495,15 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1647960922330</Id>
 			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544569</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544572</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544575</Id>
+			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
 				<Type>FIXED</Type>
@@ -5466,6 +5590,18 @@ s.sendMessage();]]></AfterExperimentCode>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1647960922330</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544569</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544572</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544575</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<ModelTimeProperties>
@@ -5748,6 +5884,15 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1647960922330</Id>
 			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544569</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544572</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544575</Id>
+			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
 				<Type>FIXED</Type>
@@ -5834,6 +5979,18 @@ s.sendMessage();]]></AfterExperimentCode>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1647960922330</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544569</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544572</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544575</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<ModelTimeProperties>
