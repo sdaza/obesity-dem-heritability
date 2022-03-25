@@ -1512,6 +1512,13 @@ if (!p_fixedGeneticEffects) {
 	}
 }
 
+double[] a = new double[50];
+for (int i=0;i < 50;i++) {
+	a[i] = uniform(0, .4);
+}
+
+p_alleleFrequencies = a;
+
 // set output files
 if (p_exportData) {
 	f_defineOutputFiles();
@@ -5076,6 +5083,9 @@ traceln(root.p_fertilityFactor);
 			<Parameters>			
 				<Parameter>
 					<ParameterName><![CDATA[p_populationSize]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[15000]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_updatePlots]]></ParameterName>
@@ -5124,9 +5134,6 @@ traceln(root.p_fertilityFactor);
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_alleleFrequencies]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[{0.1, 0.2, 0.3, 0.4}]]></Code>
-					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_geneticVariance]]></ParameterName>
@@ -5175,6 +5182,9 @@ traceln(root.p_fertilityFactor);
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_maxPopulation]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[100000]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_minSizeCorrelations]]></ParameterName>
