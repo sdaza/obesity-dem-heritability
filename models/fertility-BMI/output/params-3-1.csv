@@ -1,0 +1,2 @@
+iteration;replicate;init_pop;fertility_type;heritability_type;mating_type;random_mating;leakage;fertility_factor
+3;1;1000;additive;preston;defined;0.49093909032664135;0.42470727311557244;0.27282436386934344
