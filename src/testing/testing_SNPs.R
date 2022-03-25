@@ -90,3 +90,5 @@ test[, sum(prop), .(mother_bmi_group, father_bmi_group)]
 
 # read data from experiments
 exp = fread("output/data/results-snp-testing.csv")
+
+

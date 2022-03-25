@@ -1788,41 +1788,6 @@ if (p.v_tbmi >= 30) p.v_BMIGroup = 3;
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1647596123497</Id>
-					<Name><![CDATA[f_createRandomAgent]]></Name>
-					<ExcludeFromBuild>true</ExcludeFromBuild>
-					<X>250</X><Y>430</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[p]]></Name>
-						<Type><![CDATA[Person]]></Type>
-					</Parameter>
-					<Body><![CDATA[p.v_recycled = true;
-p.v_id = v_id++;
-p.v_fatherID = uniform();
-p.v_motherID = uniform();
-p.v_parentType = randomFrom(ParentType.class);
-p.v_ghost = true;
-p.v_generation = -1;
-
-p.col_SNP.clear();
-for (int i = 0; i < p_numberSNP; i++) {
-	double vv = Double.valueOf(binomial(p_afreq[i], 2));
-		p.col_SNP.put(i, vv);
-}
-f_defineBMIComponents(p);	
-p.v_zpgs = (p.v_pgs - v_initialPGSMean)/v_initialPGSSD;	
-f_defineBMI(p);
-f_transformBMI(p);
-f_categorizeBMI(p);
-send("come to live!", p);]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1647947463021</Id>
 					<Name><![CDATA[f_propMarriedAgents]]></Name>
 					<X>250</X><Y>410</Y>
