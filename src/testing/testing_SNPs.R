@@ -91,4 +91,20 @@ test[, sum(prop), .(mother_bmi_group, father_bmi_group)]
 # read data from experiments
 exp = fread("output/data/results-snp-testing.csv")
 
+# testing HW equilibrium
+library(data.table)
+library(lfa)
+library(ggplot2)
+
+dat = fread("models/BMI-SNP/output/agents-0-0.csv")
+dat = dat[generation == 0]
+table(dat$generation)
+vars = paste0("snp", 1:100)
+dat[, (vars) := tstrsplit(snps, ",", fixed=TRUE), id]
+dat[, (vars) := lapply(.SD, function(x) as.numeric(gsub(".+=|\\}", "", x))), .SDcols = vars]
+
+tdat = as.matrix(transpose(dat[, .SD, .SDcols = names(dat) %like% "snp[0-9]+"]))
+LF = lfa(tdat, 1)
+gof = sHWE(tdat, LF, 10)
+ggplot() + aes(gof)+ geom_histogram(bins = 20, fill="grey", colour="black") + theme_bw()
 
