@@ -464,7 +464,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1647938699060</Id>
 					<Name><![CDATA[p_childhoodTime]]></Name>
-					<X>50</X><Y>480</Y>
+					<X>50</X><Y>500</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -488,7 +488,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1647938713699</Id>
 					<Name><![CDATA[p_lateAdulthoodTime]]></Name>
-					<X>50</X><Y>520</Y>
+					<X>50</X><Y>540</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -562,7 +562,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1647938541578</Id>
 					<Name><![CDATA[p_reproductiveTime]]></Name>
-					<X>50</X><Y>500</Y>
+					<X>50</X><Y>520</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -733,7 +733,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1647595664772</Id>
 					<Name><![CDATA[p_afreq]]></Name>
-					<X>50</X><Y>380</Y>
+					<X>50</X><Y>410</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -754,7 +754,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1647856798402</Id>
 					<Name><![CDATA[p_fixedGeneticEffects]]></Name>
-					<X>50</X><Y>440</Y>
+					<X>50</X><Y>470</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -851,7 +851,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1647960922330</Id>
 					<Name><![CDATA[p_correlation]]></Name>
-					<X>50</X><Y>540</Y>
+					<X>50</X><Y>560</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -875,7 +875,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1647593863140</Id>
 					<Name><![CDATA[p_bmiMean]]></Name>
-					<X>50</X><Y>400</Y>
+					<X>50</X><Y>430</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -899,7 +899,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1647593887088</Id>
 					<Name><![CDATA[p_bmiSD]]></Name>
-					<X>50</X><Y>420</Y>
+					<X>50</X><Y>450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1009,6 +1009,54 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1648134544573</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1648293660981</Id>
+					<Name><![CDATA[p_maxAlleleFreq]]></Name>
+					<X>50</X><Y>380</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0.4]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1648293660979</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1648302957610</Id>
+					<Name><![CDATA[p_maxGeneration]]></Name>
+					<X>50</X><Y>580</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[100]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1648302957608</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -1270,11 +1318,16 @@ if (time()>= 1) {
 	v_zpgsSD = dataViz.h_pgs.deviation();
 }
 
+dataViz.h_tbmi.reset();
+for (Person p : col_aliveAgents) {
+	dataViz.h_tbmi.add(p.v_tbmi);
+}
+	
 if (p_updatePlots) {
 	// update databases
 	dataViz.h_bmi.reset();
 	dataViz.h_pgs.reset();
-	dataViz.h_tbmi.reset();
+
 	for (Person p : col_aliveAgents) {
 		dataViz.h_bmi.add(p.v_bmi);
 		dataViz.h_pgs.add(p.v_zpgs);
@@ -1302,7 +1355,7 @@ if (col_aliveAgents.size() < 500) {
 	finishSimulation();
 }
 
-if (v_lastCompleteGeneration >= 100) {
+if (v_lastCompleteGeneration >= p_maxGeneration) {
 	traceln("Simulation stopped!");
 	finishSimulation();
 }
@@ -1512,9 +1565,11 @@ if (!p_fixedGeneticEffects) {
 	}
 }
 
-double[] a = new double[50];
-for (int i=0;i < 50;i++) {
-	a[i] = uniform(0, .4);
+// generate allele frequencies
+int numAlleleFreq = (int) Math. round(p_numberSNP * 0.5);
+double[] a = new double[numAlleleFreq];
+for (int i=0;i < numAlleleFreq;i++) {
+	a[i] = uniform(0, p_maxAlleleFreq);
 }
 
 p_alleleFrequencies = a;
@@ -1540,7 +1595,6 @@ for (Person p : people) {
 	p.v_grandFatherID = uniform();
 	p.v_grandMotherID = uniform();
 	col_aliveAgents.add(p);
-
 	
 	// define SNPs
 	p.col_SNP.clear();
@@ -3017,7 +3071,7 @@ main.col_motherKidPGS.add(new Pairs(mother.v_pgs, kid.v_pgs));]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (main.p_exportData & main.p_exportIndividualData & (v_generation == 0 | v_generation == main.p_generationToRecord)) {
+					<Body><![CDATA[if (main.p_exportData & main.p_exportIndividualData & (v_generation == 0 | v_generation == main.p_maxGeneration)) {
 	ExportOutput m = main.col_dataExport.get("agents");
 	m.writeFile(main.col_textFiles.get("agents"), m.getValues(this));
 }
@@ -5189,6 +5243,12 @@ traceln(root.p_fertilityFactor);
 				<Parameter>
 					<ParameterName><![CDATA[p_minSizeCorrelations]]></ParameterName>
 				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_maxAlleleFreq]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_maxGeneration]]></ParameterName>
+				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
 				<EnableZoomAndPanning>false</EnableZoomAndPanning>
@@ -5210,7 +5270,7 @@ traceln(root.p_fertilityFactor);
 		<!--   =========  Parameter Variation Experiment   ========  -->
 		<ParamVariationExperiment ActiveObjectClassId="1632485433838">
 			<Id>1632900535843</Id>
-			<Name><![CDATA[SimpleScenarios]]></Name>
+			<Name><![CDATA[Efast]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[// read parameter file
@@ -5219,7 +5279,7 @@ col_experimentLines = f.fromFileToCollection(true);
 /// remove temporary output files
 f.removeOutputFiles();
 ]]></InitialSetupCode>
-			<MaximumMemory>8192</MaximumMemory>
+			<MaximumMemory>25600</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
 			<BeforeSimulationRunCode><![CDATA[// define replicates
@@ -5295,7 +5355,7 @@ v_replicates++;
 					<Id>1637586729235</Id>
 					<Name><![CDATA[v_numberReplicates]]></Name>
 					<X>90</X><Y>210</Y>
-					<Label><X>15</X><Y>0</Y></Label>
+					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -5337,7 +5397,7 @@ v_replicates++;
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-14774017</Color>
-					<Text><![CDATA[Scenarios]]></Text>
+					<Text><![CDATA[Efast]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>28</Size>
@@ -5362,7 +5422,7 @@ v_replicates++;
 					<TextCode><![CDATA[(int) (((double) v_replicates) / ((double) getMaximumIterations() * (double) v_numberReplicates) * 10000) / 100.0 + "%"]]></TextCode>
 					<Font>
 						<Name>SansSerif</Name>
-						<Size>28</Size>
+						<Size>26</Size>
 						<Style>1</Style>
 					</Font>
 					<Alignment>LEFT</Alignment>
@@ -5480,6 +5540,12 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1648134544575</Id>
 			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648293660981</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648302957610</Id>
+			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
 				<Type>FIXED</Type>
@@ -5578,6 +5644,14 @@ s.sendMessage();]]></AfterExperimentCode>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1648134544575</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648293660981</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648302957610</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<ModelTimeProperties>
@@ -5606,9 +5680,9 @@ s.sendMessage();]]></AfterExperimentCode>
 		</ParamVariationExperiment>
 		<!--   =========  Parameter Variation Experiment   ========  -->
 		<ParamVariationExperiment ActiveObjectClassId="1632485433838">
-			<Id>1642502235200</Id>
-			<Name><![CDATA[ScenariosIFLS]]></Name>
-			<ExcludeFromBuild>true</ExcludeFromBuild>
+			<Id>1648302920573</Id>
+			<Name><![CDATA[HW]]></Name>
+			<Description><![CDATA[Assessing HW equilibrium]]></Description>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[// read parameter file
@@ -5617,7 +5691,7 @@ col_experimentLines = f.fromFileToCollection(true);
 /// remove temporary output files
 f.removeOutputFiles();
 ]]></InitialSetupCode>
-			<MaximumMemory>8192</MaximumMemory>
+			<MaximumMemory>25600</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
 			<BeforeSimulationRunCode><![CDATA[// define replicates
@@ -5632,12 +5706,12 @@ root.v_replicate = getCurrentReplication();
 if (getCurrentIteration() <= col_experimentLines.size()) {
 	String[] line = col_experimentLines.get(root.v_iteration-1);
 	root.p_randomMating = Double.parseDouble(line[0]);
-	root.p_leakage = Double.parseDouble(line[1]);
-	root.p_fertilityFactor = Double.parseDouble(line[2]);
+	root.p_geneticVariance = Double.parseDouble(line[1]);
+	root.p_fertilityBMIDifferential = Double.parseDouble(line[2]);
 }]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[// track number of replicates
 //if (getCurrentIteration() <= col_experimentLines.size()) { 
-	v_replicates++;
+v_replicates++;
 //}]]></AfterSimulationRunCode>
 			<SeedValue>1</SeedValue>
 			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
@@ -5645,9 +5719,9 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 			<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
 			<Variables>
 				<Variable Class="PlainVariable">
-					<Id>1642502235204</Id>
+					<Id>1648302920577</Id>
 					<Name><![CDATA[v_replicates]]></Name>
-					<X>90</X><Y>200</Y>
+					<X>90</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -5660,7 +5734,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
-					<Id>1642502235206</Id>
+					<Id>1648302920579</Id>
 					<Name><![CDATA[v_paramName]]></Name>
 					<X>90</X><Y>160</Y>
 					<Label><X>10</X><Y>0</Y></Label>
@@ -5670,12 +5744,12 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["efast"]]></Code>
+							<Code><![CDATA["snp-efast"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
-					<Id>1642502235208</Id>
+					<Id>1648302920581</Id>
 					<Name><![CDATA[v_outputPath]]></Name>
 					<X>90</X><Y>140</Y>
 					<Label><X>10</X><Y>0</Y></Label>
@@ -5690,10 +5764,10 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
-					<Id>1642502235210</Id>
+					<Id>1648302920583</Id>
 					<Name><![CDATA[v_numberReplicates]]></Name>
-					<X>90</X><Y>220</Y>
-					<Label><X>15</X><Y>0</Y></Label>
+					<X>90</X><Y>210</Y>
+					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -5705,9 +5779,9 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 					</Properties>
 				</Variable>
 				<Variable Class="CollectionVariable">
-					<Id>1642502235202</Id>
+					<Id>1648302920575</Id>
 					<Name><![CDATA[col_experimentLines]]></Name>
-					<X>90</X><Y>260</Y>
+					<X>90</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -5723,7 +5797,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 
 			<Presentation>
 				<Text>
-					<Id>1642502235212</Id>
+					<Id>1648302920585</Id>
 					<Name><![CDATA[text]]></Name>
 					<X>80</X><Y>50</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
@@ -5735,7 +5809,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-14774017</Color>
-					<Text><![CDATA[Scenarios]]></Text>
+					<Text><![CDATA[Efast]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>28</Size>
@@ -5744,7 +5818,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 					<Alignment>LEFT</Alignment>
 				</Text>
 				<Text>
-					<Id>1642502235214</Id>
+					<Id>1648302920587</Id>
 					<Name><![CDATA[progress]]></Name>
 					<X>290</X><Y>50</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
@@ -5760,7 +5834,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 					<TextCode><![CDATA[(int) (((double) v_replicates) / ((double) getMaximumIterations() * (double) v_numberReplicates) * 10000) / 100.0 + "%"]]></TextCode>
 					<Font>
 						<Name>SansSerif</Name>
-						<Size>28</Size>
+						<Size>26</Size>
 						<Style>1</Style>
 					</Font>
 					<Alignment>LEFT</Alignment>
@@ -5769,8 +5843,8 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 
 			<AfterExperimentCode><![CDATA[// append files and remove temporary ones
 TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
-f.appendOutputFiles(v_outputPath, "group*.csv", "results-" + v_paramName + ".csv", "../../output/data/");
-f.appendOutputFiles(v_outputPath, "par*.csv", "param-" + v_paramName + ".csv", "../../output/data/");
+f.appendOutputFiles(v_outputPath, "prev*.csv", "results-" + v_paramName + ".csv", "../../output/data/");
+f.appendOutputFiles(v_outputPath, "par*.csv", "params-" + v_paramName + ".csv", "../../output/data/");
 f.removeOutputFiles();
 
 // send slack message
@@ -5778,17 +5852,14 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>6000</NumberOfRuns>
+			<NumberOfRuns>30</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[3000]]></Code>
-				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632690393452</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[0.1]]></Code>
+					<Code><![CDATA[1.0]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -5811,24 +5882,36 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[3.3]]></Code>
-				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1634656309398</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.05]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1636145720853</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.0]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647443482862</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[100]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647444988213</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[{0.1, 0.2, 0.3, 0.4}]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647510223271</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.30]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647593863140</Id>
@@ -5844,9 +5927,15 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647856798402</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647864350206</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647938541578</Id>
@@ -5868,6 +5957,15 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648134544575</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648293660981</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648302957610</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
@@ -5969,12 +6067,20 @@ s.sendMessage();]]></AfterExperimentCode>
 				<Id>1648134544575</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648293660981</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648302957610</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
 			<ModelTimeProperties>
-				<StopOption><![CDATA[Stop at specified time]]></StopOption>
+				<StopOption><![CDATA[Never]]></StopOption>
 				<InitialDate><![CDATA[1632441600000]]></InitialDate>	
 				<InitialTime><![CDATA[0.0]]></InitialTime>	
-				<FinalDate><![CDATA[4786041600000]]></FinalDate>	
-				<FinalTime><![CDATA[100.0]]></FinalTime>	
+				<FinalDate><![CDATA[17400441600000]]></FinalDate>	
+				<FinalTime><![CDATA[500.0]]></FinalTime>	
 			</ModelTimeProperties>
 			<PresentationProperties>
 				<EnableZoomAndPanning>false</EnableZoomAndPanning>
@@ -5983,9 +6089,9 @@ s.sendMessage();]]></AfterExperimentCode>
 				<ShowDeveloperPanelOnStart>true</ShowDeveloperPanelOnStart>
 			</PresentationProperties>
 			<ReplicationsProperties>
-				<UseReplication>false</UseReplication>
+				<UseReplication>true</UseReplication>
 				<FixedReplicationsNumber>true</FixedReplicationsNumber>
-				<ReplicationPerIteration>2</ReplicationPerIteration>
+				<ReplicationPerIteration>1</ReplicationPerIteration>
 				<MinimumReplication>2</MinimumReplication>
 				<MaximumReplication>10</MaximumReplication>
 				<ConfidenceLevel>LEVEL_80</ConfidenceLevel>

@@ -1,7 +1,7 @@
 .DS_Store
 /models/BMI-fertility/output
 /models/BMI-SNP/output
-!/models/BMI-SNP/output/agents-0-0.csv
+!agents-0-0.csv
 .push.settings.jsonc
 .vscode
 slack.txt
