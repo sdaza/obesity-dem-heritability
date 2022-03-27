@@ -1355,7 +1355,7 @@ if (col_aliveAgents.size() < 500) {
 	finishSimulation();
 }
 
-if (v_lastCompleteGeneration  > 0) {
+if (v_lastCompleteGeneration  > p_maxGeneration) {
 	traceln("Simulation stopped!");
 	finishSimulation();
 }
@@ -3071,12 +3071,16 @@ main.col_motherKidPGS.add(new Pairs(mother.v_pgs, kid.v_pgs));]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (main.p_exportData & main.p_exportIndividualData & (v_generation == main.p_maxGeneration)) {
+					<Body><![CDATA[if (main.p_exportData & main.p_exportIndividualData
+		& (v_generation == main.p_maxGeneration
+				| v_generation == main.p_generationToRecord)) {
 	ExportOutput m = main.col_dataExport.get("agents");
-	m.writeFile(main.col_textFiles.get("agents"), m.getValues(this));
+	m.writeFile(main.col_textFiles.get("agents"),
+			m.getValues(this));
 }
-		
-if (v_parentType == mother) main.s_numberKids.add(col_kids.size());
+
+if (v_parentType == mother)
+	main.s_numberKids.add(col_kids.size());
 main.col_deadAgents.add(this);
 main.col_aliveAgents.remove(this);
 main.col_potentialMates.remove(this);
@@ -3105,7 +3109,6 @@ v_grandMotherID = -99;
 v_generation = -99;
 v_alive = false;
 v_ghost = false;
-
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -5687,6 +5690,8 @@ s.sendMessage();]]></AfterExperimentCode>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[// read parameter file
 TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
+col_experimentLines = f.fromFileToCollection(true);
+
 /// remove temporary output files
 f.removeOutputFiles();
 ]]></InitialSetupCode>
@@ -5699,7 +5704,13 @@ setFixedReplicationsNumber(v_numberReplicates);
 
 // get iteration and replicate values
 root.v_iteration = getCurrentIteration();
-root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
+root.v_replicate = getCurrentReplication();
+
+// update parameters
+if (getCurrentIteration() <= col_experimentLines.size()) {
+	String[] line = col_experimentLines.get(root.v_iteration-1);
+	root.p_randomMating = Double.parseDouble(line[0]);
+}]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[// track number of replicates
 //if (getCurrentIteration() <= col_experimentLines.size()) { 
 v_replicates++;
@@ -5844,7 +5855,7 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>30</NumberOfRuns>
+			<NumberOfRuns>90</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 			</FreeformParamValue>
@@ -5916,6 +5927,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647692182095</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647856798402</Id>
@@ -5955,9 +5969,6 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648302957610</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[0]]></Code>
-				</Expression>
 			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
