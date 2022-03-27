@@ -3726,7 +3726,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["efast"]]></Code>
+							<Code><![CDATA["hm-efast"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>

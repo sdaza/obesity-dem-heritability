@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[BMI-SNP]]></Name>
@@ -437,6 +437,54 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
+					<Id>1648134544572</Id>
+					<Name><![CDATA[p_maxPopulation]]></Name>
+					<X>250</X><Y>480</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[6000]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1648134544570</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1648302957610</Id>
+					<Name><![CDATA[p_maxGeneration]]></Name>
+					<X>50</X><Y>580</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[100]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1648302957608</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
 					<Id>1632900849933</Id>
 					<Name><![CDATA[p_updatePlots]]></Name>
 					<X>50</X><Y>200</Y>
@@ -683,6 +731,30 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
+					<Id>1648293660981</Id>
+					<Name><![CDATA[p_maxAlleleFreq]]></Name>
+					<X>50</X><Y>380</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0.4]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1648293660979</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
 					<Id>1647444988213</Id>
 					<Name><![CDATA[p_alleleFrequencies]]></Name>
 					<X>50</X><Y>360</Y>
@@ -707,6 +779,27 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
+					<Id>1647595664772</Id>
+					<Name><![CDATA[p_afreq]]></Name>
+					<X>50</X><Y>410</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double[]]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1647595664770</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
 					<Id>1647510223271</Id>
 					<Name><![CDATA[p_geneticVariance]]></Name>
 					<X>50</X><Y>320</Y>
@@ -723,27 +816,6 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1647510223269</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1647595664772</Id>
-					<Name><![CDATA[p_afreq]]></Name>
-					<X>50</X><Y>410</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double[]]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<ParameterEditor>
-							<Id>1647595664770</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -921,30 +993,6 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
-					<Id>1647692182095</Id>
-					<Name><![CDATA[p_generationToRecord]]></Name>
-					<X>60</X><Y>800</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[50]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1647692182093</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
 					<Id>1648134544569</Id>
 					<Name><![CDATA[p_maxSizeCollections]]></Name>
 					<X>250</X><Y>500</Y>
@@ -961,30 +1009,6 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1648134544567</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1648134544572</Id>
-					<Name><![CDATA[p_maxPopulation]]></Name>
-					<X>250</X><Y>480</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[6000]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1648134544570</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -1017,9 +1041,9 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
-					<Id>1648293660981</Id>
-					<Name><![CDATA[p_maxAlleleFreq]]></Name>
-					<X>50</X><Y>380</Y>
+					<Id>1647692182095</Id>
+					<Name><![CDATA[p_generationToRecord]]></Name>
+					<X>60</X><Y>800</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1029,34 +1053,10 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[0.4]]></Code>
+							<Code><![CDATA[50]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
-							<Id>1648293660979</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1648302957610</Id>
-					<Name><![CDATA[p_maxGeneration]]></Name>
-					<X>50</X><Y>580</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[100]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1648302957608</Id>
+							<Id>1647692182093</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -1355,7 +1355,7 @@ if (col_aliveAgents.size() < 500) {
 	finishSimulation();
 }
 
-if (v_lastCompleteGeneration >= p_maxGeneration) {
+if (v_lastCompleteGeneration  > 0) {
 	traceln("Simulation stopped!");
 	finishSimulation();
 }
@@ -3071,7 +3071,7 @@ main.col_motherKidPGS.add(new Pairs(mother.v_pgs, kid.v_pgs));]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (main.p_exportData & main.p_exportIndividualData & (v_generation == 0 | v_generation == main.p_maxGeneration)) {
+					<Body><![CDATA[if (main.p_exportData & main.p_exportIndividualData & (v_generation == main.p_maxGeneration)) {
 	ExportOutput m = main.col_dataExport.get("agents");
 	m.writeFile(main.col_textFiles.get("agents"), m.getValues(this));
 }
@@ -5142,6 +5142,15 @@ traceln(root.p_fertilityFactor);
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
+					<ParameterName><![CDATA[p_maxPopulation]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[100000]]></Code>
+					</ParameterValue>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_maxGeneration]]></ParameterName>
+				</Parameter>
+				<Parameter>
 					<ParameterName><![CDATA[p_updatePlots]]></ParameterName>
 				</Parameter>
 				<Parameter>
@@ -5187,16 +5196,19 @@ traceln(root.p_fertilityFactor);
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
+					<ParameterName><![CDATA[p_maxAlleleFreq]]></ParameterName>
+				</Parameter>
+				<Parameter>
 					<ParameterName><![CDATA[p_alleleFrequencies]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[p_afreq]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_geneticVariance]]></ParameterName>
 					<ParameterValue Class="CodeValue">
 						<Code><![CDATA[0.1]]></Code>
 					</ParameterValue>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_afreq]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_fixedGeneticEffects]]></ParameterName>
@@ -5229,25 +5241,13 @@ traceln(root.p_fertilityFactor);
 					<ParameterName><![CDATA[p_bmiSD]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[p_generationToRecord]]></ParameterName>
-				</Parameter>
-				<Parameter>
 					<ParameterName><![CDATA[p_maxSizeCollections]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_maxPopulation]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[100000]]></Code>
-					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_minSizeCorrelations]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[p_maxAlleleFreq]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[p_maxGeneration]]></ParameterName>
+					<ParameterName><![CDATA[p_generationToRecord]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
@@ -5687,7 +5687,6 @@ s.sendMessage();]]></AfterExperimentCode>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[// read parameter file
 TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
-col_experimentLines = f.fromFileToCollection(true);
 /// remove temporary output files
 f.removeOutputFiles();
 ]]></InitialSetupCode>
@@ -5700,15 +5699,7 @@ setFixedReplicationsNumber(v_numberReplicates);
 
 // get iteration and replicate values
 root.v_iteration = getCurrentIteration();
-root.v_replicate = getCurrentReplication();
-
-// update parameters
-if (getCurrentIteration() <= col_experimentLines.size()) {
-	String[] line = col_experimentLines.get(root.v_iteration-1);
-	root.p_randomMating = Double.parseDouble(line[0]);
-	root.p_geneticVariance = Double.parseDouble(line[1]);
-	root.p_fertilityBMIDifferential = Double.parseDouble(line[2]);
-}]]></BeforeSimulationRunCode>
+root.v_replicate = getCurrentReplication();]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[// track number of replicates
 //if (getCurrentIteration() <= col_experimentLines.size()) { 
 v_replicates++;
@@ -5744,7 +5735,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["snp-efast"]]></Code>
+							<Code><![CDATA["snp-hw"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -5809,7 +5800,7 @@ v_replicates++;
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-14774017</Color>
-					<Text><![CDATA[Efast]]></Text>
+					<Text><![CDATA[HW]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>28</Size>
@@ -5844,6 +5835,7 @@ v_replicates++;
 			<AfterExperimentCode><![CDATA[// append files and remove temporary ones
 TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
 f.appendOutputFiles(v_outputPath, "prev*.csv", "results-" + v_paramName + ".csv", "../../output/data/");
+f.appendOutputFiles(v_outputPath, "agent*.csv", "agents-" + v_paramName + ".csv", "../../output/data/");
 f.appendOutputFiles(v_outputPath, "par*.csv", "params-" + v_paramName + ".csv", "../../output/data/");
 f.removeOutputFiles();
 
