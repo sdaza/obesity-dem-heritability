@@ -1,4 +1,11 @@
 
+
+### 2022-03-27
+
+- Create an output of the AM by obesity group 
+- Define mating to be different by BMI
+- Create a more flexible definition of fertility differentials (function)
+
 ### 2022-03-26
 
 - It looks that the baseline is in HW equilibrium
