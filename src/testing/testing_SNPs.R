@@ -113,5 +113,5 @@ ggplot() + aes(gof)+ geom_histogram(bins = 20, fill="grey", colour="black") + th
 library(data.table)
  
 v = c(0.0, 0.5, 1.0)
-dt = data.table("random-mating" = rep(v, 30))
+dt = data.table("random-mating" = rep(v, 100))
 fwrite(dt, "models/BMI-SNP/data/param-snp-hw.csv", row.names = FALSE)
