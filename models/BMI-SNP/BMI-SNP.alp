@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[BMI-SNP]]></Name>
@@ -1569,7 +1569,7 @@ if (!p_fixedGeneticEffects) {
 int numAlleleFreq = (int) Math. round(p_numberSNP * 0.5);
 double[] a = new double[numAlleleFreq];
 for (int i=0;i < numAlleleFreq;i++) {
-	a[i] = uniform(0, p_maxAlleleFreq);
+	a[i] = uniform(0.2, p_maxAlleleFreq);
 }
 
 p_alleleFrequencies = a;
@@ -5855,7 +5855,7 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>300</NumberOfRuns>
+			<NumberOfRuns>36</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 			</FreeformParamValue>
@@ -5885,6 +5885,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[2.5]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1634656309398</Id>
@@ -5954,12 +5957,18 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647960922330</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648134544569</Id>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648134544572</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[10000]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648134544575</Id>
