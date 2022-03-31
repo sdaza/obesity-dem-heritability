@@ -410,18 +410,6 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 						</InitialValue>
 					</Properties>
 				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1648714217832</Id>
-					<Name><![CDATA[v_propFemale]]></Name>
-					<X>470</X><Y>560</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[double]]></Type>        
-					</Properties>
-				</Variable>
 				<Variable Class="Parameter">
 					<Id>1632485646519</Id>
 					<Name><![CDATA[p_populationSize]]></Name>
@@ -1085,9 +1073,12 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double[]]]></Type>
+						<Type><![CDATA[double]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[100]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1647692182093</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
@@ -1344,7 +1335,6 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					<Action><![CDATA[// stats
 f_definePropBMIGroup();
 f_propMarriedAgents();
-f_propFemaleAgents();
 
 if (time()>= 1) {
 	v_geneticVariance = f_geneticVariance();
@@ -1902,23 +1892,6 @@ double married = (double) col_aliveAgents.stream()
 
 v_propMarriedAgents = married / total;]]></Body>
 				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1648714243373</Id>
-					<Name><![CDATA[f_propFemaleAgents]]></Name>
-					<X>250</X><Y>430</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[double total = (double) col_aliveAgents.size();
-double female = (double) col_aliveAgents.stream()
-		.filter(p -> p.v_parentType == mother)
-		.count();
-
-v_propFemale = female / total;]]></Body>
-				</Function>
 			</Functions>
 			<AnalysisData>
     			<Statistics>
@@ -2287,8 +2260,6 @@ v_propFemale = female / total;]]></Body>
 			<Id>1632485445834</Id>
 			<Name><![CDATA[Person]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
-			<Import><![CDATA[import com.querydsl.core.util.ArrayUtils;
-import org.eclipse.jetty.util.ArrayUtil;]]></Import>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1632485445832</Id>
@@ -2511,7 +2482,7 @@ import org.eclipse.jetty.util.ArrayUtil;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1634552935057</Id>
 					<Name><![CDATA[v_married]]></Name>
-					<X>40</X><Y>480</Y>
+					<X>40</X><Y>510</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2598,7 +2569,7 @@ import org.eclipse.jetty.util.ArrayUtil;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1647596668517</Id>
 					<Name><![CDATA[v_ghost]]></Name>
-					<X>40</X><Y>500</Y>
+					<X>40</X><Y>530</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2613,7 +2584,7 @@ import org.eclipse.jetty.util.ArrayUtil;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1647939654045</Id>
 					<Name><![CDATA[v_birthTime]]></Name>
-					<X>40</X><Y>520</Y>
+					<X>40</X><Y>550</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2625,7 +2596,7 @@ import org.eclipse.jetty.util.ArrayUtil;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1647939729817</Id>
 					<Name><![CDATA[v_matingTime]]></Name>
-					<X>40</X><Y>540</Y>
+					<X>40</X><Y>570</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2674,18 +2645,6 @@ import org.eclipse.jetty.util.ArrayUtil;]]></Import>
 					<Id>1648131614931</Id>
 					<Name><![CDATA[v_grandMotherID]]></Name>
 					<X>200</X><Y>560</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[double]]></Type>        
-					</Properties>
-				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1648722864395</Id>
-					<Name><![CDATA[v_poolMates]]></Name>
-					<X>40</X><Y>560</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3035,7 +2994,7 @@ if (v_parentType == ParentType.mother) {
 						</Timeout>
 						<Condition><![CDATA[true]]></Condition>
 						<Rate Class="CodeUnitValue">
-							<Code><![CDATA[0.1]]></Code>
+							<Code><![CDATA[5]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_YEAR]]></Unit>
 						</Rate>
 						<Guard><![CDATA[!spouse.isConnected()]]></Guard>
@@ -3136,11 +3095,9 @@ main.col_motherKidPGS.add(new Pairs(mother.v_pgs, kid.v_pgs));]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[StatUtils s = new StatUtils();
-
-if (main.p_exportData & main.p_exportIndividualData
+					<Body><![CDATA[if (main.p_exportData & main.p_exportIndividualData
 		& (v_generation == main.p_maxGeneration
-				| s.contains(main.p_generationToRecord, v_generation))) {
+				| v_generation == main.p_generationToRecord)) {
 	ExportOutput m = main.col_dataExport.get("agents");
 	m.writeFile(main.col_textFiles.get("agents"),
 			m.getValues(this));
@@ -3176,7 +3133,6 @@ v_grandMotherID = -99;
 v_generation = -99;
 v_alive = false;
 v_ghost = false;
-v_poolMates = -99;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -3290,70 +3246,39 @@ List<Person> alters = new ArrayList<Person>();
 
 if (r) {
 
+/*
+	alters = filter(main.col_potentialMates, p ->
+		p != ego & p.v_parentType != ego.v_parentType &  
+		(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID) & 
+		(p.v_grandMotherID != ego.v_grandMotherID & p.v_grandFatherID != ego.v_grandFatherID));
+*/		
 
-    /*
-	// testing
-	traceln("new agent ::::::::::");
-	traceln("ego gender: " + ego.v_parentType);
-	traceln("total potential alters: "
-			+ main.col_potentialMates.size());
-	traceln("number women: " + main.col_potentialMates.stream().filter(
-					p -> p.v_parentType == mother).count());
-	traceln("number men: " + main.col_potentialMates.stream().filter(
-					p -> p.v_parentType == father).count());
-	traceln("potential alters dif sex: "
-			+ main.col_potentialMates.stream().filter(
-					p -> p.v_parentType != ego.v_parentType)
-					.count());
-	*/				
-					
-	alters = filter(main.col_potentialMates, p -> (p != ego)
-			& (p.v_parentType != ego.v_parentType)
-			& (p.v_motherID != ego.v_motherID
-					& p.v_fatherID != ego.v_fatherID)
-			& (p.v_grandMotherID != ego.v_grandMotherID
-					& p.v_grandFatherID != ego.v_grandFatherID));
-
-	//traceln("filtered potential partners: " + alters.size());
-
-	// alters = filter(main.col_potentialMates, p -> p !=
-	// ego);
-	// traceln(time() + ": " + alters.size());
-
+	alters = filter(main.col_potentialMates, p -> p != ego  &  p.v_parentType != ego.v_parentType);
+	//traceln(time() + ": " + alters.size());
+	
 } else {
 
-	alters = filter(main.col_potentialMates, p -> p != ego
-			& p.v_parentType != ego.v_parentType
-			& p.v_BMIGroup == ego.v_BMIGroup
-			& (p.v_motherID != ego.v_motherID
-					& p.v_fatherID != ego.v_fatherID)
-			& (p.v_grandMotherID != ego.v_grandMotherID
-					& p.v_grandFatherID != ego.v_grandFatherID));
-
-	/*
-	 * alters = filter(main.col_potentialMates, p -> p !=
-	 * ego & p.v_parentType != ego.v_parentType &
-	 * p.v_BMIGroup == ego.v_BMIGroup);
-	 */
-	// traceln(alters.size());
-	// if (alters.size() == 0) {
-	// alters = filter(col_aliveAgents, p -> p.v_married ==
-	// false &
-	// p != ego & p.v_parentType != ego.v_parentType &
-	// p.inState(p.Mating) &
-	// (p.v_motherID != ego.v_motherID & p.v_fatherID !=
-	// ego.v_fatherID));
-
-	// }
+/*	
+	alters = filter(main.col_potentialMates, p -> 
+		p != ego & p.v_parentType != ego.v_parentType &
+		p.v_BMIGroup == ego.v_BMIGroup &
+		(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID) & 
+		(p.v_grandMotherID != ego.v_grandMotherID & p.v_grandFatherID != ego.v_grandFatherID));	
+*/		
+	alters = filter(main.col_potentialMates, p -> 
+		p != ego & p.v_parentType != ego.v_parentType & 
+		p.v_BMIGroup == ego.v_BMIGroup);	
+	//traceln(alters.size());
+	//if (alters.size() == 0) {
+		//alters = filter(col_aliveAgents, p -> p.v_married == false & 
+		//p != ego & p.v_parentType != ego.v_parentType &
+		//p.inState(p.Mating) &
+		//(p.v_motherID != ego.v_motherID & p.v_fatherID != ego.v_fatherID));
+	
+	//}	
 }
-
-
 if (alters.size() > 0) {
-	v_poolMates = alters.size();
-	
 	Person partner = randomFrom(alters);
-	partner.v_poolMates = alters.size();
-	
 	main.col_potentialMates.remove(this);
 	main.col_potentialMates.remove(partner);
 	ego.spouse.connectTo(partner);
@@ -3361,10 +3286,8 @@ if (alters.size() > 0) {
 	ego.v_matingTime = time() - ego.v_birthTime;
 	partner.v_married = true;
 	partner.v_matingTime = time() - partner.v_birthTime;
-	main.col_coupleBMI.add(new Pairs(ego.v_bmi,
-			ego.spouse.getConnectedAgent().v_bmi));
-	main.col_couplePGS.add(new Pairs(ego.v_zpgs,
-			ego.spouse.getConnectedAgent().v_zpgs));
+	main.col_coupleBMI.add(new Pairs(ego.v_bmi, ego.spouse.getConnectedAgent().v_bmi));
+	main.col_couplePGS.add(new Pairs(ego.v_zpgs, ego.spouse.getConnectedAgent().v_zpgs));
 }]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -5251,13 +5174,13 @@ traceln(root.p_fertilityFactor);
 				<Parameter>
 					<ParameterName><![CDATA[p_populationSize]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[20000]]></Code>
+						<Code><![CDATA[6000]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_maxPopulation]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[40000]]></Code>
+						<Code><![CDATA[100000]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -5280,9 +5203,6 @@ traceln(root.p_fertilityFactor);
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_baselineFertility]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[2.15]]></Code>
-					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_reproductiveTime]]></ParameterName>
@@ -5355,6 +5275,9 @@ traceln(root.p_fertilityFactor);
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_correlation]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[true]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_bmiMean]]></ParameterName>
@@ -5370,9 +5293,6 @@ traceln(root.p_fertilityFactor);
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_generationToRecord]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[{5, 10}]]></Code>
-					</ParameterValue>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
@@ -5984,11 +5904,11 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>30</NumberOfRuns>
+			<NumberOfRuns>90</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[20000]]></Code>
+					<Code><![CDATA[6000]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -6017,9 +5937,6 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[2.15]]></Code>
-				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1634656309398</Id>
@@ -6063,7 +5980,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1647692182095</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[{0, 10, 30}]]></Code>
+					<Code><![CDATA[0]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -6108,19 +6025,16 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1648293660981</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[0.55]]></Code>
+					<Code><![CDATA[0.7]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648302957610</Id>
-				<Expression Class="CodeValue">
-					<Code><![CDATA[50]]></Code>
-				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648626928522</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[0.45]]></Code>
+					<Code><![CDATA[0.10]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<RangeVariationParamValue>	
@@ -7109,17 +7023,6 @@ public class StatUtils {
 	public double rev(double x, double min, double max) {
 		return (max - x) + min;
 	}
-	
-	public boolean contains(double[] array, double value) {
-		boolean result = false;
-		for (int i=0;i<array.length;i++) {
-			if (array[i] == value) { 
-				result = true; 
-				break;
-			}
-		}
-		return result;
-	}
 
 
 }]]></Text>
@@ -7201,10 +7104,6 @@ public class StatUtils {
 		</Resource>
 		<Resource>
 			<Path><![CDATA[jarfiles/ant-1.10.11.jar]]></Path>
-			<ReferencedFromUserCode>false</ReferencedFromUserCode>
-		</Resource>
-		<Resource>
-			<Path><![CDATA[jarfiles/commons-lang3-3.12.0.jar]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
@@ -7402,142 +7301,6 @@ public class StatUtils {
 		<ResourceReference>
 			<PackageName><![CDATA[snp_bmi]]></PackageName>
 			<ClassName><![CDATA[jarfiles/ant-1.10.11.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/annotations-13.0.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/ant-1.10.11.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/aws-lambda-java-core-1.2.1.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/bolt-1.2.1.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/bolt-aws-lambda-1.2.1.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/commons-io-2.11.0.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/commons-lang3-3.12.0.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/commons-math3-3.6.1.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/gson-2.8.6.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/kotlin-stdlib-1.4.10.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/kotlin-stdlib-common-1.4.0.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/okhttp-4.9.0.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/okio-2.8.0.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/slack-api-client-1.2.1.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/slack-api-model-1.2.1.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/slack-app-backend-1.2.1.jar]]></ClassName>
-		</ResourceReference>
-		<Imported>false</Imported>
-		<Folder>false</Folder>
-	</ClassPathEntry>
-	<ClassPathEntry>
-		<ResourceReference>
-			<PackageName><![CDATA[snp_bmi]]></PackageName>
-			<ClassName><![CDATA[jarfiles/slf4j-api-1.7.30.jar]]></ClassName>
 		</ResourceReference>
 		<Imported>false</Imported>
 		<Folder>false</Folder>
