@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[BMI-SNP]]></Name>
@@ -1797,8 +1797,7 @@ ExportOutput g = new ExportOutput(p_outputPath, "prevalence", v_iteration, v_rep
 	new String[] {"iteration", "replicate", "time", "last_generation",  "population", "bmi_category_prop", 
 		"am_bmi", "am_pgs", "genetic_variance", "vertical_trans_variance", "average_bmi", "sd_bmi"}, 
 	new String[] {"v_iteration", "v_replicate", "time()", "v_lastCompleteGeneration", "col_aliveAgents.size()",
-		 "col_propBMIGroup.toString()", "v_assortativeMatingBMI", "v_assortativeMatingPGS", "v_geneticVariance",
-		 "v_verticalTransVariance", 
+		 "col_propBMIGroup.toString()", "v_assortativeMatingBMI", "v_assortativeMatingPGS", "v_geneticVariance", 
 		 "dataViz.h_tbmi.mean()", "dataViz.h_tbmi.deviation()"});
 g.initiateFile(col_textFiles);
 col_dataExport.put("prevalence", g);]]></Body>
@@ -5720,7 +5719,7 @@ col_experimentLines = f.fromFileToCollection(true);
 /// remove temporary output files
 f.removeOutputFiles();
 ]]></InitialSetupCode>
-			<MaximumMemory>25600</MaximumMemory>
+			<MaximumMemory>41600</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
 			<BeforeSimulationRunCode><![CDATA[// define replicates
@@ -5884,6 +5883,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			<NumberOfRuns>6000</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[8000]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632690393452</Id>
@@ -5911,6 +5913,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[2.15]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1634656309398</Id>
@@ -5945,7 +5950,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1647692182095</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[{100}]]></Code>
+					<Code><![CDATA[{50}]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -5978,7 +5983,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1648134544572</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[40000]]></Code>
+					<Code><![CDATA[15000]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -5992,6 +5997,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648302957610</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[50]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648626928522</Id>
@@ -6596,7 +6604,7 @@ col_experimentLines = f.fromFileToCollection(true);
 /// remove temporary output files
 f.removeOutputFiles();
 ]]></InitialSetupCode>
-			<MaximumMemory>25600</MaximumMemory>
+			<MaximumMemory>40960</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
 			<BeforeSimulationRunCode><![CDATA[// define replicates
@@ -6757,9 +6765,12 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>32768</NumberOfRuns>
+			<NumberOfRuns>16384</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[8000]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632690393452</Id>
@@ -6787,6 +6798,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[2.15]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1634656309398</Id>
@@ -6820,6 +6834,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647692182095</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[{50}]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647856798402</Id>
@@ -6844,21 +6861,36 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648134544569</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[15000]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648134544572</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[15000]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648134544575</Id>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648293660981</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.50]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648302957610</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[50]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648626928522</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.10]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1651131589377</Id>
