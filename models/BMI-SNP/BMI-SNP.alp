@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[BMI-SNP]]></Name>
@@ -1772,9 +1772,11 @@ for (int i = 0; i < people.size(); i++) {
 					<Body><![CDATA[// params
 ExportOutput p = new ExportOutput(p_outputPath, "params", v_iteration, v_replicate, 
 	new String[] {"iteration", "replicate", "init_pop", "fertility_type", 
-	    "initial_genetic_variance", "random_mating", "fertility_factor"}, 
+	    "initial_genetic_variance", "vertical_trans_variance", 
+	    "random_mating", "fertility_factor"}, 
 	new String[] {"v_iteration", "v_replicate", "p_populationSize", "p_fertilityType", 
-		"p_geneticVariance", "p_verticalTransVariance", "p_randomMating", "p_fertilityBMIDifferential"});
+		"p_geneticVariance", "p_verticalTransVariance", 
+		"p_randomMating", "p_fertilityBMIDifferential"});
 p.initiateFile(col_textFiles);
 col_dataExport.put("params", p);
 
@@ -1794,10 +1796,12 @@ col_dataExport.put("agents", a);
 
 // obesity prevalence
 ExportOutput g = new ExportOutput(p_outputPath, "prevalence", v_iteration, v_replicate, 
-	new String[] {"iteration", "replicate", "time", "last_generation",  "population", "bmi_category_prop", 
-		"am_bmi", "am_pgs", "genetic_variance", "average_bmi", "sd_bmi"}, 
+	new String[] {"iteration", "replicate", "time", "last_generation",  "population", 
+		"bmi_category_prop", "am_bmi", "am_pgs", "genetic_variance", "vertical_trans_variance",
+		 "average_bmi", "sd_bmi"}, 
 	new String[] {"v_iteration", "v_replicate", "time()", "v_lastCompleteGeneration", "col_aliveAgents.size()",
-		 "col_propBMIGroup.toString()", "v_assortativeMatingBMI", "v_assortativeMatingPGS", "v_geneticVariance", 
+		 "col_propBMIGroup.toString()", "v_assortativeMatingBMI", "v_assortativeMatingPGS", 
+		 "v_geneticVariance", "v_verticalTransVariance",
 		 "dataViz.h_tbmi.mean()", "dataViz.h_tbmi.deviation()"});
 g.initiateFile(col_textFiles);
 col_dataExport.put("prevalence", g);]]></Body>
@@ -5574,6 +5578,9 @@ traceln(root.p_fertilityFactor);
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_maxGeneration]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[50]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_updatePlots]]></ParameterName>
@@ -5658,9 +5665,6 @@ traceln(root.p_fertilityFactor);
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_exportData]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[false]]></Code>
-					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_exportIndividualData]]></ParameterName>
@@ -5719,7 +5723,7 @@ col_experimentLines = f.fromFileToCollection(true);
 /// remove temporary output files
 f.removeOutputFiles();
 ]]></InitialSetupCode>
-			<MaximumMemory>41600</MaximumMemory>
+			<MaximumMemory>40960</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
 			<BeforeSimulationRunCode><![CDATA[// define replicates
@@ -5880,7 +5884,7 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>2</NumberOfRuns>
+			<NumberOfRuns>6000</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 				<Expression Class="CodeValue">
@@ -7204,7 +7208,7 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>2</NumberOfRuns>
+			<NumberOfRuns>6000</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 				<Expression Class="CodeValue">
