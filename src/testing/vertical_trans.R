@@ -1,7 +1,6 @@
 
 library(data.table)
 
-
 p = fread("output/data/param-snp-vt-efast.csv")
 setorder(p, iteration)
 

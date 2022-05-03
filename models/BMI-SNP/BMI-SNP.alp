@@ -500,7 +500,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1632485646519</Id>
 					<Name><![CDATA[p_populationSize]]></Name>
-					<X>50</X><Y>180</Y>
+					<X>50</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -574,7 +574,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1632900849933</Id>
 					<Name><![CDATA[p_updatePlots]]></Name>
-					<X>50</X><Y>200</Y>
+					<X>50</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -647,7 +647,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1632731453253</Id>
 					<Name><![CDATA[p_fertilityType]]></Name>
-					<X>50</X><Y>240</Y>
+					<X>50</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -672,7 +672,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1632903366204</Id>
 					<Name><![CDATA[p_baselineFertility]]></Name>
-					<X>50</X><Y>280</Y>
+					<X>50</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -721,7 +721,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1636145720853</Id>
 					<Name><![CDATA[p_fertilityBMIDifferential]]></Name>
-					<X>50</X><Y>260</Y>
+					<X>50</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -746,7 +746,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1634656309398</Id>
 					<Name><![CDATA[p_populationAdjustment]]></Name>
-					<X>50</X><Y>300</Y>
+					<X>50</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -770,7 +770,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1632690393452</Id>
 					<Name><![CDATA[p_randomMating]]></Name>
-					<X>50</X><Y>220</Y>
+					<X>50</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -795,7 +795,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="Parameter">
 					<Id>1647443482862</Id>
 					<Name><![CDATA[p_numberSNP]]></Name>
-					<X>50</X><Y>370</Y>
+					<X>50</X><Y>380</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -887,9 +887,33 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
+					<Id>1647856798402</Id>
+					<Name><![CDATA[p_fixedGeneticEffects]]></Name>
+					<X>50</X><Y>460</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[boolean]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[false]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1647856798400</Id>
+							<EditorContolType>CHECK_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
 					<Id>1647510223271</Id>
 					<Name><![CDATA[p_geneticVariance]]></Name>
-					<X>50</X><Y>320</Y>
+					<X>50</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -914,7 +938,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					<Id>1651131589377</Id>
 					<Name><![CDATA[p_verticalTransVariance]]></Name>
 					<Description><![CDATA[Vertical transmision variance]]></Description>
-					<X>50</X><Y>340</Y>
+					<X>50</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -936,23 +960,23 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
-					<Id>1647856798402</Id>
-					<Name><![CDATA[p_fixedGeneticEffects]]></Name>
-					<X>50</X><Y>460</Y>
+					<Id>1651564591816</Id>
+					<Name><![CDATA[p_leakage]]></Name>
+					<X>50</X><Y>350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[boolean]]></Type>
+						<Type><![CDATA[double]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[false]]></Code>
+							<Code><![CDATA[0.1]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
-							<Id>1647856798400</Id>
-							<EditorContolType>CHECK_BOX</EditorContolType>
+							<Id>1651564591814</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
 							<DelimeterType>NO_DELIMETER</DelimeterType>
@@ -1223,15 +1247,15 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1634640909761</Id>
-					<Name><![CDATA[col_geneticEffectsData]]></Name>
-					<X>220</X><Y>690</Y>
+					<Name><![CDATA[col_BMIdata]]></Name>
+					<X>220</X><Y>710</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
 						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
-						<ElementClass><![CDATA[MatingData]]></ElementClass>
+						<ElementClass><![CDATA[BMIData]]></ElementClass>
 						<ValueElementClass><![CDATA[String]]></ValueElementClass>
 					</Properties>
 
@@ -1386,6 +1410,21 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					</Properties>
 
 				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1651564451297</Id>
+					<Name><![CDATA[col_verticalTransData]]></Name>
+					<X>220</X><Y>690</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[VerticalTransData]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
 			</Variables>
 			<Events>
 				<Event>
@@ -1420,7 +1459,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					<Action><![CDATA[StatUtils s = new StatUtils();
 
 // update scale
-if (v_newGeneration < 3) {
+if (v_newGeneration < 2) {
 	f_scaleComponents();
 	f_computeZscores();
 }
@@ -1651,14 +1690,48 @@ return s.correlation(ego, alter);]]></Body>
 						<Name><![CDATA[path]]></Name>
 						<Type><![CDATA[String]]></Type>
 					</Parameter>
-					<Body><![CDATA[// mating
-TextFileUtilities m = new TextFileUtilities(path, "genetic-effects.csv", "");
+					<Body><![CDATA[// genetics effects
+TextFileUtilities m = new TextFileUtilities(path,
+		"genetic-effects.csv", "");
 ArrayList<String[]> im = m.fromFileToCollection(true);
 
 for (int i = 0; i < p_numberSNP; i++) {
 	String[] list = im.get(i);
 	double eff = Double.parseDouble(list[0]);
 	col_geneticEffects.put(i, eff);
+}
+
+int maxBMIGroup = 3;
+
+// vertical transmission
+TextFileUtilities h = new TextFileUtilities(path,
+		"heritability.csv", "");
+ArrayList<String[]> ih = h.fromFileToCollection(true);
+for (int i = 0; i < ih.size(); i++) {
+	String[] list = ih.get(i);
+	double father = Double.parseDouble(list[0]);
+	double mother = Double.parseDouble(list[1]);
+	double kid = Double.parseDouble(list[2]);
+	double prob = Double.parseDouble(list[3]);
+
+	// rules!
+	if (mother == father & kid == mother)
+		prob = 1 - p_leakage;
+	else if (mother == father & mother > 0 & mother < 3
+			& (kid == (mother + 1) | kid == (mother - 1)))
+		prob = p_leakage / 2;
+	else if (mother == 0 & father == 0 & kid == 1)
+		prob = p_leakage;
+	else if (mother == maxBMIGroup
+			& father == maxBMIGroup
+			& kid == (maxBMIGroup - 1))
+		prob = p_leakage;
+	else if (mother != father
+			& (kid == father | kid == mother))
+		prob = 0.5;
+	VerticalTransData hh = new VerticalTransData(father,
+			mother, kid, prob);
+	col_verticalTransData.add(hh);
 }
 ]]></Body>
 				</Function>
@@ -1690,6 +1763,13 @@ if (false) {
 
 		traceln(c);
 	}
+}
+
+// create bmi data
+for (int i=0; i < 25000; i++) {
+	double r = normal();
+	double cr = f_categorizeBMI(r, true);
+	col_BMIdata.add(new BMIData(cr, r));
 }
 
 // read input files
@@ -1737,6 +1817,8 @@ for (Person p : people) {
 	p.v_grandMotherID = uniform();
 	p.v_fatherBMI = normal(1, 0);
 	p.v_motherBMI = normal(1, 0);
+	p.v_fatherBMIGroup = f_categorizeBMI(p.v_fatherBMI, true);
+	p.v_motherBMIGroup = f_categorizeBMI(p.v_motherBMI, true);
 	col_aliveAgents.add(p);
 
 	// define SNPs
@@ -1754,9 +1836,8 @@ f_scaleComponents();
 for (int i = 0; i < people.size(); i++) {
 	Person p = people.get(i);
 	f_defineBMI(p);
-	f_transformBMI(p);
-	f_categorizeBMI(p);
-
+	p.v_tbmi = f_transformBMI(p.v_bmi);
+	p.v_BMIGroup = f_categorizeBMI(p.v_bmi, true);
 }]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1772,10 +1853,10 @@ for (int i = 0; i < people.size(); i++) {
 					<Body><![CDATA[// params
 ExportOutput p = new ExportOutput(p_outputPath, "params", v_iteration, v_replicate, 
 	new String[] {"iteration", "replicate", "init_pop", "fertility_type", 
-	    "initial_genetic_variance", "vertical_trans_variance", 
+	    "initial_genetic_variance", "vertical_trans_variance", "leakage", 
 	    "random_mating", "fertility_factor"}, 
 	new String[] {"v_iteration", "v_replicate", "p_populationSize", "p_fertilityType", 
-		"p_geneticVariance", "p_verticalTransVariance", 
+		"p_geneticVariance", "p_verticalTransVariance", "p_leakage",
 		"p_randomMating", "p_fertilityBMIDifferential"});
 p.initiateFile(col_textFiles);
 col_dataExport.put("params", p);
@@ -1862,12 +1943,13 @@ double noiseComp = normal(1, 0);
 
 p.v_pgs = geneticComp;
 p.v_noise = noiseComp;
-p.v_verticalTrans = (p.v_fatherBMI + p.v_motherBMI)/2.0;
+p.v_verticalTrans = f_verticalTransBMI(p.v_fatherBMIGroup, p.v_motherBMIGroup);
 
 // testing
 //traceln("::::: bmi values");
 //traceln(p.v_fatherBMI);
-//traceln(p.v_motherBMI);]]></Body>
+//traceln(p.v_motherBMI);
+//traceln(p.v_verticalTrans);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -1943,7 +2025,7 @@ v_scaledNoise = s.scalingFactor(
 					<Body><![CDATA[return (value - mean) / sd;	]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1647532972266</Id>
 					<Name><![CDATA[f_transformBMI]]></Name>
@@ -1953,13 +2035,13 @@ v_scaledNoise = s.scalingFactor(
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Parameter>
-						<Name><![CDATA[p]]></Name>
-						<Type><![CDATA[Person]]></Type>
+						<Name><![CDATA[value]]></Name>
+						<Type><![CDATA[double]]></Type>
 					</Parameter>
-					<Body><![CDATA[p.v_tbmi = p.v_bmi * p_bmiSD + p_bmiMean;]]></Body>
+					<Body><![CDATA[return value * p_bmiSD + p_bmiMean;]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1647552259142</Id>
 					<Name><![CDATA[f_categorizeBMI]]></Name>
@@ -1969,14 +2051,28 @@ v_scaledNoise = s.scalingFactor(
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Parameter>
-						<Name><![CDATA[p]]></Name>
-						<Type><![CDATA[Person]]></Type>
+						<Name><![CDATA[value]]></Name>
+						<Type><![CDATA[double]]></Type>
 					</Parameter>
-					<Body><![CDATA[if (p.v_tbmi < 18.5) p.v_BMIGroup = 0;
-if (p.v_tbmi >= 18.5 & p.v_tbmi < 25.0) p.v_BMIGroup = 1;
-if (p.v_tbmi >= 25.0 & p.v_tbmi < 30) p.v_BMIGroup = 2;
-if (p.v_tbmi >= 30) p.v_BMIGroup = 3;
-]]></Body>
+					<Parameter>
+						<Name><![CDATA[standardized]]></Name>
+						<Type><![CDATA[boolean]]></Type>
+					</Parameter>
+					<Body><![CDATA[StatUtils s = new StatUtils();
+
+if (standardized)  {
+	if (value < (18.5 -p_bmiMean)/p_bmiSD) return 0.0;
+	if (value >= (18.5-p_bmiMean)/p_bmiSD & value < (25.0 -p_bmiMean)/p_bmiSD) return  1.0;
+	if (value >= (25.0 -p_bmiMean)/p_bmiSD & value < (30-p_bmiMean)/p_bmiSD) return  2.0;
+	if (value >= (30-p_bmiMean)/p_bmiSD) return 3.0;
+} else {
+	if (value < 18.5) return 0.0;
+	if (value >= 18.5 & value < 25.0) return  1.0;
+	if (value >= 25.0 & value < 30) return 2.0;
+	if (value >= 30) return 3.0;
+}
+	
+return s.sample(new double[]{0,1, 2, 3});]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -2021,7 +2117,7 @@ v_propFemale = female / total;]]></Body>
 					<ReturnType><![CDATA[double[]]]></ReturnType>
 					<Id>1651134897475</Id>
 					<Name><![CDATA[f_propVariance]]></Name>
-					<X>250</X><Y>330</Y>
+					<X>250</X><Y>320</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2090,6 +2186,49 @@ for (Person p : col_aliveAgents) {
 		v_initialVerticalTransSD, 
 		p.v_verticalTrans);
 }]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1651564805891</Id>
+					<Name><![CDATA[f_verticalTransBMI]]></Name>
+					<X>250</X><Y>340</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[father]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[mother]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Body><![CDATA[StatUtils s = new StatUtils();
+
+double[] prop = col_verticalTransData.stream().filter(
+		w -> w.father == father & w.mother == mother)
+		.mapToDouble(w -> w.prob).toArray();
+double[] outcome = col_verticalTransData.stream().filter(
+		w -> w.father == father & w.mother == mother)
+		.mapToDouble(w -> w.kid).toArray();
+
+double group = new StatUtils().weightedSampling(outcome,
+		prop);
+
+double[] values = col_BMIdata.stream()
+		.filter(b -> b.group == group)
+		.mapToDouble(w -> w.bmi).toArray();
+double v = s.sample(values);
+
+//traceln("::::::: testing");
+//traceln("father:" + father + "; mother:" + mother);
+//traceln("prop " + prop.toString());
+//traceln("outcomes " + outcome.toString());
+//traceln("group " + group + ": " + v);
+return v;
+]]></Body>
 				</Function>
 			</Functions>
 			<AnalysisData>
@@ -3334,7 +3473,6 @@ kid.v_grandFatherID = father.v_fatherID;
 
 kid.v_fatherBMI = mother.v_bmi;
 kid.v_motherBMI = father.v_bmi;
-
 kid.v_fatherBMIGroup = mother.v_BMIGroup;
 kid.v_motherBMIGroup = father.v_BMIGroup;
 kid.v_parentType = randomFrom(ParentType.class);
@@ -3493,8 +3631,8 @@ kid.v_zverticalTrans = main.f_zscore(
 
 
 main.f_defineBMI(kid);
-main.f_transformBMI(kid);
-main.f_categorizeBMI(kid);]]></Body>
+kid.v_tbmi = main.f_transformBMI(kid.v_bmi);
+kid.v_BMIGroup = main.f_categorizeBMI(kid.v_bmi, true);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -5578,9 +5716,6 @@ traceln(root.p_fertilityFactor);
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_maxGeneration]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[50]]></Code>
-					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_updatePlots]]></ParameterName>
@@ -5618,7 +5753,7 @@ traceln(root.p_fertilityFactor);
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[1.0]]></Code>
+						<Code><![CDATA[0.0]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -5643,21 +5778,27 @@ traceln(root.p_fertilityFactor);
 					<ParameterName><![CDATA[p_alleleFreq]]></ParameterName>
 				</Parameter>
 				<Parameter>
+					<ParameterName><![CDATA[p_fixedGeneticEffects]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[true]]></Code>
+					</ParameterValue>
+				</Parameter>
+				<Parameter>
 					<ParameterName><![CDATA[p_geneticVariance]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.08]]></Code>
+						<Code><![CDATA[0]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_verticalTransVariance]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.40]]></Code>
+						<Code><![CDATA[1]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[p_fixedGeneticEffects]]></ParameterName>
+					<ParameterName><![CDATA[p_leakage]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[true]]></Code>
+						<Code><![CDATA[0.05]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -5672,7 +5813,7 @@ traceln(root.p_fertilityFactor);
 				<Parameter>
 					<ParameterName><![CDATA[p_generationToRecord]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[{50}]]></Code>
+						<Code><![CDATA[{0}]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -5695,7 +5836,7 @@ traceln(root.p_fertilityFactor);
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
-				<EnableZoomAndPanning>false</EnableZoomAndPanning>
+				<EnableZoomAndPanning>true</EnableZoomAndPanning>
 				<ExecutionMode><![CDATA[realTimeScaled]]></ExecutionMode>
 				<Title><![CDATA[Testing]]></Title>	
 				<EnableDeveloperPanel>true</EnableDeveloperPanel>
@@ -6014,6 +6155,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1651131589377</Id>
 			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651564591816</Id>
+			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
 				<Type>FIXED</Type>
@@ -6124,6 +6268,10 @@ s.sendMessage();]]></AfterExperimentCode>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1651131589377</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651564591816</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<ModelTimeProperties>
@@ -6460,6 +6608,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1651131589377</Id>
 			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651564591816</Id>
+			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
 				<Type>FIXED</Type>
@@ -6570,6 +6721,10 @@ s.sendMessage();]]></AfterExperimentCode>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1651131589377</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651564591816</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<ModelTimeProperties>
@@ -6899,6 +7054,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1651131589377</Id>
 			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651564591816</Id>
+			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
 				<Type>FIXED</Type>
@@ -7009,6 +7167,10 @@ s.sendMessage();]]></AfterExperimentCode>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1651131589377</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651564591816</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
 			<ModelTimeProperties>
@@ -7338,6 +7500,9 @@ s.sendMessage();]]></AfterExperimentCode>
 					<Code><![CDATA[0.1]]></Code>
 				</Expression>
 			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651564591816</Id>
+			</FreeformParamValue>
 			<RangeVariationParamValue>	
 				<Id>1632485646519</Id>
 				<Type>FIXED</Type>
@@ -7450,6 +7615,10 @@ s.sendMessage();]]></AfterExperimentCode>
 				<Id>1651131589377</Id>
 				<Type>FIXED</Type>
 			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651564591816</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
 			<ModelTimeProperties>
 				<StopOption><![CDATA[Never]]></StopOption>
 				<InitialDate><![CDATA[1632441600000]]></InitialDate>	
@@ -7479,29 +7648,26 @@ s.sendMessage();]]></AfterExperimentCode>
 		<!--   =========   Java Class   ========  -->
 		<JavaClass>
 			<Id>1634640741605</Id>
-			<Name><![CDATA[MatingData]]></Name>
-			<Text><![CDATA[class MatingData {
-	double ego;
-	double alter;
-	double prob;
-	public MatingData(double ego, double alter,
-			double prob) {
-		this.ego = ego;
-		this.alter = alter;
-		this.prob = prob;
+			<Name><![CDATA[BMIData]]></Name>
+			<Text><![CDATA[class BMIData {
+	double group;
+	double bmi;
+	public BMIData(double group, double bmi) {
+		this.group = group;
+		this.bmi = bmi;
 	}
 }]]></Text>
 		</JavaClass>
 		<!--   =========   Java Class   ========  -->
 		<JavaClass>
 			<Id>1634646559594</Id>
-			<Name><![CDATA[HeritabilityData]]></Name>
-			<Text><![CDATA[class HeritabilityData {
+			<Name><![CDATA[VerticalTransData]]></Name>
+			<Text><![CDATA[class VerticalTransData {
 	double father;
 	double mother;
 	double kid;
 	double prob;
-	public HeritabilityData(double father, double mother,
+	public VerticalTransData(double father, double mother,
 			double kid, double prob) {
 		this.father = father;
 		this.mother = mother;
