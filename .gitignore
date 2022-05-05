@@ -5,3 +5,4 @@
 .push.settings.jsonc
 .vscode
 slack.txt
+__pycache__

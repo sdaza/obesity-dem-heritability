@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[BMI-SNP]]></Name>
@@ -1853,8 +1853,8 @@ for (int i = 0; i < people.size(); i++) {
 					<Body><![CDATA[// params
 ExportOutput p = new ExportOutput(p_outputPath, "params", v_iteration, v_replicate, 
 	new String[] {"iteration", "replicate", "init_pop", "fertility_type", 
-	    "initial_genetic_variance", "vertical_trans_variance", "leakage", 
-	    "random_mating", "fertility_factor"}, 
+	    "p_genetic_variance", "p_vertical_trans_variance", "p_leakage", 
+	    "p_random_mating", "p_fertility_factor"}, 
 	new String[] {"v_iteration", "v_replicate", "p_populationSize", "p_fertilityType", 
 		"p_geneticVariance", "p_verticalTransVariance", "p_leakage",
 		"p_randomMating", "p_fertilityBMIDifferential"});
@@ -7370,7 +7370,7 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>6000</NumberOfRuns>
+			<NumberOfRuns>3000</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 				<Expression Class="CodeValue">
