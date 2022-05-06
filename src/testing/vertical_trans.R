@@ -8,5 +8,15 @@ r = fread("output/data/results-snp-vt-efast.csv")
 setorder(r, iteration)
 
 
-r
-p
+
+tl = function(prob) {
+    return(-log((1-prob)/prob))
+}
+
+tp = function(t) {
+    return(1/(1+exp(-t)))
+}
+
+(v = tl(0.0))
+
+tp(v)

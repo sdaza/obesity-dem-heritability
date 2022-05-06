@@ -1,3 +1,23 @@
+### 2022-05-06
+
+- Optimized the assignment of random bmi values from bmi categories or groups
+- Implemented bmi group differentials in mating using a logistic function
+- Sensitivity analysis using vertical transmission
+
+### 2022-05-04
+
+- Simulation is kind of slow, find ways to optimize (specially vertical transmission)
+
+### 2022-04-22
+
+- The key factor moving away from HW equilibrum is fertility
+
+### 2022-04-03
+
+- Implement vertical transmission
+    - I have tried serveral ways
+    - I will use Preston's matrix, leakage will define different rules of transmission
+- Explore importance of parameters when genetic and vertical transmission are working
 
 
 ### 2022-03-27

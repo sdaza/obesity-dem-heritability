@@ -1,4 +1,4 @@
-iteration;replicate;init_pop;fertility_type;initial_genetic_variance;random_mating;fertility_factor
+iteration;replicate;init_pop;fertility_type;p_genetic_variance;p_random_mating;p_fertility_factor
 1;1;8000;additive;0.30635916124138896;0.6127183224827779;0.18381549674483336
 10;1;8000;additive;0.31085916124138896;0.8537183224827779;0.2675154967448334
 100;1;8000;additive;0.35585916124138894;0.73628167751722;0.09548450325516657
