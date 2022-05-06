@@ -1,3 +1,9 @@
+### 2022-05-06
+
+- Optimized the assignment of random bmi values from bmi categories or groups
+- Implemented bmi group differentials in mating using a logistic function
+- Sensitivity analysis using vertical transmission
+
 ### 2022-05-04
 
 - Simulation is kind of slow, find ways to optimize (specially vertical transmission)
