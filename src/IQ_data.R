@@ -48,7 +48,7 @@ abs(test - max(test))
 0.5 + 6 *0.25 + 6 * 0.25
 
 # create preston matrix
-e = 0.4
+e = 0.1
 test = expand.grid(iq_father = 1:4, iq_mother = 1:4, iq_kid = 1:4)
 test = data.table(test)
 test[iq_father == iq_mother & iq_kid == iq_mother, prop := 1-e]
@@ -65,7 +65,10 @@ table(test$prop)
 test[iq_father != iq_mother & (iq_father == iq_kid | iq_mother == iq_kid), prop := 1/2]
 test[is.na(prop), prop := 0]
 table(test$prop)
+test
 test[, sum(prop), .(iq_mother, iq_father)]
+
+test[iq_father == 3 & iq_mother == 1]
 
 write.xlsx(test, "test",  file = "data/matrixH.xlsx", row.names = FALSE)
 
@@ -75,3 +78,8 @@ test[, prop := 0.0]
 write.xlsx(test, "mating", file = "data/mating.xlsx", row.names = FALSE)
 
 test[iq_father == 3 & iq_mother == 2]
+
+
+test = data.table(expand.grid(father = 0:3, mother = 0:3, kid = 0:3))
+test[, prop := 0]
+fwrite(test, "models/BMI-SNP/data/heritability.csv", row.names = FALSE)
