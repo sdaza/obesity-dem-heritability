@@ -1,3 +1,9 @@
+### 2022-05-07
+
+- Create class for sensitivity analysis
+- Run simulations for Sobol
+- Run simulations to show differences in outcome
+
 ### 2022-05-06
 
 - Optimized the assignment of random bmi values from bmi categories or groups
