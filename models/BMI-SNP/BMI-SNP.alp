@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[BMI-SNP]]></Name>
@@ -3785,7 +3785,6 @@ List<Person> alters = new ArrayList<Person>();
 
 if (r) {
 
-
     /*
 	// testing
 	traceln("new agent ::::::::::");
@@ -3814,7 +3813,6 @@ if (r) {
 					& p.v_grandFatherID != ego.v_grandFatherID));
 
 	//traceln("filtered potential partners: " + alters.size());
-
 	// alters = filter(main.col_potentialMates, p -> p !=
 	// ego);
 	// traceln(time() + ": " + alters.size());
@@ -3849,7 +3847,6 @@ if (r) {
 
 	// }
 }
-
 
 if (alters.size() > 0) {
 	v_poolMates = alters.size();
@@ -7215,6 +7212,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1651131589377</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.0]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1651564591816</Id>
