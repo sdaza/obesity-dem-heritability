@@ -19,7 +19,6 @@ class Sensitivity:
         self.Y = Y.to_numpy()
         self.X = X
  
-
     def score(self, type):
         self.type = type
         if (self.type == 'efast'):

@@ -1,0 +1,62 @@
+
+\begin{table}[htp]
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{5pt}
+\caption{Efast sensitivity results (N = 6000 per scenario)}
+\label{tab:efast}
+\footnotesize
+\centering
+\begin{threeparttable}
+\begin{tabular}{lccc}
+\hline
+\addlinespace
+& Proportion Obese & Average BMI & SD BMI \\
+\addlinespace
+\hline
+\addlinespace
+\multicolumn{4}{l}{\textbf{Scenario 1 (only genes)}} \\
+\addlinespace[6pt]
+\multicolumn{4}{l}{\hspace{1em} S1} \\
+\hspace{1.5em} random-mating & 0.109 [0.104; 0.113] & 0.097 [0.094; 0.101] & 0.148 [0.144; 0.152]\\ 
+	\hspace{1.5em} genetic-variance & 0.481 [0.478; 0.485] & 0.506 [0.502; 0.510] & 0.308 [0.303; 0.313]\\ 
+	\hspace{1.5em} fertility-differential & 0.189 [0.185; 0.193] & 0.227 [0.223; 0.231] & 0.078 [0.074; 0.081]\\
+\addlinespace[12pt]
+\multicolumn{4}{l}{\hspace{1em} ST} \\ 
+\hspace{1.5em} random-mating & 0.230 [0.213; 0.247] & 0.185 [0.165; 0.204] & 0.521 [0.501; 0.541]\\ 
+	\hspace{1.5em} genetic-variance & 0.685 [0.664; 0.705] & 0.664 [0.644; 0.684] & 0.721 [0.703; 0.738]\\ 
+	\hspace{1.5em} fertility-differential & 0.337 [0.317; 0.356] & 0.350 [0.333; 0.368] & 0.397 [0.380; 0.415]\\ 
+\addlinespace[12pt]
+    \multicolumn{4}{l}{\textbf{Scenario 2 (only vertical transmission)}} \\
+    \addlinespace[6pt]
+    \multicolumn{4}{l}{\hspace{1em} S1} \\
+\hspace{1.5em} random-mating & 0.022 [0.018; 0.026] & 0.033 [0.029; 0.037] & 0.003 [-0.001; 0.007]\\ 
+	\hspace{1.5em} leakage & 0.464 [0.460; 0.469] & 0.533 [0.529; 0.537] & 0.396 [0.392; 0.400]\\ 
+	\hspace{1.5em} fertility-differential & 0.048 [0.044; 0.052] & 0.106 [0.102; 0.110] & 0.097 [0.093; 0.101]\\
+\addlinespace[12pt]
+\multicolumn{4}{l}{\hspace{1em} ST} \\ 
+\hspace{1.5em} random-mating & 0.342 [0.323; 0.361] & 0.272 [0.253; 0.291] & 0.358 [0.337; 0.378]\\ 
+	\hspace{1.5em} leakage & 0.887 [0.869; 0.906] & 0.831 [0.813; 0.849] & 0.842 [0.823; 0.861]\\ 
+	\hspace{1.5em} fertility-differential & 0.441 [0.424; 0.458] & 0.379 [0.359; 0.399] & 0.520 [0.502; 0.538]\\ 
+\addlinespace[12pt]
+    \multicolumn{4}{l}{\textbf{Scenario 3 (genes and vertical transmission)}} \\
+    \addlinespace[6pt]
+    \multicolumn{4}{l}{\hspace{1em} S1} \\
+\hspace{1.5em} random-mating & 0.192 [0.188; 0.197] & 0.098 [0.094; 0.102] & 0.247 [0.243; 0.251]\\ 
+	\hspace{1.5em} genetic-variance & 0.384 [0.380; 0.388] & 0.201 [0.197; 0.204] & 0.357 [0.353; 0.361]\\ 
+	\hspace{1.5em} vertical-trans-variance & 0.152 [0.149; 0.156] & 0.065 [0.061; 0.069] & 0.140 [0.136; 0.144]\\
+\addlinespace[12pt]
+\multicolumn{4}{l}{\hspace{1em} ST} \\ 
+\hspace{1.5em} random-mating & 0.407 [0.388; 0.426] & 0.669 [0.648; 0.691] & 0.460 [0.440; 0.480]\\ 
+	\hspace{1.5em} genetic-variance & 0.613 [0.594; 0.633] & 0.762 [0.743; 0.782] & 0.566 [0.546; 0.586]\\ 
+	\hspace{1.5em} vertical-trans-variance & 0.305 [0.283; 0.326] & 0.573 [0.554; 0.591] & 0.244 [0.224; 0.264]\\
+\addlinespace
+\hline
+\end{tabular}
+\begin{tablenotes}
+\scriptsize
+\item 95\% confidence interval in brackets.
+\item S1 = First-order indices,  measures the contribution to the output variance by a single model input alone.
+\item ST = Total-order index, measures the contribution to the output variance caused by a model input, including both its first-order effects (the input varying alone) and all higher-order interactions.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
