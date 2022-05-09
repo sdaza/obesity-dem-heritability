@@ -81,3 +81,26 @@ class Sensitivity:
             fig.write_image(filepath)
             if (move):
                 shutil.copy(filepath, moving_path)
+
+    def tabval(self, type='ST'):
+        p = self.Sif['ST']
+        params = len(p)
+        v = []
+        for i in range(0,params):
+            p = self.Sif[type][i]
+            c = self.Sif[type + '_conf'][i]
+            l = p - c
+            h = p + c
+            v.append(str(format(p,'.3f')) + " [" + str(format(l,'.3f')) + "; " + str(format(h,'.3f')) + "]")
+        return v
+
+    def createRows(self, d, g=['s1', 'st']):
+        rows = {}
+        for i in g:
+            v = {}
+            h = 0
+            for ii in self.Sif['names']:
+                v[ii] = [value[h] for key, value in d.items() if key.endswith(i)]
+                h += 1
+            rows[i] = "\\\\ \n\t".join(["{} & {}".format("\\hspace{1.5em} " + _k, " & ".join(_v)) for _k, _v in v.items()])
+        return rows
