@@ -1,4 +1,5 @@
 # import libraries
+from lib2to3.pgen2.pgen import DFAState
 from SALib.analyze import fast,sobol
 from SALib.plotting.bar import plot as barplot
 import pandas as pd
@@ -11,6 +12,7 @@ import re
 
 class Sensitivity:
     
+    
     def __init__(self, problem, Y, X):
         
         self.problem = problem
@@ -19,12 +21,14 @@ class Sensitivity:
         self.Y = Y.to_numpy()
         self.X = X
  
+
     def score(self, type):
         self.type = type
         if (self.type == 'efast'):
             self.Sif = fast.analyze(self.problem, self.Y, print_to_console=True)
         if (self.type == 'sobol'):
             self.Sif = sobol.analyze(self.problem, self.Y, print_to_console=True)
+
 
     def plot(self, save=False, filepath = '', move = False, moving_path = ''):
         if (self.type == 'efast'):
@@ -46,6 +50,7 @@ class Sensitivity:
                     plt.savefig(tpath, bbox_inches='tight')
                     if (move): 
                         shutil.copy(tpath, moving_path)
+
 
     def plot3D(self, labels=None, save=False, filepath='', move=False, moving_path=''):
         
@@ -81,25 +86,43 @@ class Sensitivity:
             if (move):
                 shutil.copy(filepath, moving_path)
 
-    def tabval(self, type='ST'):
-        p = self.Sif['ST']
-        params = len(p)
-        v = []
-        for i in range(0,params):
-            p = self.Sif[type][i]
-            c = self.Sif[type + '_conf'][i]
-            l = p - c
-            h = p + c
-            v.append(str(format(p,'.3f')) + " [" + str(format(l,'.3f')) + "; " + str(format(h,'.3f')) + "]")
+
+    def tabval(self, index='ST'):
+        v = {}
+        if (self.type == 'efast'):      
+            nn = self.Sif['names']
+            params = len(nn)
+            for i in range(0,params):
+                p = self.Sif[index][i]
+                c = self.Sif[index + '_conf'][i]
+                l = p - c
+                h = p + c
+                v[nn[i]] = str(format(p,'.3f')) + " [" + str(format(l,'.3f')) + "; " + str(format(h,'.3f')) + "]"
+        if (self.type == 'sobol'):
+            st, s1, s2 = self.Sif.to_df()
+            dix = {'ST':st,'S1':s1,'S2':s2}
+            dd = dix[index]
+            params = dd.shape[0]
+            nn = dd.index.to_list()
+            for i in range(0,params):
+                p = dd.iloc[i,0]
+                c = dd.iloc[i,1]
+                l = p - c
+                h = p + c
+                v[nn[i]] = str(format(p,'.3f')) + " [" + str(format(l,'.3f')) + "; " + str(format(h,'.3f')) + "]"
         return v
 
+
     def createRows(self, d, g=['s1', 'st']):
-        rows = {}
-        for i in g:
-            v = {}
-            h = 0
-            for ii in self.Sif['names']:
-                v[ii] = [value[h] for key, value in d.items() if key.endswith(i)]
-                h += 1
-            rows[i] = "\\\\ \n\t".join(["{} & {}".format("\\hspace{1.5em} " + _k, " & ".join(_v)) for _k, _v in v.items()])
-        return rows
+        output = {}
+        for ss in g:
+            rows = []
+            t = [value for key, value in d.items() if key.endswith(ss)]
+            v = list(t[0].keys())
+            for ii in v:
+                vv = [x[ii] for x in t]
+                if (ss == 's2'):
+                    ii = ' x '.join(ii)
+                rows.append('\\hspace{1.5em} ' + ii + ' '.join([' & {} '.format(z) for z in vv]) + '\\\\\n\t ')
+            output[ss] = ' '.join(rows)
+        return output
