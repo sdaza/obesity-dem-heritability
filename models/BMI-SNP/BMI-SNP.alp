@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[BMI-SNP]]></Name>
@@ -197,7 +197,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1632899137405</Id>
 					<Name><![CDATA[v_replicate]]></Name>
-					<X>470</X><Y>140</Y>
+					<X>470</X><Y>160</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -209,7 +209,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1634553224336</Id>
 					<Name><![CDATA[v_id]]></Name>
-					<X>470</X><Y>160</Y>
+					<X>470</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -507,6 +507,18 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[double]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1652102745986</Id>
+					<Name><![CDATA[v_iterationExp]]></Name>
+					<X>470</X><Y>140</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
 					</Properties>
 				</Variable>
 				<Variable Class="Parameter">
@@ -1904,7 +1916,7 @@ for (int i = 0; i < people.size(); i++) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[// params
-ExportOutput p = new ExportOutput(p_outputPath, "params", v_iteration, v_replicate, 
+ExportOutput p = new ExportOutput(p_outputPath, "params", v_iterationExp, v_replicate, 
 	new String[] {"iteration", "replicate", "init_pop", "fertility_type", "mating_type",
 	    "p_genetic_variance", "p_vertical_trans_variance", "p_leakage", 
 	    "p_random_mating", "p_fertility_factor"}, 
@@ -1917,7 +1929,7 @@ col_dataExport.put("params", p);
 
 // agents
 if (p_exportIndividualData) {
-ExportOutput a = new ExportOutput(p_outputPath, "agents", v_iteration, v_replicate, 
+ExportOutput a = new ExportOutput(p_outputPath, "agents", v_iterationExp, v_replicate, 
 	new String[] {"iteration", "replicate", "id", "time", "pgs", "raw_bmi", "bmi", "bmi_group", 
         "noise", "ghost", "generation", "parent_type", "father_bmi_group", "mother_bmi_group", 
         "father_id", "mother_id", "father_pgs", "mother_pgs", "snps"}, 
@@ -1930,7 +1942,7 @@ col_dataExport.put("agents", a);
 }
 
 // obesity prevalence
-ExportOutput g = new ExportOutput(p_outputPath, "prevalence", v_iteration, v_replicate, 
+ExportOutput g = new ExportOutput(p_outputPath, "prevalence", v_iterationExp, v_replicate, 
 	new String[] {"iteration", "replicate", "time", "last_generation",  "population", 
 		"bmi_category_prop", "am_bmi", "am_pgs", "genetic_variance", "vertical_trans_variance",
 		 "average_bmi", "sd_bmi"}, 
@@ -5751,24 +5763,9 @@ switch (main.p_matingType) {
 			<Name><![CDATA[Simulation]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
-			<InitialSetupCode><![CDATA[//TextFileUtilities f = new TextFileUtilities("data/", "param-sobol.csv", "output");
-//col_experimentLines = f.fromFileToCollection(true);
-//f.removeOutputFiles();]]></InitialSetupCode>
 			<MaximumMemory>512</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
-			<BeforeSimulationRunCode><![CDATA[/*
-String[] line = col_experimentLines.get(1);
-
-root.p_randomMating = Double.parseDouble(line[0]);
-root.p_leakage = Double.parseDouble(line[1]);
-root.p_fertilityFactor = Double.parseDouble(line[2]);
-
-traceln("iteration....");
-traceln(root.p_randomMating);
-traceln(root.p_leakage);
-traceln(root.p_fertilityFactor);
-*/]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[if (v_slack) {
 	SlackMessage s = new SlackMessage();
 	s.sendMessage();
@@ -6012,6 +6009,7 @@ setFixedReplicationsNumber(v_numberReplicates);
 
 // get iteration and replicate values
 root.v_iteration = getCurrentIteration();
+root.v_iterationExp = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
 // update parameters
@@ -6473,6 +6471,7 @@ setFixedReplicationsNumber(v_numberReplicates);
 
 // get iteration and replicate values
 root.v_iteration = getCurrentIteration();
+root.v_iterationExp = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
 // update parameters
@@ -6931,6 +6930,7 @@ setFixedReplicationsNumber(v_numberReplicates);
 
 // get iteration and replicate values
 root.v_iteration = getCurrentIteration();
+root.v_iterationExp = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
 // update parameters
@@ -7390,6 +7390,7 @@ setFixedReplicationsNumber(v_numberReplicates);
 
 // get iteration and replicate values
 root.v_iteration = getCurrentIteration();
+root.v_iterationExp = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
 // update parameters
@@ -7846,6 +7847,7 @@ setFixedReplicationsNumber(v_numberReplicates);
 
 // get iteration and replicate values
 root.v_iteration = getCurrentIteration();
+root.v_iterationExp = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
 // update parameters
@@ -8305,6 +8307,7 @@ setFixedReplicationsNumber(v_numberReplicates);
 
 // get iteration and replicate values
 root.v_replicate = getCurrentReplication();
+root.v_iterationExp = getCurrentIteration();
 
 // update parameters
 if (getCurrentIteration() <= col_experimentLines.size()) {
@@ -8456,7 +8459,7 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>6000</NumberOfRuns>
+			<NumberOfRuns>900</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 				<Expression Class="CodeValue">
@@ -8549,6 +8552,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1647960922330</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1648134544569</Id>
