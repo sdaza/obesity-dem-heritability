@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[BMI-SNP]]></Name>
@@ -8776,7 +8776,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 	String[] line = col_experimentLines.get(getCurrentIteration()-1);
 	root.v_iteration = Integer.parseInt(line[0]);
 	root.p_randomMating = Double.parseDouble(line[1]);
-	root.p_geneticVariance = Double.parseDouble(line[2]);
+	root.p_verticalTransVariance = Double.parseDouble(line[2]);
 }]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[// track number of replicates
 //if (getCurrentIteration() <= col_experimentLines.size()) { 
