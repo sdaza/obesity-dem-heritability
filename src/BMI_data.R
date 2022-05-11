@@ -6,6 +6,7 @@
 library(data.table)
 library(xlsx)
 
+
 # heritability matrix
 test = expand.grid(iq_father = 1:4, iq_mother = 1:4, iq_kid = 1:4)
 

@@ -6,3 +6,5 @@
 .vscode
 slack.txt
 __pycache__
+env
+.ipynb_checkpoints/
