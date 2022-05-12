@@ -8776,8 +8776,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 	String[] line = col_experimentLines.get(getCurrentIteration()-1);
 	root.v_iteration = Integer.parseInt(line[0]);
 	root.p_randomMating = Double.parseDouble(line[1]);
-	root.p_genesVariance = Double.parseDouble(line[2]);
-	root.p_verticalTransVariance = Double.parseDouble(line[3]);
+	root.p_verticalTransVariance = Double.parseDouble(line[2]);
 }]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[// track number of replicates
 //if (getCurrentIteration() <= col_experimentLines.size()) { 
@@ -8879,7 +8878,7 @@ v_replicates++;
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-14774017</Color>
-					<Text><![CDATA[BMI Genes Vertical Trans]]></Text>
+					<Text><![CDATA[BMI Vertical Trans]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>28</Size>
@@ -9700,7 +9699,8 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 	String[] line = col_experimentLines.get(getCurrentIteration()-1);
 	root.v_iteration = Integer.parseInt(line[0]);
 	root.p_randomMating = Double.parseDouble(line[1]);
-	root.p_verticalTransVariance = Double.parseDouble(line[2]);
+	root.p_geneticVariance = Double.parseDouble(line[2]);
+	root.p_verticalTransVariance = Double.parseDouble(line[3]);
 }]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[// track number of replicates
 //if (getCurrentIteration() <= col_experimentLines.size()) { 
@@ -9737,7 +9737,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["bmi-mating-vertical-trans"]]></Code>
+							<Code><![CDATA["bmi-mating-genes-vertical-trans"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -9802,7 +9802,7 @@ v_replicates++;
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-14774017</Color>
-					<Text><![CDATA[BMI Vertical Trans]]></Text>
+					<Text><![CDATA[BMI Genes Vertical Trans]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>28</Size>
@@ -9813,7 +9813,7 @@ v_replicates++;
 				<Text>
 					<Id>1652270894504</Id>
 					<Name><![CDATA[progress]]></Name>
-					<X>390</X><Y>50</Y>
+					<X>450</X><Y>50</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
