@@ -77,13 +77,12 @@ class Sensitivity:
             width=700,
             margin=dict(r=20, b=10, l=10, t=10), 
             coloraxis_colorbar=dict(title=labels['outcome'])
-            )
-        fig.show()
-
+        )
         if (save):
             fig.write_image(filepath)
             if (move):
                 shutil.copy(filepath, moving_path)
+        fig.show()
 
 
     def tabval(self, index='ST'):
