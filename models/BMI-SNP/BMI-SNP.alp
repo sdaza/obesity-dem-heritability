@@ -8130,7 +8130,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1651131589377</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[1]]></Code>
+					<Code><![CDATA[1.00]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -8813,7 +8813,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["bmi-mating-genes-vertical-trans"]]></Code>
+							<Code><![CDATA["bmi-mating-vertical-trans"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -9054,7 +9054,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1651131589377</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[0.2]]></Code>
+					<Code><![CDATA[1.0]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -9515,7 +9515,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1651131589377</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[0.3]]></Code>
+					<Code><![CDATA[1.0]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -9845,7 +9845,7 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>2700</NumberOfRuns>
+			<NumberOfRuns>1800</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 				<Expression Class="CodeValue">
