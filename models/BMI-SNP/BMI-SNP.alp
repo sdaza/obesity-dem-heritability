@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[BMI-SNP]]></Name>
@@ -8793,7 +8793,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1652270894494</Id>
 					<Name><![CDATA[v_replicates]]></Name>
-					<X>90</X><Y>190</Y>
+					<X>90</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8808,7 +8808,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1652270894496</Id>
 					<Name><![CDATA[v_paramName]]></Name>
-					<X>90</X><Y>160</Y>
+					<X>90</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8816,14 +8816,14 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["bmi-fertility-genes-vertical-trans"]]></Code>
+							<Code><![CDATA["bmi-mating-genes-vertical-trans"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1652270894498</Id>
 					<Name><![CDATA[v_outputPath]]></Name>
-					<X>90</X><Y>140</Y>
+					<X>90</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8838,7 +8838,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1652270894500</Id>
 					<Name><![CDATA[v_numberReplicates]]></Name>
-					<X>90</X><Y>210</Y>
+					<X>90</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8853,7 +8853,7 @@ v_replicates++;
 				<Variable Class="CollectionVariable">
 					<Id>1652270894492</Id>
 					<Name><![CDATA[col_experimentLines]]></Name>
-					<X>90</X><Y>230</Y>
+					<X>90</X><Y>280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8881,7 +8881,7 @@ v_replicates++;
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-14774017</Color>
-					<Text><![CDATA[BMI Genes Vertical Trans]]></Text>
+					<Text><![CDATA[BMI Mating Genes Vertical Trans]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>28</Size>
@@ -8892,7 +8892,7 @@ v_replicates++;
 				<Text>
 					<Id>1652270894504</Id>
 					<Name><![CDATA[progress]]></Name>
-					<X>450</X><Y>50</Y>
+					<X>80</X><Y>100</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9718,7 +9718,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1653935245694</Id>
 					<Name><![CDATA[v_replicates]]></Name>
-					<X>90</X><Y>190</Y>
+					<X>90</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9733,7 +9733,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1653935245696</Id>
 					<Name><![CDATA[v_paramName]]></Name>
-					<X>90</X><Y>160</Y>
+					<X>90</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9741,14 +9741,14 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["bmi-mating-genes-vertical-trans"]]></Code>
+							<Code><![CDATA["bmi-fertility-genes-vertical-trans"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1653935245698</Id>
 					<Name><![CDATA[v_outputPath]]></Name>
-					<X>90</X><Y>140</Y>
+					<X>90</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9763,7 +9763,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1653935245700</Id>
 					<Name><![CDATA[v_numberReplicates]]></Name>
-					<X>90</X><Y>210</Y>
+					<X>90</X><Y>280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9778,7 +9778,7 @@ v_replicates++;
 				<Variable Class="CollectionVariable">
 					<Id>1653935245692</Id>
 					<Name><![CDATA[col_experimentLines]]></Name>
-					<X>90</X><Y>230</Y>
+					<X>90</X><Y>300</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9806,7 +9806,7 @@ v_replicates++;
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-14774017</Color>
-					<Text><![CDATA[BMI Genes Vertical Trans]]></Text>
+					<Text><![CDATA[BMI Fertility Genes Vertical Trans]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>28</Size>
@@ -9817,7 +9817,7 @@ v_replicates++;
 				<Text>
 					<Id>1653935245704</Id>
 					<Name><![CDATA[progress]]></Name>
-					<X>450</X><Y>50</Y>
+					<X>80</X><Y>100</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9849,7 +9849,7 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>8000</NumberOfRuns>
+			<NumberOfRuns>6400</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 				<Expression Class="CodeValue">
