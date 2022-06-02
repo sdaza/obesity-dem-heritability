@@ -1,0 +1,45 @@
+
+\begin{table}[htp]
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{5pt}
+\caption{Sobol sensitivity results only genes, Scenario 1 (N = 16384)}
+\label{tab:sobol}
+\footnotesize
+\centering
+\begin{threeparttable}
+\begin{tabular}{lccc}
+\hline
+\addlinespace
+& Proportion Obese & Average BMI & SD BMI \\
+\addlinespace
+\hline
+\addlinespace[6pt]
+\multicolumn{4}{l}{\hspace{1em} S1} \\
+\hspace{1.5em} random-mating & 0.112 [0.080; 0.143]   & 0.102 [0.079; 0.125]   & 0.149 [0.094; 0.204] \\
+	  \hspace{1.5em} genetic-variance & 0.494 [0.440; 0.548]   & 0.520 [0.465; 0.576]   & 0.325 [0.258; 0.391] \\
+	  \hspace{1.5em} fertility-differential & 0.187 [0.155; 0.219]   & 0.225 [0.187; 0.264]   & 0.072 [0.034; 0.110] \\
+	 \\
+\addlinespace[12pt]
+\multicolumn{4}{l}{\hspace{1em} S2} \\ 
+\hspace{1.5em} random-mating x genetic-variance & 0.076 [0.025; 0.127]   & 0.050 [0.003; 0.097]   & 0.118 [0.010; 0.225] \\
+	  \hspace{1.5em} random-mating x fertility-differential & 0.020 [-0.031; 0.072]   & 0.014 [-0.026; 0.053]   & 0.044 [-0.077; 0.164] \\
+	  \hspace{1.5em} genetic-variance x fertility-differential & 0.088 [0.008; 0.169]   & 0.073 [0.001; 0.144]   & 0.097 [-0.017; 0.210] \\
+	 \\
+\addlinespace[12pt]
+\multicolumn{4}{l}{\hspace{1em} ST} \\ 
+\hspace{1.5em} random-mating & 0.232 [0.205; 0.259]   & 0.185 [0.167; 0.204]   & 0.487 [0.416; 0.557] \\
+	  \hspace{1.5em} genetic-variance & 0.688 [0.625; 0.751]   & 0.667 [0.609; 0.725]   & 0.763 [0.677; 0.849] \\
+	  \hspace{1.5em} fertility-differential & 0.330 [0.296; 0.364]   & 0.343 [0.306; 0.379]   & 0.458 [0.387; 0.529] \\
+	 \\
+\addlinespace
+\hline
+\end{tabular}
+\begin{tablenotes}
+\scriptsize
+\item 95\% confidence interval in brackets.
+\item S1 = First-order indices,  measures the contribution to the output variance by a single model input alone.
+\item S2 = Second-order indices,  measures the contribution to the output variance caused by the interaction of two model inputs.
+\item ST = Total-order index, measures the contribution to the output variance caused by a model input, including both its first-order effects (the input varying alone) and all higher-order interactions.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
