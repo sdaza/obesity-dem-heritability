@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[BMI-SNP]]></Name>
@@ -197,7 +197,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1632899137405</Id>
 					<Name><![CDATA[v_replicate]]></Name>
-					<X>470</X><Y>140</Y>
+					<X>470</X><Y>160</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -209,7 +209,7 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 				<Variable Class="PlainVariable">
 					<Id>1634553224336</Id>
 					<Name><![CDATA[v_id]]></Name>
-					<X>470</X><Y>160</Y>
+					<X>470</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -507,6 +507,18 @@ import org.eclipse.jetty.util.component.LifeCycle;]]></Import>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[double]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1652102745986</Id>
+					<Name><![CDATA[v_iterationExp]]></Name>
+					<X>470</X><Y>140</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
 					</Properties>
 				</Variable>
 				<Variable Class="Parameter">
@@ -1904,11 +1916,11 @@ for (int i = 0; i < people.size(); i++) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[// params
-ExportOutput p = new ExportOutput(p_outputPath, "params", v_iteration, v_replicate, 
-	new String[] {"iteration", "replicate", "init_pop", "fertility_type", "mating_type",
+ExportOutput p = new ExportOutput(p_outputPath, "params", v_iterationExp, v_replicate, 
+	new String[] {"iteration", "iteration_exp", "replicate", "init_pop", "fertility_type", "mating_type",
 	    "p_genetic_variance", "p_vertical_trans_variance", "p_leakage", 
 	    "p_random_mating", "p_fertility_factor"}, 
-	new String[] {"v_iteration", "v_replicate", "p_populationSize", "p_fertilityType", 
+	new String[] {"v_iteration", "v_iterationExp", "v_replicate", "p_populationSize", "p_fertilityType", 
 		"p_matingType",
 		"p_geneticVariance", "p_verticalTransVariance", "p_leakage",
 		"p_randomMating", "p_fertilityBMIDifferential"});
@@ -1917,11 +1929,11 @@ col_dataExport.put("params", p);
 
 // agents
 if (p_exportIndividualData) {
-ExportOutput a = new ExportOutput(p_outputPath, "agents", v_iteration, v_replicate, 
-	new String[] {"iteration", "replicate", "id", "time", "pgs", "raw_bmi", "bmi", "bmi_group", 
+ExportOutput a = new ExportOutput(p_outputPath, "agents", v_iterationExp, v_replicate, 
+	new String[] {"iteration", "iteration_exp", "replicate", "id", "time", "pgs", "raw_bmi", "bmi", "bmi_group", 
         "noise", "ghost", "generation", "parent_type", "father_bmi_group", "mother_bmi_group", 
         "father_id", "mother_id", "father_pgs", "mother_pgs", "snps"}, 
-	new String[] {"main.v_iteration", "main.v_replicate", "v_id", "time()", "v_zpgs", "v_bmi", "v_tbmi", 
+	new String[] {"main.v_iteration", "main.v_iterationExp", "main.v_replicate", "v_id", "time()", "v_zpgs", "v_bmi", "v_tbmi", 
         "v_BMIGroup", "v_noise", "v_ghost", "v_generation", "v_parentType", 
         "v_fatherBMIGroup", "v_motherBMIGroup", "v_fatherID", "v_motherID", "v_fatherPGS", "v_motherPGS",
 		 "col_SNP.toString()"});
@@ -1930,11 +1942,11 @@ col_dataExport.put("agents", a);
 }
 
 // obesity prevalence
-ExportOutput g = new ExportOutput(p_outputPath, "prevalence", v_iteration, v_replicate, 
-	new String[] {"iteration", "replicate", "time", "last_generation",  "population", 
+ExportOutput g = new ExportOutput(p_outputPath, "prevalence", v_iterationExp, v_replicate, 
+	new String[] {"iteration", "iteration_exp", "replicate", "time", "last_generation",  "population", 
 		"bmi_category_prop", "am_bmi", "am_pgs", "genetic_variance", "vertical_trans_variance",
 		 "average_bmi", "sd_bmi"}, 
-	new String[] {"v_iteration", "v_replicate", "time()", "v_lastCompleteGeneration", "col_aliveAgents.size()",
+	new String[] {"v_iteration", "v_iterationExp", "v_replicate", "time()", "v_lastCompleteGeneration", "col_aliveAgents.size()",
 		 "col_propBMIGroup.toString()", "v_assortativeMatingBMI", "v_assortativeMatingPGS", 
 		 "v_geneticVariance", "v_verticalTransVariance",
 		 "dataViz.h_tbmi.mean()", "dataViz.h_tbmi.deviation()"});
@@ -5751,24 +5763,9 @@ switch (main.p_matingType) {
 			<Name><![CDATA[Simulation]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
-			<InitialSetupCode><![CDATA[//TextFileUtilities f = new TextFileUtilities("data/", "param-sobol.csv", "output");
-//col_experimentLines = f.fromFileToCollection(true);
-//f.removeOutputFiles();]]></InitialSetupCode>
 			<MaximumMemory>512</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
-			<BeforeSimulationRunCode><![CDATA[/*
-String[] line = col_experimentLines.get(1);
-
-root.p_randomMating = Double.parseDouble(line[0]);
-root.p_leakage = Double.parseDouble(line[1]);
-root.p_fertilityFactor = Double.parseDouble(line[2]);
-
-traceln("iteration....");
-traceln(root.p_randomMating);
-traceln(root.p_leakage);
-traceln(root.p_fertilityFactor);
-*/]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[if (v_slack) {
 	SlackMessage s = new SlackMessage();
 	s.sendMessage();
@@ -5994,7 +5991,7 @@ traceln(root.p_fertilityFactor);
 		<!--   =========  Parameter Variation Experiment   ========  -->
 		<ParamVariationExperiment ActiveObjectClassId="1632485433838">
 			<Id>1632900535843</Id>
-			<Name><![CDATA[EfastGenetic]]></Name>
+			<Name><![CDATA[EfastGenes]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[// read parameter file
@@ -6012,6 +6009,7 @@ setFixedReplicationsNumber(v_numberReplicates);
 
 // get iteration and replicate values
 root.v_iteration = getCurrentIteration();
+root.v_iterationExp = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
 // update parameters
@@ -6033,7 +6031,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1632900715658</Id>
 					<Name><![CDATA[v_replicates]]></Name>
-					<X>90</X><Y>190</Y>
+					<X>90</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6048,7 +6046,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1637049588578</Id>
 					<Name><![CDATA[v_paramName]]></Name>
-					<X>90</X><Y>160</Y>
+					<X>90</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6063,7 +6061,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1637049718902</Id>
 					<Name><![CDATA[v_outputPath]]></Name>
-					<X>90</X><Y>140</Y>
+					<X>90</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6078,7 +6076,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1637586729235</Id>
 					<Name><![CDATA[v_numberReplicates]]></Name>
-					<X>90</X><Y>210</Y>
+					<X>90</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6093,7 +6091,7 @@ v_replicates++;
 				<Variable Class="CollectionVariable">
 					<Id>1634901108702</Id>
 					<Name><![CDATA[col_experimentLines]]></Name>
-					<X>90</X><Y>230</Y>
+					<X>90</X><Y>280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6121,7 +6119,7 @@ v_replicates++;
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-14774017</Color>
-					<Text><![CDATA[Efast]]></Text>
+					<Text><![CDATA[Efast genes]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>28</Size>
@@ -6132,7 +6130,7 @@ v_replicates++;
 				<Text>
 					<Id>1639687672513</Id>
 					<Name><![CDATA[progress]]></Name>
-					<X>290</X><Y>50</Y>
+					<X>80</X><Y>100</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6473,6 +6471,7 @@ setFixedReplicationsNumber(v_numberReplicates);
 
 // get iteration and replicate values
 root.v_iteration = getCurrentIteration();
+root.v_iterationExp = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
 // update parameters
@@ -6492,7 +6491,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1648302920577</Id>
 					<Name><![CDATA[v_replicates]]></Name>
-					<X>90</X><Y>190</Y>
+					<X>90</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6507,7 +6506,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1648302920579</Id>
 					<Name><![CDATA[v_paramName]]></Name>
-					<X>90</X><Y>160</Y>
+					<X>90</X><Y>220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6522,7 +6521,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1648302920581</Id>
 					<Name><![CDATA[v_outputPath]]></Name>
-					<X>90</X><Y>140</Y>
+					<X>90</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6537,7 +6536,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1648302920583</Id>
 					<Name><![CDATA[v_numberReplicates]]></Name>
-					<X>90</X><Y>210</Y>
+					<X>90</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6552,7 +6551,7 @@ v_replicates++;
 				<Variable Class="CollectionVariable">
 					<Id>1648302920575</Id>
 					<Name><![CDATA[col_experimentLines]]></Name>
-					<X>90</X><Y>230</Y>
+					<X>90</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6591,7 +6590,7 @@ v_replicates++;
 				<Text>
 					<Id>1648302920587</Id>
 					<Name><![CDATA[progress]]></Name>
-					<X>290</X><Y>50</Y>
+					<X>80</X><Y>110</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6913,7 +6912,7 @@ s.sendMessage();]]></AfterExperimentCode>
 		<!--   =========  Parameter Variation Experiment   ========  -->
 		<ParamVariationExperiment ActiveObjectClassId="1632485433838">
 			<Id>1648375803070</Id>
-			<Name><![CDATA[SobolGenetic]]></Name>
+			<Name><![CDATA[SobolGenes]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[// read parameter file
@@ -6922,7 +6921,7 @@ col_experimentLines = f.fromFileToCollection(true);
 /// remove temporary output files
 f.removeOutputFiles();
 ]]></InitialSetupCode>
-			<MaximumMemory>40960</MaximumMemory>
+			<MaximumMemory>25600</MaximumMemory>
 			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
 			<BeforeSimulationRunCode><![CDATA[// define replicates
@@ -6931,6 +6930,7 @@ setFixedReplicationsNumber(v_numberReplicates);
 
 // get iteration and replicate values
 root.v_iteration = getCurrentIteration();
+root.v_iterationExp = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
 // update parameters
@@ -6952,7 +6952,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1648375803074</Id>
 					<Name><![CDATA[v_replicates]]></Name>
-					<X>90</X><Y>190</Y>
+					<X>90</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6967,7 +6967,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1648375803076</Id>
 					<Name><![CDATA[v_paramName]]></Name>
-					<X>90</X><Y>160</Y>
+					<X>90</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6982,7 +6982,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1648375803078</Id>
 					<Name><![CDATA[v_outputPath]]></Name>
-					<X>90</X><Y>140</Y>
+					<X>90</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6997,7 +6997,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1648375803080</Id>
 					<Name><![CDATA[v_numberReplicates]]></Name>
-					<X>90</X><Y>210</Y>
+					<X>90</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7012,7 +7012,7 @@ v_replicates++;
 				<Variable Class="CollectionVariable">
 					<Id>1648375803072</Id>
 					<Name><![CDATA[col_experimentLines]]></Name>
-					<X>90</X><Y>230</Y>
+					<X>90</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7040,7 +7040,7 @@ v_replicates++;
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-14774017</Color>
-					<Text><![CDATA[Sobol]]></Text>
+					<Text><![CDATA[Sobol Genes]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>28</Size>
@@ -7051,7 +7051,7 @@ v_replicates++;
 				<Text>
 					<Id>1648375803084</Id>
 					<Name><![CDATA[progress]]></Name>
-					<X>290</X><Y>50</Y>
+					<X>80</X><Y>110</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7372,7 +7372,7 @@ s.sendMessage();]]></AfterExperimentCode>
 		<!--   =========  Parameter Variation Experiment   ========  -->
 		<ParamVariationExperiment ActiveObjectClassId="1632485433838">
 			<Id>1651136152735</Id>
-			<Name><![CDATA[EfastGeneticVerticalTrans]]></Name>
+			<Name><![CDATA[EfastGenesVerticalTrans]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<InitialSetupCode><![CDATA[// read parameter file
@@ -7390,6 +7390,7 @@ setFixedReplicationsNumber(v_numberReplicates);
 
 // get iteration and replicate values
 root.v_iteration = getCurrentIteration();
+root.v_iterationExp = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
 // update parameters
@@ -7398,6 +7399,7 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 	root.p_randomMating = Double.parseDouble(line[0]);
 	root.p_geneticVariance = Double.parseDouble(line[1]);
 	root.p_verticalTransVariance = Double.parseDouble(line[2]);
+	root.p_fertilityBMIDifferential = Double.parseDouble(line[3]);
 }]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[// track number of replicates
 //if (getCurrentIteration() <= col_experimentLines.size()) { 
@@ -7411,7 +7413,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1651136152739</Id>
 					<Name><![CDATA[v_replicates]]></Name>
-					<X>90</X><Y>190</Y>
+					<X>90</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7426,7 +7428,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1651136152741</Id>
 					<Name><![CDATA[v_paramName]]></Name>
-					<X>90</X><Y>160</Y>
+					<X>90</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7441,7 +7443,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1651136152743</Id>
 					<Name><![CDATA[v_outputPath]]></Name>
-					<X>90</X><Y>140</Y>
+					<X>90</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7456,7 +7458,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1651136152745</Id>
 					<Name><![CDATA[v_numberReplicates]]></Name>
-					<X>90</X><Y>210</Y>
+					<X>90</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7471,7 +7473,7 @@ v_replicates++;
 				<Variable Class="CollectionVariable">
 					<Id>1651136152737</Id>
 					<Name><![CDATA[col_experimentLines]]></Name>
-					<X>90</X><Y>230</Y>
+					<X>90</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7510,7 +7512,7 @@ v_replicates++;
 				<Text>
 					<Id>1651136152749</Id>
 					<Name><![CDATA[progress]]></Name>
-					<X>630</X><Y>50</Y>
+					<X>80</X><Y>100</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7542,7 +7544,7 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>6000</NumberOfRuns>
+			<NumberOfRuns>8000</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 				<Expression Class="CodeValue">
@@ -7557,6 +7559,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632731453253</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[Fertility.additive]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1632898861982</Id>
@@ -7846,6 +7851,7 @@ setFixedReplicationsNumber(v_numberReplicates);
 
 // get iteration and replicate values
 root.v_iteration = getCurrentIteration();
+root.v_iterationExp = getCurrentIteration();
 root.v_replicate = getCurrentReplication();
 
 // update parameters
@@ -7867,7 +7873,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1651917707537</Id>
 					<Name><![CDATA[v_replicates]]></Name>
-					<X>90</X><Y>190</Y>
+					<X>90</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7882,7 +7888,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1651917707539</Id>
 					<Name><![CDATA[v_paramName]]></Name>
-					<X>90</X><Y>160</Y>
+					<X>90</X><Y>220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7897,7 +7903,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1651917707541</Id>
 					<Name><![CDATA[v_outputPath]]></Name>
-					<X>90</X><Y>140</Y>
+					<X>90</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7912,7 +7918,7 @@ v_replicates++;
 				<Variable Class="PlainVariable">
 					<Id>1651917707543</Id>
 					<Name><![CDATA[v_numberReplicates]]></Name>
-					<X>90</X><Y>210</Y>
+					<X>90</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7927,7 +7933,7 @@ v_replicates++;
 				<Variable Class="CollectionVariable">
 					<Id>1651917707535</Id>
 					<Name><![CDATA[col_experimentLines]]></Name>
-					<X>90</X><Y>230</Y>
+					<X>90</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7966,7 +7972,7 @@ v_replicates++;
 				<Text>
 					<Id>1651917707547</Id>
 					<Name><![CDATA[progress]]></Name>
-					<X>490</X><Y>50</Y>
+					<X>80</X><Y>100</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8128,7 +8134,1857 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1651131589377</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[1]]></Code>
+					<Code><![CDATA[1.00]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651564591816</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651782769715</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[Mating.logistic]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632485646519</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632690393452</Id>
+				<Type>RANGE</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632731453253</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632898861982</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632898917488</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632900849933</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632903366204</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1634656309398</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1636145720853</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647443482862</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647510223271</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647593863140</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647593887088</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647595664772</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647692182095</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647856798402</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647864350206</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647938541578</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647938699060</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647938713699</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647960922330</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544569</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544572</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544575</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648293660981</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648302957610</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648626928522</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651131589377</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651564591816</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651782769715</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<ModelTimeProperties>
+				<StopOption><![CDATA[Never]]></StopOption>
+				<InitialDate><![CDATA[1632441600000]]></InitialDate>	
+				<InitialTime><![CDATA[0.0]]></InitialTime>	
+				<FinalDate><![CDATA[17400441600000]]></FinalDate>	
+				<FinalTime><![CDATA[500.0]]></FinalTime>	
+			</ModelTimeProperties>
+			<PresentationProperties>
+				<EnableZoomAndPanning>false</EnableZoomAndPanning>
+				<Title><![CDATA[Scenarios]]></Title>
+				<EnableDeveloperPanel>true</EnableDeveloperPanel>
+				<ShowDeveloperPanelOnStart>true</ShowDeveloperPanelOnStart>
+			</PresentationProperties>
+			<ReplicationsProperties>
+				<UseReplication>true</UseReplication>
+				<FixedReplicationsNumber>true</FixedReplicationsNumber>
+				<ReplicationPerIteration>1</ReplicationPerIteration>
+				<MinimumReplication>2</MinimumReplication>
+				<MaximumReplication>10</MaximumReplication>
+				<ConfidenceLevel>LEVEL_80</ConfidenceLevel>
+				<ErrorPercent>0.5</ErrorPercent>
+				<ExpressionForConfidenceComputation><![CDATA[0]]></ExpressionForConfidenceComputation>
+			</ReplicationsProperties>
+		</ParamVariationExperiment>
+		<!--   =========  Parameter Variation Experiment   ========  -->
+		<ParamVariationExperiment ActiveObjectClassId="1632485433838">
+			<Id>1652174012638</Id>
+			<Name><![CDATA[SobolVerticalTrans]]></Name>
+			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
+			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
+			<InitialSetupCode><![CDATA[// read parameter file
+TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
+col_experimentLines = f.fromFileToCollection(true);
+/// remove temporary output files
+f.removeOutputFiles();
+]]></InitialSetupCode>
+			<MaximumMemory>25600</MaximumMemory>
+			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
+			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
+			<BeforeSimulationRunCode><![CDATA[// define replicates
+setUseReplications(true);
+setFixedReplicationsNumber(v_numberReplicates);
+
+// get iteration and replicate values
+root.v_iteration = getCurrentIteration();
+root.v_iterationExp = getCurrentIteration();
+root.v_replicate = getCurrentReplication();
+
+// update parameters
+if (getCurrentIteration() <= col_experimentLines.size()) {
+	String[] line = col_experimentLines.get(root.v_iteration-1);
+	root.p_randomMating = Double.parseDouble(line[0]);
+	root.p_leakage = Double.parseDouble(line[1]);
+	root.p_fertilityBMIDifferential = Double.parseDouble(line[2]);
+}]]></BeforeSimulationRunCode>
+			<AfterSimulationRunCode><![CDATA[// track number of replicates
+//if (getCurrentIteration() <= col_experimentLines.size()) { 
+v_replicates++;
+//}]]></AfterSimulationRunCode>
+			<SeedValue>1</SeedValue>
+			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+			<VmArgs><![CDATA[]]></VmArgs>
+			<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+			<Variables>
+				<Variable Class="PlainVariable">
+					<Id>1652174012642</Id>
+					<Name><![CDATA[v_replicates]]></Name>
+					<X>90</X><Y>220</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1652174012644</Id>
+					<Name><![CDATA[v_paramName]]></Name>
+					<X>90</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA["vt-sobol"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1652174012646</Id>
+					<Name><![CDATA[v_outputPath]]></Name>
+					<X>90</X><Y>170</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA["output/"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1652174012648</Id>
+					<Name><![CDATA[v_numberReplicates]]></Name>
+					<X>90</X><Y>240</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[1]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1652174012640</Id>
+					<Name><![CDATA[col_experimentLines]]></Name>
+					<X>90</X><Y>260</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[String[]]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
+			</Variables>
+
+			<Presentation>
+				<Text>
+					<Id>1652174012650</Id>
+					<Name><![CDATA[text]]></Name>
+					<X>80</X><Y>50</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14774017</Color>
+					<Text><![CDATA[Sobol Vertical Trans
+]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1652174012652</Id>
+					<Name><![CDATA[progress]]></Name>
+					<X>80</X><Y>100</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-8388608</Color>
+					<Text><![CDATA[v_replicates  / (col_experimentLines * v_numberReplicates)]]></Text>
+					<TextCode><![CDATA[(int) (((double) v_replicates) / ((double) getMaximumIterations() * (double) v_numberReplicates) * 10000) / 100.0 + "%"]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>26</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+			</Presentation>
+
+			<AfterExperimentCode><![CDATA[// append files and remove temporary ones
+TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
+f.appendOutputFiles(v_outputPath, "prev*.csv", "results-" + v_paramName + ".csv", "../../output/data/");
+f.appendOutputFiles(v_outputPath, "par*.csv", "param-" + v_paramName + ".csv", "../../output/data/");
+f.removeOutputFiles();
+
+// send slack message
+SlackMessage s = new SlackMessage();
+s.sendMessage();]]></AfterExperimentCode>
+			<AllowParallelEvaluations>true</AllowParallelEvaluations>
+			<UseFreeformParameters>true</UseFreeformParameters>
+			<NumberOfRuns>16384</NumberOfRuns>
+			<FreeformParamValue>	
+				<Id>1632485646519</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[8000]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632690393452</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.1]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632731453253</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[Fertility.additive]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632898861982</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632898917488</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632900849933</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[false]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632903366204</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[2.15]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1634656309398</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.05]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1636145720853</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647443482862</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[100]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647510223271</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.0]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647593863140</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647593887088</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647595664772</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647692182095</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[{50}]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647856798402</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647864350206</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647938541578</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647938699060</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647938713699</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647960922330</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544569</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[15000]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544572</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[15000]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544575</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648293660981</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.50]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648302957610</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[50]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648626928522</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.10]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651131589377</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[1.0]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651564591816</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651782769715</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[Mating.logistic]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632485646519</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632690393452</Id>
+				<Type>RANGE</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632731453253</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632898861982</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632898917488</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632900849933</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632903366204</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1634656309398</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1636145720853</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647443482862</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647510223271</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647593863140</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647593887088</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647595664772</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647692182095</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647856798402</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647864350206</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647938541578</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647938699060</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647938713699</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647960922330</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544569</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544572</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544575</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648293660981</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648302957610</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648626928522</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651131589377</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651564591816</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651782769715</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<ModelTimeProperties>
+				<StopOption><![CDATA[Never]]></StopOption>
+				<InitialDate><![CDATA[1632441600000]]></InitialDate>	
+				<InitialTime><![CDATA[0.0]]></InitialTime>	
+				<FinalDate><![CDATA[17400441600000]]></FinalDate>	
+				<FinalTime><![CDATA[500.0]]></FinalTime>	
+			</ModelTimeProperties>
+			<PresentationProperties>
+				<EnableZoomAndPanning>false</EnableZoomAndPanning>
+				<Title><![CDATA[Scenarios]]></Title>
+				<EnableDeveloperPanel>true</EnableDeveloperPanel>
+				<ShowDeveloperPanelOnStart>true</ShowDeveloperPanelOnStart>
+			</PresentationProperties>
+			<ReplicationsProperties>
+				<UseReplication>true</UseReplication>
+				<FixedReplicationsNumber>true</FixedReplicationsNumber>
+				<ReplicationPerIteration>1</ReplicationPerIteration>
+				<MinimumReplication>2</MinimumReplication>
+				<MaximumReplication>10</MaximumReplication>
+				<ConfidenceLevel>LEVEL_80</ConfidenceLevel>
+				<ErrorPercent>0.5</ErrorPercent>
+				<ExpressionForConfidenceComputation><![CDATA[0]]></ExpressionForConfidenceComputation>
+			</ReplicationsProperties>
+		</ParamVariationExperiment>
+		<!--   =========  Parameter Variation Experiment   ========  -->
+		<ParamVariationExperiment ActiveObjectClassId="1632485433838">
+			<Id>1652270894490</Id>
+			<Name><![CDATA[BMIGenesVerticalTrans]]></Name>
+			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
+			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
+			<InitialSetupCode><![CDATA[// read parameter file
+TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
+col_experimentLines = f.fromFileToCollection(true);
+/// remove temporary output files
+f.removeOutputFiles();
+]]></InitialSetupCode>
+			<MaximumMemory>25600</MaximumMemory>
+			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
+			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
+			<BeforeSimulationRunCode><![CDATA[// define replicates
+setUseReplications(true);
+setFixedReplicationsNumber(v_numberReplicates);
+
+// get iteration and replicate values
+root.v_replicate = getCurrentReplication();
+root.v_iterationExp = getCurrentIteration();
+
+// update parameters
+if (getCurrentIteration() <= col_experimentLines.size()) {
+	String[] line = col_experimentLines.get(getCurrentIteration()-1);
+	root.v_iteration = Integer.parseInt(line[0]);
+	root.p_randomMating = Double.parseDouble(line[1]);
+	root.p_geneticVariance = Double.parseDouble(line[2]);
+	root.p_verticalTransVariance = Double.parseDouble(line[3]);
+}]]></BeforeSimulationRunCode>
+			<AfterSimulationRunCode><![CDATA[// track number of replicates
+//if (getCurrentIteration() <= col_experimentLines.size()) { 
+v_replicates++;
+//}]]></AfterSimulationRunCode>
+			<SeedValue>1</SeedValue>
+			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+			<VmArgs><![CDATA[]]></VmArgs>
+			<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+			<Variables>
+				<Variable Class="PlainVariable">
+					<Id>1652270894494</Id>
+					<Name><![CDATA[v_replicates]]></Name>
+					<X>90</X><Y>240</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1652270894496</Id>
+					<Name><![CDATA[v_paramName]]></Name>
+					<X>90</X><Y>210</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA["bmi-mating-genes-vertical-trans"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1652270894498</Id>
+					<Name><![CDATA[v_outputPath]]></Name>
+					<X>90</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA["output/"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1652270894500</Id>
+					<Name><![CDATA[v_numberReplicates]]></Name>
+					<X>90</X><Y>260</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[1]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1652270894492</Id>
+					<Name><![CDATA[col_experimentLines]]></Name>
+					<X>90</X><Y>280</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[String[]]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
+			</Variables>
+
+			<Presentation>
+				<Text>
+					<Id>1652270894502</Id>
+					<Name><![CDATA[text]]></Name>
+					<X>80</X><Y>50</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14774017</Color>
+					<Text><![CDATA[BMI Mating Genes Vertical Trans]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1652270894504</Id>
+					<Name><![CDATA[progress]]></Name>
+					<X>80</X><Y>100</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-8388608</Color>
+					<Text><![CDATA[v_replicates  / (col_experimentLines * v_numberReplicates)]]></Text>
+					<TextCode><![CDATA[(int) (((double) v_replicates) / ((double) getMaximumIterations() * (double) v_numberReplicates) * 10000) / 100.0 + "%"]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>26</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+			</Presentation>
+
+			<AfterExperimentCode><![CDATA[// append files and remove temporary ones
+TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
+f.appendOutputFiles(v_outputPath, "prev*.csv", "results-" + v_paramName + ".csv", "../../output/data/");
+f.appendOutputFiles(v_outputPath, "par*.csv", "param-" + v_paramName + ".csv", "../../output/data/");
+f.removeOutputFiles();
+
+// send slack message
+SlackMessage s = new SlackMessage();
+s.sendMessage();]]></AfterExperimentCode>
+			<AllowParallelEvaluations>true</AllowParallelEvaluations>
+			<UseFreeformParameters>true</UseFreeformParameters>
+			<NumberOfRuns>8000</NumberOfRuns>
+			<FreeformParamValue>	
+				<Id>1632485646519</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[8000]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632690393452</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.1]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632731453253</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[Fertility.additive]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632898861982</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632898917488</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632900849933</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[false]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632903366204</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[2.15]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1634656309398</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.05]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1636145720853</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647443482862</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[100]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647510223271</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.10]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647593863140</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647593887088</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647595664772</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647692182095</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[{50}]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647856798402</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647864350206</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647938541578</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647938699060</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647938713699</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647960922330</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544569</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[15000]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544572</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[15000]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544575</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648293660981</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.50]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648302957610</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[50]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648626928522</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.10]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651131589377</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.2]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651564591816</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651782769715</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[Mating.logistic]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632485646519</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632690393452</Id>
+				<Type>RANGE</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632731453253</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632898861982</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632898917488</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632900849933</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632903366204</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1634656309398</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1636145720853</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647443482862</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647510223271</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647593863140</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647593887088</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647595664772</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647692182095</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647856798402</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647864350206</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647938541578</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647938699060</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647938713699</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647960922330</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544569</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544572</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544575</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648293660981</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648302957610</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648626928522</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651131589377</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651564591816</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651782769715</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<ModelTimeProperties>
+				<StopOption><![CDATA[Never]]></StopOption>
+				<InitialDate><![CDATA[1632441600000]]></InitialDate>	
+				<InitialTime><![CDATA[0.0]]></InitialTime>	
+				<FinalDate><![CDATA[17400441600000]]></FinalDate>	
+				<FinalTime><![CDATA[500.0]]></FinalTime>	
+			</ModelTimeProperties>
+			<PresentationProperties>
+				<EnableZoomAndPanning>false</EnableZoomAndPanning>
+				<Title><![CDATA[Scenarios]]></Title>
+				<EnableDeveloperPanel>true</EnableDeveloperPanel>
+				<ShowDeveloperPanelOnStart>true</ShowDeveloperPanelOnStart>
+			</PresentationProperties>
+			<ReplicationsProperties>
+				<UseReplication>true</UseReplication>
+				<FixedReplicationsNumber>true</FixedReplicationsNumber>
+				<ReplicationPerIteration>1</ReplicationPerIteration>
+				<MinimumReplication>2</MinimumReplication>
+				<MaximumReplication>10</MaximumReplication>
+				<ConfidenceLevel>LEVEL_80</ConfidenceLevel>
+				<ErrorPercent>0.5</ErrorPercent>
+				<ExpressionForConfidenceComputation><![CDATA[0]]></ExpressionForConfidenceComputation>
+			</ReplicationsProperties>
+		</ParamVariationExperiment>
+		<!--   =========  Parameter Variation Experiment   ========  -->
+		<ParamVariationExperiment ActiveObjectClassId="1632485433838">
+			<Id>1652345630701</Id>
+			<Name><![CDATA[SobolGenesVerticalTrans]]></Name>
+			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
+			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
+			<InitialSetupCode><![CDATA[// read parameter file
+TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
+col_experimentLines = f.fromFileToCollection(true);
+/// remove temporary output files
+f.removeOutputFiles();
+]]></InitialSetupCode>
+			<MaximumMemory>25600</MaximumMemory>
+			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
+			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
+			<BeforeSimulationRunCode><![CDATA[// define replicates
+setUseReplications(true);
+setFixedReplicationsNumber(v_numberReplicates);
+
+// get iteration and replicate values
+root.v_iteration = getCurrentIteration();
+root.v_iterationExp = getCurrentIteration();
+root.v_replicate = getCurrentReplication();
+
+// update parameters
+if (getCurrentIteration() <= col_experimentLines.size()) {
+	String[] line = col_experimentLines.get(root.v_iteration-1);
+	root.p_randomMating = Double.parseDouble(line[0]);
+	root.p_geneticVariance = Double.parseDouble(line[1]);
+	root.p_verticalTransVariance = Double.parseDouble(line[2]);
+	root.p_fertilityBMIDifferential = Double.parseDouble(line[3]);
+
+}]]></BeforeSimulationRunCode>
+			<AfterSimulationRunCode><![CDATA[// track number of replicates
+//if (getCurrentIteration() <= col_experimentLines.size()) { 
+v_replicates++;
+//}]]></AfterSimulationRunCode>
+			<SeedValue>1</SeedValue>
+			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+			<VmArgs><![CDATA[]]></VmArgs>
+			<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+			<Variables>
+				<Variable Class="PlainVariable">
+					<Id>1652345630705</Id>
+					<Name><![CDATA[v_replicates]]></Name>
+					<X>90</X><Y>240</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1652345630707</Id>
+					<Name><![CDATA[v_paramName]]></Name>
+					<X>90</X><Y>210</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA["snp-vt-sobol"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1652345630709</Id>
+					<Name><![CDATA[v_outputPath]]></Name>
+					<X>90</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA["output/"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1652345630711</Id>
+					<Name><![CDATA[v_numberReplicates]]></Name>
+					<X>90</X><Y>260</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[1]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1652345630703</Id>
+					<Name><![CDATA[col_experimentLines]]></Name>
+					<X>90</X><Y>280</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[String[]]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
+			</Variables>
+
+			<Presentation>
+				<Text>
+					<Id>1652345630713</Id>
+					<Name><![CDATA[text]]></Name>
+					<X>80</X><Y>50</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14774017</Color>
+					<Text><![CDATA[Sobol Genes Vertical Trans
+]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1652345630715</Id>
+					<Name><![CDATA[progress]]></Name>
+					<X>80</X><Y>110</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-8388608</Color>
+					<Text><![CDATA[v_replicates  / (col_experimentLines * v_numberReplicates)]]></Text>
+					<TextCode><![CDATA[(int) (((double) v_replicates) / ((double) getMaximumIterations() * (double) v_numberReplicates) * 10000) / 100.0 + "%"]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>26</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+			</Presentation>
+
+			<AfterExperimentCode><![CDATA[// append files and remove temporary ones
+TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
+f.appendOutputFiles(v_outputPath, "prev*.csv", "results-" + v_paramName + ".csv", "../../output/data/");
+f.appendOutputFiles(v_outputPath, "par*.csv", "param-" + v_paramName + ".csv", "../../output/data/");
+f.removeOutputFiles();
+
+// send slack message
+SlackMessage s = new SlackMessage();
+s.sendMessage();]]></AfterExperimentCode>
+			<AllowParallelEvaluations>true</AllowParallelEvaluations>
+			<UseFreeformParameters>true</UseFreeformParameters>
+			<NumberOfRuns>20482</NumberOfRuns>
+			<FreeformParamValue>	
+				<Id>1632485646519</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[8000]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632690393452</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.1]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632731453253</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[Fertility.additive]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632898861982</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632898917488</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632900849933</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[false]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632903366204</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[2.15]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1634656309398</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.05]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1636145720853</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647443482862</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[100]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647510223271</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.0]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647593863140</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647593887088</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647595664772</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647692182095</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[{50}]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647856798402</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647864350206</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647938541578</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647938699060</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647938713699</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647960922330</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544569</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[15000]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544572</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[15000]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544575</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648293660981</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.50]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648302957610</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[50]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648626928522</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.10]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651131589377</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.3]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651564591816</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651782769715</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[Mating.logistic]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632485646519</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632690393452</Id>
+				<Type>RANGE</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632731453253</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632898861982</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632898917488</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632900849933</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1632903366204</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1634656309398</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1636145720853</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647443482862</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647510223271</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647593863140</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647593887088</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647595664772</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647692182095</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647856798402</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647864350206</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647938541578</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647938699060</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647938713699</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1647960922330</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544569</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544572</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648134544575</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648293660981</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648302957610</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1648626928522</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651131589377</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651564591816</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<RangeVariationParamValue>	
+				<Id>1651782769715</Id>
+				<Type>FIXED</Type>
+			</RangeVariationParamValue>
+			<ModelTimeProperties>
+				<StopOption><![CDATA[Never]]></StopOption>
+				<InitialDate><![CDATA[1632441600000]]></InitialDate>	
+				<InitialTime><![CDATA[0.0]]></InitialTime>	
+				<FinalDate><![CDATA[17400441600000]]></FinalDate>	
+				<FinalTime><![CDATA[500.0]]></FinalTime>	
+			</ModelTimeProperties>
+			<PresentationProperties>
+				<EnableZoomAndPanning>false</EnableZoomAndPanning>
+				<Title><![CDATA[Scenarios]]></Title>
+				<EnableDeveloperPanel>true</EnableDeveloperPanel>
+				<ShowDeveloperPanelOnStart>true</ShowDeveloperPanelOnStart>
+			</PresentationProperties>
+			<ReplicationsProperties>
+				<UseReplication>true</UseReplication>
+				<FixedReplicationsNumber>true</FixedReplicationsNumber>
+				<ReplicationPerIteration>1</ReplicationPerIteration>
+				<MinimumReplication>2</MinimumReplication>
+				<MaximumReplication>10</MaximumReplication>
+				<ConfidenceLevel>LEVEL_80</ConfidenceLevel>
+				<ErrorPercent>0.5</ErrorPercent>
+				<ExpressionForConfidenceComputation><![CDATA[0]]></ExpressionForConfidenceComputation>
+			</ReplicationsProperties>
+		</ParamVariationExperiment>
+		<!--   =========  Parameter Variation Experiment   ========  -->
+		<ParamVariationExperiment ActiveObjectClassId="1632485433838">
+			<Id>1653935245690</Id>
+			<Name><![CDATA[BMIGenesVerticalTransFertility]]></Name>
+			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
+			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
+			<InitialSetupCode><![CDATA[// read parameter file
+TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
+col_experimentLines = f.fromFileToCollection(true);
+/// remove temporary output files
+f.removeOutputFiles();
+]]></InitialSetupCode>
+			<MaximumMemory>25600</MaximumMemory>
+			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
+			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
+			<BeforeSimulationRunCode><![CDATA[// define replicates
+setUseReplications(true);
+setFixedReplicationsNumber(v_numberReplicates);
+
+// get iteration and replicate values
+root.v_replicate = getCurrentReplication();
+root.v_iterationExp = getCurrentIteration();
+
+// update parameters
+if (getCurrentIteration() <= col_experimentLines.size()) {
+	String[] line = col_experimentLines.get(getCurrentIteration()-1);
+	root.v_iteration = Integer.parseInt(line[0]);
+	root.p_fertilityBMIDifferential = Double.parseDouble(line[1]);
+	root.p_geneticVariance = Double.parseDouble(line[2]);
+	root.p_verticalTransVariance = Double.parseDouble(line[3]);
+}]]></BeforeSimulationRunCode>
+			<AfterSimulationRunCode><![CDATA[// track number of replicates
+//if (getCurrentIteration() <= col_experimentLines.size()) { 
+v_replicates++;
+//}]]></AfterSimulationRunCode>
+			<SeedValue>1</SeedValue>
+			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+			<VmArgs><![CDATA[]]></VmArgs>
+			<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+			<Variables>
+				<Variable Class="PlainVariable">
+					<Id>1653935245694</Id>
+					<Name><![CDATA[v_replicates]]></Name>
+					<X>90</X><Y>260</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1653935245696</Id>
+					<Name><![CDATA[v_paramName]]></Name>
+					<X>90</X><Y>230</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA["bmi-fertility-genes-vertical-trans"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1653935245698</Id>
+					<Name><![CDATA[v_outputPath]]></Name>
+					<X>90</X><Y>210</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA["output/"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1653935245700</Id>
+					<Name><![CDATA[v_numberReplicates]]></Name>
+					<X>90</X><Y>280</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[1]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1653935245692</Id>
+					<Name><![CDATA[col_experimentLines]]></Name>
+					<X>90</X><Y>300</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[String[]]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
+			</Variables>
+
+			<Presentation>
+				<Text>
+					<Id>1653935245702</Id>
+					<Name><![CDATA[text]]></Name>
+					<X>80</X><Y>50</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-14774017</Color>
+					<Text><![CDATA[BMI Fertility Genes Vertical Trans]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>28</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1653935245704</Id>
+					<Name><![CDATA[progress]]></Name>
+					<X>80</X><Y>100</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-8388608</Color>
+					<Text><![CDATA[v_replicates  / (col_experimentLines * v_numberReplicates)]]></Text>
+					<TextCode><![CDATA[(int) (((double) v_replicates) / ((double) getMaximumIterations() * (double) v_numberReplicates) * 10000) / 100.0 + "%"]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>26</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+			</Presentation>
+
+			<AfterExperimentCode><![CDATA[// append files and remove temporary ones
+TextFileUtilities f = new TextFileUtilities("data/", "param-" + v_paramName+ ".csv", "output");
+f.appendOutputFiles(v_outputPath, "prev*.csv", "results-" + v_paramName + ".csv", "../../output/data/");
+f.appendOutputFiles(v_outputPath, "par*.csv", "param-" + v_paramName + ".csv", "../../output/data/");
+f.removeOutputFiles();
+
+// send slack message
+SlackMessage s = new SlackMessage();
+s.sendMessage();]]></AfterExperimentCode>
+			<AllowParallelEvaluations>true</AllowParallelEvaluations>
+			<UseFreeformParameters>true</UseFreeformParameters>
+			<NumberOfRuns>6400</NumberOfRuns>
+			<FreeformParamValue>	
+				<Id>1632485646519</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[8000]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632690393452</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.6]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632731453253</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[Fertility.additive]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632898861982</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632898917488</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632900849933</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[false]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1632903366204</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[2.15]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1634656309398</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.05]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1636145720853</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647443482862</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[100]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647510223271</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.10]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647593863140</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647593887088</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647595664772</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647692182095</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[{50}]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647856798402</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647864350206</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647938541578</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647938699060</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647938713699</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1647960922330</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544569</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[15000]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544572</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[15000]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648134544575</Id>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648293660981</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.50]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648302957610</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[50]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1648626928522</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.10]]></Code>
+				</Expression>
+			</FreeformParamValue>
+			<FreeformParamValue>	
+				<Id>1651131589377</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.2]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
