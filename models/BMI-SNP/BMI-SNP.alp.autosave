@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[BMI-SNP]]></Name>
@@ -1795,7 +1795,6 @@ for (int i = 0; i < ih.size(); i++) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[// check parameters
-
 if ((p_geneticVariance + p_verticalTransVariance) > 1.0) {
 	traceln("Sum of proportion variance for genetic and vertical transmissin is higher than 1");
 	finishSimulation();
@@ -2150,9 +2149,9 @@ else if (noiseVariance == 0.0) v_scaledNoise = 0.0;]]></Body>
 					<Body><![CDATA[StatUtils s = new StatUtils();
 
 if (standardized)  {
-	if (value < (18.5 -p_bmiMean)/p_bmiSD) return 0.0;
-	if (value >= (18.5-p_bmiMean)/p_bmiSD & value < (25.0 -p_bmiMean)/p_bmiSD) return  1.0;
-	if (value >= (25.0 -p_bmiMean)/p_bmiSD & value < (30-p_bmiMean)/p_bmiSD) return  2.0;
+	if (value < (18.5-p_bmiMean)/p_bmiSD) return 0.0;
+	if (value >= (18.5-p_bmiMean)/p_bmiSD & value < (25.0-p_bmiMean)/p_bmiSD) return  1.0;
+	if (value >= (25.0-p_bmiMean)/p_bmiSD & value < (30.0-p_bmiMean)/p_bmiSD) return  2.0;
 	if (value >= (30-p_bmiMean)/p_bmiSD) return 3.0;
 } else {
 	if (value < 18.5) return 0.0;
@@ -5942,6 +5941,9 @@ switch (main.p_matingType) {
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_exportData]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[false]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_exportIndividualData]]></ParameterName>

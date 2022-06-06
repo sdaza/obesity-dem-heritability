@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.5.202106081839" AlpVersion="8.7.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.7.6.202107211757" AlpVersion="8.7.2">
 <Model>
 	<Id>1632485433832</Id>
 	<Name><![CDATA[BMI-SNP]]></Name>
@@ -9391,7 +9391,7 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>20482</NumberOfRuns>
+			<NumberOfRuns>20480</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 				<Expression Class="CodeValue">
