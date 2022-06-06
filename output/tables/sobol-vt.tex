@@ -1,45 +1,45 @@
 
-\begin{table}[htp]
-\renewcommand{\arraystretch}{1.3}
-\setlength{\tabcolsep}{5pt}
-\caption{Sobol sensitivity results only vertical transmission, Scenario 2 (N=16384)}
-\label{tab:sobol-vt}
-\footnotesize
-\centering
-\begin{threeparttable}
-\begin{tabular}{lccc}
-\hline
-\addlinespace
-& Proportion Obese & Average BMI & SD BMI \\
-\addlinespace
-\hline
-\addlinespace[6pt]
-\multicolumn{4}{l}{\hspace{1em} S1} \\
-\hspace{1.5em} random-mating & -0.007 [-0.032; 0.018]   & -0.006 [-0.033; 0.021]   & -0.033 [-0.064; -0.001] \\
-	  \hspace{1.5em} leakage & 0.577 [0.472; 0.682]   & 0.566 [0.496; 0.635]   & 0.329 [0.243; 0.415] \\
-	  \hspace{1.5em} fertility-differential & 0.029 [-0.001; 0.059]   & 0.084 [0.047; 0.122]   & 0.075 [0.022; 0.128] \\
+    \begin{table}[htp]
+    \renewcommand{\arraystretch}{1.3}
+    \setlength{\tabcolsep}{5pt}
+    \caption{Sobol sensitivity results only vertical transmission, Scenario 2 (N=16384)}
+    \label{tab:sobol-vt}
+    \footnotesize
+    \centering
+    \begin{threeparttable}
+    \begin{tabular}{lccc}
+    \hline
+    \addlinespace
+    & Proportion Obese & Average BMI & SD BMI \\
+    \addlinespace
+    \hline
+    \addlinespace[6pt]
+    \multicolumn{4}{l}{\hspace{1em} S1} \\
+\hspace{1.5em} random-mating & 0.016 [-0.014; 0.045]   & 0.037 [0.008; 0.066]   & -0.030 [-0.063; 0.003] \\
+	  \hspace{1.5em} leakage & 0.484 [0.372; 0.596]   & 0.530 [0.447; 0.612]   & 0.381 [0.263; 0.499] \\
+	  \hspace{1.5em} fertility-differential & -0.006 [-0.052; 0.040]   & 0.076 [0.033; 0.118]   & 0.065 [0.025; 0.105] \\
 	 \\
-\addlinespace[12pt]
-\multicolumn{4}{l}{\hspace{1em} S2} \\ 
-\hspace{1.5em} random-mating x leakage & -0.014 [-0.117; 0.090]   & 0.026 [-0.042; 0.095]   & 0.070 [-0.008; 0.148] \\
-	  \hspace{1.5em} random-mating x fertility-differential & 0.036 [0.004; 0.068]   & 0.038 [0.001; 0.074]   & 0.050 [0.008; 0.091] \\
-	  \hspace{1.5em} leakage x fertility-differential & -0.046 [-0.227; 0.136]   & 0.024 [-0.093; 0.141]   & 0.084 [-0.045; 0.213] \\
+    \addlinespace[12pt]
+    \multicolumn{4}{l}{\hspace{1em} S2} \\ 
+\hspace{1.5em} random-mating x leakage & -0.004 [-0.099; 0.091]   & 0.007 [-0.067; 0.081]   & 0.047 [-0.041; 0.136] \\
+	  \hspace{1.5em} random-mating x fertility-differential & 0.024 [-0.014; 0.062]   & 0.008 [-0.032; 0.047]   & 0.044 [0.003; 0.085] \\
+	  \hspace{1.5em} leakage x fertility-differential & 0.055 [-0.105; 0.215]   & 0.083 [-0.045; 0.210]   & 0.128 [-0.027; 0.284] \\
 	 \\
-\addlinespace[12pt]
-\multicolumn{4}{l}{\hspace{1em} ST} \\ 
-\hspace{1.5em} random-mating & 0.355 [0.283; 0.427]   & 0.256 [0.219; 0.293]   & 0.306 [0.258; 0.354] \\
-	  \hspace{1.5em} leakage & 0.901 [0.799; 1.002]   & 0.843 [0.784; 0.902]   & 0.808 [0.720; 0.896] \\
-	  \hspace{1.5em} fertility-differential & 0.424 [0.342; 0.507]   & 0.384 [0.332; 0.436]   & 0.555 [0.457; 0.653] \\
+    \addlinespace[12pt]
+    \multicolumn{4}{l}{\hspace{1em} ST} \\ 
+\hspace{1.5em} random-mating & 0.306 [0.252; 0.361]   & 0.243 [0.207; 0.278]   & 0.357 [0.303; 0.410] \\
+	  \hspace{1.5em} leakage & 0.900 [0.800; 1.000]   & 0.850 [0.782; 0.918]   & 0.855 [0.771; 0.939] \\
+	  \hspace{1.5em} fertility-differential & 0.463 [0.379; 0.546]   & 0.409 [0.353; 0.465]   & 0.567 [0.474; 0.661] \\
 	 \\
-\addlinespace
-\hline
-\end{tabular}
-\begin{tablenotes}
-\scriptsize
-\item 95\% confidence interval in brackets.
-\item S1 = First-order indices,  measures the contribution to the output variance by a single model input alone.
-\item S2 = Second-order indices,  measures the contribution to the output variance caused by the interaction of two model inputs.
-\item ST = Total-order index, measures the contribution to the output variance caused by a model input, including both its first-order effects (the input varying alone) and all higher-order interactions.
-\end{tablenotes}
-\end{threeparttable}
-\end{table}
+    \addlinespace
+    \hline
+    \end{tabular}
+    \begin{tablenotes}
+    \scriptsize
+    \item 95\% confidence interval in brackets.
+    \item S1 = First-order indices,  measures the contribution to the output variance by a single model input alone.
+    \item S2 = Second-order indices,  measures the contribution to the output variance caused by the interaction of two model inputs.
+    \item ST = Total-order index, measures the contribution to the output variance caused by a model input, including both its first-order effects (the input varying alone) and all higher-order interactions.
+    \end{tablenotes}
+    \end{threeparttable}
+    \end{table}

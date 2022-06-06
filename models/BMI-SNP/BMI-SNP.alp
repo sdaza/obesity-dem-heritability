@@ -1795,7 +1795,6 @@ for (int i = 0; i < ih.size(); i++) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[// check parameters
-
 if ((p_geneticVariance + p_verticalTransVariance) > 1.0) {
 	traceln("Sum of proportion variance for genetic and vertical transmissin is higher than 1");
 	finishSimulation();
@@ -2150,9 +2149,9 @@ else if (noiseVariance == 0.0) v_scaledNoise = 0.0;]]></Body>
 					<Body><![CDATA[StatUtils s = new StatUtils();
 
 if (standardized)  {
-	if (value < (18.5 -p_bmiMean)/p_bmiSD) return 0.0;
-	if (value >= (18.5-p_bmiMean)/p_bmiSD & value < (25.0 -p_bmiMean)/p_bmiSD) return  1.0;
-	if (value >= (25.0 -p_bmiMean)/p_bmiSD & value < (30-p_bmiMean)/p_bmiSD) return  2.0;
+	if (value < (18.5-p_bmiMean)/p_bmiSD) return 0.0;
+	if (value >= (18.5-p_bmiMean)/p_bmiSD & value < (25.0-p_bmiMean)/p_bmiSD) return  1.0;
+	if (value >= (25.0-p_bmiMean)/p_bmiSD & value < (30.0-p_bmiMean)/p_bmiSD) return  2.0;
 	if (value >= (30-p_bmiMean)/p_bmiSD) return 3.0;
 } else {
 	if (value < 18.5) return 0.0;
@@ -3831,9 +3830,9 @@ if (r) {
 
 } else {
 
-	alters = filter(main.col_potentialMates, p -> p != ego
-			& p.v_parentType != ego.v_parentType
-			& p.v_BMIGroup == ego.v_BMIGroup
+	alters = filter(main.col_potentialMates, p -> (p != ego)
+			& (p.v_parentType != ego.v_parentType)
+			& (p.v_BMIGroup == ego.v_BMIGroup)
 			& (p.v_motherID != ego.v_motherID
 					& p.v_fatherID != ego.v_fatherID) 
 			& (p.v_id != ego.v_motherID & p.v_id != ego.v_fatherID) 
@@ -3861,6 +3860,7 @@ if (r) {
 }
 
 if (alters.size() > 0) {
+
 	v_poolMates = alters.size();
 	
 	Person partner = randomFrom(alters);
@@ -5858,6 +5858,9 @@ switch (main.p_matingType) {
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_fertilityType]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[Fertility.additive]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_baselineFertility]]></ParameterName>
@@ -5870,9 +5873,6 @@ switch (main.p_matingType) {
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_fertilityBMIDifferential]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.0]]></Code>
-					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_populationAdjustment]]></ParameterName>
@@ -5883,7 +5883,7 @@ switch (main.p_matingType) {
 				<Parameter>
 					<ParameterName><![CDATA[p_randomMating]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.001]]></Code>
+						<Code><![CDATA[0.2]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
@@ -5928,20 +5928,20 @@ switch (main.p_matingType) {
 				<Parameter>
 					<ParameterName><![CDATA[p_verticalTransVariance]]></ParameterName>
 					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.2]]></Code>
+						<Code><![CDATA[0.7]]></Code>
 					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_leakage]]></ParameterName>
-					<ParameterValue Class="CodeValue">
-						<Code><![CDATA[0.05]]></Code>
-					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_outputPath]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_exportData]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[false]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[p_exportIndividualData]]></ParameterName>
@@ -8139,6 +8139,9 @@ s.sendMessage();]]></AfterExperimentCode>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1651564591816</Id>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[0.01]]></Code>
+				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
 				<Id>1651782769715</Id>
