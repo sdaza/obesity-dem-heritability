@@ -6102,7 +6102,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["snp-efast"]]></Code>
+							<Code><![CDATA["snp-efast-test"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -6244,7 +6244,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.15]]></Code>
+					<Code><![CDATA[2.5]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -7165,7 +7165,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.15]]></Code>
+					<Code><![CDATA[2.5]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -8369,7 +8369,7 @@ root.v_replicate = getCurrentReplication();
 if (getCurrentIteration() <= col_experimentLines.size()) {
 	String[] line = col_experimentLines.get(root.v_iteration-1);
 	root.p_randomMating = Double.parseDouble(line[0]);
-	root.p_leakage = Double.parseDouble(line[1]);
+	root.p_verticalTransVariance = Double.parseDouble(line[1]);
 	root.p_fertilityBMIDifferential = Double.parseDouble(line[2]);
 }]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[// track number of replicates
@@ -8407,7 +8407,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["vt-sobol"]]></Code>
+							<Code><![CDATA["vt-sobol-test"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -8550,7 +8550,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.15]]></Code>
+					<Code><![CDATA[2.5]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -9010,7 +9010,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.15]]></Code>
+					<Code><![CDATA[2.5]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -9296,7 +9296,6 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 	root.p_geneticVariance = Double.parseDouble(line[1]);
 	root.p_verticalTransVariance = Double.parseDouble(line[2]);
 	root.p_fertilityBMIDifferential = Double.parseDouble(line[3]);
-
 }]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[// track number of replicates
 //if (getCurrentIteration() <= col_experimentLines.size()) { 
@@ -9476,7 +9475,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.15]]></Code>
+					<Code><![CDATA[2.5]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
