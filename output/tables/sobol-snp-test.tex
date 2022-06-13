@@ -1,0 +1,45 @@
+
+    \begin{table}[htp]
+    \renewcommand{\arraystretch}{1.3}
+    \setlength{\tabcolsep}{5pt}
+    \caption{Sobol sensitivity results only genes, Scenario 1 (N=16384)}
+    \label{tab:sobol-snp}
+    \footnotesize
+    \centering
+    \begin{threeparttable}
+    \begin{tabular}{lccc}
+    \hline
+    \addlinespace
+    & Proportion Obese & Average BMI & SD BMI \\
+    \addlinespace
+    \hline
+    \addlinespace[6pt]
+    \multicolumn{4}{l}{\hspace{1em} S1} \\
+\hspace{1.5em} random-mating & 0.112 [0.082; 0.141]   & 0.102 [0.075; 0.128]   & 0.149 [0.088; 0.210] \\
+	  \hspace{1.5em} genetic-variance & 0.494 [0.441; 0.548]   & 0.520 [0.473; 0.567]   & 0.325 [0.258; 0.392] \\
+	  \hspace{1.5em} fertility-differential & 0.187 [0.156; 0.218]   & 0.225 [0.189; 0.262]   & 0.072 [0.027; 0.118] \\
+	 \\
+    \addlinespace[12pt]
+    \multicolumn{4}{l}{\hspace{1em} S2} \\ 
+\hspace{1.5em} random-mating x genetic-variance & 0.076 [0.017; 0.135]   & 0.050 [-0.000; 0.100]   & 0.118 [0.004; 0.231] \\
+	  \hspace{1.5em} random-mating x fertility-differential & 0.020 [-0.030; 0.071]   & 0.014 [-0.033; 0.060]   & 0.044 [-0.079; 0.167] \\
+	  \hspace{1.5em} genetic-variance x fertility-differential & 0.088 [0.007; 0.170]   & 0.073 [0.010; 0.135]   & 0.097 [-0.012; 0.205] \\
+	 \\
+    \addlinespace[12pt]
+    \multicolumn{4}{l}{\hspace{1em} ST} \\ 
+\hspace{1.5em} random-mating & 0.232 [0.205; 0.259]   & 0.185 [0.165; 0.206]   & 0.487 [0.419; 0.554] \\
+	  \hspace{1.5em} genetic-variance & 0.688 [0.625; 0.751]   & 0.667 [0.611; 0.724]   & 0.763 [0.672; 0.854] \\
+	  \hspace{1.5em} fertility-differential & 0.330 [0.298; 0.362]   & 0.343 [0.308; 0.378]   & 0.458 [0.384; 0.532] \\
+	 \\
+    \addlinespace
+    \hline
+    \end{tabular}
+    \begin{tablenotes}
+    \scriptsize
+    \item 95\% confidence interval in brackets.
+    \item S1 = First-order indices,  measures the contribution to the output variance by a single model input alone.
+    \item S2 = Second-order indices,  measures the contribution to the output variance caused by the interaction of two model inputs.
+    \item ST = Total-order index, measures the contribution to the output variance caused by a model input, including both its first-order effects (the input varying alone) and all higher-order interactions.
+    \end{tablenotes}
+    \end{threeparttable}
+    \end{table}
