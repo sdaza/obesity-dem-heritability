@@ -5831,7 +5831,7 @@ switch (main.p_matingType) {
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[boolean]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[false]]></Code>
+							<Code><![CDATA[true]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -7023,7 +7023,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["snp-sobol"]]></Code>
+							<Code><![CDATA["snp-sobol-test"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -9332,7 +9332,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["snp-vt-sobol"]]></Code>
+							<Code><![CDATA["snp-vt-sobol-test"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -11151,14 +11151,15 @@ s.sendMessage();]]></AfterExperimentCode>
 		<JavaClass>
 			<Id>1639393833674</Id>
 			<Name><![CDATA[SlackMessage]]></Name>
-			<Text><![CDATA[// reading files
+			<Text><![CDATA[// import libraries
 
+// reader functions
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-// date
+// date function
 import java.text.*;
 
 // slack
@@ -11177,7 +11178,7 @@ public class SlackMessage {
 	public SlackMessage() {
 		this.path = "slack.txt";
 		this.header = "Anylogic simulation experiment finished at ";
-		this.channel = "#slack-from-simulations";
+		this.channel = "#notifications";
 	}
 
 	public SlackMessage(String path, String header,
