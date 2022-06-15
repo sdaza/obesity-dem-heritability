@@ -1,3 +1,12 @@
+
+### 2022-06-15
+
+- Added vertical transmission and genetic influences
+  - Average of parent's BMI 
+- Re-runned sensitivity analysis
+- Explore outcome changes
+  - Include scenario with out mating (random) and no fertility (future)
+
 ### 2022-05-07
 
 - Create class for sensitivity analysis

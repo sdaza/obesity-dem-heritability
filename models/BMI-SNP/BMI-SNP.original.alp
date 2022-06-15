@@ -1688,7 +1688,7 @@ if (col_motherKidPGS.size() > 1000) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1632725205130</Id>
 					<Name><![CDATA[f_definePropBMIGroup]]></Name>
-					<X>250</X><Y>360</Y>
+					<X>250</X><Y>370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2010,7 +2010,6 @@ for (int i = 0; i < p_numberSNP; i++) {
 
 //verticalTrans = f_verticalTransBMI(p.v_fatherBMIGroup,
 	//	p.v_motherBMIGroup);
-
 verticalTrans = f_verticalTransBMI(p);
 noiseComp = normal(1, 0);
 
@@ -2285,7 +2284,7 @@ for (Person p : col_aliveAgents) {
 					<Id>1651564805891</Id>
 					<Name><![CDATA[f_verticalTransBMI]]></Name>
 					<ExcludeFromBuild>true</ExcludeFromBuild>
-					<X>370</X><Y>330</Y>
+					<X>250</X><Y>350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3743,7 +3742,7 @@ p_randomMating = -99;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1647447186916</Id>
 					<Name><![CDATA[f_definePhenotype]]></Name>
-					<X>200</X><Y>260</Y>
+					<X>200</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -5832,7 +5831,7 @@ switch (main.p_matingType) {
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[boolean]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[false]]></Code>
+							<Code><![CDATA[true]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -6103,7 +6102,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["snp-efast"]]></Code>
+							<Code><![CDATA["snp-efast-test"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -6245,7 +6244,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.15]]></Code>
+					<Code><![CDATA[2.5]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -7024,7 +7023,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["snp-sobol"]]></Code>
+							<Code><![CDATA["snp-sobol-test"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -7166,7 +7165,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.15]]></Code>
+					<Code><![CDATA[2.5]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -7485,7 +7484,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["snp-vt-efast-test"]]></Code>
+							<Code><![CDATA["snp-vt-efast"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -8370,7 +8369,7 @@ root.v_replicate = getCurrentReplication();
 if (getCurrentIteration() <= col_experimentLines.size()) {
 	String[] line = col_experimentLines.get(root.v_iteration-1);
 	root.p_randomMating = Double.parseDouble(line[0]);
-	root.p_leakage = Double.parseDouble(line[1]);
+	root.p_verticalTransVariance = Double.parseDouble(line[1]);
 	root.p_fertilityBMIDifferential = Double.parseDouble(line[2]);
 }]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[// track number of replicates
@@ -8408,7 +8407,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["vt-sobol"]]></Code>
+							<Code><![CDATA["vt-sobol-test"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -8551,7 +8550,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.15]]></Code>
+					<Code><![CDATA[2.5]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -9011,7 +9010,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.15]]></Code>
+					<Code><![CDATA[2.5]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -9297,7 +9296,6 @@ if (getCurrentIteration() <= col_experimentLines.size()) {
 	root.p_geneticVariance = Double.parseDouble(line[1]);
 	root.p_verticalTransVariance = Double.parseDouble(line[2]);
 	root.p_fertilityBMIDifferential = Double.parseDouble(line[3]);
-
 }]]></BeforeSimulationRunCode>
 			<AfterSimulationRunCode><![CDATA[// track number of replicates
 //if (getCurrentIteration() <= col_experimentLines.size()) { 
@@ -9334,7 +9332,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["snp-vt-sobol"]]></Code>
+							<Code><![CDATA["snp-vt-sobol-test"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -9477,7 +9475,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.15]]></Code>
+					<Code><![CDATA[2.5]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -9795,7 +9793,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["bmi-fertility-genes-vertical-trans"]]></Code>
+							<Code><![CDATA["bmi-fertility-genes-vertical-trans-test"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -9903,7 +9901,7 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>6400</NumberOfRuns>
+			<NumberOfRuns>192</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 				<Expression Class="CodeValue">
@@ -9937,7 +9935,7 @@ s.sendMessage();]]></AfterExperimentCode>
 			<FreeformParamValue>	
 				<Id>1632903366204</Id>
 				<Expression Class="CodeValue">
-					<Code><![CDATA[2.15]]></Code>
+					<Code><![CDATA[2.5]]></Code>
 				</Expression>
 			</FreeformParamValue>
 			<FreeformParamValue>	
@@ -10722,7 +10720,7 @@ v_replicates++;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["snp-vt-efast"]]></Code>
+							<Code><![CDATA["snp-vt-efast-test"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -11153,14 +11151,15 @@ s.sendMessage();]]></AfterExperimentCode>
 		<JavaClass>
 			<Id>1639393833674</Id>
 			<Name><![CDATA[SlackMessage]]></Name>
-			<Text><![CDATA[// reading files
+			<Text><![CDATA[// import libraries
 
+// reader functions
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-// date
+// date function
 import java.text.*;
 
 // slack
@@ -11179,7 +11178,7 @@ public class SlackMessage {
 	public SlackMessage() {
 		this.path = "slack.txt";
 		this.header = "Anylogic simulation experiment finished at ";
-		this.channel = "#slack-from-simulations";
+		this.channel = "#notifications";
 	}
 
 	public SlackMessage(String path, String header,
