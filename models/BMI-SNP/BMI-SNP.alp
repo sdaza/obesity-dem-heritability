@@ -11290,7 +11290,7 @@ SlackMessage s = new SlackMessage();
 s.sendMessage();]]></AfterExperimentCode>
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>true</UseFreeformParameters>
-			<NumberOfRuns>160</NumberOfRuns>
+			<NumberOfRuns>1600</NumberOfRuns>
 			<FreeformParamValue>	
 				<Id>1632485646519</Id>
 				<Expression Class="CodeValue">
@@ -11642,7 +11642,7 @@ public class SlackMessage {
 	public SlackMessage() {
 		this.path = "slack.txt";
 		this.header = "Anylogic simulation experiment finished at ";
-		this.channel = "#slack-from-simulations";
+		this.channel = "#notifications";
 	}
 
 	public SlackMessage(String path, String header,
