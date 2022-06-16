@@ -8,3 +8,4 @@ slack.txt
 __pycache__
 env
 .ipynb_checkpoints/
+output/data/agents-snp-hw.csv
